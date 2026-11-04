@@ -1,0 +1,50 @@
+[
+  {
+    "prompt": "Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+    "seed": 0,
+    "file": "prompt_0_seed_0.png",
+    "role": "2D diagnostic, not a 3D method result"
+  },
+  {
+    "prompt": "Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+    "seed": 1,
+    "file": "prompt_0_seed_1.png",
+    "role": "2D diagnostic, not a 3D method result"
+  },
+  {
+    "prompt": "Paint the white machine base red, keeping all other objects unchanged.",
+    "seed": 0,
+    "file": "prompt_1_seed_0.png",
+    "role": "2D diagnostic, not a 3D method result"
+  },
+  {
+    "prompt": "Paint the white machine base red, keeping all other objects unchanged.",
+    "seed": 1,
+    "file": "prompt_1_seed_1.png",
+    "role": "2D diagnostic, not a 3D method result"
+  },
+  {
+    "prompt": "Paint the white base of the selected industrial machine red, keeping all other objects unchanged.",
+    "seed": 0,
+    "file": "prompt_2_seed_0.png",
+    "role": "2D diagnostic, not a 3D method result"
+  },
+  {
+    "prompt": "Paint the white base of the selected industrial machine red, keeping all other objects unchanged.",
+    "seed": 1,
+    "file": "prompt_2_seed_1.png",
+    "role": "2D diagnostic, not a 3D method result"
+  },
+  {
+    "prompt": "Make the machine base red.",
+    "seed": 0,
+    "file": "prompt_3_seed_0.png",
+    "role": "2D diagnostic, not a 3D method result"
+  },
+  {
+    "prompt": "Make the machine base red.",
+    "seed": 1,
+    "file": "prompt_3_seed_1.png",
+    "role": "2D diagnostic, not a 3D method result"
+  }
+]

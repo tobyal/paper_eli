@@ -1,0 +1,13 @@
+{
+  "ShilongLiu/GroundingDINO/GroundingDINO_SwinB.cfg.py": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--ShilongLiu--GroundingDINO/snapshots/a94c9b567a2a374598f05c584e96798a170c56fb/GroundingDINO_SwinB.cfg.py",
+  "ShilongLiu/GroundingDINO/groundingdino_swinb_cogcoor.pth": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--ShilongLiu--GroundingDINO/snapshots/a94c9b567a2a374598f05c584e96798a170c56fb/groundingdino_swinb_cogcoor.pth",
+  "ShilongLiu/GroundingDINO/GroundingDINO_SwinT_OGC.cfg.py": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--ShilongLiu--GroundingDINO/snapshots/a94c9b567a2a374598f05c584e96798a170c56fb/GroundingDINO_SwinT_OGC.cfg.py",
+  "ShilongLiu/GroundingDINO/groundingdino_swint_ogc.pth": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--ShilongLiu--GroundingDINO/snapshots/a94c9b567a2a374598f05c584e96798a170c56fb/groundingdino_swint_ogc.pth",
+  "bert-base-uncased/config.json": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/config.json",
+  "bert-base-uncased/pytorch_model.bin": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/pytorch_model.bin",
+  "bert-base-uncased/model.safetensors": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/model.safetensors",
+  "bert-base-uncased/tokenizer_config.json": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/tokenizer_config.json",
+  "bert-base-uncased/vocab.txt": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/vocab.txt",
+  "sam_vit_h_4b8939.pth": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/torch/hub/checkpoints/sam_vit_h_4b8939.pth",
+  "vgg16-397923af.pth": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/torch/hub/checkpoints/vgg16-397923af.pth"
+}

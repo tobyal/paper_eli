@@ -1,0 +1,57 @@
+diff --git a/threestudio/gaussiansplatting/submodules/diff-gaussian-rasterization/setup.py b/threestudio/gaussiansplatting/submodules/diff-gaussian-rasterization/setup.py
+index f66979a..a63b4bd 100644
+--- a/threestudio/gaussiansplatting/submodules/diff-gaussian-rasterization/setup.py
++++ b/threestudio/gaussiansplatting/submodules/diff-gaussian-rasterization/setup.py
+@@ -29,7 +29,7 @@ setup(
+                 "rasterize_points.cu",
+                 "ext.cpp",
+             ],
+-            extracompileargs={"nvcc": ["-I" + os.path.join(os.path.dirname(os.path.abspath(__file__)), "third_party/glm/"),"--std=c++17"]},
++            extra_compile_args={"nvcc": ["-I" + os.path.join(os.path.dirname(os.path.abspath(__file__)), "third_party/glm/"),"--std=c++17"]},
+         )
+     ],
+     cmdclass={"build_ext": BuildExtension},
+diff --git a/threestudio/threestudio/systems/GassuianEditor.py b/threestudio/threestudio/systems/GassuianEditor.py
+index 0c790d1..7b3c948 100644
+--- a/threestudio/threestudio/systems/GassuianEditor.py
++++ b/threestudio/threestudio/systems/GassuianEditor.py
+@@ -105,7 +105,7 @@ class GaussianEditor(BaseLift3DSystem):
+ 
+                 cur_cam = self.trainer.datamodule.train_dataset.scene.cameras[id]
+ 
+-                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt)[
++                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt, camera=cur_cam)[
+                     0
+                 ].to(get_device())
+ 
+diff --git a/threestudio/threestudio/utils/sam.py b/threestudio/threestudio/utils/sam.py
+index 55e68c0..edf204d 100644
+--- a/threestudio/threestudio/utils/sam.py
++++ b/threestudio/threestudio/utils/sam.py
+@@ -7,6 +7,7 @@ from einops import rearrange
+ from torchvision.transforms import ToPILImage, ToTensor
+ 
+ from lang_sam import LangSAM
++from instance_selection import select_instance
+ 
+ # from threestudio.utils.typing import *
+ 
+@@ -19,7 +20,7 @@ class LangSAMTextSegmentor(torch.nn.Module):
+         self.to_pil_image = ToPILImage(mode="RGB")
+         self.to_tensor = ToTensor()
+ 
+-    def forward(self, images, prompt: str):
++    def forward(self, images, prompt: str, camera=None):
+         images = rearrange(images, "b h w c -> b c h w")
+         masks = []
+         for image in images:
+@@ -27,6 +28,9 @@ class LangSAMTextSegmentor(torch.nn.Module):
+             image = self.to_pil_image(image.clamp(0.0, 1.0))
+             mask, _, _, _ = self.model.predict(image, prompt)
+             # breakpoint()
++            if camera is not None:
++                masks.append(select_instance(mask, camera))
++                continue
+             if mask.ndim == 3:
+                 masks.append(mask[0:1].to(torch.float32))
+             else:

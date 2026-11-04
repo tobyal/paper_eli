@@ -1,0 +1,11 @@
+{
+  "status": "visually_reviewed",
+  "reviewer": "assistant visual inspection of saved renders",
+  "source_iteration": 30000,
+  "source_gaussians": 1828777,
+  "selected_gaussians": 6596,
+  "visible_views_over_100_pixels": 184,
+  "reviewed_frames": [51,61,71,81,91,101,121,131,141,151,161,171,221,231,241,251,261,271,281],
+  "finding": "The common ROI follows the same white lower machine housing in all reviewed visible views and excludes adjacent machines. Occluded portions are naturally hidden by the common Gaussian renderer.",
+  "limitations": "Geometry-based annotation with soft rasterization threshold0.25; boundaries and heavily occluded views are approximate. Background metrics exclude a 9-pixel dilation. This is an evaluation annotation, not edited output."
+}

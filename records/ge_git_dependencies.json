@@ -1,0 +1,44 @@
+[
+  {
+    "url": "https://github.com/KAIR-BAIR/nerfacc.git",
+    "requested_revision": "v0.3.3",
+    "commit": "58d6b4c46dfee36ab4b565ab0655b1a27ff4859f",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/dependencies/nerfacc"
+  },
+  {
+    "url": "https://github.com/NVlabs/tiny-cuda-nn",
+    "requested_revision": "212104156403bd87616c1a4f73a1c5f2c2e172a9",
+    "commit": "212104156403bd87616c1a4f73a1c5f2c2e172a9",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/dependencies/tiny-cuda-nn"
+  },
+  {
+    "url": "https://github.com/NVlabs/nvdiffrast.git",
+    "requested_revision": "c5caf7bdb8a2448acc491a9faa47753972edd380",
+    "commit": "c5caf7bdb8a2448acc491a9faa47753972edd380",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/dependencies/nvdiffrast"
+  },
+  {
+    "url": "https://github.com/ashawkey/envlight.git",
+    "requested_revision": "ef492c03711c87287549a0283ee51199f45cbea4",
+    "commit": "ef492c03711c87287549a0283ee51199f45cbea4",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/dependencies/envlight"
+  },
+  {
+    "url": "https://github.com/openai/CLIP.git",
+    "requested_revision": "a1d071733d7111c9c014f024669f959182114e33",
+    "commit": "a1d071733d7111c9c014f024669f959182114e33",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/dependencies/CLIP"
+  },
+  {
+    "url": "https://github.com/ashawkey/kiuikit",
+    "requested_revision": "b8956670173c8785118a1db474a10d987b76fc8c",
+    "commit": "b8956670173c8785118a1db474a10d987b76fc8c",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/dependencies/kiuikit"
+  },
+  {
+    "url": "https://github.com/luca-medeiros/lang-segment-anything.git",
+    "requested_revision": "134a48a81ebd691686187ecce2d016fb327a8852",
+    "commit": "134a48a81ebd691686187ecce2d016fb327a8852",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/dependencies/lang-segment-anything"
+  }
+]

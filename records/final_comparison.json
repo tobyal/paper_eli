@@ -1,0 +1,639 @@
+{
+  "instruction": "将画面中央设备的外壳改成红色，保持其他物体不变。",
+  "instruction_en": "Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+  "rows": [
+    {
+      "method": "GaussianEditor",
+      "run": {
+        "method": "gaussianeditor",
+        "cwd": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/GaussianEditor",
+        "argv": [
+          "/mnt/sda/ubuntu/lkx/papers/paper_eli/envs/gaussianeditor/bin/python",
+          "launch.py",
+          "--config",
+          "configs/edit-n2n.yaml",
+          "--train",
+          "--gpu",
+          "0",
+          "data.source=/mnt/sda/ubuntu/lkx/papers/paper_eli/data/edit_train",
+          "system.gs_source=/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+          "system.prompt_processor.prompt=Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+          "system.seg_prompt=white machine base",
+          "exp_root_dir=/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor",
+          "tag=industrial_red_seed0",
+          "use_timestamp=false",
+          "seed=0",
+          "system.loggers.wandb.enable=false",
+          "system.cache_dir=industrial_red_gaussianeditor",
+          "trainer.val_check_interval=500",
+          "system.mask_thres=0.5",
+          "system.guidance.ip2p_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d",
+          "system.guidance.ddim_scheduler_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--CompVis--stable-diffusion-v1-4/snapshots/133a221b8aa7292a167afc5127cb63fb5005638b",
+          "trainer.max_steps=2500",
+          "system.max_densify_percent=0.01",
+          "system.anchor_weight_init_g0=0.01",
+          "system.anchor_weight_init=0.01",
+          "system.anchor_weight_multiplier=1.3",
+          "system.gs_lr_scaler=0.1",
+          "system.gs_final_lr_scaler=0.1",
+          "system.color_lr_scaler=1",
+          "system.opacity_lr_scaler=2",
+          "system.scaling_lr_scaler=2",
+          "system.rotation_lr_scaler=2",
+          "system.loss.lambda_anchor_color=0",
+          "system.loss.lambda_anchor_geo=50",
+          "system.loss.lambda_anchor_scale=50",
+          "system.loss.lambda_anchor_opacity=50",
+          "system.densify_from_iter=100",
+          "system.densify_until_iter=2001",
+          "system.edit_until_step=2200",
+          "system.densification_interval=100",
+          "system.prompt_processor.pretrained_model_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14"
+        ],
+        "start_utc": "2026-11-04T09:11:51.831998+00:00",
+        "log": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/gaussianeditor_20261104T091151Z/stdout.log",
+        "source_ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+        "status": "completed_reviewed",
+        "shared_gpu": true,
+        "gpu": "0",
+        "sampled_process_gpu_peak_mib": 12220,
+        "gpu_sampling_period_seconds": 5,
+        "scene_adaptation": "Common physical-instance selection among unchanged LangSAM candidates using reviewed projected 3D ROI; no substitute masks or pixel recoloring",
+        "segmentation_prompt": "white machine base",
+        "semantic_tracing_threshold": 0.5,
+        "timing_scope": "Entire official entrypoint including model loading, segmentation, editing, fitting and its built-in rendering",
+        "pid": 1272885,
+        "wall_seconds": 990.1610603146255,
+        "exit_code": 0,
+        "end_utc": "2026-11-04T09:28:21.993382+00:00",
+        "quality_label": "execution_success_edit_target_not_achieved",
+        "quality_review": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/gaussianeditor.quality_review.json"
+      },
+      "artifacts": {
+        "method": "gaussianeditor",
+        "run_record": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/gaussianeditor_20261104T091151Z/run.json",
+        "ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/edit-n2n/industrial_red_seed0/save/last.ply",
+        "model_check": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/model_check.json",
+        "common_render_dir": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/common_render",
+        "multiview_video": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/common_render/multiview.mp4",
+        "common_render_seconds": 132.99677484296262,
+        "video_probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 960,
+              "height": 540,
+              "nb_frames": "350"
+            }
+          ],
+          "format": {
+            "duration": "29.167000",
+            "size": "15645286"
+          }
+        },
+        "status": "reviewed_actual_result_edit_target_not_achieved",
+        "created_utc": "2026-11-04T09:30:41.904249+00:00",
+        "quality_review": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/gaussianeditor.quality_review.json",
+        "official_checkpoint": {
+          "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/edit-n2n/industrial_red_seed0/ckpts/last.ckpt",
+          "bytes": 922672954,
+          "sha256": "41198083ced865ecde70c40caa680645a42591e89ab1a2fa91978ab7da1e93ee",
+          "format": "Official saved checkpoint; not converted"
+        }
+      },
+      "model": {
+        "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/edit-n2n/industrial_red_seed0/save/last.ply",
+        "bytes": 453854924,
+        "sha256": "895d7d23063f86daab473b85382e0420e768281411336f4fa141dc97e5761e74",
+        "gaussians": 1830054,
+        "all_parameters_finite": true,
+        "all_quaternions_nonzero": true,
+        "xyz_min": [
+          -56.86058044433594,
+          -12.189061164855957,
+          -31.67356300354004
+        ],
+        "xyz_max": [
+          27.300926208496094,
+          10.770877838134766,
+          30.684772491455078
+        ],
+        "log_scale_range": [
+          -20.09209632873535,
+          2.270958185195923
+        ],
+        "opacity_logit_range": [
+          -7.092538833618164,
+          19.458139419555664
+        ]
+      },
+      "quality": {
+        "method": "gaussianeditor",
+        "run": "gaussianeditor_20261104T091151Z",
+        "execution": "completed2500steps_exit0",
+        "artifacts": "validated finite PLY,350 common RGB renders,44 held-out renders and350-frame video",
+        "visual_result": "Target remains predominantly white; the requested red edit is weak/unsuccessful. Do not interpret the red semantic-overlay panel as edited RGB.",
+        "inspected_actual_rgb": [
+          "frame_000061.png",
+          "frame_000091.png",
+          "frame_000151.png",
+          "frame_000161.png",
+          "frame_000281.png"
+        ],
+        "segmentation": "The official traced mask at0.5 covers84-88% of the reviewed base in5 views; the model output is still not visibly red.",
+        "limitations": "Single seed; industrial domain and small repeated objects challenge IP2P instruction grounding.",
+        "additional_diagnostics": {
+          "original_views": "outputs/prompt_diagnostic:4 equivalent English phrasings x2 seeds; largely unchanged target or red foreground table",
+          "target_views": "outputs/prompt_diagnostic_target: calibrated target-centered views still produce wrong-object changes",
+          "camera_check": "outputs/target_view_check/alignment.json: source-render vs resampled real image PSNR26.89-28.55dB in4 views",
+          "decision": "Keep original common editing inputs and original English instruction for the main4-method baseline. Target-centered input adaptation is exploratory only and is not used in the main runs."
+        },
+        "eligible_for_comparison": true,
+        "quality_label": "execution_success_edit_target_not_achieved",
+        "visual_result_zh": "完整运行2500步。五个检查视角中的目标底座仍主要为白色，未明显达到改红目标；可见轻微颜色与细节变化。"
+      },
+      "metrics": {
+        "visible_target_test_views": 24,
+        "red_fraction": 0.0001845726092316346,
+        "clip_target_similarity": 0.1994484936197599,
+        "clip_directional_similarity": 0.019031731489424903,
+        "background_psnr_db": 30.980726999691615,
+        "background_ssim": 0.9486652513345083,
+        "background_lpips": 0.08439002248148124,
+        "target_reprojection_mae": 0.0902380697015259,
+        "target_reprojection_excess_mae": 0.0011319708638539952,
+        "wall_minutes": 16.50268433857709,
+        "peak_process_gpu_gib": 11.93359375
+      }
+    },
+    {
+      "method": "DGE",
+      "run": {
+        "method": "dge",
+        "cwd": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/DGE",
+        "argv": [
+          "/mnt/sda/ubuntu/lkx/papers/paper_eli/envs/dge/bin/python",
+          "launch.py",
+          "--config",
+          "configs/dge.yaml",
+          "--train",
+          "--gpu",
+          "0",
+          "data.source=/mnt/sda/ubuntu/lkx/papers/paper_eli/data/edit_train",
+          "system.gs_source=/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+          "system.prompt_processor.prompt=Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+          "system.seg_prompt=white machine base",
+          "exp_root_dir=/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge",
+          "tag=industrial_red_seed0",
+          "use_timestamp=false",
+          "seed=0",
+          "system.loggers.wandb.enable=false",
+          "system.cache_dir=industrial_red_dge",
+          "trainer.val_check_interval=500",
+          "system.mask_thres=0.5",
+          "system.guidance.ip2p_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d",
+          "system.guidance.ddim_scheduler_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--CompVis--stable-diffusion-v1-4/snapshots/133a221b8aa7292a167afc5127cb63fb5005638b",
+          "system.prompt_processor.pretrained_model_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14"
+        ],
+        "start_utc": "2026-11-04T09:47:57.440855+00:00",
+        "output_name": "dge",
+        "editing_data": "/mnt/sda/ubuntu/lkx/papers/paper_eli/data/edit_train",
+        "instruction": "Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+        "log": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/dge_20261104T094757Z/stdout.log",
+        "source_ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+        "status": "completed_reviewed",
+        "shared_gpu": true,
+        "gpu": "0",
+        "sampled_process_gpu_peak_mib": 31950,
+        "gpu_sampling_period_seconds": 5,
+        "scene_adaptation": "Common physical-instance selection among unchanged LangSAM candidates using reviewed projected 3D ROI; no substitute masks or pixel recoloring",
+        "segmentation_prompt": "white machine base",
+        "semantic_tracing_threshold": 0.5,
+        "timing_scope": "Entire official entrypoint including model loading, segmentation, editing, fitting and its built-in rendering",
+        "pid": 1438385,
+        "wall_seconds": 364.230918135494,
+        "exit_code": 0,
+        "end_utc": "2026-11-04T09:54:01.672078+00:00",
+        "quality_label": "execution_success_edit_target_not_achieved",
+        "quality_review": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/dge.quality_review.json"
+      },
+      "artifacts": {
+        "method": "dge",
+        "run_record": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/dge_20261104T094757Z/run.json",
+        "ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/dge/industrial_red_seed0/save/last.ply",
+        "model_check": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/model_check.json",
+        "common_render_dir": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/common_render",
+        "multiview_video": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/common_render/multiview.mp4",
+        "common_render_seconds": 123.25204280298203,
+        "video_probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 960,
+              "height": 540,
+              "nb_frames": "350"
+            }
+          ],
+          "format": {
+            "duration": "29.167000",
+            "size": "15683493"
+          }
+        },
+        "status": "reviewed_actual_result",
+        "created_utc": "2026-11-04T09:56:12.002703+00:00",
+        "quality_review": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/dge.quality_review.json",
+        "official_checkpoint": {
+          "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/dge/industrial_red_seed0/ckpts/last.ckpt",
+          "bytes": 922230074,
+          "sha256": "b9da189521a4d6db44066dc0123f58761b4678902ef21dd6962fa52a2c423880",
+          "format": "Official saved checkpoint; not converted"
+        }
+      },
+      "model": {
+        "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/dge/industrial_red_seed0/save/last.ply",
+        "bytes": 453622300,
+        "sha256": "7e7f913485829da962587722741e936b19a8fda8bdb0bb4f48381eabf1cadcb5",
+        "gaussians": 1829116,
+        "all_parameters_finite": true,
+        "all_quaternions_nonzero": true,
+        "xyz_min": [
+          -56.86058044433594,
+          -12.189061164855957,
+          -31.67356300354004
+        ],
+        "xyz_max": [
+          27.300926208496094,
+          10.770877838134766,
+          30.684772491455078
+        ],
+        "log_scale_range": [
+          -20.09209632873535,
+          2.270958185195923
+        ],
+        "opacity_logit_range": [
+          -7.092538833618164,
+          17.98320198059082
+        ]
+      },
+      "quality": {
+        "method": "dge",
+        "run": "dge_20261104T094757Z",
+        "execution": "official_entrypoint_exit0",
+        "visual_result": "The target housing remains predominantly white across five inspected views; some purple/blue tint and edge artifacts appear. No convincing red housing edit was achieved.",
+        "quality_label": "execution_success_edit_target_not_achieved",
+        "inspected_actual_rgb": [
+          "frame_000061.png",
+          "frame_000091.png",
+          "frame_000151.png",
+          "frame_000161.png",
+          "frame_000281.png"
+        ],
+        "inspection_sheet": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/quality_preview.png",
+        "inspection_sheet_sha256": "7aa73350349c8202becbe078dbec7dbb57df6051971c82b7ff7ad0a83edb4a1b",
+        "artifacts": "finite PLY,350 common RGB renders,44 held-out square renders,350-frame multiview video",
+        "eligible_for_comparison": true,
+        "visual_result_zh": "完整运行1000步。五个检查视角中的目标仍主要为白色，部分区域出现紫蓝色偏色和边缘伪影，未明显达到改红目标。"
+      },
+      "metrics": {
+        "visible_target_test_views": 24,
+        "red_fraction": 4.347957244244387e-05,
+        "clip_target_similarity": 0.19557785925765833,
+        "clip_directional_similarity": 0.03312111026995505,
+        "background_psnr_db": 31.630275812868785,
+        "background_ssim": 0.9553789844115576,
+        "background_lpips": 0.0743167366211613,
+        "target_reprojection_mae": 0.08413847039143245,
+        "target_reprojection_excess_mae": -0.004967631355005627,
+        "wall_minutes": 6.070515302258233,
+        "peak_process_gpu_gib": 31.201171875
+      }
+    },
+    {
+      "method": "DreamCatalyst",
+      "run": {
+        "method": "dreamcatalyst",
+        "cwd": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/DreamCatalyst/threestudio",
+        "argv": [
+          "/mnt/sda/ubuntu/lkx/papers/paper_eli/envs/dreamcatalyst/bin/python",
+          "launch.py",
+          "--config",
+          "configs/edit-dc.yaml",
+          "--train",
+          "--gpu",
+          "0",
+          "data.source=/mnt/sda/ubuntu/lkx/papers/paper_eli/data/edit_train",
+          "system.gs_source=/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+          "system.prompt_processor.prompt=Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+          "system.seg_prompt=white machine base",
+          "exp_root_dir=/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst",
+          "tag=industrial_red_seed0",
+          "use_timestamp=false",
+          "seed=0",
+          "system.loggers.wandb.enable=false",
+          "system.cache_dir=industrial_red_dreamcatalyst",
+          "trainer.val_check_interval=500",
+          "system.mask_thres=0.5",
+          "system.guidance.ip2p_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d",
+          "system.guidance.ddim_scheduler_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--CompVis--stable-diffusion-v1-4/snapshots/133a221b8aa7292a167afc5127cb63fb5005638b",
+          "trainer.max_steps=1500",
+          "system.dds_target_prompt_processor.prompt=Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+          "system.dds_source_prompt_processor.prompt=A photo of a white industrial machine in a factory.",
+          "system.max_densify_percent=0.01",
+          "system.anchor_weight_init_g0=0.05",
+          "system.anchor_weight_init=0.1",
+          "system.anchor_weight_multiplier=1.3",
+          "system.gs_lr_scaler=1",
+          "system.gs_final_lr_scaler=1",
+          "system.color_lr_scaler=1",
+          "system.opacity_lr_scaler=1",
+          "system.scaling_lr_scaler=1",
+          "system.rotation_lr_scaler=1",
+          "system.loss.lambda_anchor_color=5",
+          "system.loss.lambda_anchor_geo=5",
+          "system.loss.lambda_anchor_scale=5",
+          "system.loss.lambda_anchor_opacity=5",
+          "system.densify_from_iter=100",
+          "system.densify_until_iter=1201",
+          "system.densification_interval=100",
+          "system.second_guidance.chi=0.075",
+          "system.second_guidance.delta=0.05",
+          "system.second_guidance.gamma=0.2",
+          "system.second_guidance.ip2p_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d",
+          "system.second_guidance.ddim_scheduler_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--CompVis--stable-diffusion-v1-4/snapshots/133a221b8aa7292a167afc5127cb63fb5005638b",
+          "system.prompt_processor.pretrained_model_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+          "system.dds_target_prompt_processor.pretrained_model_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+          "system.dds_source_prompt_processor.pretrained_model_name_or_path=/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14"
+        ],
+        "start_utc": "2026-11-04T09:56:23.532903+00:00",
+        "output_name": "dreamcatalyst",
+        "editing_data": "/mnt/sda/ubuntu/lkx/papers/paper_eli/data/edit_train",
+        "instruction": "Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+        "log": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/dreamcatalyst_20261104T095623Z/stdout.log",
+        "source_ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+        "status": "completed_reviewed",
+        "shared_gpu": true,
+        "gpu": "0",
+        "sampled_process_gpu_peak_mib": 11964,
+        "gpu_sampling_period_seconds": 5,
+        "scene_adaptation": "Common physical-instance selection among unchanged LangSAM candidates using reviewed projected 3D ROI; no substitute masks or pixel recoloring",
+        "segmentation_prompt": "white machine base",
+        "semantic_tracing_threshold": 0.5,
+        "timing_scope": "Entire official entrypoint including model loading, segmentation, editing, fitting and its built-in rendering",
+        "pid": 1473919,
+        "wall_seconds": 816.2721262127161,
+        "exit_code": 0,
+        "end_utc": "2026-11-04T10:09:59.805388+00:00",
+        "quality_label": "execution_success_edit_target_not_achieved",
+        "quality_review": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/dreamcatalyst.quality_review.json"
+      },
+      "artifacts": {
+        "method": "dreamcatalyst",
+        "run_record": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/dreamcatalyst_20261104T095623Z/run.json",
+        "ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/edit-dc/industrial_red_seed0/save/last.ply",
+        "model_check": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/model_check.json",
+        "common_render_dir": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/common_render",
+        "multiview_video": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/common_render/multiview.mp4",
+        "common_render_seconds": 133.75100206490606,
+        "video_probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 960,
+              "height": 540,
+              "nb_frames": "350"
+            }
+          ],
+          "format": {
+            "duration": "29.167000",
+            "size": "15930780"
+          }
+        },
+        "status": "reviewed_actual_result",
+        "created_utc": "2026-11-04T10:12:24.518071+00:00",
+        "quality_review": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/dreamcatalyst.quality_review.json",
+        "official_checkpoint": {
+          "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/edit-dc/industrial_red_seed0/ckpts/last.ckpt",
+          "bytes": 922397065,
+          "sha256": "9b2bca29ed70df8e8f9cf5eb88ab4ab7c3a3f340ccab74814e203f2ee0989094",
+          "format": "Official saved checkpoint; not converted"
+        }
+      },
+      "model": {
+        "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/edit-dc/industrial_red_seed0/save/last.ply",
+        "bytes": 453710340,
+        "sha256": "c53c96e80b31ab87d7b0f9a9dc069c391bc52c08edea06f99753fd1bc19940d6",
+        "gaussians": 1829471,
+        "all_parameters_finite": true,
+        "all_quaternions_nonzero": true,
+        "xyz_min": [
+          -56.86058044433594,
+          -12.189061164855957,
+          -31.67356300354004
+        ],
+        "xyz_max": [
+          27.300926208496094,
+          10.770877838134766,
+          30.684772491455078
+        ],
+        "log_scale_range": [
+          -20.09209632873535,
+          2.270958185195923
+        ],
+        "opacity_logit_range": [
+          -7.092538833618164,
+          17.98320198059082
+        ]
+      },
+      "quality": {
+        "method": "dreamcatalyst",
+        "run": "dreamcatalyst_20261104T095623Z",
+        "execution": "official_entrypoint_exit0",
+        "visual_result": "The housing remains predominantly white in all five inspected views, with noticeable green/purple edge and surface artifacts near the target. The requested red edit was not achieved.",
+        "quality_label": "execution_success_edit_target_not_achieved",
+        "inspected_actual_rgb": [
+          "frame_000061.png",
+          "frame_000091.png",
+          "frame_000151.png",
+          "frame_000161.png",
+          "frame_000281.png"
+        ],
+        "inspection_sheet": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/quality_preview.png",
+        "inspection_sheet_sha256": "630ae06e4fd769fa1da6ed35b340248ac426a0d9d1b57f8ce270775927f6cfe8",
+        "artifacts": "finite PLY,350 common RGB renders,44 held-out square renders,350-frame multiview video",
+        "eligible_for_comparison": true,
+        "visual_result_zh": "完整运行1500步。五个检查视角中的目标仍主要为白色，目标附近出现较明显的绿色/紫色边缘及表面伪影，未达到改红目标。"
+      },
+      "metrics": {
+        "visible_target_test_views": 24,
+        "red_fraction": 0.0035440408004148356,
+        "clip_target_similarity": 0.1921080326040586,
+        "clip_directional_similarity": 0.034612682492782675,
+        "background_psnr_db": 37.38069964315796,
+        "background_ssim": 0.986153411368529,
+        "background_lpips": 0.023603587100903194,
+        "target_reprojection_mae": 0.08367328366471662,
+        "target_reprojection_excess_mae": -0.005432814446976408,
+        "wall_minutes": 13.604535436878601,
+        "peak_process_gpu_gib": 11.68359375
+      }
+    },
+    {
+      "method": "EditSplat",
+      "run": {
+        "method": "editsplat",
+        "cwd": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/cvpr25_EditSplat",
+        "argv": [
+          "/mnt/sda/ubuntu/lkx/papers/paper_eli/envs/editsplat/bin/python",
+          "run_editing.py",
+          "-s",
+          "/mnt/sda/ubuntu/lkx/papers/paper_eli/data/edit_all",
+          "-m",
+          "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat",
+          "--source_checkpoint",
+          "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/chkpnt30000.pth",
+          "--object_prompt",
+          "machine",
+          "--target_prompt",
+          "Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+          "--sampling_prompt",
+          "A factory with the central industrial machine housing painted red and all other objects unchanged.",
+          "--target_mask_prompt",
+          "white machine base",
+          "-r",
+          "1"
+        ],
+        "start_utc": "2026-11-04T10:12:26.574857+00:00",
+        "output_name": "editsplat",
+        "editing_data": "/mnt/sda/ubuntu/lkx/papers/paper_eli/data/edit_all",
+        "instruction": "Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+        "log": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/editsplat_20261104T101226Z/stdout.log",
+        "source_ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+        "status": "completed_reviewed",
+        "shared_gpu": true,
+        "gpu": "0",
+        "sampled_process_gpu_peak_mib": 23854,
+        "gpu_sampling_period_seconds": 5,
+        "scene_adaptation": "Common physical-instance selection among unchanged LangSAM candidates using reviewed projected 3D ROI; no substitute masks or pixel recoloring",
+        "segmentation_prompt": "white machine base",
+        "semantic_tracing_threshold": null,
+        "timing_scope": "Entire official entrypoint including model loading, segmentation, editing, fitting and its built-in rendering",
+        "pid": 1556850,
+        "wall_seconds": 4218.646245977841,
+        "exit_code": 0,
+        "end_utc": "2026-11-04T11:22:45.221478+00:00",
+        "quality_label": "execution_success_edit_target_not_achieved",
+        "quality_review": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/editsplat.quality_review.json"
+      },
+      "artifacts": {
+        "method": "editsplat",
+        "run_record": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/editsplat_20261104T101226Z/run.json",
+        "ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/point_cloud/iteration_33060/point_cloud.ply",
+        "model_check": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/model_check.json",
+        "common_render_dir": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/common_render",
+        "multiview_video": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/common_render/multiview.mp4",
+        "common_render_seconds": 174.39010882936418,
+        "video_probe": {
+          "programs": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 960,
+              "height": 540,
+              "nb_frames": "350"
+            }
+          ],
+          "format": {
+            "duration": "29.167000",
+            "size": "17019781"
+          }
+        },
+        "status": "reviewed_actual_result",
+        "created_utc": "2026-11-04T11:25:51.511491+00:00",
+        "quality_review": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/editsplat.quality_review.json",
+        "official_checkpoint": {
+          "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/point_cloud/iteration_33060/chkpnt33060.pth",
+          "bytes": 1187865793,
+          "sha256": "ae273e864ff8ffa8b5a9c167aacdc44b4679d2165a8870f703ba00c9d33079ab",
+          "format": "Official saved checkpoint; not converted"
+        }
+      },
+      "model": {
+        "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/point_cloud/iteration_33060/point_cloud.ply",
+        "bytes": 409152428,
+        "sha256": "2f534c21f598d5285a7c259317c7f58e3eb00f184cb1f76d2242f8afbbbd7ca8",
+        "gaussians": 1649802,
+        "all_parameters_finite": true,
+        "all_quaternions_nonzero": true,
+        "xyz_min": [
+          -56.86058044433594,
+          -12.189061164855957,
+          -31.67361831665039
+        ],
+        "xyz_max": [
+          27.299755096435547,
+          10.772089004516602,
+          30.684772491455078
+        ],
+        "log_scale_range": [
+          -20.09209632873535,
+          2.2691028118133545
+        ],
+        "opacity_logit_range": [
+          -7.092538833618164,
+          18.249156951904297
+        ]
+      },
+      "quality": {
+        "method": "editsplat",
+        "run": "editsplat_20261104T101226Z",
+        "execution": "official_entrypoint_exit0",
+        "visual_result": "The target housing remains predominantly white in all five inspected views. Some support edges become rougher and nearby surfaces acquire slight color changes. No convincing red housing edit is achieved.",
+        "quality_label": "execution_success_edit_target_not_achieved",
+        "inspected_actual_rgb": [
+          "frame_000061.png",
+          "frame_000091.png",
+          "frame_000151.png",
+          "frame_000161.png",
+          "frame_000281.png"
+        ],
+        "inspection_sheet": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/quality_preview.png",
+        "inspection_sheet_sha256": "1379e6569504ef04e01cc26edc1290a9e47b194a64c6ff83d0c0d8bef75e4ab7",
+        "artifacts": "finite PLY,350 common RGB renders,44 held-out square renders,350-frame multiview video",
+        "eligible_for_comparison": true,
+        "visual_result_zh": "五个检查视角中的目标外壳仍主要为白色，没有明显改红；部分支架边缘更粗糙，附近表面出现轻微颜色变化。"
+      },
+      "metrics": {
+        "visible_target_test_views": 24,
+        "red_fraction": 0.001556066263095304,
+        "clip_target_similarity": 0.21230094383160272,
+        "clip_directional_similarity": 0.038797863060608506,
+        "background_psnr_db": 27.900293697044955,
+        "background_ssim": 0.9205086082220078,
+        "background_lpips": 0.11696263371656339,
+        "target_reprojection_mae": 0.08822872137857808,
+        "target_reprojection_excess_mae": -0.0008773774176612884,
+        "wall_minutes": 70.31077076629735,
+        "peak_process_gpu_gib": 23.294921875
+      }
+    }
+  ],
+  "unedited_reference": {
+    "red_fraction": 0.0,
+    "target_reprojection_mae": 0.08910609802438153
+  },
+  "limits": [
+    "仅使用一个工业视频、一个固定随机种子；没有编辑后的真实参考图像。",
+    "共享GPU环境。耗时含模型加载、分割、编辑、拟合和方法自带测试；统一评价渲染的耗时单独记录。",
+    "单次运行耗时不含共同预处理、基础3DGS训练、环境安装、模型下载及失败重试；相关日志全部另存。",
+    "进程显存每5秒采样，报告的是采样峰值，可能漏掉短时峰值。",
+    "统一使用源场景几何和人工检查过的近似目标mask。红色比例和CLIP是代理指标，不能单独证明编辑正确。",
+    "较低的跨视角MAE也可能来自模糊或几乎没有编辑，必须结合实际RGB和编辑强度判断。",
+    "背景LPIPS对空间特征图按mask汇总；其感受野可能受目标附近变化影响，应结合像素PSNR/SSIM和实际图像解读。",
+    "共用306个训练视角、44个留出测试视角；各方法保留官方的视角采样策略。",
+    "方法使用的视角数和优化次数不同，墙钟时间反映本配置的完整运行成本，不代表同等计算预算下的独立速度排名。",
+    "目标中心相机实验仅作诊断，未用于主对比。"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "status": "pretrained_components_loaded_and_inference_checked",
+  "not_an_editing_run": true,
+  "sam_masks": 1,
+  "boxes": [
+    [
+      1.02410888671875,
+      1.3937530517578125,
+      510.81353759765625,
+      509.78857421875
+    ]
+  ],
+  "phrases": [
+    "white industrial machine housing"
+  ],
+  "reward_score_for_unedited_reference": 0.46436619758605957,
+  "torch": "2.4.1+cu118"
+}

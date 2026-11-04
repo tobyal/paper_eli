@@ -1,0 +1,15 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index fec4de6..02829f7 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -26,8 +26,8 @@ opencv_python = ">=4.7.0.72"
+ Pillow = ">=9.3.0"
+ transformers = ">=4.27.4"
+ lightning = ">=2.0.1"
+-segment-anything = {git = "https://github.com/facebookresearch/segment-anything.git"}
+-groundingdino = {git = "https://github.com/IDEA-Research/GroundingDINO.git"}
++segment-anything = {git = "https://github.com/facebookresearch/segment-anything.git", rev = "dca509fe793f601edb92606367a655c15ac00fdf"}
++groundingdino = {git = "https://github.com/IDEA-Research/GroundingDINO.git", rev = "856dde20aee659246248e20734ef9ba5214f5e44"}
+ 
+ [tool.poetry.group.dev.dependencies]
+ pre-commit = "^2.20.0"

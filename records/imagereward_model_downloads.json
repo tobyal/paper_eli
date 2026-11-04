@@ -1,0 +1,17 @@
+{
+  "THUDM/ImageReward": {
+    "revision": "5736be03b2652728fb87788c9797b0570450ab72",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--THUDM--ImageReward/snapshots/5736be03b2652728fb87788c9797b0570450ab72",
+    "files": [
+      {
+        "name": "ImageReward.pt",
+        "size": 1786880927,
+        "sha256": "d71dc8d4912bc633c06ab8ef1ef6a81e8199d4369f14b47b29baf1d19de561f6"
+      },
+      {
+        "name": "med_config.json",
+        "size": 485
+      }
+    ]
+  }
+}

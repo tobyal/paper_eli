@@ -1,0 +1,10 @@
+{
+  "status": "physical_instance_confirmed_on_reconstruction_previews",
+  "reference": "frame_000151.jpg, approximately 75 seconds",
+  "selected_reference_mask": "outputs/reference_sam/mask_0.png",
+  "description": "White lower housing/base below the black assembly on the central-left mobile industrial jig; excludes black upper assembly and adjacent machines.",
+  "reviewed_projection_frames": [51,61,71,81,91,101,121,131,141,151,161,171,221,231,241,251,261,271,281],
+  "finding": "Projected 3D region consistently follows the same physical housing despite camera motion and repeated similar devices.",
+  "limitation": "Annotation derives from the 7000-step reconstruction and a single reference view; final 30000-step evaluation masks still require review.",
+  "not_an_editing_result": true
+}

@@ -1,0 +1,22 @@
+E1104 16:24:39.324630 1037937 reconstruction.cc:551] cameras, images, points3D files do not exist at data/industrial/distorted/sparse_exhaustive/[0-9]*
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  [reconstruction.cc:551] cameras, images, points3D files do not exist at data/industrial/distorted/sparse_exhaustive/[0-9]*
+*** Aborted at 1793780679 (unix time) try "date -d @1793780679" if you are using GNU date ***
+PC: @                0x0 (unknown)
+*** SIGABRT (@0x408000fd671) received by PID 1037937 (TID 0x7f7a47896000) from PID 1037937; stack trace: ***
+    @     0x7f7a4dc0e876 google::(anonymous namespace)::FailureSignalHandler()
+    @     0x7f7a4bdf2520 (unknown)
+    @     0x7f7a4be469bc pthread_kill
+    @     0x7f7a4bdf2476 raise
+    @     0x7f7a4bdd87f3 abort
+    @     0x7f7a4c09bb9e (unknown)
+    @     0x7f7a4c0a720c (unknown)
+    @     0x7f7a4c0a7277 std::terminate()
+    @     0x7f7a4c0a74d8 __cxa_throw
+    @     0x55fd59d9f192 colmap::LogMessageFatalThrow<>::~LogMessageFatalThrow()
+    @     0x55fd59eb086a colmap::Reconstruction::Read()
+    @     0x55fd59dbe24f colmap::RunModelAnalyzer()
+    @     0x55fd59d7ba28 main
+    @     0x7f7a4bdd9d90 (unknown)
+    @     0x7f7a4bdd9e40 __libc_start_main
+    @     0x55fd59d83845 _start

@@ -1,0 +1,118 @@
+name: edit-dc
+description: ''
+tag: industrial_red_seed0
+seed: 0
+use_timestamp: false
+timestamp: ''
+exp_root_dir: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst
+exp_dir: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/edit-dc
+trial_name: industrial_red_seed0
+trial_dir: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/edit-dc/industrial_red_seed0
+n_gpus: 1
+resume: null
+data_type: gs-load
+data:
+  batch_size: 1
+  source: /mnt/sda/ubuntu/lkx/papers/paper_eli/data/edit_train
+  max_view_num: 96
+  eval_camera_distance: 4.0
+  camera_distance_range:
+  - 1.5
+  - 4.0
+  light_sample_strategy: dreamfusion3dgs
+  height: 512
+  width: 512
+  elevation_view_num: 2
+  azimuth_view_num: 8
+system_type: gsedit-system-edit
+system:
+  gs_source: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply
+  per_editing_step: 10
+  edit_begin_step: 0
+  densify_until_iter: 1201
+  densify_from_iter: 100
+  densification_interval: 100
+  max_grad: 5
+  min_opacity: 0.005
+  prompt_processor_type: stable-diffusion-prompt-processor
+  prompt_processor:
+    pretrained_model_name_or_path: /mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+    prompt: Change the housing of the industrial machine in the center to red, keeping
+      all other objects unchanged.
+  dds_target_prompt_processor:
+    pretrained_model_name_or_path: /mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+    prompt: Change the housing of the industrial machine in the center to red, keeping
+      all other objects unchanged.
+  dds_source_prompt_processor:
+    pretrained_model_name_or_path: /mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+    prompt: A photo of a white industrial machine in a factory.
+  seg_prompt: white machine base
+  guidance_type: stable-diffusion-instructpix2pix-guidance
+  guidance:
+    min_step_percent: 0.02
+    max_step_percent: 0.98
+    guidance_scale: 7.5
+    condition_scale: 1.5
+    ip2p_name_or_path: /mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d
+    ddim_scheduler_name_or_path: /mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--CompVis--stable-diffusion-v1-4/snapshots/133a221b8aa7292a167afc5127cb63fb5005638b
+  second_guidance_type: stable-diffusion-instructpix2pix-dc-guidance
+  second_guidance:
+    min_step_percent: 0.2
+    max_step_percent: 0.9
+    chi: 0.075
+    delta: 0.05
+    gamma: 0.2
+    diffusion_steps: 500
+    use_dds: true
+    use_dreamcatalyst: true
+    ip2p_name_or_path: /mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d
+    ddim_scheduler_name_or_path: /mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--CompVis--stable-diffusion-v1-4/snapshots/133a221b8aa7292a167afc5127cb63fb5005638b
+  loggers:
+    wandb:
+      enable: false
+      project: threestudio_gs
+      name: None
+  loss:
+    lambda_sparsity: 0.0
+    lambda_opaque: 0.0
+    lambda_l1: 0.0
+    lambda_p: 0.0
+    lambda_dds: 1.0
+    lambda_anchor_color: 5
+    lambda_anchor_geo: 5
+    lambda_anchor_opacity: 5
+    lambda_anchor_scale: 5
+    lambda_move: 0
+    lambda_alpha: 0
+    lambda_scale: 0
+  optimizer:
+    name: Adam
+    args:
+      lr: 0.001
+      betas:
+      - 0.9
+      - 0.99
+      eps: 1.0e-15
+  cache_dir: industrial_red_dreamcatalyst
+  mask_thres: 0.5
+  max_densify_percent: 0.01
+  anchor_weight_init_g0: 0.05
+  anchor_weight_init: 0.1
+  anchor_weight_multiplier: 1.3
+  gs_lr_scaler: 1
+  gs_final_lr_scaler: 1
+  color_lr_scaler: 1
+  opacity_lr_scaler: 1
+  scaling_lr_scaler: 1
+  rotation_lr_scaler: 1
+trainer:
+  max_steps: 1500
+  log_every_n_steps: 1
+  num_sanity_val_steps: 0
+  val_check_interval: 500
+  enable_progress_bar: true
+  precision: 16-mixed
+checkpoint:
+  save_last: true
+  save_top_k: -1
+  every_n_train_steps: 1500

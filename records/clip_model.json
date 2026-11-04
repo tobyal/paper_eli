@@ -1,0 +1,6 @@
+{
+  "model": "ViT-L/14",
+  "url": "https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt",
+  "sha256": "b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836",
+  "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/clip/ViT-L-14.pt"
+}

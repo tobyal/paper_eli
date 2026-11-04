@@ -1,0 +1,23 @@
+{
+  "input_frames": 350,
+  "registered": 350,
+  "registration_fraction": 1.0,
+  "unregistered": [],
+  "points": 136641,
+  "point_reprojection_error_mean": 0.7025039600169055,
+  "point_reprojection_error_median": 0.5726028994287036,
+  "cameras": [
+    {
+      "id": 1,
+      "model": "PINHOLE",
+      "width": 1875,
+      "height": 1056,
+      "params": [
+        1412.5745251406631,
+        1406.3617590159379,
+        937.5,
+        528.0
+      ]
+    }
+  ]
+}

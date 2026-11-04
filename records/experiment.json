@@ -1,0 +1,53 @@
+{
+  "root": "/mnt/sda/ubuntu/lkx/papers/paper_eli",
+  "input_video": "20261016-142321.mp4",
+  "sha256": "061413776d7e163c53aa37cd556018bd65356df2128f4929a55ed90645c67116",
+  "instruction_zh": "将画面中央设备的外壳改成红色，保持其他物体不变。",
+  "instruction_en": "Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.",
+  "reference_time_seconds": 75,
+  "reference_target": "White housing/base beneath the black assembly, near the center of reference_075s.jpg",
+  "reference_dimensions": [
+    1280,
+    720
+  ],
+  "reference_target_approximate_bbox_xyxy": [
+    504,
+    361,
+    710,
+    493
+  ],
+  "sampling_fps": 2,
+  "sfm_image_dimensions": [
+    1920,
+    1080
+  ],
+  "gpu": 0,
+  "seed": 0,
+  "evaluation": {
+    "status": "completed_actual_outputs_visually_reviewed",
+    "same_source_reconstruction": true,
+    "same_evaluation_cameras": true,
+    "metrics": [
+      "target-region red color fraction and CLIP alignment",
+      "depth-reprojected cross-view difference with visibility masks",
+      "outside-target PSNR, SSIM and LPIPS relative to original reconstruction",
+      "wall time, GPU utilization and peak memory"
+    ],
+    "timing_caveat": "Shared server; record competing GPU load. No claim of isolated benchmark timing.",
+    "metrics_record": "records/common_metrics.json",
+    "comparison_record": "records/final_comparison.json",
+    "artifact_verification": "records/final_artifact_verification.json",
+    "quality_labels": {
+      "gaussianeditor": "execution_success_edit_target_not_achieved",
+      "dge": "execution_success_edit_target_not_achieved",
+      "dreamcatalyst": "execution_success_edit_target_not_achieved",
+      "editsplat": "execution_success_edit_target_not_achieved"
+    }
+  },
+  "upstream_commits": {
+    "GaussianEditor": "9249f847c57036266a0bfb3a210681f94264ede9",
+    "DGE": "7eed0bc57824707c53b935bd19ea994f19f41eae",
+    "DreamCatalyst": "072cb248ce847cef0e443d70baef7db8cee89ee7",
+    "EditSplat": "631f26679f9d66c7099413be441d346185c6442f"
+  }
+}

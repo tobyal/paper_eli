@@ -1,0 +1,21 @@
+{
+  "timbrooks/instruct-pix2pix": {
+    "revision": "31519b5cb02a7fd89b906d88731cd4d6a7bbf88d",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d",
+    "files": [
+      {
+        "name": "feature_extractor/preprocessor_config.json",
+        "size": 518
+      },
+      {
+        "name": "safety_checker/config.json",
+        "size": 4905
+      },
+      {
+        "name": "safety_checker/pytorch_model.bin",
+        "size": 1216064769,
+        "sha256": "16d28f2b37109f222cdc33620fdd262102ac32112be0352a7f77e9614b35a394"
+      }
+    ]
+  }
+}

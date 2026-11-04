@@ -1,0 +1,8 @@
+I1104 16:12:28.749620 979183 model.cc:444] Cameras: 1
+I1104 16:12:28.749796 979183 model.cc:445] Images: 53
+I1104 16:12:28.749802 979183 model.cc:446] Registered images: 53
+I1104 16:12:28.749809 979183 model.cc:448] Points: 16650
+I1104 16:12:28.749814 979183 model.cc:449] Observations: 103872
+I1104 16:12:28.749823 979183 model.cc:451] Mean track length: 6.238559
+I1104 16:12:28.749840 979183 model.cc:453] Mean observations per image: 1959.849057
+I1104 16:12:28.749846 979183 model.cc:456] Mean reprojection error: 0.696542px

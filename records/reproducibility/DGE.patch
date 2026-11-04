@@ -1,0 +1,62 @@
+diff --git a/threestudio/systems/DGE.py b/threestudio/systems/DGE.py
+index 9f0ad76..2c48d1b 100644
+--- a/threestudio/systems/DGE.py
++++ b/threestudio/systems/DGE.py
+@@ -72,7 +72,7 @@ class DGE(BaseLift3DSystem):
+ 
+         # guidance 
+         camera_update_per_step: int = 500
+-        added_noise_schedule: List[int] = field(default_factory=[999, 200, 200, 21])    
++        added_noise_schedule: List[int] = field(default_factory=lambda: [999, 200, 200, 21])    
+         
+ 
+     cfg: Config
+@@ -120,7 +120,7 @@ class DGE(BaseLift3DSystem):
+ 
+                 cur_cam = self.trainer.datamodule.train_dataset.scene.cameras[id]
+ 
+-                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt)[
++                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt, camera=cur_cam)[
+                     0
+                 ].to(get_device())
+ 
+@@ -593,7 +593,7 @@ class DGE(BaseLift3DSystem):
+         distances = [np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), 0, 1)) for cam in cams]
+         sorted_cams = [cam for _, cam in sorted(zip(distances, cams), key=lambda pair: pair[0])]
+         reference_axis = np.cross(most_left_vecotr, sorted_cams[1].R[:, 2])
+-        distances_with_sign = [np.arccos(np.dot(most_left_vecotr, cam.R[:, 2])) if np.dot(reference_axis,  np.cross(most_left_vecotr, cam.R[:, 2])) >= 0 else 2 * np.pi - np.arccos(np.dot(most_left_vecotr, cam.R[:, 2])) for cam in cams]
++        distances_with_sign = [np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), -1.0, 1.0)) if np.dot(reference_axis,  np.cross(most_left_vecotr, cam.R[:, 2])) >= 0 else 2 * np.pi - np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), -1.0, 1.0)) for cam in cams]
+         
+         sorted_cam_idx = [idx for _, idx in sorted(zip(distances_with_sign, range(len(cams))), key=lambda pair: pair[0])]
+ 
+diff --git a/threestudio/utils/sam.py b/threestudio/utils/sam.py
+index 55e68c0..edf204d 100644
+--- a/threestudio/utils/sam.py
++++ b/threestudio/utils/sam.py
+@@ -7,6 +7,7 @@ from einops import rearrange
+ from torchvision.transforms import ToPILImage, ToTensor
+ 
+ from lang_sam import LangSAM
++from instance_selection import select_instance
+ 
+ # from threestudio.utils.typing import *
+ 
+@@ -19,7 +20,7 @@ class LangSAMTextSegmentor(torch.nn.Module):
+         self.to_pil_image = ToPILImage(mode="RGB")
+         self.to_tensor = ToTensor()
+ 
+-    def forward(self, images, prompt: str):
++    def forward(self, images, prompt: str, camera=None):
+         images = rearrange(images, "b h w c -> b c h w")
+         masks = []
+         for image in images:
+@@ -27,6 +28,9 @@ class LangSAMTextSegmentor(torch.nn.Module):
+             image = self.to_pil_image(image.clamp(0.0, 1.0))
+             mask, _, _, _ = self.model.predict(image, prompt)
+             # breakpoint()
++            if camera is not None:
++                masks.append(select_instance(mask, camera))
++                continue
+             if mask.ndim == 3:
+                 masks.append(mask[0:1].to(torch.float32))
+             else:

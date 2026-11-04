@@ -1,0 +1,81 @@
+{
+  "GaussianEditor": {
+    "read": [
+      "readme.md",
+      "requirements.lock.txt",
+      "configs/edit-n2n.yaml",
+      "docs/hyperparameter.md",
+      "script/edit_n2n_bear_grey.sh",
+      "threestudio/systems/GassuianEditor.py",
+      "threestudio/systems/GassuianEditorEdit.py",
+      "threestudio/models/guidance/instructpix2pix_guidance.py"
+    ],
+    "preserve": [
+      "LangSAM segmentation and semantic Gaussian tracing",
+      "per-generation anchor losses",
+      "ranked gradient densification",
+      "iterative InstructPix2Pix image updates",
+      "L1 and perceptual optimization"
+    ],
+    "candidate_config": "Official bear texture-edit script, 2500 steps, 96 views; only scene and text fields adapted initially"
+  },
+  "DGE": {
+    "read": [
+      "README.md",
+      "requirements.txt",
+      "configs/dge.yaml",
+      "threestudio/systems/dge.py",
+      "threestudio/models/guidance/dge_guidance.py"
+    ],
+    "preserve": [
+      "pivotal-view extended attention",
+      "epipolar-constrained feature propagation",
+      "camera updates and added-noise schedule",
+      "direct fitting of consistent edited images"
+    ],
+    "candidate_config": "Official dge.yaml, 1000 steps, 20 views per editing update, camera batch size 5"
+  },
+  "DreamCatalyst": {
+    "read": [
+      "README.md",
+      "threestudio/README.md",
+      "threestudio/requirements_all.txt",
+      "threestudio/configs/edit-dc.yaml",
+      "threestudio/threestudio/models/guidance/instructpix2pix_dc_guidance.py"
+    ],
+    "preserve": [
+      "official 3DGS GaussianEditor integration",
+      "deterministic annealed timestep schedule",
+      "DDS source/target guidance",
+      "identity and editability weighting with chi/delta/gamma",
+      "GaussianEditor anchors and semantic tracing"
+    ],
+    "candidate_config": "README 1500-step configuration, chi=0.075, delta=0.05, gamma=0.2; use_dreamcatalyst=true"
+  },
+  "EditSplat": {
+    "read": [
+      "README.md",
+      "environment.yaml",
+      "arguments/__init__.py",
+      "run_editing.py",
+      "scene/dataloader.py",
+      "scene/dataset_readers.py",
+      "utils/camera_utils.py"
+    ],
+    "preserve": [
+      "initial InstructPix2Pix editing",
+      "ImageReward filtering_ratio=0.85 from source defaults (keeps top 15 percent)",
+      "RGBD reprojection and multi-view fusion guidance",
+      "SAM-guided background replacement",
+      "attention-guided trimming",
+      "10 epochs of official Gaussian optimization"
+    ],
+    "candidate_config": "environment.yaml torch2.4.1/cu118 and diffusers0.30.3; runtime defaults; common 512px dataset"
+  },
+  "notes": [
+    "Candidate configurations are not evidence of a completed run.",
+    "DreamCatalyst README requests diffusers0.27.2 while requirements_all pins0.19.3; resolve in favor of README, record installed freeze.",
+    "README and source differ on EditSplat filtering_ratio: arguments default0.85 and run_editing computes top_ratio=1-filtering_ratio, retaining top15percent. Honor executable source defaults and report this discrepancy.",
+    "EditSplat AGT executable computes top_k=int((k_percent/100)*N); default k_percent=0.15 therefore trims0.15percent, not15percent. Preserve the executable default."
+  ]
+}

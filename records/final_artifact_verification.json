@@ -1,0 +1,96 @@
+{
+  "gaussianeditor": {
+    "execution": "completed_reviewed",
+    "quality_label": "execution_success_edit_target_not_achieved",
+    "wide_renders": 350,
+    "square_test_renders": 44,
+    "video": {
+      "programs": [],
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "nb_frames": "350"
+        }
+      ],
+      "format": {
+        "duration": "29.167000"
+      }
+    },
+    "ply_sha256": "895d7d23063f86daab473b85382e0420e768281411336f4fa141dc97e5761e74"
+  },
+  "dge": {
+    "execution": "completed_reviewed",
+    "quality_label": "execution_success_edit_target_not_achieved",
+    "wide_renders": 350,
+    "square_test_renders": 44,
+    "video": {
+      "programs": [],
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "nb_frames": "350"
+        }
+      ],
+      "format": {
+        "duration": "29.167000"
+      }
+    },
+    "ply_sha256": "7e7f913485829da962587722741e936b19a8fda8bdb0bb4f48381eabf1cadcb5"
+  },
+  "dreamcatalyst": {
+    "execution": "completed_reviewed",
+    "quality_label": "execution_success_edit_target_not_achieved",
+    "wide_renders": 350,
+    "square_test_renders": 44,
+    "video": {
+      "programs": [],
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "nb_frames": "350"
+        }
+      ],
+      "format": {
+        "duration": "29.167000"
+      }
+    },
+    "ply_sha256": "c53c96e80b31ab87d7b0f9a9dc069c391bc52c08edea06f99753fd1bc19940d6"
+  },
+  "editsplat": {
+    "execution": "completed_reviewed",
+    "quality_label": "execution_success_edit_target_not_achieved",
+    "wide_renders": 350,
+    "square_test_renders": 44,
+    "video": {
+      "programs": [],
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "nb_frames": "350"
+        }
+      ],
+      "format": {
+        "duration": "29.167000"
+      }
+    },
+    "ply_sha256": "2f534c21f598d5285a7c259317c7f58e3eb00f184cb1f76d2242f8afbbbd7ca8"
+  },
+  "comparison_video": {
+    "programs": [],
+    "streams": [
+      {
+        "width": 1920,
+        "height": 1132,
+        "nb_frames": "350"
+      }
+    ],
+    "format": {
+      "duration": "29.167000"
+    }
+  },
+  "verified_utc": "2026-11-04T11:30:57.065020+00:00"
+}

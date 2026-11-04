@@ -1,0 +1,34 @@
+{
+  "gaussianeditor": {
+    "run": "gaussianeditor_20261104T091151Z",
+    "calls": 96,
+    "nonempty_selected_mask": 22,
+    "no_candidate": 6,
+    "offscreen_projected_roi": 47,
+    "note": "Calls may include repeat/update views. This measures localization availability, not editing quality."
+  },
+  "dge": {
+    "run": "dge_20261104T094757Z",
+    "calls": 20,
+    "nonempty_selected_mask": 5,
+    "no_candidate": 3,
+    "offscreen_projected_roi": 7,
+    "note": "Calls may include repeat/update views. This measures localization availability, not editing quality."
+  },
+  "dreamcatalyst": {
+    "run": "dreamcatalyst_20261104T095623Z",
+    "calls": 96,
+    "nonempty_selected_mask": 22,
+    "no_candidate": 6,
+    "offscreen_projected_roi": 47,
+    "note": "Calls may include repeat/update views. This measures localization availability, not editing quality."
+  },
+  "editsplat": {
+    "run": "editsplat_20261104T101226Z",
+    "calls": 306,
+    "nonempty_selected_mask": 26,
+    "no_candidate": 55,
+    "offscreen_projected_roi": 153,
+    "note": "Calls may include repeat/update views. This measures localization availability, not editing quality."
+  }
+}

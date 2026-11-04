@@ -1,0 +1,13 @@
+diff --git a/threestudio/gaussiansplatting/submodules/diff-gaussian-rasterization/setup.py b/threestudio/gaussiansplatting/submodules/diff-gaussian-rasterization/setup.py
+index f66979a..a63b4bd 100644
+--- a/threestudio/gaussiansplatting/submodules/diff-gaussian-rasterization/setup.py
++++ b/threestudio/gaussiansplatting/submodules/diff-gaussian-rasterization/setup.py
+@@ -29,7 +29,7 @@ setup(
+                 "rasterize_points.cu",
+                 "ext.cpp",
+             ],
+-            extracompileargs={"nvcc": ["-I" + os.path.join(os.path.dirname(os.path.abspath(__file__)), "third_party/glm/"),"--std=c++17"]},
++            extra_compile_args={"nvcc": ["-I" + os.path.join(os.path.dirname(os.path.abspath(__file__)), "third_party/glm/"),"--std=c++17"]},
+         )
+     ],
+     cmdclass={"build_ext": BuildExtension},

@@ -1,0 +1,31 @@
+diff --git a/threestudio/systems/DGE.py b/threestudio/systems/DGE.py
+index 9f0ad76..2c48d1b 100644
+--- a/threestudio/systems/DGE.py
++++ b/threestudio/systems/DGE.py
+@@ -72,7 +72,7 @@ class DGE(BaseLift3DSystem):
+ 
+         # guidance 
+         camera_update_per_step: int = 500
+-        added_noise_schedule: List[int] = field(default_factory=[999, 200, 200, 21])    
++        added_noise_schedule: List[int] = field(default_factory=lambda: [999, 200, 200, 21])    
+         
+ 
+     cfg: Config
+@@ -120,7 +120,7 @@ class DGE(BaseLift3DSystem):
+ 
+                 cur_cam = self.trainer.datamodule.train_dataset.scene.cameras[id]
+ 
+-                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt)[
++                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt, camera=cur_cam)[
+                     0
+                 ].to(get_device())
+ 
+@@ -593,7 +593,7 @@ class DGE(BaseLift3DSystem):
+         distances = [np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), 0, 1)) for cam in cams]
+         sorted_cams = [cam for _, cam in sorted(zip(distances, cams), key=lambda pair: pair[0])]
+         reference_axis = np.cross(most_left_vecotr, sorted_cams[1].R[:, 2])
+-        distances_with_sign = [np.arccos(np.dot(most_left_vecotr, cam.R[:, 2])) if np.dot(reference_axis,  np.cross(most_left_vecotr, cam.R[:, 2])) >= 0 else 2 * np.pi - np.arccos(np.dot(most_left_vecotr, cam.R[:, 2])) for cam in cams]
++        distances_with_sign = [np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), -1.0, 1.0)) if np.dot(reference_axis,  np.cross(most_left_vecotr, cam.R[:, 2])) >= 0 else 2 * np.pi - np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), -1.0, 1.0)) for cam in cams]
+         
+         sorted_cam_idx = [idx for _, idx in sorted(zip(distances_with_sign, range(len(cams))), key=lambda pair: pair[0])]
+ 

@@ -1,0 +1,104 @@
+{
+  "timbrooks/instruct-pix2pix": {
+    "revision": "31519b5cb02a7fd89b906d88731cd4d6a7bbf88d",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d",
+    "files": [
+      {
+        "name": "model_index.json",
+        "size": 616
+      },
+      {
+        "name": "scheduler/scheduler_config.json",
+        "size": 569
+      },
+      {
+        "name": "text_encoder/config.json",
+        "size": 617
+      },
+      {
+        "name": "text_encoder/pytorch_model.bin",
+        "size": 492307041,
+        "sha256": "98124f3d5663b2f14ff08d4c29db93800622b4fcfa3d952bb6f9112f5d6dadd7"
+      },
+      {
+        "name": "tokenizer/merges.txt",
+        "size": 524619
+      },
+      {
+        "name": "tokenizer/special_tokens_map.json",
+        "size": 472
+      },
+      {
+        "name": "tokenizer/tokenizer_config.json",
+        "size": 806
+      },
+      {
+        "name": "tokenizer/vocab.json",
+        "size": 1059962
+      },
+      {
+        "name": "unet/config.json",
+        "size": 1021
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.bin",
+        "size": 3438412453,
+        "sha256": "b83d6c874bc598364d113910c8d5a521eb83550fcecc0b4ddd2472c6de4323db"
+      },
+      {
+        "name": "vae/config.json",
+        "size": 553
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.bin",
+        "size": 334711857,
+        "sha256": "af27ea858349760ebe3311953e0bfe8d6fd257dc9537ae0b2b938c262132a2c6"
+      }
+    ]
+  },
+  "stable-diffusion-v1-5/stable-diffusion-v1-5": {
+    "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+    "files": [
+      {
+        "name": "text_encoder/config.json",
+        "size": 617
+      },
+      {
+        "name": "text_encoder/pytorch_model.bin",
+        "size": 492305335,
+        "sha256": "770a47a9ffdcfda0b05506a7888ed714d06131d60267e6cf52765d61cf59fd67"
+      },
+      {
+        "name": "tokenizer/merges.txt",
+        "size": 524619
+      },
+      {
+        "name": "tokenizer/special_tokens_map.json",
+        "size": 472
+      },
+      {
+        "name": "tokenizer/tokenizer_config.json",
+        "size": 806
+      },
+      {
+        "name": "tokenizer/vocab.json",
+        "size": 1059962
+      }
+    ]
+  },
+  "CompVis/stable-diffusion-v1-4": {
+    "revision": "133a221b8aa7292a167afc5127cb63fb5005638b",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--CompVis--stable-diffusion-v1-4/snapshots/133a221b8aa7292a167afc5127cb63fb5005638b",
+    "files": [
+      {
+        "name": "scheduler/.ipynb_checkpoints/scheduler_config-checkpoint.json",
+        "size": 209
+      },
+      {
+        "name": "scheduler/scheduler_config.json",
+        "size": 313
+      }
+    ]
+  }
+}

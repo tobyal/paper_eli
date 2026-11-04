@@ -1,0 +1,41 @@
+{
+  "source_mask": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/GaussianEditor/edit_cache/industrial_red_gaussianeditor/white machine base_mask_96_view/gs_mask.pt",
+  "selected_gaussians": 452,
+  "views": [
+    {
+      "frame": "frame_000061.jpg",
+      "selected_pixels": 337,
+      "target_pixels": 4105,
+      "coverage": 0.001705237515225335,
+      "precision": 0.020771513353115726
+    },
+    {
+      "frame": "frame_000091.jpg",
+      "selected_pixels": 2172,
+      "target_pixels": 14881,
+      "coverage": 0.018211141724346482,
+      "precision": 0.12476979742173112
+    },
+    {
+      "frame": "frame_000151.jpg",
+      "selected_pixels": 291,
+      "target_pixels": 6684,
+      "coverage": 0.031119090365050867,
+      "precision": 0.7147766323024055
+    },
+    {
+      "frame": "frame_000161.jpg",
+      "selected_pixels": 441,
+      "target_pixels": 7664,
+      "coverage": 0.03953549060542798,
+      "precision": 0.6870748299319728
+    },
+    {
+      "frame": "frame_000281.jpg",
+      "selected_pixels": 52,
+      "target_pixels": 4623,
+      "coverage": 0.0034609560891196195,
+      "precision": 0.3076923076923077
+    }
+  ]
+}

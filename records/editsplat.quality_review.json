@@ -1,0 +1,19 @@
+{
+  "method": "editsplat",
+  "run": "editsplat_20261104T101226Z",
+  "execution": "official_entrypoint_exit0",
+  "visual_result": "The target housing remains predominantly white in all five inspected views. Some support edges become rougher and nearby surfaces acquire slight color changes. No convincing red housing edit is achieved.",
+  "quality_label": "execution_success_edit_target_not_achieved",
+  "inspected_actual_rgb": [
+    "frame_000061.png",
+    "frame_000091.png",
+    "frame_000151.png",
+    "frame_000161.png",
+    "frame_000281.png"
+  ],
+  "inspection_sheet": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/quality_preview.png",
+  "inspection_sheet_sha256": "1379e6569504ef04e01cc26edc1290a9e47b194a64c6ff83d0c0d8bef75e4ab7",
+  "artifacts": "finite PLY,350 common RGB renders,44 held-out square renders,350-frame multiview video",
+  "eligible_for_comparison": true,
+  "visual_result_zh": "\u4e94\u4e2a\u68c0\u67e5\u89c6\u89d2\u4e2d\u7684\u76ee\u6807\u5916\u58f3\u4ecd\u4e3b\u8981\u4e3a\u767d\u8272\uff0c\u6ca1\u6709\u660e\u663e\u6539\u7ea2\uff1b\u90e8\u5206\u652f\u67b6\u8fb9\u7f18\u66f4\u7c97\u7cd9\uff0c\u9644\u8fd1\u8868\u9762\u51fa\u73b0\u8f7b\u5fae\u989c\u8272\u53d8\u5316\u3002"
+}

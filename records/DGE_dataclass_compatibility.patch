@@ -1,0 +1,22 @@
+diff --git a/threestudio/systems/DGE.py b/threestudio/systems/DGE.py
+index 9f0ad76..28409eb 100644
+--- a/threestudio/systems/DGE.py
++++ b/threestudio/systems/DGE.py
+@@ -72,7 +72,7 @@ class DGE(BaseLift3DSystem):
+ 
+         # guidance 
+         camera_update_per_step: int = 500
+-        added_noise_schedule: List[int] = field(default_factory=[999, 200, 200, 21])    
++        added_noise_schedule: List[int] = field(default_factory=lambda: [999, 200, 200, 21])    
+         
+ 
+     cfg: Config
+@@ -120,7 +120,7 @@ class DGE(BaseLift3DSystem):
+ 
+                 cur_cam = self.trainer.datamodule.train_dataset.scene.cameras[id]
+ 
+-                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt)[
++                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt, camera=cur_cam)[
+                     0
+                 ].to(get_device())
+ 

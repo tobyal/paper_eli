@@ -1,0 +1,25 @@
+certifi==2026.10.23
+charset-normalizer==3.5.2
+diff-gaussian-rasterization @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/repos/gaussian-splatting/submodules/diff-gaussian-rasterization
+filelock==3.16.1
+fsspec==2025.3.0
+idna==3.15
+Jinja2==3.1.6
+MarkupSafe==2.1.5
+mpmath==1.3.0
+networkx==3.1
+ninja==1.13.2
+numpy==1.24.4
+Pillow==9.5.0
+plyfile==1.0.2
+poetry-core==1.9.1
+requests==2.32.4
+simple-knn @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/repos/gaussian-splatting/submodules/simple-knn
+sympy==1.13.3
+torch @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/torch-2.1.0%2Bcu118-cp38-cp38-linux_x86_64.whl#sha256=02cd2c312501ebd9faf65bedb48ffbff77312ffef04cf7125ed4caa1738fd8df
+torchaudio==2.1.0+cu118
+torchvision==0.16.0+cu118
+tqdm==4.70.1
+triton==2.1.0
+typing_extensions==4.13.2
+urllib3==2.2.3

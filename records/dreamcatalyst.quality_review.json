@@ -1,0 +1,19 @@
+{
+  "method": "dreamcatalyst",
+  "run": "dreamcatalyst_20261104T095623Z",
+  "execution": "official_entrypoint_exit0",
+  "visual_result": "The housing remains predominantly white in all five inspected views, with noticeable green/purple edge and surface artifacts near the target. The requested red edit was not achieved.",
+  "quality_label": "execution_success_edit_target_not_achieved",
+  "inspected_actual_rgb": [
+    "frame_000061.png",
+    "frame_000091.png",
+    "frame_000151.png",
+    "frame_000161.png",
+    "frame_000281.png"
+  ],
+  "inspection_sheet": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/quality_preview.png",
+  "inspection_sheet_sha256": "630ae06e4fd769fa1da6ed35b340248ac426a0d9d1b57f8ce270775927f6cfe8",
+  "artifacts": "finite PLY,350 common RGB renders,44 held-out square renders,350-frame multiview video",
+  "eligible_for_comparison": true,
+  "visual_result_zh": "完整运行1500步。五个检查视角中的目标仍主要为白色，目标附近出现较明显的绿色/紫色边缘及表面伪影，未达到改红目标。"
+}

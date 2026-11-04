@@ -1,0 +1,19 @@
+{
+  "method": "dge",
+  "run": "dge_20261104T094757Z",
+  "execution": "official_entrypoint_exit0",
+  "visual_result": "The target housing remains predominantly white across five inspected views; some purple/blue tint and edge artifacts appear. No convincing red housing edit was achieved.",
+  "quality_label": "execution_success_edit_target_not_achieved",
+  "inspected_actual_rgb": [
+    "frame_000061.png",
+    "frame_000091.png",
+    "frame_000151.png",
+    "frame_000161.png",
+    "frame_000281.png"
+  ],
+  "inspection_sheet": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/quality_preview.png",
+  "inspection_sheet_sha256": "7aa73350349c8202becbe078dbec7dbb57df6051971c82b7ff7ad0a83edb4a1b",
+  "artifacts": "finite PLY,350 common RGB renders,44 held-out square renders,350-frame multiview video",
+  "eligible_for_comparison": true,
+  "visual_result_zh": "完整运行1000步。五个检查视角中的目标仍主要为白色，部分区域出现紫蓝色偏色和边缘伪影，未明显达到改红目标。"
+}

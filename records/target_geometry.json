@@ -1,0 +1,35 @@
+{
+  "reference_frame": "frame_000151.jpg",
+  "reference_mask": "outputs/reference_sam/mask_0.png",
+  "review": "SAM candidate0 visually isolates white lower housing; candidates1/2 additionally include vertical posts.",
+  "source_geometry_iteration": 7000,
+  "center": [
+    0.46808853013085727,
+    0.12505088506993703,
+    2.765819902891625
+  ],
+  "basis": [
+    [
+      -0.9121270141822934,
+      -0.06456724755553384,
+      0.40479053909645263
+    ],
+    [
+      0.40182592429775604,
+      -0.3359696785608938,
+      0.8518569725311543
+    ],
+    [
+      -0.0809952872773995,
+      -0.9396570893846288,
+      -0.33239181368989745
+    ]
+  ],
+  "half_extents": [
+    0.46934106919296226,
+    0.1184569223510971,
+    0.07933956642621298
+  ],
+  "point_count": 6031,
+  "method": "Alpha-normalized source Gaussian depth; robust PCA bounds using 2nd/98th percentiles plus 12% margin. This annotation disambiguates repeated devices and defines common evaluation ROI."
+}

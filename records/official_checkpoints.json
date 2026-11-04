@@ -1,0 +1,26 @@
+{
+  "gaussianeditor": {
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/edit-n2n/industrial_red_seed0/ckpts/last.ckpt",
+    "bytes": 922672954,
+    "sha256": "41198083ced865ecde70c40caa680645a42591e89ab1a2fa91978ab7da1e93ee",
+    "format": "Official saved checkpoint; not converted"
+  },
+  "dge": {
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/dge/industrial_red_seed0/ckpts/last.ckpt",
+    "bytes": 922230074,
+    "sha256": "b9da189521a4d6db44066dc0123f58761b4678902ef21dd6962fa52a2c423880",
+    "format": "Official saved checkpoint; not converted"
+  },
+  "dreamcatalyst": {
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/edit-dc/industrial_red_seed0/ckpts/last.ckpt",
+    "bytes": 922397065,
+    "sha256": "9b2bca29ed70df8e8f9cf5eb88ab4ab7c3a3f340ccab74814e203f2ee0989094",
+    "format": "Official saved checkpoint; not converted"
+  },
+  "editsplat": {
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/point_cloud/iteration_33060/chkpnt33060.pth",
+    "bytes": 1187865793,
+    "sha256": "ae273e864ff8ffa8b5a9c167aacdc44b4679d2165a8870f703ba00c9d33079ab",
+    "format": "Official saved checkpoint; not converted"
+  }
+}

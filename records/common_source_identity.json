@@ -1,0 +1,16 @@
+{
+  "ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+  "checkpoint": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/chkpnt30000.pth",
+  "iteration": 30000,
+  "gaussians": 1828777,
+  "active_sh_degree": 3,
+  "maximum_absolute_differences": {
+    "xyz": 0.0,
+    "f_dc": 0.0,
+    "f_rest": 0.0,
+    "scale": 0.0,
+    "rotation": 0.0,
+    "opacity": 0.0
+  },
+  "status": "all_source_gaussian_parameters_exactly_equal"
+}

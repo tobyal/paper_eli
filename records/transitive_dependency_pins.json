@@ -1,0 +1,5 @@
+{
+  "reason": "Floating GroundingDINO main now requires supervision>=0.22, incompatible with LangSAM Pillow 9.3.0; use official dependency versions contemporaneous with GE locked release. Only packaging references changed.",
+  "groundingdino": "16e6b4bfcf6ed3a6f0ef2bc5752d716657a6b9fe",
+  "segment_anything": "6fdee8f2727f4506cfbbe553e23b895e27956588"
+}

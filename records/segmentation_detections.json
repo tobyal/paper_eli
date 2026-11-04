@@ -1,0 +1,913 @@
+[
+  {
+    "frame": 61,
+    "prompt": "white industrial machine housing",
+    "detections": 1,
+    "boxes": [
+      [
+        1.2180938720703125,
+        1.2483978271484375,
+        510.74566650390625,
+        509.73712158203125
+      ]
+    ],
+    "phrases": [
+      "white industrial machine housing"
+    ],
+    "logits": [
+      0.43345004320144653
+    ],
+    "first_mask_fraction": 0.3768310546875
+  },
+  {
+    "frame": 61,
+    "prompt": "industrial machine",
+    "detections": 1,
+    "boxes": [
+      [
+        194.13616943359375,
+        238.58799743652344,
+        378.11383056640625,
+        387.3218994140625
+      ]
+    ],
+    "phrases": [
+      "industrial machine"
+    ],
+    "logits": [
+      0.4491331875324249
+    ],
+    "first_mask_fraction": 0.04158782958984375
+  },
+  {
+    "frame": 61,
+    "prompt": "white machine base",
+    "detections": 2,
+    "boxes": [
+      [
+        194.58917236328125,
+        272.06585693359375,
+        377.68609619140625,
+        390.97357177734375
+      ],
+      [
+        195.29473876953125,
+        315.40521240234375,
+        377.795166015625,
+        390.95867919921875
+      ]
+    ],
+    "phrases": [
+      "white machine base",
+      "white machine base"
+    ],
+    "logits": [
+      0.4068647027015686,
+      0.311691015958786
+    ],
+    "first_mask_fraction": 0.02669525146484375
+  },
+  {
+    "frame": 61,
+    "prompt": "white cart",
+    "detections": 2,
+    "boxes": [
+      [
+        107.72966003417969,
+        129.3334503173828,
+        206.9307098388672,
+        256.10565185546875
+      ],
+      [
+        194.03749084472656,
+        243.31234741210938,
+        378.09283447265625,
+        391.4023132324219
+      ]
+    ],
+    "phrases": [
+      "white cart",
+      "white cart"
+    ],
+    "logits": [
+      0.4368373155593872,
+      0.30327504873275757
+    ],
+    "first_mask_fraction": 0.036571502685546875
+  },
+  {
+    "frame": 61,
+    "prompt": "white platform",
+    "detections": 1,
+    "boxes": [
+      [
+        196.06687927246094,
+        265.9940185546875,
+        377.626708984375,
+        391.64617919921875
+      ]
+    ],
+    "phrases": [
+      "white platform"
+    ],
+    "logits": [
+      0.5558611750602722
+    ],
+    "first_mask_fraction": 0.0330963134765625
+  },
+  {
+    "frame": 61,
+    "prompt": "white trolley",
+    "detections": 3,
+    "boxes": [
+      [
+        107.68392944335938,
+        129.21217346191406,
+        206.91354370117188,
+        256.6513671875
+      ],
+      [
+        208.6968536376953,
+        144.96324157714844,
+        295.14483642578125,
+        251.0310516357422
+      ],
+      [
+        193.8911895751953,
+        241.88201904296875,
+        378.10845947265625,
+        391.33758544921875
+      ]
+    ],
+    "phrases": [
+      "white trolley",
+      "white trolley",
+      "white trolley"
+    ],
+    "logits": [
+      0.45415323972702026,
+      0.3348820209503174,
+      0.3016746938228607
+    ],
+    "first_mask_fraction": 0.036579132080078125
+  },
+  {
+    "frame": 91,
+    "prompt": "white industrial machine housing",
+    "detections": 1,
+    "boxes": [
+      [
+        0.3671417236328125,
+        0.6120452880859375,
+        511.3551025390625,
+        510.827392578125
+      ]
+    ],
+    "phrases": [
+      "white industrial machine housing"
+    ],
+    "logits": [
+      0.42424076795578003
+    ],
+    "first_mask_fraction": 0.308502197265625
+  },
+  {
+    "frame": 91,
+    "prompt": "industrial machine",
+    "detections": 3,
+    "boxes": [
+      [
+        -0.0693817138671875,
+        334.9887390136719,
+        167.109130859375,
+        511.5520324707031
+      ],
+      [
+        154.36807250976562,
+        133.09695434570312,
+        285.4385070800781,
+        357.79998779296875
+      ],
+      [
+        279.7311096191406,
+        109.56260681152344,
+        384.7585144042969,
+        327.16827392578125
+      ]
+    ],
+    "phrases": [
+      "industrial machine",
+      "industrial machine",
+      "industrial machine"
+    ],
+    "logits": [
+      0.4256444275379181,
+      0.31954020261764526,
+      0.3460518419742584
+    ],
+    "first_mask_fraction": 0.054309844970703125
+  },
+  {
+    "frame": 91,
+    "prompt": "white machine base",
+    "detections": 1,
+    "boxes": [
+      [
+        0.22998809814453125,
+        415.4866638183594,
+        158.27154541015625,
+        511.1333923339844
+      ]
+    ],
+    "phrases": [
+      "white machine base"
+    ],
+    "logits": [
+      0.35310569405555725
+    ],
+    "first_mask_fraction": 0.034473419189453125
+  },
+  {
+    "frame": 91,
+    "prompt": "white cart",
+    "detections": 0,
+    "boxes": [],
+    "phrases": [],
+    "logits": [],
+    "first_mask_fraction": 0
+  },
+  {
+    "frame": 91,
+    "prompt": "white platform",
+    "detections": 1,
+    "boxes": [
+      [
+        0.0135650634765625,
+        121.46243286132812,
+        511.73321533203125,
+        510.5063781738281
+      ]
+    ],
+    "phrases": [
+      "white platform"
+    ],
+    "logits": [
+      0.3482222259044647
+    ],
+    "first_mask_fraction": 0.31760406494140625
+  },
+  {
+    "frame": 91,
+    "prompt": "white trolley",
+    "detections": 1,
+    "boxes": [
+      [
+        154.13531494140625,
+        143.4086151123047,
+        284.4908142089844,
+        294.90228271484375
+      ]
+    ],
+    "phrases": [
+      "white trolley"
+    ],
+    "logits": [
+      0.32569441199302673
+    ],
+    "first_mask_fraction": 0.03310394287109375
+  },
+  {
+    "frame": 111,
+    "prompt": "white industrial machine housing",
+    "detections": 1,
+    "boxes": [
+      [
+        1.3394317626953125,
+        1.1578216552734375,
+        510.0670166015625,
+        509.99383544921875
+      ]
+    ],
+    "phrases": [
+      "white industrial machine housing"
+    ],
+    "logits": [
+      0.38310179114341736
+    ],
+    "first_mask_fraction": 0.5933914184570312
+  },
+  {
+    "frame": 111,
+    "prompt": "industrial machine",
+    "detections": 1,
+    "boxes": [
+      [
+        0.5765228271484375,
+        0.343780517578125,
+        511.3126220703125,
+        511.541015625
+      ]
+    ],
+    "phrases": [
+      "industrial machine"
+    ],
+    "logits": [
+      0.35709497332572937
+    ],
+    "first_mask_fraction": 0.6003074645996094
+  },
+  {
+    "frame": 111,
+    "prompt": "white machine base",
+    "detections": 1,
+    "boxes": [
+      [
+        66.10829162597656,
+        240.77003479003906,
+        187.97459411621094,
+        328.80712890625
+      ]
+    ],
+    "phrases": [
+      "white machine base"
+    ],
+    "logits": [
+      0.4887830317020416
+    ],
+    "first_mask_fraction": 0.01634979248046875
+  },
+  {
+    "frame": 111,
+    "prompt": "white cart",
+    "detections": 2,
+    "boxes": [
+      [
+        66.00658416748047,
+        240.01242065429688,
+        188.1053466796875,
+        328.9518737792969
+      ],
+      [
+        65.61531829833984,
+        201.63345336914062,
+        188.26339721679688,
+        329.0591125488281
+      ]
+    ],
+    "phrases": [
+      "white cart",
+      "white cart"
+    ],
+    "logits": [
+      0.35296380519866943,
+      0.35562044382095337
+    ],
+    "first_mask_fraction": 0.01638031005859375
+  },
+  {
+    "frame": 111,
+    "prompt": "white platform",
+    "detections": 1,
+    "boxes": [
+      [
+        66.21585083007812,
+        241.95758056640625,
+        187.82754516601562,
+        326.3038330078125
+      ]
+    ],
+    "phrases": [
+      "white platform"
+    ],
+    "logits": [
+      0.39142104983329773
+    ],
+    "first_mask_fraction": 0.016208648681640625
+  },
+  {
+    "frame": 111,
+    "prompt": "white trolley",
+    "detections": 1,
+    "boxes": [
+      [
+        65.59007263183594,
+        146.4141387939453,
+        188.39138793945312,
+        329.04400634765625
+      ]
+    ],
+    "phrases": [
+      "white trolley"
+    ],
+    "logits": [
+      0.3232918381690979
+    ],
+    "first_mask_fraction": 0.02361297607421875
+  },
+  {
+    "frame": 151,
+    "prompt": "white industrial machine housing",
+    "detections": 1,
+    "boxes": [
+      [
+        1.02410888671875,
+        1.3937530517578125,
+        510.81353759765625,
+        509.78857421875
+      ]
+    ],
+    "phrases": [
+      "white industrial machine housing"
+    ],
+    "logits": [
+      0.43116143345832825
+    ],
+    "first_mask_fraction": 0.15805816650390625
+  },
+  {
+    "frame": 151,
+    "prompt": "industrial machine",
+    "detections": 1,
+    "boxes": [
+      [
+        137.09713745117188,
+        208.25784301757812,
+        292.5261535644531,
+        355.7122497558594
+      ]
+    ],
+    "phrases": [
+      "industrial machine"
+    ],
+    "logits": [
+      0.4487258195877075
+    ],
+    "first_mask_fraction": 0.047794342041015625
+  },
+  {
+    "frame": 151,
+    "prompt": "white machine base",
+    "detections": 2,
+    "boxes": [
+      [
+        146.50534057617188,
+        252.697509765625,
+        291.9455261230469,
+        355.49560546875
+      ],
+      [
+        143.65966796875,
+        210.368408203125,
+        292.5437316894531,
+        355.24444580078125
+      ]
+    ],
+    "phrases": [
+      "white machine base",
+      "white machine base"
+    ],
+    "logits": [
+      0.4724067449569702,
+      0.30271825194358826
+    ],
+    "first_mask_fraction": 0.027179718017578125
+  },
+  {
+    "frame": 151,
+    "prompt": "white cart",
+    "detections": 1,
+    "boxes": [
+      [
+        143.04080200195312,
+        208.83897399902344,
+        292.52880859375,
+        355.6025390625
+      ]
+    ],
+    "phrases": [
+      "white cart"
+    ],
+    "logits": [
+      0.6533688902854919
+    ],
+    "first_mask_fraction": 0.047779083251953125
+  },
+  {
+    "frame": 151,
+    "prompt": "white platform",
+    "detections": 2,
+    "boxes": [
+      [
+        148.88772583007812,
+        253.57565307617188,
+        292.0314636230469,
+        355.0490417480469
+      ],
+      [
+        147.3927001953125,
+        209.60791015625,
+        292.34552001953125,
+        355.0003662109375
+      ]
+    ],
+    "phrases": [
+      "white platform",
+      "white platform"
+    ],
+    "logits": [
+      0.39343616366386414,
+      0.38216859102249146
+    ],
+    "first_mask_fraction": 0.02690887451171875
+  },
+  {
+    "frame": 151,
+    "prompt": "white trolley",
+    "detections": 1,
+    "boxes": [
+      [
+        142.61325073242188,
+        208.5660400390625,
+        292.5633239746094,
+        355.807861328125
+      ]
+    ],
+    "phrases": [
+      "white trolley"
+    ],
+    "logits": [
+      0.5918168425559998
+    ],
+    "first_mask_fraction": 0.04778289794921875
+  },
+  {
+    "frame": 161,
+    "prompt": "white industrial machine housing",
+    "detections": 1,
+    "boxes": [
+      [
+        0.003173828125,
+        0.3992156982421875,
+        511.98638916015625,
+        511.11431884765625
+      ]
+    ],
+    "phrases": [
+      "white industrial machine housing"
+    ],
+    "logits": [
+      0.47535738348960876
+    ],
+    "first_mask_fraction": 0.07541275024414062
+  },
+  {
+    "frame": 161,
+    "prompt": "industrial machine",
+    "detections": 1,
+    "boxes": [
+      [
+        -0.00661468505859375,
+        205.69775390625,
+        145.49880981445312,
+        351.98187255859375
+      ]
+    ],
+    "phrases": [
+      "industrial machine"
+    ],
+    "logits": [
+      0.31929832696914673
+    ],
+    "first_mask_fraction": 0.04248809814453125
+  },
+  {
+    "frame": 161,
+    "prompt": "white machine base",
+    "detections": 1,
+    "boxes": [
+      [
+        0.16890716552734375,
+        251.92514038085938,
+        144.99560546875,
+        351.1941833496094
+      ]
+    ],
+    "phrases": [
+      "white machine base"
+    ],
+    "logits": [
+      0.38055184483528137
+    ],
+    "first_mask_fraction": 0.02225494384765625
+  },
+  {
+    "frame": 161,
+    "prompt": "white cart",
+    "detections": 1,
+    "boxes": [
+      [
+        0.033905029296875,
+        206.08270263671875,
+        145.6731414794922,
+        352.162353515625
+      ]
+    ],
+    "phrases": [
+      "white cart"
+    ],
+    "logits": [
+      0.7036837339401245
+    ],
+    "first_mask_fraction": 0.042423248291015625
+  },
+  {
+    "frame": 161,
+    "prompt": "white platform",
+    "detections": 2,
+    "boxes": [
+      [
+        0.02793121337890625,
+        207.40774536132812,
+        145.38751220703125,
+        351.6935119628906
+      ],
+      [
+        0.05892181396484375,
+        252.0011444091797,
+        145.32937622070312,
+        351.571533203125
+      ]
+    ],
+    "phrases": [
+      "white platform",
+      "white platform"
+    ],
+    "logits": [
+      0.37421321868896484,
+      0.34680110216140747
+    ],
+    "first_mask_fraction": 0.041858673095703125
+  },
+  {
+    "frame": 161,
+    "prompt": "white trolley",
+    "detections": 1,
+    "boxes": [
+      [
+        0.00855255126953125,
+        205.89366149902344,
+        145.76910400390625,
+        352.29388427734375
+      ]
+    ],
+    "phrases": [
+      "white trolley"
+    ],
+    "logits": [
+      0.622138500213623
+    ],
+    "first_mask_fraction": 0.04248809814453125
+  },
+  {
+    "frame": 191,
+    "prompt": "white industrial machine housing",
+    "detections": 1,
+    "boxes": [
+      [
+        0.063812255859375,
+        0.88739013671875,
+        512.0107421875,
+        510.9828186035156
+      ]
+    ],
+    "phrases": [
+      "white industrial machine housing"
+    ],
+    "logits": [
+      0.4633747935295105
+    ],
+    "first_mask_fraction": 0.06397247314453125
+  },
+  {
+    "frame": 191,
+    "prompt": "industrial machine",
+    "detections": 1,
+    "boxes": [
+      [
+        24.726882934570312,
+        287.8919677734375,
+        399.00164794921875,
+        457.4169921875
+      ]
+    ],
+    "phrases": [
+      "industrial machine"
+    ],
+    "logits": [
+      0.3159269392490387
+    ],
+    "first_mask_fraction": 0.10770034790039062
+  },
+  {
+    "frame": 191,
+    "prompt": "white machine base",
+    "detections": 0,
+    "boxes": [],
+    "phrases": [],
+    "logits": [],
+    "first_mask_fraction": 0
+  },
+  {
+    "frame": 191,
+    "prompt": "white cart",
+    "detections": 1,
+    "boxes": [
+      [
+        351.36077880859375,
+        158.88864135742188,
+        455.68719482421875,
+        265.2035827636719
+      ]
+    ],
+    "phrases": [
+      "white cart"
+    ],
+    "logits": [
+      0.4155940115451813
+    ],
+    "first_mask_fraction": 0.022838592529296875
+  },
+  {
+    "frame": 191,
+    "prompt": "white platform",
+    "detections": 0,
+    "boxes": [],
+    "phrases": [],
+    "logits": [],
+    "first_mask_fraction": 0
+  },
+  {
+    "frame": 191,
+    "prompt": "white trolley",
+    "detections": 1,
+    "boxes": [
+      [
+        24.590469360351562,
+        307.0333251953125,
+        411.57196044921875,
+        511.11187744140625
+      ]
+    ],
+    "phrases": [
+      "white trolley"
+    ],
+    "logits": [
+      0.3229120373725891
+    ],
+    "first_mask_fraction": 0.17383193969726562
+  },
+  {
+    "frame": 241,
+    "prompt": "white industrial machine housing",
+    "detections": 2,
+    "boxes": [
+      [
+        -0.005218505859375,
+        0.0134124755859375,
+        511.9805603027344,
+        511.774658203125
+      ],
+      [
+        167.10020446777344,
+        113.8772964477539,
+        234.07777404785156,
+        222.66668701171875
+      ]
+    ],
+    "phrases": [
+      "white industrial machine housing",
+      "white industrial machine housing"
+    ],
+    "logits": [
+      0.42645463347435,
+      0.3289327025413513
+    ],
+    "first_mask_fraction": 0.4886283874511719
+  },
+  {
+    "frame": 241,
+    "prompt": "industrial machine",
+    "detections": 2,
+    "boxes": [
+      [
+        167.271484375,
+        113.8917236328125,
+        234.3599853515625,
+        223.86370849609375
+      ],
+      [
+        262.3639831542969,
+        122.88316345214844,
+        311.2085266113281,
+        201.33021545410156
+      ]
+    ],
+    "phrases": [
+      "industrial machine",
+      "industrial machine"
+    ],
+    "logits": [
+      0.4200192391872406,
+      0.3982202112674713
+    ],
+    "first_mask_fraction": 0.0204620361328125
+  },
+  {
+    "frame": 241,
+    "prompt": "white machine base",
+    "detections": 1,
+    "boxes": [
+      [
+        6.938648223876953,
+        269.5888977050781,
+        111.70680236816406,
+        380.6261901855469
+      ]
+    ],
+    "phrases": [
+      "white machine base"
+    ],
+    "logits": [
+      0.32504138350486755
+    ],
+    "first_mask_fraction": 0.025421142578125
+  },
+  {
+    "frame": 241,
+    "prompt": "white cart",
+    "detections": 2,
+    "boxes": [
+      [
+        167.38540649414062,
+        114.49699401855469,
+        234.34664916992188,
+        223.9629364013672
+      ],
+      [
+        167.9578857421875,
+        146.7984161376953,
+        233.61514282226562,
+        223.44850158691406
+      ]
+    ],
+    "phrases": [
+      "white cart",
+      "white cart"
+    ],
+    "logits": [
+      0.4783908724784851,
+      0.30805641412734985
+    ],
+    "first_mask_fraction": 0.0204620361328125
+  },
+  {
+    "frame": 241,
+    "prompt": "white platform",
+    "detections": 1,
+    "boxes": [
+      [
+        31.486297607421875,
+        141.09954833984375,
+        511.7481994628906,
+        511.265380859375
+      ]
+    ],
+    "phrases": [
+      "white platform"
+    ],
+    "logits": [
+      0.45370155572891235
+    ],
+    "first_mask_fraction": 0.4091949462890625
+  },
+  {
+    "frame": 241,
+    "prompt": "white trolley",
+    "detections": 1,
+    "boxes": [
+      [
+        167.3533172607422,
+        114.0906982421875,
+        234.2861785888672,
+        223.75698852539062
+      ]
+    ],
+    "phrases": [
+      "white trolley"
+    ],
+    "logits": [
+      0.5522228479385376
+    ],
+    "first_mask_fraction": 0.020458221435546875
+  }
+]

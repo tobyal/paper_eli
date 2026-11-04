@@ -1,0 +1,139 @@
+accelerate==0.34.2
+addict==2.4.0
+aiofiles==23.2.1
+aiohappyeyeballs==2.6.1
+aiohttp==3.13.5
+aiosignal==1.4.0
+annotated-doc==0.0.5
+annotated-types==0.7.0
+anyio==4.12.1
+async-timeout==5.0.1
+attrs==26.1.0
+certifi==2026.10.23
+charset-normalizer==3.5.2
+click==8.1.8
+clip @ git+https://github.com/openai/CLIP.git@d05afc436d78f1c48dc0dbf8e5980a9d471f35f6
+contourpy==1.3.0
+cycler==0.12.1
+datasets==4.5.0
+defusedxml==0.7.1
+diff_gaussian_rasterization @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/repos/cvpr25_EditSplat/submodules/diff-gaussian-rasterization
+diffusers==0.30.3
+dill==0.4.0
+einops==0.8.2
+exceptiongroup==1.3.1
+fairscale==0.4.13
+fastapi==0.128.8
+ffmpy==1.0.0
+filelock==3.19.1
+fonttools==4.60.2
+frozenlist==1.8.0
+fsspec==2025.10.0
+ftfy==6.3.1
+gradio==4.44.1
+gradio_client==1.3.0
+groundingdino @ git+https://github.com/IDEA-Research/GroundingDINO.git@856dde20aee659246248e20734ef9ba5214f5e44
+h11==0.16.0
+hf-xet==1.8.0
+httpcore==1.0.9
+httpx==0.28.1
+huggingface-hub==0.36.0
+idna==3.20
+image-reward==1.5
+ImageIO==2.37.2
+importlib_metadata==8.7.1
+importlib_resources==6.5.2
+jaxtyping==0.2.36
+Jinja2==3.1.6
+joblib==1.5.3
+kiwisolver==1.4.7
+lang-sam @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/repos/dependencies/lang-sam-editsplat
+lazy-loader==0.6
+lightning==2.6.0
+lightning-utilities==0.15.2
+lpips==0.1.4
+markdown-it-py==3.0.0
+MarkupSafe==2.1.5
+matplotlib==3.9.4
+mdurl==0.1.2
+mpmath==1.3.0
+multidict==6.7.1
+multiprocess==0.70.18
+networkx==3.2.1
+ninja==1.13.2
+numpy==1.26.1
+nvidia-cublas-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_cublas_cu11-11.11.3.6-py3-none-manylinux1_x86_64.whl#sha256=39fb40e8f486dd8a2ddb8fdeefe1d5b28f5b99df01c87ab3676f057a74a5a6f3
+nvidia-cuda-cupti-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_cuda_cupti_cu11-11.8.87-py3-none-manylinux1_x86_64.whl#sha256=0e50c707df56c75a2c0703dc6b886f3c97a22f37d6f63839f75b7418ba672a8d
+nvidia-cuda-nvrtc-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_cuda_nvrtc_cu11-11.8.89-py3-none-manylinux1_x86_64.whl#sha256=1f27d67b0f72902e9065ae568b4f6268dfe49ba3ed269c9a3da99bb86d1d2008
+nvidia-cuda-runtime-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_cuda_runtime_cu11-11.8.89-py3-none-manylinux1_x86_64.whl#sha256=f587bd726eb2f7612cf77ce38a2c1e65cf23251ff49437f6161ce0d647f64f7c
+nvidia-cudnn-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_cudnn_cu11-9.1.0.70-py3-none-manylinux2014_x86_64.whl#sha256=e6135ac63fe9d5b0b89cfb35c3fc1c1349f2b995becadf2e9dc21bca89d9633d
+nvidia-cufft-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_cufft_cu11-10.9.0.58-py3-none-manylinux1_x86_64.whl#sha256=222f9da70c80384632fd6035e4c3f16762d64ea7a843829cb278f98b3cb7dd81
+nvidia-curand-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_curand_cu11-10.3.0.86-py3-none-manylinux1_x86_64.whl#sha256=ac439548c88580269a1eb6aeb602a5aed32f0dbb20809a31d9ed7d01d77f6bf5
+nvidia-cusolver-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_cusolver_cu11-11.4.1.48-py3-none-manylinux1_x86_64.whl#sha256=ca538f545645b7e6629140786d3127fe067b3d5a085bd794cde5bfe877c8926f
+nvidia-cusparse-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_cusparse_cu11-11.7.5.86-py3-none-manylinux1_x86_64.whl#sha256=4ae709fe78d3f23f60acaba8c54b8ad556cf16ca486e0cc1aa92dca7555d2d2b
+nvidia-nccl-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_nccl_cu11-2.20.5-py3-none-manylinux2014_x86_64.whl#sha256=3619e25dfb0c8f4c554561c3459ee7dfe1250eed05e9aa4d147a75c45cc6ae0d
+nvidia-nvtx-cu11 @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/nvidia_nvtx_cu11-11.8.86-py3-none-manylinux1_x86_64.whl#sha256=890656d8bd9b4e280231c832e1f0d03459200ba4824ddda3dcb59b1e1989b9f5
+opencv-python==4.11.0.86
+orjson==3.11.5
+packaging==26.3
+pandas==2.3.3
+pillow==10.4.0
+platformdirs==4.4.0
+plyfile==1.1.3
+poetry-core==1.9.1
+propcache==0.4.1
+psutil==7.2.2
+pyarrow==21.0.0
+pycocotools==2.0.11
+pydantic==2.13.5
+pydantic_core==2.46.5
+pyDeprecate==0.9.0
+pydub==0.25.1
+Pygments==2.21.0
+pyparsing==3.3.3
+python-dateutil==3.0.0
+python-multipart==0.0.20
+pytorch-lightning==2.6.0
+pytz==2026.6
+PyYAML==6.0.3
+regex==2026.1.15
+requests==2.32.5
+rich==15.0.0
+ruff==0.17.3
+safetensors==0.7.0
+scikit-image==0.24.0
+scikit-learn==1.6.1
+scipy==1.13.1
+segment_anything @ git+https://github.com/facebookresearch/segment-anything.git@dca509fe793f601edb92606367a655c15ac00fdf
+semantic-version==2.10.0
+shellingham==1.5.4
+simple_knn @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/repos/cvpr25_EditSplat/submodules/simple-knn
+six==1.17.0
+starlette==0.49.3
+supervision==0.29.1
+sympy==1.14.0
+threadpoolctl==3.7.0
+tifffile==2024.8.30
+timm==0.6.13
+tokenizers==0.20.3
+tomli==2.5.0
+tomlkit==0.12.0
+torch @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/torch-2.4.1%2Bcu118-cp39-cp39-linux_x86_64.whl#sha256=82309da0cce45cf61eb48b0567c7d080992d8ba98264da128ee1d858fac5dd75
+torchaudio==2.4.1+cu118
+torchmetrics==1.8.2
+torchvision==0.19.1+cu118
+tqdm==4.70.1
+transformers==4.45.2
+triton @ file:///mnt/sda/ubuntu/lkx/papers/paper_eli/runtime/wheels/triton-3.0.0-1-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl#sha256=6e5727202f7078c56f91ff13ad0c1abab14a0e7f2c87e91b12b6f64f3e8ae609
+typer==0.23.2
+typing-inspection==0.4.2
+typing_extensions==4.16.0
+tzdata==2026.6
+urllib3==2.6.3
+uvicorn==0.39.0
+wcwidth==0.9.4
+websockets==12.0
+xxhash==4.0.2
+yapf==0.43.0
+yarl==1.22.0
+zipp==3.23.1

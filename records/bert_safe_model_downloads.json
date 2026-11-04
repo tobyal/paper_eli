@@ -1,0 +1,13 @@
+{
+  "google-bert/bert-base-uncased": {
+    "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--google-bert--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594",
+    "files": [
+      {
+        "name": "model.safetensors",
+        "size": 440449768,
+        "sha256": "68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3"
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "package": "nvidia-cuda-nvrtc-cu11",
+    "version": "11.8.89",
+    "filename": "nvidia_cuda_nvrtc_cu11-11.8.89-py3-none-manylinux1_x86_64.whl",
+    "sha256": "1f27d67b0f72902e9065ae568b4f6268dfe49ba3ed269c9a3da99bb86d1d2008",
+    "url": "https://files.pythonhosted.org/packages/83/08/a9833e4e9f9165bedb7f36033b47aa399b053b9cb2eaf7b84d1e28705cf7/nvidia_cuda_nvrtc_cu11-11.8.89-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "nvidia-cuda-runtime-cu11",
+    "version": "11.8.89",
+    "filename": "nvidia_cuda_runtime_cu11-11.8.89-py3-none-manylinux1_x86_64.whl",
+    "sha256": "f587bd726eb2f7612cf77ce38a2c1e65cf23251ff49437f6161ce0d647f64f7c",
+    "url": "https://files.pythonhosted.org/packages/45/3e/84db02be49fe6d6df6e42f69fd64501c22d0f9ada9c9877f885612085d20/nvidia_cuda_runtime_cu11-11.8.89-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "nvidia-cuda-cupti-cu11",
+    "version": "11.8.87",
+    "filename": "nvidia_cuda_cupti_cu11-11.8.87-py3-none-manylinux1_x86_64.whl",
+    "sha256": "0e50c707df56c75a2c0703dc6b886f3c97a22f37d6f63839f75b7418ba672a8d",
+    "url": "https://files.pythonhosted.org/packages/27/c9/b4b15f709a694ea9f84871c6c4fbeeb54bab225962d852665a2c6f77f90d/nvidia_cuda_cupti_cu11-11.8.87-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "nvidia-cudnn-cu11",
+    "version": "9.1.0.70",
+    "filename": "nvidia_cudnn_cu11-9.1.0.70-py3-none-manylinux2014_x86_64.whl",
+    "sha256": "e6135ac63fe9d5b0b89cfb35c3fc1c1349f2b995becadf2e9dc21bca89d9633d",
+    "url": "https://files.pythonhosted.org/packages/00/3b/0b776f04e364cd99e4cf152c2a9eadb5934c67c9a91429da55169a9447fd/nvidia_cudnn_cu11-9.1.0.70-py3-none-manylinux2014_x86_64.whl"
+  },
+  {
+    "package": "nvidia-cublas-cu11",
+    "version": "11.11.3.6",
+    "filename": "nvidia_cublas_cu11-11.11.3.6-py3-none-manylinux1_x86_64.whl",
+    "sha256": "39fb40e8f486dd8a2ddb8fdeefe1d5b28f5b99df01c87ab3676f057a74a5a6f3",
+    "url": "https://files.pythonhosted.org/packages/46/be/c222e33e60d28ecd496a46fc4d78ccae0ee28e1fd7dc705b6288b4cad27e/nvidia_cublas_cu11-11.11.3.6-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "nvidia-cufft-cu11",
+    "version": "10.9.0.58",
+    "filename": "nvidia_cufft_cu11-10.9.0.58-py3-none-manylinux1_x86_64.whl",
+    "sha256": "222f9da70c80384632fd6035e4c3f16762d64ea7a843829cb278f98b3cb7dd81",
+    "url": "https://files.pythonhosted.org/packages/74/79/b912a77e38e41f15a0581a59f5c3548d1ddfdda3225936fb67c342719e7a/nvidia_cufft_cu11-10.9.0.58-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "nvidia-curand-cu11",
+    "version": "10.3.0.86",
+    "filename": "nvidia_curand_cu11-10.3.0.86-py3-none-manylinux1_x86_64.whl",
+    "sha256": "ac439548c88580269a1eb6aeb602a5aed32f0dbb20809a31d9ed7d01d77f6bf5",
+    "url": "https://files.pythonhosted.org/packages/49/28/c47f8e2439ddbcbeae3cf74d43ed572b651d630ea72863d5357f3759eb66/nvidia_curand_cu11-10.3.0.86-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "nvidia-cusolver-cu11",
+    "version": "11.4.1.48",
+    "filename": "nvidia_cusolver_cu11-11.4.1.48-py3-none-manylinux1_x86_64.whl",
+    "sha256": "ca538f545645b7e6629140786d3127fe067b3d5a085bd794cde5bfe877c8926f",
+    "url": "https://files.pythonhosted.org/packages/55/ee/939ff0104991dd7bdabb4c9767994c612ba0e1c9a55672a1ddd42f5e5b16/nvidia_cusolver_cu11-11.4.1.48-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "nvidia-cusparse-cu11",
+    "version": "11.7.5.86",
+    "filename": "nvidia_cusparse_cu11-11.7.5.86-py3-none-manylinux1_x86_64.whl",
+    "sha256": "4ae709fe78d3f23f60acaba8c54b8ad556cf16ca486e0cc1aa92dca7555d2d2b",
+    "url": "https://files.pythonhosted.org/packages/c1/e0/21b829c535d569831835a4ca5d049a19ba00d3e91f3e12ab4ad27bd7385f/nvidia_cusparse_cu11-11.7.5.86-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "nvidia-nccl-cu11",
+    "version": "2.20.5",
+    "filename": "nvidia_nccl_cu11-2.20.5-py3-none-manylinux2014_x86_64.whl",
+    "sha256": "3619e25dfb0c8f4c554561c3459ee7dfe1250eed05e9aa4d147a75c45cc6ae0d",
+    "url": "https://files.pythonhosted.org/packages/a0/37/948257090a0b9eddade74490b521490b7fe748a70cad72fd8fbda692f6d4/nvidia_nccl_cu11-2.20.5-py3-none-manylinux2014_x86_64.whl"
+  },
+  {
+    "package": "nvidia-nvtx-cu11",
+    "version": "11.8.86",
+    "filename": "nvidia_nvtx_cu11-11.8.86-py3-none-manylinux1_x86_64.whl",
+    "sha256": "890656d8bd9b4e280231c832e1f0d03459200ba4824ddda3dcb59b1e1989b9f5",
+    "url": "https://files.pythonhosted.org/packages/d5/a2/23214c23118784dc2189ac2d2e48190df3e4206e2f73eb17d47140797a2b/nvidia_nvtx_cu11-11.8.86-py3-none-manylinux1_x86_64.whl"
+  },
+  {
+    "package": "triton",
+    "version": "3.0.0",
+    "filename": "triton-3.0.0-1-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+    "sha256": "6e5727202f7078c56f91ff13ad0c1abab14a0e7f2c87e91b12b6f64f3e8ae609",
+    "url": "https://files.pythonhosted.org/packages/6c/bf/55cccf57c14787ad81ee827526ddd48fd0aff0291fcc7b8c2e2bdf28da0a/triton-3.0.0-1-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+  }
+]

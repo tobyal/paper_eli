@@ -1,0 +1,39 @@
+{
+  "editing_instruction_changed": false,
+  "segmentation_prompt": "white machine base",
+  "evidence": "Official LangSAM probe across7 calibrated views: white industrial machine housing selected factory structures; white machine base isolated the intended lower housing in close views but selected adjacent devices in other views.",
+  "instance_selection": "Project the reviewed fixed physical target's 3D box into each camera. Rank unmodified LangSAM candidate masks by binary cosine overlap with the projected region; accept score>=0.25, otherwise use empty mask. The ROI does not create or crop the selected semantic mask.",
+  "applies_to": [
+    "GaussianEditor semantic tracing input",
+    "DGE semantic tracing input",
+    "DreamCatalyst semantic tracing input",
+    "EditSplat SAM mask for background replacement"
+  ],
+  "preserved": [
+    "All diffusion editing and optimization",
+    "Semantic Gaussian tracing",
+    "Hierarchical anchors",
+    "DGE epipolar feature propagation",
+    "DreamCatalyst DDS/annealing/FreeU",
+    "EditSplat ImageReward/MFG/attention trimming"
+  ],
+  "artifacts": [
+    "scripts/instance_selection.py",
+    "scripts/patch_instance_selection.py",
+    "records/target_geometry.json",
+    "records/target_instance.reviewed.json",
+    "records/*instance*.patch",
+    "records/runs/*/instance_selection.jsonl"
+  ],
+  "limitations": "A common instance-disambiguation adaptation is required for the repeated industrial devices. Results must be described as official algorithms with this explicit scene adapter, not pristine unmodified repository runs.",
+  "semantic_tracing_threshold": {
+    "value": 0.5,
+    "applies_to": [
+      "GaussianEditor",
+      "DGE",
+      "DreamCatalyst"
+    ],
+    "reason": "High0.8 threshold rejected most target Gaussians due repeated-device views/occlusions; use GE and DreamCatalyst generic default0.5 for the common scene. DGE changes from its yaml0.8. Five diagnostic view coverage84.4-87.8%.",
+    "proof": "records/gaussianeditor_tracing_diagnostics.json"
+  }
+}

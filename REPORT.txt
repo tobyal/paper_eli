@@ -1,0 +1,63 @@
+工业场景四方法复现实验
+统一指令：将画面中央设备的外壳改成红色，保持其他物体不变。
+英文执行指令：Change the housing of the industrial machine in the center to red, keeping all other objects unchanged.
+服务器目录：/mnt/sda/ubuntu/lkx/papers/paper_eli
+执行状态：四种官方方法均完成实际运行、输出检查和同相机渲染。
+编辑目标：本轮四种方法均未明显将指定外壳改红。此交付是实际运行的负结果基线，不能称为改色成功。
+
+实际输出及指标（目标可见的24个测试视角；重投影为18组有效视角对）：
+方法 | 目标红色比例% | 背景PSNR dB | 背景SSIM | 背景LPIPS | 目标重投影MAE | 耗时分钟 | 采样显存峰值GiB
+GaussianEditor | 0.018 | 30.981 | 0.9487 | 0.0844 | 0.0902 | 16.50 | 11.93
+DGE | 0.004 | 31.630 | 0.9554 | 0.0743 | 0.0841 | 6.07 | 31.20
+DreamCatalyst | 0.354 | 37.381 | 0.9862 | 0.0236 | 0.0837 | 13.60 | 11.68
+EditSplat | 0.156 | 27.900 | 0.9205 | 0.1170 | 0.0882 | 70.31 | 23.29
+
+输出检查：
+GaussianEditor: 完整运行2500步。五个检查视角中的目标底座仍主要为白色，未明显达到改红目标；可见轻微颜色与细节变化。
+PLY: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/edit-n2n/industrial_red_seed0/save/last.ply
+Video: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gaussianeditor/common_render/multiview.mp4
+Log: /mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/gaussianeditor_20261104T091151Z/stdout.log
+
+DGE: 完整运行1000步。五个检查视角中的目标仍主要为白色，部分区域出现紫蓝色偏色和边缘伪影，未明显达到改红目标。
+PLY: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/dge/industrial_red_seed0/save/last.ply
+Video: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dge/common_render/multiview.mp4
+Log: /mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/dge_20261104T094757Z/stdout.log
+
+DreamCatalyst: 完整运行1500步。五个检查视角中的目标仍主要为白色，目标附近出现较明显的绿色/紫色边缘及表面伪影，未达到改红目标。
+PLY: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/edit-dc/industrial_red_seed0/save/last.ply
+Video: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/dreamcatalyst/common_render/multiview.mp4
+Log: /mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/dreamcatalyst_20261104T095623Z/stdout.log
+
+EditSplat: 五个检查视角中的目标外壳仍主要为白色，没有明显改红；部分支架边缘更粗糙，附近表面出现轻微颜色变化。
+PLY: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/point_cloud/iteration_33060/point_cloud.ply
+Video: /mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/editsplat/common_render/multiview.mp4
+Log: /mnt/sda/ubuntu/lkx/papers/paper_eli/records/runs/editsplat_20261104T101226Z/stdout.log
+
+本配置下的比较：
+未编辑模型的目标红色比例为0.000%，目标重投影MAE为0.0891，为编辑后数值提供参照。
+背景像素保持指标中，DreamCatalyst的PSNR最高；感知保持指标中，DreamCatalyst的LPIPS最低。这些分数只衡量偏离原场景的程度，几乎不编辑也可能获得较好的保持分数。
+DGE本次完整运行耗时最短（6.07分钟），EditSplat最长（70.31分钟）。各自使用官方采样/迭代设置，且共享服务器负载不恒定，不能解释为等预算速度排名。
+跨视角一致性使用源几何重投影，不是对优化后几何准确度的独立检验；请同时检查目标纹理、伪影和展示视频。
+
+诊断记录：
+官方IP2P在原始视图与目标中心视图上的诊断未稳定改红目标；部分结果误改前景工作台、地面标线或厂房背景。相关提示词、随机种子和真实二维图像均保存。
+这一视频包含多台相似设备，目标在不少编辑视角中不可见。二维实例/部件定位问题已在优化前出现，是解释本轮结果的重要证据。
+EditSplat参考视角151的MFG结果恢复了误改红的地面标线，但目标底座仍主要为白色。此处是中间二维诊断，不能替代最终3D指标。
+EditSplat初始筛选保留45个视角，其中14个在共同目标mask中有至少100像素；这14个目标区域的平均红色比例为0.371%。全部45个入选视角的目标外平均红色比例为11.004%。
+以上结果仅对应这一视频、指令和配置，不能推广为四篇论文在其他数据上的性能结论。
+
+解释与边界：
+仅使用一个工业视频、一个固定随机种子；没有编辑后的真实参考图像。
+共享GPU环境。耗时含模型加载、分割、编辑、拟合和方法自带测试；统一评价渲染的耗时单独记录。
+单次运行耗时不含共同预处理、基础3DGS训练、环境安装、模型下载及失败重试；相关日志全部另存。
+进程显存每5秒采样，报告的是采样峰值，可能漏掉短时峰值。
+统一使用源场景几何和人工检查过的近似目标mask。红色比例和CLIP是代理指标，不能单独证明编辑正确。
+较低的跨视角MAE也可能来自模糊或几乎没有编辑，必须结合实际RGB和编辑强度判断。
+背景LPIPS对空间特征图按mask汇总；其感受野可能受目标附近变化影响，应结合像素PSNR/SSIM和实际图像解读。
+共用306个训练视角、44个留出测试视角；各方法保留官方的视角采样策略。
+方法使用的视角数和优化次数不同，墙钟时间反映本配置的完整运行成本，不代表同等计算预算下的独立速度排名。
+目标中心相机实验仅作诊断，未用于主对比。
+
+复现：bash scripts/replay_baseline.sh repeat1
+环境安装、数据预处理和补丁应用顺序见 README_reproduction.txt。
+运行成功与改红成功分别记录。所有对比图像均为保存的真实RGB渲染；红色语义标注图不计作编辑结果。

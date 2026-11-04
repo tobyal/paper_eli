@@ -1,0 +1,26 @@
+{
+  "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+  "bytes": 453538228,
+  "sha256": "1d5cc6a5b58e7d99fbefd54ba6de7ab351ee23b884b2fcacba11720906b5bf7a",
+  "gaussians": 1828777,
+  "all_parameters_finite": true,
+  "all_quaternions_nonzero": true,
+  "xyz_min": [
+    -56.86058044433594,
+    -12.189061164855957,
+    -31.67356300354004
+  ],
+  "xyz_max": [
+    27.300926208496094,
+    10.770877838134766,
+    30.684772491455078
+  ],
+  "log_scale_range": [
+    -20.09209632873535,
+    2.270958185195923
+  ],
+  "opacity_logit_range": [
+    -7.092538833618164,
+    17.98320198059082
+  ]
+}

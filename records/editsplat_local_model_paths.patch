@@ -1,0 +1,31 @@
+diff --git a/run_editing.py b/run_editing.py
+index 0c91fe5..165757e 100644
+--- a/run_editing.py
++++ b/run_editing.py
+@@ -190,7 +190,7 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+     ):
+ 
+         # set scheduler
+-        self.scheduler = DDIMScheduler.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="scheduler", torch_dtype=torch.bfloat16)
++        self.scheduler = DDIMScheduler.from_pretrained(os.environ.get("SD14_PATH", "CompVis/stable-diffusion-v1-4"), subfolder="scheduler", torch_dtype=torch.bfloat16)
+         self.num_train_timesteps = 1000
+         self.alphas = self.scheduler.alphas_cumprod.to(self._execution_device)
+ 
+@@ -209,7 +209,7 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+         )
+ 
+         # load ImageReward
+-        reward_model = RM.load("ImageReward-v1.0")        
++        reward_model = RM.load(os.environ.get("IMAGEREWARD_PATH", "ImageReward-v1.0"), med_config=os.environ.get("IMAGEREWARD_CONFIG"))        
+ 
+         # load Lang-SAM
+         lang_sam = LangSAM()
+@@ -559,7 +559,7 @@ if __name__ == "__main__":
+ 
+     set_seed(0)
+ 
+-    pipeline = editsplat_Pipeline.from_pretrained("timbrooks/instruct-pix2pix", torch_dtype=torch.bfloat16).to(device)
++    pipeline = editsplat_Pipeline.from_pretrained(os.environ.get("IP2P_PATH", "timbrooks/instruct-pix2pix"), torch_dtype=torch.bfloat16).to(device)
+ 
+     os.makedirs(args.model_path, exist_ok=True)
+     with open(os.path.join(args.model_path, 'args.json'), 'w') as f:

@@ -1,0 +1,49 @@
+{
+  "target_gaussians": 6596,
+  "target_weight_quantiles": [
+    0.0,
+    0.047706685960292816,
+    0.4332733452320099,
+    0.5969219207763672,
+    0.6934559345245361,
+    0.7548881769180298,
+    1.0
+  ],
+  "thresholds": [
+    {
+      "threshold": 0.1,
+      "selected": 26242,
+      "inside_target_box": 5890
+    },
+    {
+      "threshold": 0.2,
+      "selected": 19030,
+      "inside_target_box": 5703
+    },
+    {
+      "threshold": 0.3,
+      "selected": 12858,
+      "inside_target_box": 5467
+    },
+    {
+      "threshold": 0.4,
+      "selected": 9493,
+      "inside_target_box": 5128
+    },
+    {
+      "threshold": 0.5,
+      "selected": 6940,
+      "inside_target_box": 4444
+    },
+    {
+      "threshold": 0.6,
+      "selected": 4399,
+      "inside_target_box": 3234
+    },
+    {
+      "threshold": 0.8,
+      "selected": 452,
+      "inside_target_box": 273
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "resolution": [
+    512,
+    512
+  ],
+  "affine_by_camera": {
+    "1": [
+      2.0625,
+      0,
+      409.5,
+      0,
+      2.0625,
+      0.0
+    ]
+  },
+  "description": "Crop about calibrated principal point, uniform scale, preserve camera extrinsics; test = sorted index % 8 == 0"
+}

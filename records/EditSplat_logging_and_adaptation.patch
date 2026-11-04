@@ -1,0 +1,84 @@
+diff --git a/run_editing.py b/run_editing.py
+index 0c91fe5..ea4ff59 100644
+--- a/run_editing.py
++++ b/run_editing.py
+@@ -18,6 +18,7 @@ import lpips
+ from diffusers import StableDiffusionInstructPix2PixPipeline, DDIMScheduler
+ import ImageReward as RM
+ from lang_sam import LangSAM
++from instance_selection import select_instance
+ 
+ from scene import Scene, GaussianModel
+ from gaussian_renderer import render
+@@ -190,7 +191,7 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+     ):
+ 
+         # set scheduler
+-        self.scheduler = DDIMScheduler.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="scheduler", torch_dtype=torch.bfloat16)
++        self.scheduler = DDIMScheduler.from_pretrained(os.environ.get("SD14_PATH", "CompVis/stable-diffusion-v1-4"), subfolder="scheduler", torch_dtype=torch.bfloat16)
+         self.num_train_timesteps = 1000
+         self.alphas = self.scheduler.alphas_cumprod.to(self._execution_device)
+ 
+@@ -209,7 +210,7 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+         )
+ 
+         # load ImageReward
+-        reward_model = RM.load("ImageReward-v1.0")        
++        reward_model = RM.load(os.environ.get("IMAGEREWARD_PATH", "ImageReward-v1.0"), med_config=os.environ.get("IMAGEREWARD_CONFIG"))        
+ 
+         # load Lang-SAM
+         lang_sam = LangSAM()
+@@ -291,6 +292,9 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+                 # save pil image for imagereward sampling
+                 edited_pil = topilimage(edited_image.squeeze(0))
+                 edited_image_pil_list_RM.append(edited_pil)
++                diagnostic_dir = os.path.join(dataset.model_path, "initial_2d")
++                os.makedirs(diagnostic_dir, exist_ok=True)
++                edited_pil.save(os.path.join(diagnostic_dir, f"{idx:06d}.png"))
+ 
+                 # render depth map from pretrained 3dgs
+                 render_pkg = render(camera_list[idx], gaussians, pipe, background)
+@@ -306,6 +310,8 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+             top_ratio = 1 - ed.filtering_ratio
+             top_count = int(len(ranking) * top_ratio)
+             is_top_selection = [rank <= top_count for rank in ranking]
++            with open(os.path.join(dataset.model_path, "imagereward_ranking.json"), "w") as diagnostic_file:
++                json.dump({"ranking": [int(r) for r in ranking], "rewards": [float(r) for r in rewards], "selected": [bool(r) for r in is_top_selection], "top_count": top_count, "filtering_ratio": ed.filtering_ratio, "camera_names": [c.image_name for c in camera_list]}, diagnostic_file, indent=2)
+ 
+         """Multi-View Fusion Guidance (MFG)"""
+         edited_image_MFG_list = []
+@@ -363,6 +369,7 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+                 
+                 reprejected_image = dst_image.unsqueeze(0)
+                 mask, _, _, _ = lang_sam.predict(dst_image_pil, ed.target_mask_prompt)
++                mask = select_instance(mask, dst_camera)
+ 
+                 try:
+                     if mask.shape[0] != 1:
+@@ -430,6 +437,9 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+             
+             # save gaussian target image
+             edited_image_MFG_list.append(edited_image_MFG.squeeze(0).detach().cpu().clone())
++            diagnostic_dir = os.path.join(dataset.model_path, "mfg_2d")
++            os.makedirs(diagnostic_dir, exist_ok=True)
++            topilimage(edited_image_MFG_list[-1]).save(os.path.join(diagnostic_dir, f"{idx:06d}.png"))
+         
+         # clean GPU Resources
+         del self.unet
+@@ -453,6 +463,7 @@ class editsplat_Pipeline(StableDiffusionInstructPix2PixPipeline):
+ 
+         attn_weights /= attn_weights_cnt + 1e-7
+         selected_mask = attn_weights[:, 0]
++        torch.save(selected_mask.detach().cpu(), os.path.join(dataset.model_path, "attention_gaussian_weights.pt"))
+ 
+         gaussians.set_mask(selected_mask)
+         gaussians.apply_grad_mask(selected_mask)
+@@ -559,7 +570,7 @@ if __name__ == "__main__":
+ 
+     set_seed(0)
+ 
+-    pipeline = editsplat_Pipeline.from_pretrained("timbrooks/instruct-pix2pix", torch_dtype=torch.bfloat16).to(device)
++    pipeline = editsplat_Pipeline.from_pretrained(os.environ.get("IP2P_PATH", "timbrooks/instruct-pix2pix"), torch_dtype=torch.bfloat16).to(device)
+ 
+     os.makedirs(args.model_path, exist_ok=True)
+     with open(os.path.join(args.model_path, 'args.json'), 'w') as f:

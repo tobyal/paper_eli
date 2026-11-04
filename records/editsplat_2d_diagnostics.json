@@ -1,0 +1,5836 @@
+{
+  "role": "Diagnostic2D diffusion targets; final3D quality is scored separately on held-out renders",
+  "mask": "Same approximate3D target mask resampled into calibrated512 input crop",
+  "stages": {
+    "initial_2d": {
+      "summary": {
+        "all": {
+          "views": 306,
+          "target_visible_views": 141,
+          "mean_global_red_fraction": 0.06990169699675118,
+          "mean_target_red_fraction": 0.0024554210729555055,
+          "mean_outside_target_red_fraction": 0.07029099626466417
+        },
+        "selected": {
+          "views": 45,
+          "target_visible_views": 14,
+          "mean_global_red_fraction": 0.10941263834635416,
+          "mean_target_red_fraction": 0.0037127763724661617,
+          "mean_outside_target_red_fraction": 0.11003839927544874
+        }
+      },
+      "views": [
+        {
+          "index": 0,
+          "camera": "frame_000237",
+          "rank": 239,
+          "selected": false,
+          "target_pixels": 337,
+          "global_red_fraction": 0.00127410888671875,
+          "outside_target_red_fraction": 0.0012719293219814597,
+          "target_red_fraction": 0.002967359050445104
+        },
+        {
+          "index": 1,
+          "camera": "frame_000174",
+          "rank": 260,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.006824493408203125,
+          "outside_target_red_fraction": 0.006824493408203125
+        },
+        {
+          "index": 2,
+          "camera": "frame_000347",
+          "rank": 302,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11758804321289062,
+          "outside_target_red_fraction": 0.11758804321289062
+        },
+        {
+          "index": 3,
+          "camera": "frame_000069",
+          "rank": 129,
+          "selected": false,
+          "target_pixels": 5530,
+          "global_red_fraction": 0.0569610595703125,
+          "outside_target_red_fraction": 0.05810672839361843,
+          "target_red_fraction": 0.0037974683544303796
+        },
+        {
+          "index": 4,
+          "camera": "frame_000172",
+          "rank": 109,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.007350921630859375,
+          "outside_target_red_fraction": 0.007350921630859375
+        },
+        {
+          "index": 5,
+          "camera": "frame_000102",
+          "rank": 56,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11098861694335938,
+          "outside_target_red_fraction": 0.11098861694335938
+        },
+        {
+          "index": 6,
+          "camera": "frame_000067",
+          "rank": 173,
+          "selected": false,
+          "target_pixels": 6496,
+          "global_red_fraction": 0.05089569091796875,
+          "outside_target_red_fraction": 0.05210680310426837,
+          "target_red_fraction": 0.003232758620689655
+        },
+        {
+          "index": 7,
+          "camera": "frame_000204",
+          "rank": 38,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.14713287353515625,
+          "outside_target_red_fraction": 0.14713287353515625
+        },
+        {
+          "index": 8,
+          "camera": "frame_000107",
+          "rank": 100,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10430908203125,
+          "outside_target_red_fraction": 0.10430908203125
+        },
+        {
+          "index": 9,
+          "camera": "frame_000253",
+          "rank": 186,
+          "selected": false,
+          "target_pixels": 549,
+          "global_red_fraction": 0.00759124755859375,
+          "outside_target_red_fraction": 0.007603356333263251,
+          "target_red_fraction": 0.0018214936247723133
+        },
+        {
+          "index": 10,
+          "camera": "frame_000111",
+          "rank": 54,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.13577651977539062,
+          "outside_target_red_fraction": 0.13577651977539062
+        },
+        {
+          "index": 11,
+          "camera": "frame_000218",
+          "rank": 44,
+          "selected": true,
+          "target_pixels": 160,
+          "global_red_fraction": 0.03350830078125,
+          "outside_target_red_fraction": 0.0335287651154269,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 12,
+          "camera": "frame_000287",
+          "rank": 300,
+          "selected": false,
+          "target_pixels": 2206,
+          "global_red_fraction": 0.02944183349609375,
+          "outside_target_red_fraction": 0.02968400156960506,
+          "target_red_fraction": 0.0009066183136899365
+        },
+        {
+          "index": 13,
+          "camera": "frame_000005",
+          "rank": 32,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11877059936523438,
+          "outside_target_red_fraction": 0.11877059936523438
+        },
+        {
+          "index": 14,
+          "camera": "frame_000230",
+          "rank": 251,
+          "selected": false,
+          "target_pixels": 332,
+          "global_red_fraction": 0.0047454833984375,
+          "outside_target_red_fraction": 0.004751501077108765,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 15,
+          "camera": "frame_000269",
+          "rank": 143,
+          "selected": false,
+          "target_pixels": 918,
+          "global_red_fraction": 0.001308441162109375,
+          "outside_target_red_fraction": 0.0013130392839916395,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 16,
+          "camera": "frame_000104",
+          "rank": 49,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.18570709228515625,
+          "outside_target_red_fraction": 0.18570709228515625
+        },
+        {
+          "index": 17,
+          "camera": "frame_000215",
+          "rank": 34,
+          "selected": true,
+          "target_pixels": 38,
+          "global_red_fraction": 0.031856536865234375,
+          "outside_target_red_fraction": 0.031861155410406475
+        },
+        {
+          "index": 18,
+          "camera": "frame_000330",
+          "rank": 182,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.231964111328125,
+          "outside_target_red_fraction": 0.231964111328125
+        },
+        {
+          "index": 19,
+          "camera": "frame_000118",
+          "rank": 87,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.24170684814453125,
+          "outside_target_red_fraction": 0.24170684814453125
+        },
+        {
+          "index": 20,
+          "camera": "frame_000301",
+          "rank": 122,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08904647827148438,
+          "outside_target_red_fraction": 0.08904647827148438
+        },
+        {
+          "index": 21,
+          "camera": "frame_000318",
+          "rank": 125,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.16603469848632812,
+          "outside_target_red_fraction": 0.16603469848632812
+        },
+        {
+          "index": 22,
+          "camera": "frame_000259",
+          "rank": 231,
+          "selected": false,
+          "target_pixels": 625,
+          "global_red_fraction": 0.00435638427734375,
+          "outside_target_red_fraction": 0.004366795529196731,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 23,
+          "camera": "frame_000328",
+          "rank": 88,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.3275108337402344,
+          "outside_target_red_fraction": 0.3275108337402344
+        },
+        {
+          "index": 24,
+          "camera": "frame_000016",
+          "rank": 280,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.052501678466796875,
+          "outside_target_red_fraction": 0.052501678466796875
+        },
+        {
+          "index": 25,
+          "camera": "frame_000167",
+          "rank": 180,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.00577545166015625,
+          "outside_target_red_fraction": 0.00577545166015625
+        },
+        {
+          "index": 26,
+          "camera": "frame_000262",
+          "rank": 156,
+          "selected": false,
+          "target_pixels": 703,
+          "global_red_fraction": 0.014934539794921875,
+          "outside_target_red_fraction": 0.014974697924197046,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 27,
+          "camera": "frame_000219",
+          "rank": 155,
+          "selected": false,
+          "target_pixels": 236,
+          "global_red_fraction": 0.016773223876953125,
+          "outside_target_red_fraction": 0.016788337889640636,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 28,
+          "camera": "frame_000149",
+          "rank": 254,
+          "selected": false,
+          "target_pixels": 5393,
+          "global_red_fraction": 0.013439178466796875,
+          "outside_target_red_fraction": 0.013721465544437997,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 29,
+          "camera": "frame_000223",
+          "rank": 120,
+          "selected": false,
+          "target_pixels": 292,
+          "global_red_fraction": 0.010799407958984375,
+          "outside_target_red_fraction": 0.010811450743167896,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 30,
+          "camera": "frame_000303",
+          "rank": 235,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.09440231323242188,
+          "outside_target_red_fraction": 0.09440231323242188
+        },
+        {
+          "index": 31,
+          "camera": "frame_000040",
+          "rank": 107,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02667236328125,
+          "outside_target_red_fraction": 0.02667236328125
+        },
+        {
+          "index": 32,
+          "camera": "frame_000323",
+          "rank": 1,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.234893798828125,
+          "outside_target_red_fraction": 0.234893798828125
+        },
+        {
+          "index": 33,
+          "camera": "frame_000074",
+          "rank": 64,
+          "selected": false,
+          "target_pixels": 203,
+          "global_red_fraction": 0.06742095947265625,
+          "outside_target_red_fraction": 0.06747320961590587,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 34,
+          "camera": "frame_000335",
+          "rank": 93,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.3380279541015625,
+          "outside_target_red_fraction": 0.3380279541015625
+        },
+        {
+          "index": 35,
+          "camera": "frame_000139",
+          "rank": 205,
+          "selected": false,
+          "target_pixels": 4006,
+          "global_red_fraction": 0.07820892333984375,
+          "outside_target_red_fraction": 0.07940326492031394,
+          "target_red_fraction": 0.0012481278082875687
+        },
+        {
+          "index": 36,
+          "camera": "frame_000228",
+          "rank": 223,
+          "selected": false,
+          "target_pixels": 317,
+          "global_red_fraction": 0.0055694580078125,
+          "outside_target_red_fraction": 0.005560923816107582,
+          "target_red_fraction": 0.012618296529968454
+        },
+        {
+          "index": 37,
+          "camera": "frame_000294",
+          "rank": 24,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.028667449951171875,
+          "outside_target_red_fraction": 0.028667449951171875
+        },
+        {
+          "index": 38,
+          "camera": "frame_000079",
+          "rank": 117,
+          "selected": false,
+          "target_pixels": 11218,
+          "global_red_fraction": 0.08464813232421875,
+          "outside_target_red_fraction": 0.08840454954847246,
+          "target_red_fraction": 0.0006239971474416117
+        },
+        {
+          "index": 39,
+          "camera": "frame_000203",
+          "rank": 15,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.14118194580078125,
+          "outside_target_red_fraction": 0.14118194580078125
+        },
+        {
+          "index": 40,
+          "camera": "frame_000063",
+          "rank": 181,
+          "selected": false,
+          "target_pixels": 4071,
+          "global_red_fraction": 0.035854339599609375,
+          "outside_target_red_fraction": 0.036400553331809214,
+          "target_red_fraction": 0.0012281994595922379
+        },
+        {
+          "index": 41,
+          "camera": "frame_000093",
+          "rank": 91,
+          "selected": false,
+          "target_pixels": 7338,
+          "global_red_fraction": 0.1094512939453125,
+          "outside_target_red_fraction": 0.11247772815396812,
+          "target_red_fraction": 0.004360861270100845
+        },
+        {
+          "index": 42,
+          "camera": "frame_000212",
+          "rank": 16,
+          "selected": true,
+          "target_pixels": 6,
+          "global_red_fraction": 0.02288055419921875,
+          "outside_target_red_fraction": 0.022881077905530674
+        },
+        {
+          "index": 43,
+          "camera": "frame_000091",
+          "rank": 9,
+          "selected": true,
+          "target_pixels": 8570,
+          "global_red_fraction": 0.11172103881835938,
+          "outside_target_red_fraction": 0.1154298153596189,
+          "target_red_fraction": 0.0019836639439906652
+        },
+        {
+          "index": 44,
+          "camera": "frame_000234",
+          "rank": 116,
+          "selected": false,
+          "target_pixels": 333,
+          "global_red_fraction": 0.0051116943359375,
+          "outside_target_red_fraction": 0.005083820007562708,
+          "target_red_fraction": 0.02702702702702703
+        },
+        {
+          "index": 45,
+          "camera": "frame_000165",
+          "rank": 123,
+          "selected": false,
+          "target_pixels": 484,
+          "global_red_fraction": 0.009334564208984375,
+          "outside_target_red_fraction": 0.009332721852786057,
+          "target_red_fraction": 0.010330578512396695
+        },
+        {
+          "index": 46,
+          "camera": "frame_000322",
+          "rank": 115,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.17786026000976562,
+          "outside_target_red_fraction": 0.17786026000976562
+        },
+        {
+          "index": 47,
+          "camera": "frame_000248",
+          "rank": 232,
+          "selected": false,
+          "target_pixels": 488,
+          "global_red_fraction": 0.002475738525390625,
+          "outside_target_red_fraction": 0.002480355887118965,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 48,
+          "camera": "frame_000004",
+          "rank": 172,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.047527313232421875,
+          "outside_target_red_fraction": 0.047527313232421875
+        },
+        {
+          "index": 49,
+          "camera": "frame_000127",
+          "rank": 257,
+          "selected": false,
+          "target_pixels": 2286,
+          "global_red_fraction": 0.02591705322265625,
+          "outside_target_red_fraction": 0.026145048449537824,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 50,
+          "camera": "frame_000244",
+          "rank": 206,
+          "selected": false,
+          "target_pixels": 471,
+          "global_red_fraction": 0.0033111572265625,
+          "outside_target_red_fraction": 0.003317117165317018,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 51,
+          "camera": "frame_000119",
+          "rank": 20,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2753639221191406,
+          "outside_target_red_fraction": 0.2753639221191406
+        },
+        {
+          "index": 52,
+          "camera": "frame_000115",
+          "rank": 104,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2393798828125,
+          "outside_target_red_fraction": 0.2393798828125
+        },
+        {
+          "index": 53,
+          "camera": "frame_000029",
+          "rank": 146,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.01879119873046875,
+          "outside_target_red_fraction": 0.01879119873046875
+        },
+        {
+          "index": 54,
+          "camera": "frame_000034",
+          "rank": 224,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.019359588623046875,
+          "outside_target_red_fraction": 0.019359588623046875
+        },
+        {
+          "index": 55,
+          "camera": "frame_000047",
+          "rank": 50,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0323944091796875,
+          "outside_target_red_fraction": 0.0323944091796875
+        },
+        {
+          "index": 56,
+          "camera": "frame_000018",
+          "rank": 131,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.03778076171875,
+          "outside_target_red_fraction": 0.03778076171875
+        },
+        {
+          "index": 57,
+          "camera": "frame_000136",
+          "rank": 52,
+          "selected": false,
+          "target_pixels": 3683,
+          "global_red_fraction": 0.022586822509765625,
+          "outside_target_red_fraction": 0.022908678678794866,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 58,
+          "camera": "frame_000075",
+          "rank": 40,
+          "selected": true,
+          "target_pixels": 1764,
+          "global_red_fraction": 0.062412261962890625,
+          "outside_target_red_fraction": 0.06283124663952684,
+          "target_red_fraction": 0.0005668934240362812
+        },
+        {
+          "index": 59,
+          "camera": "frame_000268",
+          "rank": 169,
+          "selected": false,
+          "target_pixels": 904,
+          "global_red_fraction": 0.004398345947265625,
+          "outside_target_red_fraction": 0.004405910274077477,
+          "target_red_fraction": 0.0022123893805309734
+        },
+        {
+          "index": 60,
+          "camera": "frame_000052",
+          "rank": 108,
+          "selected": false,
+          "target_pixels": 465,
+          "global_red_fraction": 0.015254974365234375,
+          "outside_target_red_fraction": 0.015282082245804974,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 61,
+          "camera": "frame_000210",
+          "rank": 55,
+          "selected": false,
+          "target_pixels": 2,
+          "global_red_fraction": 0.02036285400390625,
+          "outside_target_red_fraction": 0.020363009361338513
+        },
+        {
+          "index": 62,
+          "camera": "frame_000320",
+          "rank": 102,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.16663742065429688,
+          "outside_target_red_fraction": 0.16663742065429688
+        },
+        {
+          "index": 63,
+          "camera": "frame_000308",
+          "rank": 111,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.1006317138671875,
+          "outside_target_red_fraction": 0.1006317138671875
+        },
+        {
+          "index": 64,
+          "camera": "frame_000092",
+          "rank": 62,
+          "selected": false,
+          "target_pixels": 8095,
+          "global_red_fraction": 0.1107330322265625,
+          "outside_target_red_fraction": 0.11399769335836787,
+          "target_red_fraction": 0.008276714021000617
+        },
+        {
+          "index": 65,
+          "camera": "frame_000164",
+          "rank": 267,
+          "selected": false,
+          "target_pixels": 1902,
+          "global_red_fraction": 0.005405426025390625,
+          "outside_target_red_fraction": 0.0054372468702207945,
+          "target_red_fraction": 0.0010515247108307045
+        },
+        {
+          "index": 66,
+          "camera": "frame_000123",
+          "rank": 266,
+          "selected": false,
+          "target_pixels": 1235,
+          "global_red_fraction": 0.025115966796875,
+          "outside_target_red_fraction": 0.025196524458719324,
+          "target_red_fraction": 0.008097165991902834
+        },
+        {
+          "index": 67,
+          "camera": "frame_000130",
+          "rank": 103,
+          "selected": false,
+          "target_pixels": 2425,
+          "global_red_fraction": 0.026073455810546875,
+          "outside_target_red_fraction": 0.02631690403859556,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 68,
+          "camera": "frame_000020",
+          "rank": 200,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02365875244140625,
+          "outside_target_red_fraction": 0.02365875244140625
+        },
+        {
+          "index": 69,
+          "camera": "frame_000095",
+          "rank": 8,
+          "selected": true,
+          "target_pixels": 5080,
+          "global_red_fraction": 0.12932586669921875,
+          "outside_target_red_fraction": 0.13182709364205022,
+          "target_red_fraction": 0.0027559055118110236
+        },
+        {
+          "index": 70,
+          "camera": "frame_000043",
+          "rank": 31,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.04103851318359375,
+          "outside_target_red_fraction": 0.04103851318359375
+        },
+        {
+          "index": 71,
+          "camera": "frame_000135",
+          "rank": 67,
+          "selected": false,
+          "target_pixels": 3562,
+          "global_red_fraction": 0.014980316162109375,
+          "outside_target_red_fraction": 0.015186671926120148,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 72,
+          "camera": "frame_000316",
+          "rank": 18,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.238433837890625,
+          "outside_target_red_fraction": 0.238433837890625
+        },
+        {
+          "index": 73,
+          "camera": "frame_000176",
+          "rank": 185,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.012115478515625,
+          "outside_target_red_fraction": 0.012115478515625
+        },
+        {
+          "index": 74,
+          "camera": "frame_000156",
+          "rank": 19,
+          "selected": true,
+          "target_pixels": 6392,
+          "global_red_fraction": 0.08701324462890625,
+          "outside_target_red_fraction": 0.08916450311239013,
+          "target_red_fraction": 0.0009386733416770963
+        },
+        {
+          "index": 75,
+          "camera": "frame_000042",
+          "rank": 162,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.021755218505859375,
+          "outside_target_red_fraction": 0.021755218505859375
+        },
+        {
+          "index": 76,
+          "camera": "frame_000202",
+          "rank": 30,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10821533203125,
+          "outside_target_red_fraction": 0.10821533203125
+        },
+        {
+          "index": 77,
+          "camera": "frame_000220",
+          "rank": 14,
+          "selected": true,
+          "target_pixels": 268,
+          "global_red_fraction": 0.024738311767578125,
+          "outside_target_red_fraction": 0.0247636285875758,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 78,
+          "camera": "frame_000050",
+          "rank": 199,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.021541595458984375,
+          "outside_target_red_fraction": 0.021541595458984375
+        },
+        {
+          "index": 79,
+          "camera": "frame_000013",
+          "rank": 294,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.046779632568359375,
+          "outside_target_red_fraction": 0.046779632568359375
+        },
+        {
+          "index": 80,
+          "camera": "frame_000068",
+          "rank": 68,
+          "selected": false,
+          "target_pixels": 6682,
+          "global_red_fraction": 0.050090789794921875,
+          "outside_target_red_fraction": 0.0513853332393859,
+          "target_red_fraction": 0.000598623166716552
+        },
+        {
+          "index": 81,
+          "camera": "frame_000198",
+          "rank": 141,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07411575317382812,
+          "outside_target_red_fraction": 0.07411575317382812
+        },
+        {
+          "index": 82,
+          "camera": "frame_000334",
+          "rank": 244,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.24429702758789062,
+          "outside_target_red_fraction": 0.24429702758789062
+        },
+        {
+          "index": 83,
+          "camera": "frame_000023",
+          "rank": 41,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0213775634765625,
+          "outside_target_red_fraction": 0.0213775634765625
+        },
+        {
+          "index": 84,
+          "camera": "frame_000117",
+          "rank": 47,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.28786468505859375,
+          "outside_target_red_fraction": 0.28786468505859375
+        },
+        {
+          "index": 85,
+          "camera": "frame_000098",
+          "rank": 35,
+          "selected": true,
+          "target_pixels": 276,
+          "global_red_fraction": 0.10623550415039062,
+          "outside_target_red_fraction": 0.10633983533688729,
+          "target_red_fraction": 0.007246376811594203
+        },
+        {
+          "index": 86,
+          "camera": "frame_000293",
+          "rank": 63,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.027805328369140625,
+          "outside_target_red_fraction": 0.027805328369140625
+        },
+        {
+          "index": 87,
+          "camera": "frame_000147",
+          "rank": 293,
+          "selected": false,
+          "target_pixels": 4689,
+          "global_red_fraction": 0.015773773193359375,
+          "outside_target_red_fraction": 0.016061059214231614,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 88,
+          "camera": "frame_000213",
+          "rank": 90,
+          "selected": false,
+          "target_pixels": 4,
+          "global_red_fraction": 0.0154571533203125,
+          "outside_target_red_fraction": 0.015457389181353476
+        },
+        {
+          "index": 89,
+          "camera": "frame_000046",
+          "rank": 76,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0214996337890625,
+          "outside_target_red_fraction": 0.0214996337890625
+        },
+        {
+          "index": 90,
+          "camera": "frame_000076",
+          "rank": 75,
+          "selected": false,
+          "target_pixels": 4078,
+          "global_red_fraction": 0.052947998046875,
+          "outside_target_red_fraction": 0.05378081576030938,
+          "target_red_fraction": 0.0002452182442373713
+        },
+        {
+          "index": 91,
+          "camera": "frame_000132",
+          "rank": 147,
+          "selected": false,
+          "target_pixels": 2716,
+          "global_red_fraction": 0.015911102294921875,
+          "outside_target_red_fraction": 0.016077678585195123,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 92,
+          "camera": "frame_000275",
+          "rank": 213,
+          "selected": false,
+          "target_pixels": 1504,
+          "global_red_fraction": 0.001743316650390625,
+          "outside_target_red_fraction": 0.0017495395948434623,
+          "target_red_fraction": 0.0006648936170212766
+        },
+        {
+          "index": 93,
+          "camera": "frame_000101",
+          "rank": 105,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0921783447265625,
+          "outside_target_red_fraction": 0.0921783447265625
+        },
+        {
+          "index": 94,
+          "camera": "frame_000134",
+          "rank": 96,
+          "selected": false,
+          "target_pixels": 3415,
+          "global_red_fraction": 0.02922821044921875,
+          "outside_target_red_fraction": 0.029613997657780923,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 95,
+          "camera": "frame_000003",
+          "rank": 11,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08881378173828125,
+          "outside_target_red_fraction": 0.08881378173828125
+        },
+        {
+          "index": 96,
+          "camera": "frame_000246",
+          "rank": 184,
+          "selected": false,
+          "target_pixels": 489,
+          "global_red_fraction": 0.003551483154296875,
+          "outside_target_red_fraction": 0.0035581204257514668,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 97,
+          "camera": "frame_000315",
+          "rank": 66,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.18132400512695312,
+          "outside_target_red_fraction": 0.18132400512695312
+        },
+        {
+          "index": 98,
+          "camera": "frame_000232",
+          "rank": 230,
+          "selected": false,
+          "target_pixels": 331,
+          "global_red_fraction": 0.00211334228515625,
+          "outside_target_red_fraction": 0.002116014101667984,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 99,
+          "camera": "frame_000288",
+          "rank": 250,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.00905609130859375,
+          "outside_target_red_fraction": 0.00905609130859375
+        },
+        {
+          "index": 100,
+          "camera": "frame_000332",
+          "rank": 279,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2557563781738281,
+          "outside_target_red_fraction": 0.2557563781738281
+        },
+        {
+          "index": 101,
+          "camera": "frame_000302",
+          "rank": 221,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07742691040039062,
+          "outside_target_red_fraction": 0.07742691040039062
+        },
+        {
+          "index": 102,
+          "camera": "frame_000078",
+          "rank": 73,
+          "selected": false,
+          "target_pixels": 9931,
+          "global_red_fraction": 0.08464813232421875,
+          "outside_target_red_fraction": 0.08797722559899768,
+          "target_red_fraction": 0.0001006947940791461
+        },
+        {
+          "index": 103,
+          "camera": "frame_000197",
+          "rank": 81,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.05255889892578125,
+          "outside_target_red_fraction": 0.05255889892578125
+        },
+        {
+          "index": 104,
+          "camera": "frame_000122",
+          "rank": 273,
+          "selected": false,
+          "target_pixels": 192,
+          "global_red_fraction": 0.026912689208984375,
+          "outside_target_red_fraction": 0.026924780112387,
+          "target_red_fraction": 0.010416666666666666
+        },
+        {
+          "index": 105,
+          "camera": "frame_000278",
+          "rank": 201,
+          "selected": false,
+          "target_pixels": 2316,
+          "global_red_fraction": 0.00824737548828125,
+          "outside_target_red_fraction": 0.008286250904444478,
+          "target_red_fraction": 0.0038860103626943004
+        },
+        {
+          "index": 106,
+          "camera": "frame_000291",
+          "rank": 237,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07112884521484375,
+          "outside_target_red_fraction": 0.07112884521484375
+        },
+        {
+          "index": 107,
+          "camera": "frame_000266",
+          "rank": 82,
+          "selected": false,
+          "target_pixels": 827,
+          "global_red_fraction": 0.014987945556640625,
+          "outside_target_red_fraction": 0.015031551716880264,
+          "target_red_fraction": 0.0012091898428053204
+        },
+        {
+          "index": 108,
+          "camera": "frame_000311",
+          "rank": 80,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.15196990966796875,
+          "outside_target_red_fraction": 0.15196990966796875
+        },
+        {
+          "index": 109,
+          "camera": "frame_000338",
+          "rank": 45,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.33725738525390625,
+          "outside_target_red_fraction": 0.33725738525390625
+        },
+        {
+          "index": 110,
+          "camera": "frame_000031",
+          "rank": 287,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02516937255859375,
+          "outside_target_red_fraction": 0.02516937255859375
+        },
+        {
+          "index": 111,
+          "camera": "frame_000100",
+          "rank": 135,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07665252685546875,
+          "outside_target_red_fraction": 0.07665252685546875
+        },
+        {
+          "index": 112,
+          "camera": "frame_000142",
+          "rank": 281,
+          "selected": false,
+          "target_pixels": 4217,
+          "global_red_fraction": 0.03614044189453125,
+          "outside_target_red_fraction": 0.03668867547794531,
+          "target_red_fraction": 0.002608489447474508
+        },
+        {
+          "index": 113,
+          "camera": "frame_000214",
+          "rank": 53,
+          "selected": false,
+          "target_pixels": 21,
+          "global_red_fraction": 0.018054962158203125,
+          "outside_target_red_fraction": 0.01805640863258852
+        },
+        {
+          "index": 114,
+          "camera": "frame_000298",
+          "rank": 28,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07476043701171875,
+          "outside_target_red_fraction": 0.07476043701171875
+        },
+        {
+          "index": 115,
+          "camera": "frame_000224",
+          "rank": 229,
+          "selected": false,
+          "target_pixels": 289,
+          "global_red_fraction": 0.0067596435546875,
+          "outside_target_red_fraction": 0.00674800939451223,
+          "target_red_fraction": 0.01730103806228374
+        },
+        {
+          "index": 116,
+          "camera": "frame_000229",
+          "rank": 236,
+          "selected": false,
+          "target_pixels": 324,
+          "global_red_fraction": 0.004688262939453125,
+          "outside_target_red_fraction": 0.004694064624551218,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 117,
+          "camera": "frame_000108",
+          "rank": 95,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11218643188476562,
+          "outside_target_red_fraction": 0.11218643188476562
+        },
+        {
+          "index": 118,
+          "camera": "frame_000221",
+          "rank": 219,
+          "selected": false,
+          "target_pixels": 291,
+          "global_red_fraction": 0.009815216064453125,
+          "outside_target_red_fraction": 0.009826123817561762,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 119,
+          "camera": "frame_000053",
+          "rank": 65,
+          "selected": false,
+          "target_pixels": 29,
+          "global_red_fraction": 0.022357940673828125,
+          "outside_target_red_fraction": 0.02236041432195792
+        },
+        {
+          "index": 120,
+          "camera": "frame_000243",
+          "rank": 178,
+          "selected": false,
+          "target_pixels": 427,
+          "global_red_fraction": 0.001865386962890625,
+          "outside_target_red_fraction": 0.0018569676406194476,
+          "target_red_fraction": 0.00702576112412178
+        },
+        {
+          "index": 121,
+          "camera": "frame_000158",
+          "rank": 29,
+          "selected": true,
+          "target_pixels": 6565,
+          "global_red_fraction": 0.07273483276367188,
+          "outside_target_red_fraction": 0.0746031559713435,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 122,
+          "camera": "frame_000327",
+          "rank": 194,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2080078125,
+          "outside_target_red_fraction": 0.2080078125
+        },
+        {
+          "index": 123,
+          "camera": "frame_000151",
+          "rank": 46,
+          "selected": false,
+          "target_pixels": 5996,
+          "global_red_fraction": 0.06832122802734375,
+          "outside_target_red_fraction": 0.06989318675140935,
+          "target_red_fraction": 0.0011674449633088727
+        },
+        {
+          "index": 124,
+          "camera": "frame_000015",
+          "rank": 277,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.024753570556640625,
+          "outside_target_red_fraction": 0.024753570556640625
+        },
+        {
+          "index": 125,
+          "camera": "frame_000088",
+          "rank": 157,
+          "selected": false,
+          "target_pixels": 11680,
+          "global_red_fraction": 0.09850692749023438,
+          "outside_target_red_fraction": 0.10293295643286061,
+          "target_red_fraction": 0.003595890410958904
+        },
+        {
+          "index": 126,
+          "camera": "frame_000324",
+          "rank": 127,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.18799972534179688,
+          "outside_target_red_fraction": 0.18799972534179688
+        },
+        {
+          "index": 127,
+          "camera": "frame_000138",
+          "rank": 265,
+          "selected": false,
+          "target_pixels": 3852,
+          "global_red_fraction": 0.041156768798828125,
+          "outside_target_red_fraction": 0.041747324733247645,
+          "target_red_fraction": 0.001557632398753894
+        },
+        {
+          "index": 128,
+          "camera": "frame_000344",
+          "rank": 247,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.3083915710449219,
+          "outside_target_red_fraction": 0.3083915710449219
+        },
+        {
+          "index": 129,
+          "camera": "frame_000295",
+          "rank": 89,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.045406341552734375,
+          "outside_target_red_fraction": 0.045406341552734375
+        },
+        {
+          "index": 130,
+          "camera": "frame_000339",
+          "rank": 74,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.3340644836425781,
+          "outside_target_red_fraction": 0.3340644836425781
+        },
+        {
+          "index": 131,
+          "camera": "frame_000103",
+          "rank": 77,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07458877563476562,
+          "outside_target_red_fraction": 0.07458877563476562
+        },
+        {
+          "index": 132,
+          "camera": "frame_000286",
+          "rank": 305,
+          "selected": false,
+          "target_pixels": 17333,
+          "global_red_fraction": 0.030826568603515625,
+          "outside_target_red_fraction": 0.03286208544550694,
+          "target_red_fraction": 0.0020769630185195867
+        },
+        {
+          "index": 133,
+          "camera": "frame_000183",
+          "rank": 255,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.012935638427734375,
+          "outside_target_red_fraction": 0.012935638427734375
+        },
+        {
+          "index": 134,
+          "camera": "frame_000190",
+          "rank": 241,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.014896392822265625,
+          "outside_target_red_fraction": 0.014896392822265625
+        },
+        {
+          "index": 135,
+          "camera": "frame_000349",
+          "rank": 227,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10985946655273438,
+          "outside_target_red_fraction": 0.10985946655273438
+        },
+        {
+          "index": 136,
+          "camera": "frame_000250",
+          "rank": 163,
+          "selected": false,
+          "target_pixels": 521,
+          "global_red_fraction": 0.018169403076171875,
+          "outside_target_red_fraction": 0.018197941312499282,
+          "target_red_fraction": 0.003838771593090211
+        },
+        {
+          "index": 137,
+          "camera": "frame_000192",
+          "rank": 291,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.03778839111328125,
+          "outside_target_red_fraction": 0.03778839111328125
+        },
+        {
+          "index": 138,
+          "camera": "frame_000125",
+          "rank": 222,
+          "selected": false,
+          "target_pixels": 1910,
+          "global_red_fraction": 0.039031982421875,
+          "outside_target_red_fraction": 0.039314616844839646,
+          "target_red_fraction": 0.0005235602094240838
+        },
+        {
+          "index": 139,
+          "camera": "frame_000160",
+          "rank": 288,
+          "selected": false,
+          "target_pixels": 6538,
+          "global_red_fraction": 0.010608673095703125,
+          "outside_target_red_fraction": 0.010864377205542905,
+          "target_red_fraction": 0.000611807892321811
+        },
+        {
+          "index": 140,
+          "camera": "frame_000184",
+          "rank": 274,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.022434234619140625,
+          "outside_target_red_fraction": 0.022434234619140625
+        },
+        {
+          "index": 141,
+          "camera": "frame_000251",
+          "rank": 204,
+          "selected": false,
+          "target_pixels": 516,
+          "global_red_fraction": 0.004230499267578125,
+          "outside_target_red_fraction": 0.004238842937300289,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 142,
+          "camera": "frame_000062",
+          "rank": 85,
+          "selected": false,
+          "target_pixels": 4170,
+          "global_red_fraction": 0.07428741455078125,
+          "outside_target_red_fraction": 0.0753990712242319,
+          "target_red_fraction": 0.005515587529976019
+        },
+        {
+          "index": 143,
+          "camera": "frame_000299",
+          "rank": 25,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.06451416015625,
+          "outside_target_red_fraction": 0.06451416015625
+        },
+        {
+          "index": 144,
+          "camera": "frame_000181",
+          "rank": 192,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.01190948486328125,
+          "outside_target_red_fraction": 0.01190948486328125
+        },
+        {
+          "index": 145,
+          "camera": "frame_000254",
+          "rank": 212,
+          "selected": false,
+          "target_pixels": 565,
+          "global_red_fraction": 0.002620697021484375,
+          "outside_target_red_fraction": 0.0026263576204511832,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 146,
+          "camera": "frame_000058",
+          "rank": 187,
+          "selected": false,
+          "target_pixels": 2926,
+          "global_red_fraction": 0.0479888916015625,
+          "outside_target_red_fraction": 0.04851900716771212,
+          "target_red_fraction": 0.0010252904989747095
+        },
+        {
+          "index": 147,
+          "camera": "frame_000007",
+          "rank": 264,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.050052642822265625,
+          "outside_target_red_fraction": 0.050052642822265625
+        },
+        {
+          "index": 148,
+          "camera": "frame_000240",
+          "rank": 33,
+          "selected": true,
+          "target_pixels": 355,
+          "global_red_fraction": 0.005924224853515625,
+          "outside_target_red_fraction": 0.005932258421858825,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 149,
+          "camera": "frame_000236",
+          "rank": 210,
+          "selected": false,
+          "target_pixels": 330,
+          "global_red_fraction": 0.003040313720703125,
+          "outside_target_red_fraction": 0.003036506833095251,
+          "target_red_fraction": 0.006060606060606061
+        },
+        {
+          "index": 150,
+          "camera": "frame_000109",
+          "rank": 39,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10634994506835938,
+          "outside_target_red_fraction": 0.10634994506835938
+        },
+        {
+          "index": 151,
+          "camera": "frame_000267",
+          "rank": 228,
+          "selected": false,
+          "target_pixels": 872,
+          "global_red_fraction": 0.001834869384765625,
+          "outside_target_red_fraction": 0.001840993294344591,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 152,
+          "camera": "frame_000264",
+          "rank": 174,
+          "selected": false,
+          "target_pixels": 761,
+          "global_red_fraction": 0.017230987548828125,
+          "outside_target_red_fraction": 0.017273502867439734,
+          "target_red_fraction": 0.002628120893561104
+        },
+        {
+          "index": 153,
+          "camera": "frame_000036",
+          "rank": 97,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.04178619384765625,
+          "outside_target_red_fraction": 0.04178619384765625
+        },
+        {
+          "index": 154,
+          "camera": "frame_000261",
+          "rank": 159,
+          "selected": false,
+          "target_pixels": 675,
+          "global_red_fraction": 0.002834320068359375,
+          "outside_target_red_fraction": 0.00284163705831284,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 155,
+          "camera": "frame_000342",
+          "rank": 196,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2943611145019531,
+          "outside_target_red_fraction": 0.2943611145019531
+        },
+        {
+          "index": 156,
+          "camera": "frame_000205",
+          "rank": 112,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.1020965576171875,
+          "outside_target_red_fraction": 0.1020965576171875
+        },
+        {
+          "index": 157,
+          "camera": "frame_000282",
+          "rank": 268,
+          "selected": false,
+          "target_pixels": 5266,
+          "global_red_fraction": 0.00927734375,
+          "outside_target_red_fraction": 0.009432493245820973,
+          "target_red_fraction": 0.001709077098366882
+        },
+        {
+          "index": 158,
+          "camera": "frame_000008",
+          "rank": 177,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.06681442260742188,
+          "outside_target_red_fraction": 0.06681442260742188
+        },
+        {
+          "index": 159,
+          "camera": "frame_000022",
+          "rank": 42,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.025936126708984375,
+          "outside_target_red_fraction": 0.025936126708984375
+        },
+        {
+          "index": 160,
+          "camera": "frame_000272",
+          "rank": 203,
+          "selected": false,
+          "target_pixels": 1077,
+          "global_red_fraction": 0.00107574462890625,
+          "outside_target_red_fraction": 0.0010801824818916217,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 161,
+          "camera": "frame_000157",
+          "rank": 226,
+          "selected": false,
+          "target_pixels": 6469,
+          "global_red_fraction": 0.05083465576171875,
+          "outside_target_red_fraction": 0.052105211694534075,
+          "target_red_fraction": 0.0006183335909723295
+        },
+        {
+          "index": 162,
+          "camera": "frame_000187",
+          "rank": 262,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0052642822265625,
+          "outside_target_red_fraction": 0.0052642822265625
+        },
+        {
+          "index": 163,
+          "camera": "frame_000168",
+          "rank": 195,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.012416839599609375,
+          "outside_target_red_fraction": 0.012416839599609375
+        },
+        {
+          "index": 164,
+          "camera": "frame_000014",
+          "rank": 303,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.028079986572265625,
+          "outside_target_red_fraction": 0.028079986572265625
+        },
+        {
+          "index": 165,
+          "camera": "frame_000350",
+          "rank": 216,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.126068115234375,
+          "outside_target_red_fraction": 0.126068115234375
+        },
+        {
+          "index": 166,
+          "camera": "frame_000326",
+          "rank": 84,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.23299789428710938,
+          "outside_target_red_fraction": 0.23299789428710938
+        },
+        {
+          "index": 167,
+          "camera": "frame_000030",
+          "rank": 238,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0221099853515625,
+          "outside_target_red_fraction": 0.0221099853515625
+        },
+        {
+          "index": 168,
+          "camera": "frame_000019",
+          "rank": 5,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10960769653320312,
+          "outside_target_red_fraction": 0.10960769653320312
+        },
+        {
+          "index": 169,
+          "camera": "frame_000126",
+          "rank": 249,
+          "selected": false,
+          "target_pixels": 2038,
+          "global_red_fraction": 0.023548126220703125,
+          "outside_target_red_fraction": 0.023732632080767074,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 170,
+          "camera": "frame_000216",
+          "rank": 10,
+          "selected": true,
+          "target_pixels": 51,
+          "global_red_fraction": 0.059535980224609375,
+          "outside_target_red_fraction": 0.05954756517724624
+        },
+        {
+          "index": 171,
+          "camera": "frame_000051",
+          "rank": 150,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.015232086181640625,
+          "outside_target_red_fraction": 0.015232086181640625
+        },
+        {
+          "index": 172,
+          "camera": "frame_000110",
+          "rank": 58,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11573028564453125,
+          "outside_target_red_fraction": 0.11573028564453125
+        },
+        {
+          "index": 173,
+          "camera": "frame_000066",
+          "rank": 158,
+          "selected": false,
+          "target_pixels": 4676,
+          "global_red_fraction": 0.0460357666015625,
+          "outside_target_red_fraction": 0.04687184426802554,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 174,
+          "camera": "frame_000340",
+          "rank": 215,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2734260559082031,
+          "outside_target_red_fraction": 0.2734260559082031
+        },
+        {
+          "index": 175,
+          "camera": "frame_000080",
+          "rank": 78,
+          "selected": false,
+          "target_pixels": 12320,
+          "global_red_fraction": 0.0891876220703125,
+          "outside_target_red_fraction": 0.09355786473677469,
+          "target_red_fraction": 0.0005681818181818182
+        },
+        {
+          "index": 176,
+          "camera": "frame_000006",
+          "rank": 6,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11940765380859375,
+          "outside_target_red_fraction": 0.11940765380859375
+        },
+        {
+          "index": 177,
+          "camera": "frame_000072",
+          "rank": 139,
+          "selected": false,
+          "target_pixels": 191,
+          "global_red_fraction": 0.042636871337890625,
+          "outside_target_red_fraction": 0.04266795951945578,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 178,
+          "camera": "frame_000256",
+          "rank": 161,
+          "selected": false,
+          "target_pixels": 593,
+          "global_red_fraction": 0.05309295654296875,
+          "outside_target_red_fraction": 0.053178921128192974,
+          "target_red_fraction": 0.01517706576728499
+        },
+        {
+          "index": 179,
+          "camera": "frame_000279",
+          "rank": 261,
+          "selected": false,
+          "target_pixels": 2653,
+          "global_red_fraction": 0.005153656005859375,
+          "outside_target_red_fraction": 0.005206346270198196,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 180,
+          "camera": "frame_000319",
+          "rank": 69,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.19904327392578125,
+          "outside_target_red_fraction": 0.19904327392578125
+        },
+        {
+          "index": 181,
+          "camera": "frame_000226",
+          "rank": 243,
+          "selected": false,
+          "target_pixels": 291,
+          "global_red_fraction": 0.0106964111328125,
+          "outside_target_red_fraction": 0.010708298167292336,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 182,
+          "camera": "frame_000304",
+          "rank": 270,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07492446899414062,
+          "outside_target_red_fraction": 0.07492446899414062
+        },
+        {
+          "index": 183,
+          "camera": "frame_000035",
+          "rank": 295,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.022937774658203125,
+          "outside_target_red_fraction": 0.022937774658203125
+        },
+        {
+          "index": 184,
+          "camera": "frame_000252",
+          "rank": 188,
+          "selected": false,
+          "target_pixels": 531,
+          "global_red_fraction": 0.00284576416015625,
+          "outside_target_red_fraction": 0.0028515402522045923,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 185,
+          "camera": "frame_000096",
+          "rank": 4,
+          "selected": true,
+          "target_pixels": 3355,
+          "global_red_fraction": 0.204681396484375,
+          "outside_target_red_fraction": 0.20707989906835297,
+          "target_red_fraction": 0.019672131147540985
+        },
+        {
+          "index": 186,
+          "camera": "frame_000026",
+          "rank": 136,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.016223907470703125,
+          "outside_target_red_fraction": 0.016223907470703125
+        },
+        {
+          "index": 187,
+          "camera": "frame_000106",
+          "rank": 98,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10050582885742188,
+          "outside_target_red_fraction": 0.10050582885742188
+        },
+        {
+          "index": 188,
+          "camera": "frame_000343",
+          "rank": 282,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.25402069091796875,
+          "outside_target_red_fraction": 0.25402069091796875
+        },
+        {
+          "index": 189,
+          "camera": "frame_000189",
+          "rank": 245,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.014957427978515625,
+          "outside_target_red_fraction": 0.014957427978515625
+        },
+        {
+          "index": 190,
+          "camera": "frame_000325",
+          "rank": 83,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.31793975830078125,
+          "outside_target_red_fraction": 0.31793975830078125
+        },
+        {
+          "index": 191,
+          "camera": "frame_000146",
+          "rank": 138,
+          "selected": false,
+          "target_pixels": 4563,
+          "global_red_fraction": 0.019107818603515625,
+          "outside_target_red_fraction": 0.019446310092747523,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 192,
+          "camera": "frame_000133",
+          "rank": 79,
+          "selected": false,
+          "target_pixels": 3135,
+          "global_red_fraction": 0.0232696533203125,
+          "outside_target_red_fraction": 0.023551305167001917,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 193,
+          "camera": "frame_000231",
+          "rank": 218,
+          "selected": false,
+          "target_pixels": 332,
+          "global_red_fraction": 0.00498199462890625,
+          "outside_target_red_fraction": 0.0049883122240386235,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 194,
+          "camera": "frame_000171",
+          "rank": 252,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.008037567138671875,
+          "outside_target_red_fraction": 0.008037567138671875
+        },
+        {
+          "index": 195,
+          "camera": "frame_000124",
+          "rank": 253,
+          "selected": false,
+          "target_pixels": 1564,
+          "global_red_fraction": 0.0386505126953125,
+          "outside_target_red_fraction": 0.03874433955023409,
+          "target_red_fraction": 0.023017902813299233
+        },
+        {
+          "index": 196,
+          "camera": "frame_000270",
+          "rank": 175,
+          "selected": false,
+          "target_pixels": 981,
+          "global_red_fraction": 0.002178192138671875,
+          "outside_target_red_fraction": 0.0021825450006317895,
+          "target_red_fraction": 0.0010193679918450561
+        },
+        {
+          "index": 197,
+          "camera": "frame_000245",
+          "rank": 217,
+          "selected": false,
+          "target_pixels": 496,
+          "global_red_fraction": 0.004123687744140625,
+          "outside_target_red_fraction": 0.004131504922644164,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 198,
+          "camera": "frame_000064",
+          "rank": 134,
+          "selected": false,
+          "target_pixels": 3285,
+          "global_red_fraction": 0.03710174560546875,
+          "outside_target_red_fraction": 0.03757257812168014,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 199,
+          "camera": "frame_000070",
+          "rank": 101,
+          "selected": false,
+          "target_pixels": 3754,
+          "global_red_fraction": 0.04859161376953125,
+          "outside_target_red_fraction": 0.04927435272262858,
+          "target_red_fraction": 0.0015982951518380393
+        },
+        {
+          "index": 200,
+          "camera": "frame_000314",
+          "rank": 207,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11375808715820312,
+          "outside_target_red_fraction": 0.11375808715820312
+        },
+        {
+          "index": 201,
+          "camera": "frame_000082",
+          "rank": 142,
+          "selected": false,
+          "target_pixels": 14966,
+          "global_red_fraction": 0.0860748291015625,
+          "outside_target_red_fraction": 0.09122575633753813,
+          "target_red_fraction": 0.0010022718161165308
+        },
+        {
+          "index": 202,
+          "camera": "frame_000155",
+          "rank": 23,
+          "selected": true,
+          "target_pixels": 6334,
+          "global_red_fraction": 0.09168243408203125,
+          "outside_target_red_fraction": 0.09395254290293577,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 203,
+          "camera": "frame_000283",
+          "rank": 297,
+          "selected": false,
+          "target_pixels": 7220,
+          "global_red_fraction": 0.01169586181640625,
+          "outside_target_red_fraction": 0.012003577536834507,
+          "target_red_fraction": 0.0008310249307479224
+        },
+        {
+          "index": 204,
+          "camera": "frame_000116",
+          "rank": 13,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.13545989990234375,
+          "outside_target_red_fraction": 0.13545989990234375
+        },
+        {
+          "index": 205,
+          "camera": "frame_000200",
+          "rank": 36,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.12610244750976562,
+          "outside_target_red_fraction": 0.12610244750976562
+        },
+        {
+          "index": 206,
+          "camera": "frame_000276",
+          "rank": 275,
+          "selected": false,
+          "target_pixels": 1690,
+          "global_red_fraction": 0.0012969970703125,
+          "outside_target_red_fraction": 0.001305412856012962,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 207,
+          "camera": "frame_000206",
+          "rank": 22,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.09405517578125,
+          "outside_target_red_fraction": 0.09405517578125
+        },
+        {
+          "index": 208,
+          "camera": "frame_000348",
+          "rank": 27,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.203857421875,
+          "outside_target_red_fraction": 0.203857421875
+        },
+        {
+          "index": 209,
+          "camera": "frame_000012",
+          "rank": 118,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0599822998046875,
+          "outside_target_red_fraction": 0.0599822998046875
+        },
+        {
+          "index": 210,
+          "camera": "frame_000045",
+          "rank": 292,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.036930084228515625,
+          "outside_target_red_fraction": 0.036930084228515625
+        },
+        {
+          "index": 211,
+          "camera": "frame_000039",
+          "rank": 43,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02655792236328125,
+          "outside_target_red_fraction": 0.02655792236328125
+        },
+        {
+          "index": 212,
+          "camera": "frame_000222",
+          "rank": 164,
+          "selected": false,
+          "target_pixels": 286,
+          "global_red_fraction": 0.013336181640625,
+          "outside_target_red_fraction": 0.013339290760641264,
+          "target_red_fraction": 0.01048951048951049
+        },
+        {
+          "index": 213,
+          "camera": "frame_000199",
+          "rank": 37,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.056842803955078125,
+          "outside_target_red_fraction": 0.056842803955078125
+        },
+        {
+          "index": 214,
+          "camera": "frame_000027",
+          "rank": 86,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.01874542236328125,
+          "outside_target_red_fraction": 0.01874542236328125
+        },
+        {
+          "index": 215,
+          "camera": "frame_000021",
+          "rank": 71,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.016284942626953125,
+          "outside_target_red_fraction": 0.016284942626953125
+        },
+        {
+          "index": 216,
+          "camera": "frame_000140",
+          "rank": 301,
+          "selected": false,
+          "target_pixels": 4079,
+          "global_red_fraction": 0.059528350830078125,
+          "outside_target_red_fraction": 0.060399511750915465,
+          "target_red_fraction": 0.004412846285854376
+        },
+        {
+          "index": 217,
+          "camera": "frame_000077",
+          "rank": 130,
+          "selected": false,
+          "target_pixels": 7818,
+          "global_red_fraction": 0.0894317626953125,
+          "outside_target_red_fraction": 0.09217696971603376,
+          "target_red_fraction": 0.00012790995139421848
+        },
+        {
+          "index": 218,
+          "camera": "frame_000194",
+          "rank": 209,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.03235626220703125,
+          "outside_target_red_fraction": 0.03235626220703125
+        },
+        {
+          "index": 219,
+          "camera": "frame_000180",
+          "rank": 152,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.047763824462890625,
+          "outside_target_red_fraction": 0.047763824462890625
+        },
+        {
+          "index": 220,
+          "camera": "frame_000011",
+          "rank": 246,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0363616943359375,
+          "outside_target_red_fraction": 0.0363616943359375
+        },
+        {
+          "index": 221,
+          "camera": "frame_000292",
+          "rank": 12,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11362838745117188,
+          "outside_target_red_fraction": 0.11362838745117188
+        },
+        {
+          "index": 222,
+          "camera": "frame_000242",
+          "rank": 166,
+          "selected": false,
+          "target_pixels": 400,
+          "global_red_fraction": 0.007015228271484375,
+          "outside_target_red_fraction": 0.00701066691118039,
+          "target_red_fraction": 0.01
+        },
+        {
+          "index": 223,
+          "camera": "frame_000333",
+          "rank": 263,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2482757568359375,
+          "outside_target_red_fraction": 0.2482757568359375
+        },
+        {
+          "index": 224,
+          "camera": "frame_000310",
+          "rank": 106,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.15299224853515625,
+          "outside_target_red_fraction": 0.15299224853515625
+        },
+        {
+          "index": 225,
+          "camera": "frame_000284",
+          "rank": 299,
+          "selected": false,
+          "target_pixels": 9760,
+          "global_red_fraction": 0.026782989501953125,
+          "outside_target_red_fraction": 0.027794947381767465,
+          "target_red_fraction": 0.0006147540983606558
+        },
+        {
+          "index": 226,
+          "camera": "frame_000071",
+          "rank": 60,
+          "selected": false,
+          "target_pixels": 1428,
+          "global_red_fraction": 0.032772064208984375,
+          "outside_target_red_fraction": 0.032951564154098716,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 227,
+          "camera": "frame_000170",
+          "rank": 128,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0040740966796875,
+          "outside_target_red_fraction": 0.0040740966796875
+        },
+        {
+          "index": 228,
+          "camera": "frame_000094",
+          "rank": 3,
+          "selected": true,
+          "target_pixels": 6352,
+          "global_red_fraction": 0.22943496704101562,
+          "outside_target_red_fraction": 0.23471414274097704,
+          "target_red_fraction": 0.016845088161209068
+        },
+        {
+          "index": 229,
+          "camera": "frame_000114",
+          "rank": 124,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.12804031372070312,
+          "outside_target_red_fraction": 0.12804031372070312
+        },
+        {
+          "index": 230,
+          "camera": "frame_000307",
+          "rank": 271,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.066986083984375,
+          "outside_target_red_fraction": 0.066986083984375
+        },
+        {
+          "index": 231,
+          "camera": "frame_000175",
+          "rank": 94,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.021762847900390625,
+          "outside_target_red_fraction": 0.021762847900390625
+        },
+        {
+          "index": 232,
+          "camera": "frame_000028",
+          "rank": 113,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02014923095703125,
+          "outside_target_red_fraction": 0.02014923095703125
+        },
+        {
+          "index": 233,
+          "camera": "frame_000346",
+          "rank": 306,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.14480972290039062,
+          "outside_target_red_fraction": 0.14480972290039062
+        },
+        {
+          "index": 234,
+          "camera": "frame_000085",
+          "rank": 119,
+          "selected": false,
+          "target_pixels": 15447,
+          "global_red_fraction": 0.10142135620117188,
+          "outside_target_red_fraction": 0.10770297166159297,
+          "target_red_fraction": 0.0011005373211626854
+        },
+        {
+          "index": 235,
+          "camera": "frame_000173",
+          "rank": 151,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.013088226318359375,
+          "outside_target_red_fraction": 0.013088226318359375
+        },
+        {
+          "index": 236,
+          "camera": "frame_000317",
+          "rank": 72,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.18504714965820312,
+          "outside_target_red_fraction": 0.18504714965820312
+        },
+        {
+          "index": 237,
+          "camera": "frame_000178",
+          "rank": 296,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0250701904296875,
+          "outside_target_red_fraction": 0.0250701904296875
+        },
+        {
+          "index": 238,
+          "camera": "frame_000309",
+          "rank": 145,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.12033843994140625,
+          "outside_target_red_fraction": 0.12033843994140625
+        },
+        {
+          "index": 239,
+          "camera": "frame_000061",
+          "rank": 149,
+          "selected": false,
+          "target_pixels": 3707,
+          "global_red_fraction": 0.057018280029296875,
+          "outside_target_red_fraction": 0.057797451603292097,
+          "target_red_fraction": 0.002697599136768276
+        },
+        {
+          "index": 240,
+          "camera": "frame_000159",
+          "rank": 233,
+          "selected": false,
+          "target_pixels": 6658,
+          "global_red_fraction": 0.015171051025390625,
+          "outside_target_red_fraction": 0.015542926031171963,
+          "target_red_fraction": 0.0009011715229798738
+        },
+        {
+          "index": 241,
+          "camera": "frame_000271",
+          "rank": 176,
+          "selected": false,
+          "target_pixels": 1014,
+          "global_red_fraction": 0.00079345703125,
+          "outside_target_red_fraction": 0.0007927086125684525,
+          "target_red_fraction": 0.0009861932938856016
+        },
+        {
+          "index": 242,
+          "camera": "frame_000239",
+          "rank": 191,
+          "selected": false,
+          "target_pixels": 343,
+          "global_red_fraction": 0.0042572021484375,
+          "outside_target_red_fraction": 0.00426277974492076,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 243,
+          "camera": "frame_000099",
+          "rank": 170,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07508468627929688,
+          "outside_target_red_fraction": 0.07508468627929688
+        },
+        {
+          "index": 244,
+          "camera": "frame_000162",
+          "rank": 283,
+          "selected": false,
+          "target_pixels": 4628,
+          "global_red_fraction": 0.003299713134765625,
+          "outside_target_red_fraction": 0.0033279485546529146,
+          "target_red_fraction": 0.001728608470181504
+        },
+        {
+          "index": 245,
+          "camera": "frame_000331",
+          "rank": 225,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2754058837890625,
+          "outside_target_red_fraction": 0.2754058837890625
+        },
+        {
+          "index": 246,
+          "camera": "frame_000207",
+          "rank": 17,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.063079833984375,
+          "outside_target_red_fraction": 0.063079833984375
+        },
+        {
+          "index": 247,
+          "camera": "frame_000086",
+          "rank": 144,
+          "selected": false,
+          "target_pixels": 14919,
+          "global_red_fraction": 0.1176300048828125,
+          "outside_target_red_fraction": 0.1246556780260896,
+          "target_red_fraction": 0.0012065151819827067
+        },
+        {
+          "index": 248,
+          "camera": "frame_000163",
+          "rank": 278,
+          "selected": false,
+          "target_pixels": 3558,
+          "global_red_fraction": 0.052433013916015625,
+          "outside_target_red_fraction": 0.05313899437711245,
+          "target_red_fraction": 0.0011242270938729624
+        },
+        {
+          "index": 249,
+          "camera": "frame_000090",
+          "rank": 2,
+          "selected": true,
+          "target_pixels": 9644,
+          "global_red_fraction": 0.13887786865234375,
+          "outside_target_red_fraction": 0.14410693069306932,
+          "target_red_fraction": 0.001970136872666943
+        },
+        {
+          "index": 250,
+          "camera": "frame_000032",
+          "rank": 171,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.032268524169921875,
+          "outside_target_red_fraction": 0.032268524169921875
+        },
+        {
+          "index": 251,
+          "camera": "frame_000144",
+          "rank": 153,
+          "selected": false,
+          "target_pixels": 4353,
+          "global_red_fraction": 0.020969390869140625,
+          "outside_target_red_fraction": 0.021319596106923827,
+          "target_red_fraction": 0.00022972662531587412
+        },
+        {
+          "index": 252,
+          "camera": "frame_000274",
+          "rank": 248,
+          "selected": false,
+          "target_pixels": 1309,
+          "global_red_fraction": 0.000797271728515625,
+          "outside_target_red_fraction": 0.0008012728353173462,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 253,
+          "camera": "frame_000150",
+          "rank": 214,
+          "selected": false,
+          "target_pixels": 5778,
+          "global_red_fraction": 0.0110015869140625,
+          "outside_target_red_fraction": 0.011249541670892396,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 254,
+          "camera": "frame_000258",
+          "rank": 179,
+          "selected": false,
+          "target_pixels": 600,
+          "global_red_fraction": 0.003543853759765625,
+          "outside_target_red_fraction": 0.0035519836050530696,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 255,
+          "camera": "frame_000188",
+          "rank": 298,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.010242462158203125,
+          "outside_target_red_fraction": 0.010242462158203125
+        },
+        {
+          "index": 256,
+          "camera": "frame_000048",
+          "rank": 92,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.026519775390625,
+          "outside_target_red_fraction": 0.026519775390625
+        },
+        {
+          "index": 257,
+          "camera": "frame_000054",
+          "rank": 208,
+          "selected": false,
+          "target_pixels": 75,
+          "global_red_fraction": 0.04111480712890625,
+          "outside_target_red_fraction": 0.041126573535977165
+        },
+        {
+          "index": 258,
+          "camera": "frame_000263",
+          "rank": 137,
+          "selected": false,
+          "target_pixels": 740,
+          "global_red_fraction": 0.0201568603515625,
+          "outside_target_red_fraction": 0.020213921745650412,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 259,
+          "camera": "frame_000084",
+          "rank": 61,
+          "selected": false,
+          "target_pixels": 15736,
+          "global_red_fraction": 0.09940719604492188,
+          "outside_target_red_fraction": 0.10561345410863283,
+          "target_red_fraction": 0.002224199288256228
+        },
+        {
+          "index": 260,
+          "camera": "frame_000141",
+          "rank": 258,
+          "selected": false,
+          "target_pixels": 4127,
+          "global_red_fraction": 0.053028106689453125,
+          "outside_target_red_fraction": 0.0538724192591961,
+          "target_red_fraction": 0.000242306760358614
+        },
+        {
+          "index": 261,
+          "camera": "frame_000131",
+          "rank": 99,
+          "selected": false,
+          "target_pixels": 2613,
+          "global_red_fraction": 0.0196075439453125,
+          "outside_target_red_fraction": 0.019804955862690776,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 262,
+          "camera": "frame_000112",
+          "rank": 59,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.119232177734375,
+          "outside_target_red_fraction": 0.119232177734375
+        },
+        {
+          "index": 263,
+          "camera": "frame_000038",
+          "rank": 242,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.030612945556640625,
+          "outside_target_red_fraction": 0.030612945556640625
+        },
+        {
+          "index": 264,
+          "camera": "frame_000191",
+          "rank": 284,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.015346527099609375,
+          "outside_target_red_fraction": 0.015346527099609375
+        },
+        {
+          "index": 265,
+          "camera": "frame_000143",
+          "rank": 148,
+          "selected": false,
+          "target_pixels": 4312,
+          "global_red_fraction": 0.062076568603515625,
+          "outside_target_red_fraction": 0.06309534890936734,
+          "target_red_fraction": 0.0011595547309833025
+        },
+        {
+          "index": 266,
+          "camera": "frame_000196",
+          "rank": 26,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.27359771728515625,
+          "outside_target_red_fraction": 0.27359771728515625
+        },
+        {
+          "index": 267,
+          "camera": "frame_000290",
+          "rank": 140,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.05809783935546875,
+          "outside_target_red_fraction": 0.05809783935546875
+        },
+        {
+          "index": 268,
+          "camera": "frame_000002",
+          "rank": 57,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.06479263305664062,
+          "outside_target_red_fraction": 0.06479263305664062
+        },
+        {
+          "index": 269,
+          "camera": "frame_000235",
+          "rank": 189,
+          "selected": false,
+          "target_pixels": 324,
+          "global_red_fraction": 0.0034637451171875,
+          "outside_target_red_fraction": 0.0034642120540829577,
+          "target_red_fraction": 0.0030864197530864196
+        },
+        {
+          "index": 270,
+          "camera": "frame_000055",
+          "rank": 202,
+          "selected": false,
+          "target_pixels": 559,
+          "global_red_fraction": 0.04470062255859375,
+          "outside_target_red_fraction": 0.04478850086969818,
+          "target_red_fraction": 0.0035778175313059034
+        },
+        {
+          "index": 271,
+          "camera": "frame_000010",
+          "rank": 168,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.049060821533203125,
+          "outside_target_red_fraction": 0.049060821533203125
+        },
+        {
+          "index": 272,
+          "camera": "frame_000037",
+          "rank": 160,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.027019500732421875,
+          "outside_target_red_fraction": 0.027019500732421875
+        },
+        {
+          "index": 273,
+          "camera": "frame_000154",
+          "rank": 7,
+          "selected": true,
+          "target_pixels": 6286,
+          "global_red_fraction": 0.0878753662109375,
+          "outside_target_red_fraction": 0.09003431590960612,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 274,
+          "camera": "frame_000306",
+          "rank": 269,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08179473876953125,
+          "outside_target_red_fraction": 0.08179473876953125
+        },
+        {
+          "index": 275,
+          "camera": "frame_000260",
+          "rank": 190,
+          "selected": false,
+          "target_pixels": 649,
+          "global_red_fraction": 0.002696990966796875,
+          "outside_target_red_fraction": 0.0027036845828792137,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 276,
+          "camera": "frame_000341",
+          "rank": 289,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2960700988769531,
+          "outside_target_red_fraction": 0.2960700988769531
+        },
+        {
+          "index": 277,
+          "camera": "frame_000120",
+          "rank": 276,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.054233551025390625,
+          "outside_target_red_fraction": 0.054233551025390625
+        },
+        {
+          "index": 278,
+          "camera": "frame_000186",
+          "rank": 290,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0113372802734375,
+          "outside_target_red_fraction": 0.0113372802734375
+        },
+        {
+          "index": 279,
+          "camera": "frame_000255",
+          "rank": 240,
+          "selected": false,
+          "target_pixels": 589,
+          "global_red_fraction": 0.003849029541015625,
+          "outside_target_red_fraction": 0.003857697233851389,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 280,
+          "camera": "frame_000208",
+          "rank": 21,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.04822540283203125,
+          "outside_target_red_fraction": 0.04822540283203125
+        },
+        {
+          "index": 281,
+          "camera": "frame_000060",
+          "rank": 132,
+          "selected": false,
+          "target_pixels": 3372,
+          "global_red_fraction": 0.0861663818359375,
+          "outside_target_red_fraction": 0.08726214582721468,
+          "target_red_fraction": 0.0020759193357058124
+        },
+        {
+          "index": 282,
+          "camera": "frame_000277",
+          "rank": 285,
+          "selected": false,
+          "target_pixels": 2011,
+          "global_red_fraction": 0.004291534423828125,
+          "outside_target_red_fraction": 0.004263203822659947,
+          "target_red_fraction": 0.007956240676280457
+        },
+        {
+          "index": 283,
+          "camera": "frame_000195",
+          "rank": 272,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.06317138671875,
+          "outside_target_red_fraction": 0.06317138671875
+        },
+        {
+          "index": 284,
+          "camera": "frame_000044",
+          "rank": 114,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.045314788818359375,
+          "outside_target_red_fraction": 0.045314788818359375
+        },
+        {
+          "index": 285,
+          "camera": "frame_000059",
+          "rank": 220,
+          "selected": false,
+          "target_pixels": 3163,
+          "global_red_fraction": 0.053783416748046875,
+          "outside_target_red_fraction": 0.054436425838188904,
+          "target_red_fraction": 0.0003161555485298767
+        },
+        {
+          "index": 286,
+          "camera": "frame_000182",
+          "rank": 193,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.014812469482421875,
+          "outside_target_red_fraction": 0.014812469482421875
+        },
+        {
+          "index": 287,
+          "camera": "frame_000087",
+          "rank": 133,
+          "selected": false,
+          "target_pixels": 13427,
+          "global_red_fraction": 0.10620498657226562,
+          "outside_target_red_fraction": 0.11190228251386114,
+          "target_red_fraction": 0.0006702912042898637
+        },
+        {
+          "index": 288,
+          "camera": "frame_000312",
+          "rank": 183,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.13869094848632812,
+          "outside_target_red_fraction": 0.13869094848632812
+        },
+        {
+          "index": 289,
+          "camera": "frame_000148",
+          "rank": 256,
+          "selected": false,
+          "target_pixels": 4932,
+          "global_red_fraction": 0.0195159912109375,
+          "outside_target_red_fraction": 0.019878543769342023,
+          "target_red_fraction": 0.0006082725060827251
+        },
+        {
+          "index": 290,
+          "camera": "frame_000056",
+          "rank": 121,
+          "selected": false,
+          "target_pixels": 1760,
+          "global_red_fraction": 0.03659820556640625,
+          "outside_target_red_fraction": 0.0368379009462947,
+          "target_red_fraction": 0.0011363636363636363
+        },
+        {
+          "index": 291,
+          "camera": "frame_000336",
+          "rank": 48,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.33040618896484375,
+          "outside_target_red_fraction": 0.33040618896484375
+        },
+        {
+          "index": 292,
+          "camera": "frame_000166",
+          "rank": 286,
+          "selected": false,
+          "target_pixels": 215,
+          "global_red_fraction": 0.00531768798828125,
+          "outside_target_red_fraction": 0.005314417265747588,
+          "target_red_fraction": 0.009302325581395349
+        },
+        {
+          "index": 293,
+          "camera": "frame_000083",
+          "rank": 165,
+          "selected": false,
+          "target_pixels": 15193,
+          "global_red_fraction": 0.06782913208007812,
+          "outside_target_red_fraction": 0.07198594053071257,
+          "target_red_fraction": 0.000263279141709998
+        },
+        {
+          "index": 294,
+          "camera": "frame_000296",
+          "rank": 126,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.05574798583984375,
+          "outside_target_red_fraction": 0.05574798583984375
+        },
+        {
+          "index": 295,
+          "camera": "frame_000128",
+          "rank": 234,
+          "selected": false,
+          "target_pixels": 2322,
+          "global_red_fraction": 0.02098846435546875,
+          "outside_target_red_fraction": 0.02116448953514329,
+          "target_red_fraction": 0.0012919896640826874
+        },
+        {
+          "index": 296,
+          "camera": "frame_000211",
+          "rank": 167,
+          "selected": false,
+          "target_pixels": 5,
+          "global_red_fraction": 0.03519439697265625,
+          "outside_target_red_fraction": 0.035195068265309624
+        },
+        {
+          "index": 297,
+          "camera": "frame_000280",
+          "rank": 259,
+          "selected": false,
+          "target_pixels": 3230,
+          "global_red_fraction": 0.004642486572265625,
+          "outside_target_red_fraction": 0.004700402450234441,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 298,
+          "camera": "frame_000179",
+          "rank": 197,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.4267387390136719,
+          "outside_target_red_fraction": 0.4267387390136719
+        },
+        {
+          "index": 299,
+          "camera": "frame_000238",
+          "rank": 154,
+          "selected": false,
+          "target_pixels": 331,
+          "global_red_fraction": 0.0019378662109375,
+          "outside_target_red_fraction": 0.0019212185796732783,
+          "target_red_fraction": 0.015105740181268883
+        },
+        {
+          "index": 300,
+          "camera": "frame_000285",
+          "rank": 304,
+          "selected": false,
+          "target_pixels": 14387,
+          "global_red_fraction": 0.011447906494140625,
+          "outside_target_red_fraction": 0.012019842022627009,
+          "target_red_fraction": 0.001598665461875304
+        },
+        {
+          "index": 301,
+          "camera": "frame_000300",
+          "rank": 70,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0475006103515625,
+          "outside_target_red_fraction": 0.0475006103515625
+        },
+        {
+          "index": 302,
+          "camera": "frame_000152",
+          "rank": 198,
+          "selected": false,
+          "target_pixels": 6127,
+          "global_red_fraction": 0.032680511474609375,
+          "outside_target_red_fraction": 0.033462621622782865,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 303,
+          "camera": "frame_000024",
+          "rank": 51,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.024631500244140625,
+          "outside_target_red_fraction": 0.024631500244140625
+        },
+        {
+          "index": 304,
+          "camera": "frame_000247",
+          "rank": 211,
+          "selected": false,
+          "target_pixels": 475,
+          "global_red_fraction": 0.001827239990234375,
+          "outside_target_red_fraction": 0.0018305569249700959,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 305,
+          "camera": "frame_000227",
+          "rank": 110,
+          "selected": false,
+          "target_pixels": 311,
+          "global_red_fraction": 0.008037567138671875,
+          "outside_target_red_fraction": 0.008047114000145131,
+          "target_red_fraction": 0.0
+        }
+      ]
+    },
+    "mfg_2d": {
+      "summary": {
+        "all": {
+          "views": 306,
+          "target_visible_views": 141,
+          "mean_global_red_fraction": 0.06838292389913322,
+          "mean_target_red_fraction": 0.009712679337874952,
+          "mean_outside_target_red_fraction": 0.06873776520692733
+        },
+        "selected": {
+          "views": 45,
+          "target_visible_views": 14,
+          "mean_global_red_fraction": 0.08554746839735243,
+          "mean_target_red_fraction": 0.002682973616553092,
+          "mean_outside_target_red_fraction": 0.08592260278528333
+        }
+      },
+      "views": [
+        {
+          "index": 0,
+          "camera": "frame_000237",
+          "rank": 239,
+          "selected": false,
+          "target_pixels": 337,
+          "global_red_fraction": 0.001392364501953125,
+          "outside_target_red_fraction": 0.0013903371567605145,
+          "target_red_fraction": 0.002967359050445104
+        },
+        {
+          "index": 1,
+          "camera": "frame_000174",
+          "rank": 260,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0064849853515625,
+          "outside_target_red_fraction": 0.0064849853515625
+        },
+        {
+          "index": 2,
+          "camera": "frame_000347",
+          "rank": 302,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.20836639404296875,
+          "outside_target_red_fraction": 0.20836639404296875
+        },
+        {
+          "index": 3,
+          "camera": "frame_000069",
+          "rank": 129,
+          "selected": false,
+          "target_pixels": 5530,
+          "global_red_fraction": 0.04633331298828125,
+          "outside_target_red_fraction": 0.04724995518560952,
+          "target_red_fraction": 0.0037974683544303796
+        },
+        {
+          "index": 4,
+          "camera": "frame_000172",
+          "rank": 109,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.009014129638671875,
+          "outside_target_red_fraction": 0.009014129638671875
+        },
+        {
+          "index": 5,
+          "camera": "frame_000102",
+          "rank": 56,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.15040969848632812,
+          "outside_target_red_fraction": 0.15040969848632812
+        },
+        {
+          "index": 6,
+          "camera": "frame_000067",
+          "rank": 173,
+          "selected": false,
+          "target_pixels": 6496,
+          "global_red_fraction": 0.035762786865234375,
+          "outside_target_red_fraction": 0.03660110777318813,
+          "target_red_fraction": 0.002770935960591133
+        },
+        {
+          "index": 7,
+          "camera": "frame_000204",
+          "rank": 38,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.19445419311523438,
+          "outside_target_red_fraction": 0.19445419311523438
+        },
+        {
+          "index": 8,
+          "camera": "frame_000107",
+          "rank": 100,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.14443588256835938,
+          "outside_target_red_fraction": 0.14443588256835938
+        },
+        {
+          "index": 9,
+          "camera": "frame_000253",
+          "rank": 186,
+          "selected": false,
+          "target_pixels": 549,
+          "global_red_fraction": 0.00226593017578125,
+          "outside_target_red_fraction": 0.00226686289875571,
+          "target_red_fraction": 0.0018214936247723133
+        },
+        {
+          "index": 10,
+          "camera": "frame_000111",
+          "rank": 54,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.09459304809570312,
+          "outside_target_red_fraction": 0.09459304809570312
+        },
+        {
+          "index": 11,
+          "camera": "frame_000218",
+          "rank": 44,
+          "selected": true,
+          "target_pixels": 160,
+          "global_red_fraction": 0.013759613037109375,
+          "outside_target_red_fraction": 0.01376801636741175,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 12,
+          "camera": "frame_000287",
+          "rank": 300,
+          "selected": false,
+          "target_pixels": 2206,
+          "global_red_fraction": 0.02393341064453125,
+          "outside_target_red_fraction": 0.02413267779239665,
+          "target_red_fraction": 0.00045330915684496827
+        },
+        {
+          "index": 13,
+          "camera": "frame_000005",
+          "rank": 32,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.053829193115234375,
+          "outside_target_red_fraction": 0.053829193115234375
+        },
+        {
+          "index": 14,
+          "camera": "frame_000230",
+          "rank": 251,
+          "selected": false,
+          "target_pixels": 332,
+          "global_red_fraction": 0.005199432373046875,
+          "outside_target_red_fraction": 0.0052060256978289764,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 15,
+          "camera": "frame_000269",
+          "rank": 143,
+          "selected": false,
+          "target_pixels": 918,
+          "global_red_fraction": 0.00162506103515625,
+          "outside_target_red_fraction": 0.0016307718221004034,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 16,
+          "camera": "frame_000104",
+          "rank": 49,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0899658203125,
+          "outside_target_red_fraction": 0.0899658203125
+        },
+        {
+          "index": 17,
+          "camera": "frame_000215",
+          "rank": 34,
+          "selected": true,
+          "target_pixels": 38,
+          "global_red_fraction": 0.0462646484375,
+          "outside_target_red_fraction": 0.046271355863658215
+        },
+        {
+          "index": 18,
+          "camera": "frame_000330",
+          "rank": 182,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.23337173461914062,
+          "outside_target_red_fraction": 0.23337173461914062
+        },
+        {
+          "index": 19,
+          "camera": "frame_000118",
+          "rank": 87,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.20263290405273438,
+          "outside_target_red_fraction": 0.20263290405273438
+        },
+        {
+          "index": 20,
+          "camera": "frame_000301",
+          "rank": 122,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.12912368774414062,
+          "outside_target_red_fraction": 0.12912368774414062
+        },
+        {
+          "index": 21,
+          "camera": "frame_000318",
+          "rank": 125,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.14355850219726562,
+          "outside_target_red_fraction": 0.14355850219726562
+        },
+        {
+          "index": 22,
+          "camera": "frame_000259",
+          "rank": 231,
+          "selected": false,
+          "target_pixels": 625,
+          "global_red_fraction": 0.009037017822265625,
+          "outside_target_red_fraction": 0.009058615244016688,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 23,
+          "camera": "frame_000328",
+          "rank": 88,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2359466552734375,
+          "outside_target_red_fraction": 0.2359466552734375
+        },
+        {
+          "index": 24,
+          "camera": "frame_000016",
+          "rank": 280,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.033176422119140625,
+          "outside_target_red_fraction": 0.033176422119140625
+        },
+        {
+          "index": 25,
+          "camera": "frame_000167",
+          "rank": 180,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0079498291015625,
+          "outside_target_red_fraction": 0.0079498291015625
+        },
+        {
+          "index": 26,
+          "camera": "frame_000262",
+          "rank": 156,
+          "selected": false,
+          "target_pixels": 703,
+          "global_red_fraction": 0.01543426513671875,
+          "outside_target_red_fraction": 0.015475766999055236,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 27,
+          "camera": "frame_000219",
+          "rank": 155,
+          "selected": false,
+          "target_pixels": 236,
+          "global_red_fraction": 0.014019012451171875,
+          "outside_target_red_fraction": 0.014031644699665531,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 28,
+          "camera": "frame_000149",
+          "rank": 254,
+          "selected": false,
+          "target_pixels": 5393,
+          "global_red_fraction": 0.02945709228515625,
+          "outside_target_red_fraction": 0.029974566798181897,
+          "target_red_fraction": 0.0048210643426664194
+        },
+        {
+          "index": 29,
+          "camera": "frame_000223",
+          "rank": 120,
+          "selected": false,
+          "target_pixels": 292,
+          "global_red_fraction": 0.016933441162109375,
+          "outside_target_red_fraction": 0.016952324213677955,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 30,
+          "camera": "frame_000303",
+          "rank": 235,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.05808258056640625,
+          "outside_target_red_fraction": 0.05808258056640625
+        },
+        {
+          "index": 31,
+          "camera": "frame_000040",
+          "rank": 107,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.025562286376953125,
+          "outside_target_red_fraction": 0.025562286376953125
+        },
+        {
+          "index": 32,
+          "camera": "frame_000323",
+          "rank": 1,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.18104934692382812,
+          "outside_target_red_fraction": 0.18104934692382812
+        },
+        {
+          "index": 33,
+          "camera": "frame_000074",
+          "rank": 64,
+          "selected": false,
+          "target_pixels": 203,
+          "global_red_fraction": 0.053386688232421875,
+          "outside_target_red_fraction": 0.0534280620445062,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 34,
+          "camera": "frame_000335",
+          "rank": 93,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.3980140686035156,
+          "outside_target_red_fraction": 0.3980140686035156
+        },
+        {
+          "index": 35,
+          "camera": "frame_000139",
+          "rank": 205,
+          "selected": false,
+          "target_pixels": 4006,
+          "global_red_fraction": 0.049533843994140625,
+          "outside_target_red_fraction": 0.05022894730725426,
+          "target_red_fraction": 0.004742885671492761
+        },
+        {
+          "index": 36,
+          "camera": "frame_000228",
+          "rank": 223,
+          "selected": false,
+          "target_pixels": 317,
+          "global_red_fraction": 0.07815933227539062,
+          "outside_target_red_fraction": 0.07821958774305171,
+          "target_red_fraction": 0.028391167192429023
+        },
+        {
+          "index": 37,
+          "camera": "frame_000294",
+          "rank": 24,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.030727386474609375,
+          "outside_target_red_fraction": 0.030727386474609375
+        },
+        {
+          "index": 38,
+          "camera": "frame_000079",
+          "rank": 117,
+          "selected": false,
+          "target_pixels": 11218,
+          "global_red_fraction": 0.09393310546875,
+          "outside_target_red_fraction": 0.09809665000836901,
+          "target_red_fraction": 0.0008022820467106436
+        },
+        {
+          "index": 39,
+          "camera": "frame_000203",
+          "rank": 15,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.16968536376953125,
+          "outside_target_red_fraction": 0.16968536376953125
+        },
+        {
+          "index": 40,
+          "camera": "frame_000063",
+          "rank": 181,
+          "selected": false,
+          "target_pixels": 4071,
+          "global_red_fraction": 0.04720306396484375,
+          "outside_target_red_fraction": 0.047916674739317947,
+          "target_red_fraction": 0.0019651191353475803
+        },
+        {
+          "index": 41,
+          "camera": "frame_000093",
+          "rank": 91,
+          "selected": false,
+          "target_pixels": 7338,
+          "global_red_fraction": 0.17178726196289062,
+          "outside_target_red_fraction": 0.17611045265810069,
+          "target_red_fraction": 0.021668029435813575
+        },
+        {
+          "index": 42,
+          "camera": "frame_000212",
+          "rank": 16,
+          "selected": true,
+          "target_pixels": 6,
+          "global_red_fraction": 0.00920867919921875,
+          "outside_target_red_fraction": 0.00920888997398317
+        },
+        {
+          "index": 43,
+          "camera": "frame_000091",
+          "rank": 9,
+          "selected": true,
+          "target_pixels": 8570,
+          "global_red_fraction": 0.08072662353515625,
+          "outside_target_red_fraction": 0.08341943574656707,
+          "target_red_fraction": 0.0010501750291715287
+        },
+        {
+          "index": 44,
+          "camera": "frame_000234",
+          "rank": 116,
+          "selected": false,
+          "target_pixels": 333,
+          "global_red_fraction": 0.003543853759765625,
+          "outside_target_red_fraction": 0.0035254439271077227,
+          "target_red_fraction": 0.018018018018018018
+        },
+        {
+          "index": 45,
+          "camera": "frame_000165",
+          "rank": 123,
+          "selected": false,
+          "target_pixels": 484,
+          "global_red_fraction": 0.012348175048828125,
+          "outside_target_red_fraction": 0.012348085301536344,
+          "target_red_fraction": 0.012396694214876033
+        },
+        {
+          "index": 46,
+          "camera": "frame_000322",
+          "rank": 115,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.17547607421875,
+          "outside_target_red_fraction": 0.17547607421875
+        },
+        {
+          "index": 47,
+          "camera": "frame_000248",
+          "rank": 232,
+          "selected": false,
+          "target_pixels": 488,
+          "global_red_fraction": 0.001941680908203125,
+          "outside_target_red_fraction": 0.0019453022288806678,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 48,
+          "camera": "frame_000004",
+          "rank": 172,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.053226470947265625,
+          "outside_target_red_fraction": 0.053226470947265625
+        },
+        {
+          "index": 49,
+          "camera": "frame_000127",
+          "rank": 257,
+          "selected": false,
+          "target_pixels": 2286,
+          "global_red_fraction": 0.03035736083984375,
+          "outside_target_red_fraction": 0.030620569695756914,
+          "target_red_fraction": 0.0004374453193350831
+        },
+        {
+          "index": 50,
+          "camera": "frame_000244",
+          "rank": 206,
+          "selected": false,
+          "target_pixels": 471,
+          "global_red_fraction": 0.00334930419921875,
+          "outside_target_red_fraction": 0.0033553328008621448,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 51,
+          "camera": "frame_000119",
+          "rank": 20,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.19116973876953125,
+          "outside_target_red_fraction": 0.19116973876953125
+        },
+        {
+          "index": 52,
+          "camera": "frame_000115",
+          "rank": 104,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.21881484985351562,
+          "outside_target_red_fraction": 0.21881484985351562
+        },
+        {
+          "index": 53,
+          "camera": "frame_000029",
+          "rank": 146,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.023212432861328125,
+          "outside_target_red_fraction": 0.023212432861328125
+        },
+        {
+          "index": 54,
+          "camera": "frame_000034",
+          "rank": 224,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.021427154541015625,
+          "outside_target_red_fraction": 0.021427154541015625
+        },
+        {
+          "index": 55,
+          "camera": "frame_000047",
+          "rank": 50,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0250701904296875,
+          "outside_target_red_fraction": 0.0250701904296875
+        },
+        {
+          "index": 56,
+          "camera": "frame_000018",
+          "rank": 131,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.035305023193359375,
+          "outside_target_red_fraction": 0.035305023193359375
+        },
+        {
+          "index": 57,
+          "camera": "frame_000136",
+          "rank": 52,
+          "selected": false,
+          "target_pixels": 3683,
+          "global_red_fraction": 0.027156829833984375,
+          "outside_target_red_fraction": 0.027536069271572886,
+          "target_red_fraction": 0.0005430355688297583
+        },
+        {
+          "index": 58,
+          "camera": "frame_000075",
+          "rank": 40,
+          "selected": true,
+          "target_pixels": 1764,
+          "global_red_fraction": 0.067352294921875,
+          "outside_target_red_fraction": 0.06779322528612028,
+          "target_red_fraction": 0.0022675736961451248
+        },
+        {
+          "index": 59,
+          "camera": "frame_000268",
+          "rank": 169,
+          "selected": false,
+          "target_pixels": 904,
+          "global_red_fraction": 0.00179290771484375,
+          "outside_target_red_fraction": 0.0017952840300107182,
+          "target_red_fraction": 0.0011061946902654867
+        },
+        {
+          "index": 60,
+          "camera": "frame_000052",
+          "rank": 108,
+          "selected": false,
+          "target_pixels": 465,
+          "global_red_fraction": 0.022220611572265625,
+          "outside_target_red_fraction": 0.02226009729477719,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 61,
+          "camera": "frame_000210",
+          "rank": 55,
+          "selected": false,
+          "target_pixels": 2,
+          "global_red_fraction": 0.02330780029296875,
+          "outside_target_red_fraction": 0.023307978118729544
+        },
+        {
+          "index": 62,
+          "camera": "frame_000320",
+          "rank": 102,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.21991729736328125,
+          "outside_target_red_fraction": 0.21991729736328125
+        },
+        {
+          "index": 63,
+          "camera": "frame_000308",
+          "rank": 111,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.09417724609375,
+          "outside_target_red_fraction": 0.09417724609375
+        },
+        {
+          "index": 64,
+          "camera": "frame_000092",
+          "rank": 62,
+          "selected": false,
+          "target_pixels": 8095,
+          "global_red_fraction": 0.10824203491210938,
+          "outside_target_red_fraction": 0.11145094056658361,
+          "target_red_fraction": 0.007535515750463249
+        },
+        {
+          "index": 65,
+          "camera": "frame_000164",
+          "rank": 267,
+          "selected": false,
+          "target_pixels": 1902,
+          "global_red_fraction": 0.00490570068359375,
+          "outside_target_red_fraction": 0.004933869244779859,
+          "target_red_fraction": 0.0010515247108307045
+        },
+        {
+          "index": 66,
+          "camera": "frame_000123",
+          "rank": 266,
+          "selected": false,
+          "target_pixels": 1235,
+          "global_red_fraction": 0.030635833740234375,
+          "outside_target_red_fraction": 0.030757850438275416,
+          "target_red_fraction": 0.004858299595141701
+        },
+        {
+          "index": 67,
+          "camera": "frame_000130",
+          "rank": 103,
+          "selected": false,
+          "target_pixels": 2425,
+          "global_red_fraction": 0.0267486572265625,
+          "outside_target_red_fraction": 0.02699455950469546,
+          "target_red_fraction": 0.0004123711340206186
+        },
+        {
+          "index": 68,
+          "camera": "frame_000020",
+          "rank": 200,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02075958251953125,
+          "outside_target_red_fraction": 0.02075958251953125
+        },
+        {
+          "index": 69,
+          "camera": "frame_000095",
+          "rank": 8,
+          "selected": true,
+          "target_pixels": 5080,
+          "global_red_fraction": 0.11541366577148438,
+          "outside_target_red_fraction": 0.11765552547225594,
+          "target_red_fraction": 0.001968503937007874
+        },
+        {
+          "index": 70,
+          "camera": "frame_000043",
+          "rank": 31,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.04717254638671875,
+          "outside_target_red_fraction": 0.04717254638671875
+        },
+        {
+          "index": 71,
+          "camera": "frame_000135",
+          "rank": 67,
+          "selected": false,
+          "target_pixels": 3562,
+          "global_red_fraction": 0.0203094482421875,
+          "outside_target_red_fraction": 0.020519603065951998,
+          "target_red_fraction": 0.0050533408197641775
+        },
+        {
+          "index": 72,
+          "camera": "frame_000316",
+          "rank": 18,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.13364791870117188,
+          "outside_target_red_fraction": 0.13364791870117188
+        },
+        {
+          "index": 73,
+          "camera": "frame_000176",
+          "rank": 185,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.037109375,
+          "outside_target_red_fraction": 0.037109375
+        },
+        {
+          "index": 74,
+          "camera": "frame_000156",
+          "rank": 19,
+          "selected": true,
+          "target_pixels": 6392,
+          "global_red_fraction": 0.015697479248046875,
+          "outside_target_red_fraction": 0.016066345522224655,
+          "target_red_fraction": 0.0009386733416770963
+        },
+        {
+          "index": 75,
+          "camera": "frame_000042",
+          "rank": 162,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.021198272705078125,
+          "outside_target_red_fraction": 0.021198272705078125
+        },
+        {
+          "index": 76,
+          "camera": "frame_000202",
+          "rank": 30,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.109100341796875,
+          "outside_target_red_fraction": 0.109100341796875
+        },
+        {
+          "index": 77,
+          "camera": "frame_000220",
+          "rank": 14,
+          "selected": true,
+          "target_pixels": 268,
+          "global_red_fraction": 0.018428802490234375,
+          "outside_target_red_fraction": 0.018447662252363713,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 78,
+          "camera": "frame_000050",
+          "rank": 199,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.01758575439453125,
+          "outside_target_red_fraction": 0.01758575439453125
+        },
+        {
+          "index": 79,
+          "camera": "frame_000013",
+          "rank": 294,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.037601470947265625,
+          "outside_target_red_fraction": 0.037601470947265625
+        },
+        {
+          "index": 80,
+          "camera": "frame_000068",
+          "rank": 68,
+          "selected": false,
+          "target_pixels": 6682,
+          "global_red_fraction": 0.046024322509765625,
+          "outside_target_red_fraction": 0.04721250127220487,
+          "target_red_fraction": 0.000598623166716552
+        },
+        {
+          "index": 81,
+          "camera": "frame_000198",
+          "rank": 141,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10780715942382812,
+          "outside_target_red_fraction": 0.10780715942382812
+        },
+        {
+          "index": 82,
+          "camera": "frame_000334",
+          "rank": 244,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2710151672363281,
+          "outside_target_red_fraction": 0.2710151672363281
+        },
+        {
+          "index": 83,
+          "camera": "frame_000023",
+          "rank": 41,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.032684326171875,
+          "outside_target_red_fraction": 0.032684326171875
+        },
+        {
+          "index": 84,
+          "camera": "frame_000117",
+          "rank": 47,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.24362945556640625,
+          "outside_target_red_fraction": 0.24362945556640625
+        },
+        {
+          "index": 85,
+          "camera": "frame_000098",
+          "rank": 35,
+          "selected": true,
+          "target_pixels": 276,
+          "global_red_fraction": 0.07748031616210938,
+          "outside_target_red_fraction": 0.0775505216368552,
+          "target_red_fraction": 0.010869565217391304
+        },
+        {
+          "index": 86,
+          "camera": "frame_000293",
+          "rank": 63,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02805328369140625,
+          "outside_target_red_fraction": 0.02805328369140625
+        },
+        {
+          "index": 87,
+          "camera": "frame_000147",
+          "rank": 293,
+          "selected": false,
+          "target_pixels": 4689,
+          "global_red_fraction": 0.018131256103515625,
+          "outside_target_red_fraction": 0.018445942009283175,
+          "target_red_fraction": 0.0008530603540200469
+        },
+        {
+          "index": 88,
+          "camera": "frame_000213",
+          "rank": 90,
+          "selected": false,
+          "target_pixels": 4,
+          "global_red_fraction": 0.016956329345703125,
+          "outside_target_red_fraction": 0.016956588082703897
+        },
+        {
+          "index": 89,
+          "camera": "frame_000046",
+          "rank": 76,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.034946441650390625,
+          "outside_target_red_fraction": 0.034946441650390625
+        },
+        {
+          "index": 90,
+          "camera": "frame_000076",
+          "rank": 75,
+          "selected": false,
+          "target_pixels": 4078,
+          "global_red_fraction": 0.0523834228515625,
+          "outside_target_red_fraction": 0.0532111940356343,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 91,
+          "camera": "frame_000132",
+          "rank": 147,
+          "selected": false,
+          "target_pixels": 2716,
+          "global_red_fraction": 0.013492584228515625,
+          "outside_target_red_fraction": 0.013633840603173134,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 92,
+          "camera": "frame_000275",
+          "rank": 213,
+          "selected": false,
+          "target_pixels": 1504,
+          "global_red_fraction": 0.001216888427734375,
+          "outside_target_red_fraction": 0.0012162369551872315,
+          "target_red_fraction": 0.0013297872340425532
+        },
+        {
+          "index": 93,
+          "camera": "frame_000101",
+          "rank": 105,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.09027481079101562,
+          "outside_target_red_fraction": 0.09027481079101562
+        },
+        {
+          "index": 94,
+          "camera": "frame_000134",
+          "rank": 96,
+          "selected": false,
+          "target_pixels": 3415,
+          "global_red_fraction": 0.01802825927734375,
+          "outside_target_red_fraction": 0.018204376007328132,
+          "target_red_fraction": 0.004685212298682284
+        },
+        {
+          "index": 95,
+          "camera": "frame_000003",
+          "rank": 11,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.16660308837890625,
+          "outside_target_red_fraction": 0.16660308837890625
+        },
+        {
+          "index": 96,
+          "camera": "frame_000246",
+          "rank": 184,
+          "selected": false,
+          "target_pixels": 489,
+          "global_red_fraction": 0.0022430419921875,
+          "outside_target_red_fraction": 0.0022472339531061894,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 97,
+          "camera": "frame_000315",
+          "rank": 66,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.15124893188476562,
+          "outside_target_red_fraction": 0.15124893188476562
+        },
+        {
+          "index": 98,
+          "camera": "frame_000232",
+          "rank": 230,
+          "selected": false,
+          "target_pixels": 331,
+          "global_red_fraction": 0.002704620361328125,
+          "outside_target_red_fraction": 0.002708039707730327,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 99,
+          "camera": "frame_000288",
+          "rank": 250,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.010059356689453125,
+          "outside_target_red_fraction": 0.010059356689453125
+        },
+        {
+          "index": 100,
+          "camera": "frame_000332",
+          "rank": 279,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.21065139770507812,
+          "outside_target_red_fraction": 0.21065139770507812
+        },
+        {
+          "index": 101,
+          "camera": "frame_000302",
+          "rank": 221,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08053970336914062,
+          "outside_target_red_fraction": 0.08053970336914062
+        },
+        {
+          "index": 102,
+          "camera": "frame_000078",
+          "rank": 73,
+          "selected": false,
+          "target_pixels": 9931,
+          "global_red_fraction": 0.06598663330078125,
+          "outside_target_red_fraction": 0.06858092168127733,
+          "target_red_fraction": 0.0001006947940791461
+        },
+        {
+          "index": 103,
+          "camera": "frame_000197",
+          "rank": 81,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.056793212890625,
+          "outside_target_red_fraction": 0.056793212890625
+        },
+        {
+          "index": 104,
+          "camera": "frame_000122",
+          "rank": 273,
+          "selected": false,
+          "target_pixels": 192,
+          "global_red_fraction": 0.034999847412109375,
+          "outside_target_red_fraction": 0.03501023088199365,
+          "target_red_fraction": 0.020833333333333332
+        },
+        {
+          "index": 105,
+          "camera": "frame_000278",
+          "rank": 201,
+          "selected": false,
+          "target_pixels": 2316,
+          "global_red_fraction": 0.001758575439453125,
+          "outside_target_red_fraction": 0.0017704019582185139,
+          "target_red_fraction": 0.0004317789291882556
+        },
+        {
+          "index": 106,
+          "camera": "frame_000291",
+          "rank": 237,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10558700561523438,
+          "outside_target_red_fraction": 0.10558700561523438
+        },
+        {
+          "index": 107,
+          "camera": "frame_000266",
+          "rank": 82,
+          "selected": false,
+          "target_pixels": 827,
+          "global_red_fraction": 0.00269317626953125,
+          "outside_target_red_fraction": 0.0026940459288909637,
+          "target_red_fraction": 0.0024183796856106408
+        },
+        {
+          "index": 108,
+          "camera": "frame_000311",
+          "rank": 80,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.22177886962890625,
+          "outside_target_red_fraction": 0.22177886962890625
+        },
+        {
+          "index": 109,
+          "camera": "frame_000338",
+          "rank": 45,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2946510314941406,
+          "outside_target_red_fraction": 0.2946510314941406
+        },
+        {
+          "index": 110,
+          "camera": "frame_000031",
+          "rank": 287,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.03192901611328125,
+          "outside_target_red_fraction": 0.03192901611328125
+        },
+        {
+          "index": 111,
+          "camera": "frame_000100",
+          "rank": 135,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07024383544921875,
+          "outside_target_red_fraction": 0.07024383544921875
+        },
+        {
+          "index": 112,
+          "camera": "frame_000142",
+          "rank": 281,
+          "selected": false,
+          "target_pixels": 4217,
+          "global_red_fraction": 0.02655792236328125,
+          "outside_target_red_fraction": 0.026949485707196224,
+          "target_red_fraction": 0.002608489447474508
+        },
+        {
+          "index": 113,
+          "camera": "frame_000214",
+          "rank": 53,
+          "selected": false,
+          "target_pixels": 21,
+          "global_red_fraction": 0.02469635009765625,
+          "outside_target_red_fraction": 0.02469832864723813
+        },
+        {
+          "index": 114,
+          "camera": "frame_000298",
+          "rank": 28,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0526275634765625,
+          "outside_target_red_fraction": 0.0526275634765625
+        },
+        {
+          "index": 115,
+          "camera": "frame_000224",
+          "rank": 229,
+          "selected": false,
+          "target_pixels": 289,
+          "global_red_fraction": 0.004688262939453125,
+          "outside_target_red_fraction": 0.004674342670561952,
+          "target_red_fraction": 0.01730103806228374
+        },
+        {
+          "index": 116,
+          "camera": "frame_000229",
+          "rank": 236,
+          "selected": false,
+          "target_pixels": 324,
+          "global_red_fraction": 0.0155487060546875,
+          "outside_target_red_fraction": 0.015564128026888701,
+          "target_red_fraction": 0.0030864197530864196
+        },
+        {
+          "index": 117,
+          "camera": "frame_000108",
+          "rank": 95,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.1526336669921875,
+          "outside_target_red_fraction": 0.1526336669921875
+        },
+        {
+          "index": 118,
+          "camera": "frame_000221",
+          "rank": 219,
+          "selected": false,
+          "target_pixels": 291,
+          "global_red_fraction": 0.011188507080078125,
+          "outside_target_red_fraction": 0.011197122049394126,
+          "target_red_fraction": 0.003436426116838488
+        },
+        {
+          "index": 119,
+          "camera": "frame_000053",
+          "rank": 65,
+          "selected": false,
+          "target_pixels": 29,
+          "global_red_fraction": 0.01662445068359375,
+          "outside_target_red_fraction": 0.01662628998721935
+        },
+        {
+          "index": 120,
+          "camera": "frame_000243",
+          "rank": 178,
+          "selected": false,
+          "target_pixels": 427,
+          "global_red_fraction": 0.01103973388671875,
+          "outside_target_red_fraction": 0.011038640974793384,
+          "target_red_fraction": 0.0117096018735363
+        },
+        {
+          "index": 121,
+          "camera": "frame_000158",
+          "rank": 29,
+          "selected": true,
+          "target_pixels": 6565,
+          "global_red_fraction": 0.024616241455078125,
+          "outside_target_red_fraction": 0.025236815231298348,
+          "target_red_fraction": 0.00045696877380045696
+        },
+        {
+          "index": 122,
+          "camera": "frame_000327",
+          "rank": 194,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.1952056884765625,
+          "outside_target_red_fraction": 0.1952056884765625
+        },
+        {
+          "index": 123,
+          "camera": "frame_000151",
+          "rank": 46,
+          "selected": false,
+          "target_pixels": 5996,
+          "global_red_fraction": 0.010036468505859375,
+          "outside_target_red_fraction": 0.010208941705576464,
+          "target_red_fraction": 0.00266844563042028
+        },
+        {
+          "index": 124,
+          "camera": "frame_000015",
+          "rank": 277,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02698516845703125,
+          "outside_target_red_fraction": 0.02698516845703125
+        },
+        {
+          "index": 125,
+          "camera": "frame_000088",
+          "rank": 157,
+          "selected": false,
+          "target_pixels": 11680,
+          "global_red_fraction": 0.08948898315429688,
+          "outside_target_red_fraction": 0.0934585409480005,
+          "target_red_fraction": 0.004366438356164384
+        },
+        {
+          "index": 126,
+          "camera": "frame_000324",
+          "rank": 127,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2360382080078125,
+          "outside_target_red_fraction": 0.2360382080078125
+        },
+        {
+          "index": 127,
+          "camera": "frame_000138",
+          "rank": 265,
+          "selected": false,
+          "target_pixels": 3852,
+          "global_red_fraction": 0.03624725341796875,
+          "outside_target_red_fraction": 0.036776206773728955,
+          "target_red_fraction": 0.000778816199376947
+        },
+        {
+          "index": 128,
+          "camera": "frame_000344",
+          "rank": 247,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2114715576171875,
+          "outside_target_red_fraction": 0.2114715576171875
+        },
+        {
+          "index": 129,
+          "camera": "frame_000295",
+          "rank": 89,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.03791046142578125,
+          "outside_target_red_fraction": 0.03791046142578125
+        },
+        {
+          "index": 130,
+          "camera": "frame_000339",
+          "rank": 74,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.3541450500488281,
+          "outside_target_red_fraction": 0.3541450500488281
+        },
+        {
+          "index": 131,
+          "camera": "frame_000103",
+          "rank": 77,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08806228637695312,
+          "outside_target_red_fraction": 0.08806228637695312
+        },
+        {
+          "index": 132,
+          "camera": "frame_000286",
+          "rank": 305,
+          "selected": false,
+          "target_pixels": 17333,
+          "global_red_fraction": 0.03414154052734375,
+          "outside_target_red_fraction": 0.036403592975805824,
+          "target_red_fraction": 0.002192349852881786
+        },
+        {
+          "index": 133,
+          "camera": "frame_000183",
+          "rank": 255,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0235137939453125,
+          "outside_target_red_fraction": 0.0235137939453125
+        },
+        {
+          "index": 134,
+          "camera": "frame_000190",
+          "rank": 241,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0106353759765625,
+          "outside_target_red_fraction": 0.0106353759765625
+        },
+        {
+          "index": 135,
+          "camera": "frame_000349",
+          "rank": 227,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.18903350830078125,
+          "outside_target_red_fraction": 0.18903350830078125
+        },
+        {
+          "index": 136,
+          "camera": "frame_000250",
+          "rank": 163,
+          "selected": false,
+          "target_pixels": 521,
+          "global_red_fraction": 0.001369476318359375,
+          "outside_target_red_fraction": 0.0013722035142170223,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 137,
+          "camera": "frame_000192",
+          "rank": 291,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.024932861328125,
+          "outside_target_red_fraction": 0.024932861328125
+        },
+        {
+          "index": 138,
+          "camera": "frame_000125",
+          "rank": 222,
+          "selected": false,
+          "target_pixels": 1910,
+          "global_red_fraction": 0.019245147705078125,
+          "outside_target_red_fraction": 0.019386398395290393,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 139,
+          "camera": "frame_000160",
+          "rank": 288,
+          "selected": false,
+          "target_pixels": 6538,
+          "global_red_fraction": 0.011138916015625,
+          "outside_target_red_fraction": 0.011408182906504543,
+          "target_red_fraction": 0.000611807892321811
+        },
+        {
+          "index": 140,
+          "camera": "frame_000184",
+          "rank": 274,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.051097869873046875,
+          "outside_target_red_fraction": 0.051097869873046875
+        },
+        {
+          "index": 141,
+          "camera": "frame_000251",
+          "rank": 204,
+          "selected": false,
+          "target_pixels": 516,
+          "global_red_fraction": 0.00177764892578125,
+          "outside_target_red_fraction": 0.0017811549222560277,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 142,
+          "camera": "frame_000062",
+          "rank": 85,
+          "selected": false,
+          "target_pixels": 4170,
+          "global_red_fraction": 0.042949676513671875,
+          "outside_target_red_fraction": 0.043605169513206754,
+          "target_red_fraction": 0.002398081534772182
+        },
+        {
+          "index": 143,
+          "camera": "frame_000299",
+          "rank": 25,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.04986572265625,
+          "outside_target_red_fraction": 0.04986572265625
+        },
+        {
+          "index": 144,
+          "camera": "frame_000181",
+          "rank": 192,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.01038360595703125,
+          "outside_target_red_fraction": 0.01038360595703125
+        },
+        {
+          "index": 145,
+          "camera": "frame_000254",
+          "rank": 212,
+          "selected": false,
+          "target_pixels": 565,
+          "global_red_fraction": 0.025356292724609375,
+          "outside_target_red_fraction": 0.025411061285500747,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 146,
+          "camera": "frame_000058",
+          "rank": 187,
+          "selected": false,
+          "target_pixels": 2926,
+          "global_red_fraction": 0.032215118408203125,
+          "outside_target_red_fraction": 0.03256718283452538,
+          "target_red_fraction": 0.0010252904989747095
+        },
+        {
+          "index": 147,
+          "camera": "frame_000007",
+          "rank": 264,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08396148681640625,
+          "outside_target_red_fraction": 0.08396148681640625
+        },
+        {
+          "index": 148,
+          "camera": "frame_000240",
+          "rank": 33,
+          "selected": true,
+          "target_pixels": 355,
+          "global_red_fraction": 0.00695037841796875,
+          "outside_target_red_fraction": 0.006952163765475249,
+          "target_red_fraction": 0.005633802816901409
+        },
+        {
+          "index": 149,
+          "camera": "frame_000236",
+          "rank": 210,
+          "selected": false,
+          "target_pixels": 330,
+          "global_red_fraction": 0.00261688232421875,
+          "outside_target_red_fraction": 0.002612541728097046,
+          "target_red_fraction": 0.006060606060606061
+        },
+        {
+          "index": 150,
+          "camera": "frame_000109",
+          "rank": 39,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.19523239135742188,
+          "outside_target_red_fraction": 0.19523239135742188
+        },
+        {
+          "index": 151,
+          "camera": "frame_000267",
+          "rank": 228,
+          "selected": false,
+          "target_pixels": 872,
+          "global_red_fraction": 0.10416030883789062,
+          "outside_target_red_fraction": 0.10139624605774825,
+          "target_red_fraction": 0.9323394495412844
+        },
+        {
+          "index": 152,
+          "camera": "frame_000264",
+          "rank": 174,
+          "selected": false,
+          "target_pixels": 761,
+          "global_red_fraction": 0.021671295166015625,
+          "outside_target_red_fraction": 0.021730563961696054,
+          "target_red_fraction": 0.001314060446780552
+        },
+        {
+          "index": 153,
+          "camera": "frame_000036",
+          "rank": 97,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.035709381103515625,
+          "outside_target_red_fraction": 0.035709381103515625
+        },
+        {
+          "index": 154,
+          "camera": "frame_000261",
+          "rank": 159,
+          "selected": false,
+          "target_pixels": 675,
+          "global_red_fraction": 0.0033721923828125,
+          "outside_target_red_fraction": 0.0033808979267140656,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 155,
+          "camera": "frame_000342",
+          "rank": 196,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2816276550292969,
+          "outside_target_red_fraction": 0.2816276550292969
+        },
+        {
+          "index": 156,
+          "camera": "frame_000205",
+          "rank": 112,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.12916183471679688,
+          "outside_target_red_fraction": 0.12916183471679688
+        },
+        {
+          "index": 157,
+          "camera": "frame_000282",
+          "rank": 268,
+          "selected": false,
+          "target_pixels": 5266,
+          "global_red_fraction": 0.0076904296875,
+          "outside_target_red_fraction": 0.0077974758445643454,
+          "target_red_fraction": 0.0024686669198632737
+        },
+        {
+          "index": 158,
+          "camera": "frame_000008",
+          "rank": 177,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.060939788818359375,
+          "outside_target_red_fraction": 0.060939788818359375
+        },
+        {
+          "index": 159,
+          "camera": "frame_000022",
+          "rank": 42,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.02362823486328125,
+          "outside_target_red_fraction": 0.02362823486328125
+        },
+        {
+          "index": 160,
+          "camera": "frame_000272",
+          "rank": 203,
+          "selected": false,
+          "target_pixels": 1077,
+          "global_red_fraction": 0.001323699951171875,
+          "outside_target_red_fraction": 0.0013291607135333075,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 161,
+          "camera": "frame_000157",
+          "rank": 226,
+          "selected": false,
+          "target_pixels": 6469,
+          "global_red_fraction": 0.07124710083007812,
+          "outside_target_red_fraction": 0.07303803656986409,
+          "target_red_fraction": 0.0004637501932292472
+        },
+        {
+          "index": 162,
+          "camera": "frame_000187",
+          "rank": 262,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.006427764892578125,
+          "outside_target_red_fraction": 0.006427764892578125
+        },
+        {
+          "index": 163,
+          "camera": "frame_000168",
+          "rank": 195,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07542037963867188,
+          "outside_target_red_fraction": 0.07542037963867188
+        },
+        {
+          "index": 164,
+          "camera": "frame_000014",
+          "rank": 303,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.03823089599609375,
+          "outside_target_red_fraction": 0.03823089599609375
+        },
+        {
+          "index": 165,
+          "camera": "frame_000350",
+          "rank": 216,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.14563369750976562,
+          "outside_target_red_fraction": 0.14563369750976562
+        },
+        {
+          "index": 166,
+          "camera": "frame_000326",
+          "rank": 84,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.23462295532226562,
+          "outside_target_red_fraction": 0.23462295532226562
+        },
+        {
+          "index": 167,
+          "camera": "frame_000030",
+          "rank": 238,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.022930145263671875,
+          "outside_target_red_fraction": 0.022930145263671875
+        },
+        {
+          "index": 168,
+          "camera": "frame_000019",
+          "rank": 5,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.022037506103515625,
+          "outside_target_red_fraction": 0.022037506103515625
+        },
+        {
+          "index": 169,
+          "camera": "frame_000126",
+          "rank": 249,
+          "selected": false,
+          "target_pixels": 2038,
+          "global_red_fraction": 0.029876708984375,
+          "outside_target_red_fraction": 0.03011080098113846,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 170,
+          "camera": "frame_000216",
+          "rank": 10,
+          "selected": true,
+          "target_pixels": 51,
+          "global_red_fraction": 0.03952789306640625,
+          "outside_target_red_fraction": 0.03953558469703502
+        },
+        {
+          "index": 171,
+          "camera": "frame_000051",
+          "rank": 150,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0162353515625,
+          "outside_target_red_fraction": 0.0162353515625
+        },
+        {
+          "index": 172,
+          "camera": "frame_000110",
+          "rank": 58,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10388946533203125,
+          "outside_target_red_fraction": 0.10388946533203125
+        },
+        {
+          "index": 173,
+          "camera": "frame_000066",
+          "rank": 158,
+          "selected": false,
+          "target_pixels": 4676,
+          "global_red_fraction": 0.03905487060546875,
+          "outside_target_red_fraction": 0.03976416486709028,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 174,
+          "camera": "frame_000340",
+          "rank": 215,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.351806640625,
+          "outside_target_red_fraction": 0.351806640625
+        },
+        {
+          "index": 175,
+          "camera": "frame_000080",
+          "rank": 78,
+          "selected": false,
+          "target_pixels": 12320,
+          "global_red_fraction": 0.09640884399414062,
+          "outside_target_red_fraction": 0.10112719354425516,
+          "target_red_fraction": 0.0007305194805194805
+        },
+        {
+          "index": 176,
+          "camera": "frame_000006",
+          "rank": 6,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.061786651611328125,
+          "outside_target_red_fraction": 0.061786651611328125
+        },
+        {
+          "index": 177,
+          "camera": "frame_000072",
+          "rank": 139,
+          "selected": false,
+          "target_pixels": 191,
+          "global_red_fraction": 0.04803466796875,
+          "outside_target_red_fraction": 0.048069691891293474,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 178,
+          "camera": "frame_000256",
+          "rank": 161,
+          "selected": false,
+          "target_pixels": 593,
+          "global_red_fraction": 0.001697540283203125,
+          "outside_target_red_fraction": 0.0016975656755279086,
+          "target_red_fraction": 0.0016863406408094434
+        },
+        {
+          "index": 179,
+          "camera": "frame_000279",
+          "rank": 261,
+          "selected": false,
+          "target_pixels": 2653,
+          "global_red_fraction": 0.00498199462890625,
+          "outside_target_red_fraction": 0.0050329298511316385,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 180,
+          "camera": "frame_000319",
+          "rank": 69,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.20282363891601562,
+          "outside_target_red_fraction": 0.20282363891601562
+        },
+        {
+          "index": 181,
+          "camera": "frame_000226",
+          "rank": 243,
+          "selected": false,
+          "target_pixels": 291,
+          "global_red_fraction": 0.013519287109375,
+          "outside_target_red_fraction": 0.013534311235693309,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 182,
+          "camera": "frame_000304",
+          "rank": 270,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.15756988525390625,
+          "outside_target_red_fraction": 0.15756988525390625
+        },
+        {
+          "index": 183,
+          "camera": "frame_000035",
+          "rank": 295,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.032329559326171875,
+          "outside_target_red_fraction": 0.032329559326171875
+        },
+        {
+          "index": 184,
+          "camera": "frame_000252",
+          "rank": 188,
+          "selected": false,
+          "target_pixels": 531,
+          "global_red_fraction": 0.006816864013671875,
+          "outside_target_red_fraction": 0.006830700309235397,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 185,
+          "camera": "frame_000096",
+          "rank": 4,
+          "selected": true,
+          "target_pixels": 3355,
+          "global_red_fraction": 0.12606048583984375,
+          "outside_target_red_fraction": 0.1275556534474031,
+          "target_red_fraction": 0.010730253353204173
+        },
+        {
+          "index": 186,
+          "camera": "frame_000026",
+          "rank": 136,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.019046783447265625,
+          "outside_target_red_fraction": 0.019046783447265625
+        },
+        {
+          "index": 187,
+          "camera": "frame_000106",
+          "rank": 98,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.09775161743164062,
+          "outside_target_red_fraction": 0.09775161743164062
+        },
+        {
+          "index": 188,
+          "camera": "frame_000343",
+          "rank": 282,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.23830413818359375,
+          "outside_target_red_fraction": 0.23830413818359375
+        },
+        {
+          "index": 189,
+          "camera": "frame_000189",
+          "rank": 245,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.010990142822265625,
+          "outside_target_red_fraction": 0.010990142822265625
+        },
+        {
+          "index": 190,
+          "camera": "frame_000325",
+          "rank": 83,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.193603515625,
+          "outside_target_red_fraction": 0.193603515625
+        },
+        {
+          "index": 191,
+          "camera": "frame_000146",
+          "rank": 138,
+          "selected": false,
+          "target_pixels": 4563,
+          "global_red_fraction": 0.016254425048828125,
+          "outside_target_red_fraction": 0.0165346046486348,
+          "target_red_fraction": 0.00043830813061582295
+        },
+        {
+          "index": 192,
+          "camera": "frame_000133",
+          "rank": 79,
+          "selected": false,
+          "target_pixels": 3135,
+          "global_red_fraction": 0.029541015625,
+          "outside_target_red_fraction": 0.02989857495299391,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 193,
+          "camera": "frame_000231",
+          "rank": 218,
+          "selected": false,
+          "target_pixels": 332,
+          "global_red_fraction": 0.00437164306640625,
+          "outside_target_red_fraction": 0.004377186683574473,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 194,
+          "camera": "frame_000171",
+          "rank": 252,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.005046844482421875,
+          "outside_target_red_fraction": 0.005046844482421875
+        },
+        {
+          "index": 195,
+          "camera": "frame_000124",
+          "rank": 253,
+          "selected": false,
+          "target_pixels": 1564,
+          "global_red_fraction": 0.03850555419921875,
+          "outside_target_red_fraction": 0.03860234860695372,
+          "target_red_fraction": 0.02237851662404092
+        },
+        {
+          "index": 196,
+          "camera": "frame_000270",
+          "rank": 175,
+          "selected": false,
+          "target_pixels": 981,
+          "global_red_fraction": 0.00183868408203125,
+          "outside_target_red_fraction": 0.0018379326321109805,
+          "target_red_fraction": 0.0020387359836901123
+        },
+        {
+          "index": 197,
+          "camera": "frame_000245",
+          "rank": 217,
+          "selected": false,
+          "target_pixels": 496,
+          "global_red_fraction": 0.004993438720703125,
+          "outside_target_red_fraction": 0.005002904665810555,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 198,
+          "camera": "frame_000064",
+          "rank": 134,
+          "selected": false,
+          "target_pixels": 3285,
+          "global_red_fraction": 0.030559539794921875,
+          "outside_target_red_fraction": 0.030947349715482173,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 199,
+          "camera": "frame_000070",
+          "rank": 101,
+          "selected": false,
+          "target_pixels": 3754,
+          "global_red_fraction": 0.055744171142578125,
+          "outside_target_red_fraction": 0.05653856573396803,
+          "target_red_fraction": 0.0010655301012253596
+        },
+        {
+          "index": 200,
+          "camera": "frame_000314",
+          "rank": 207,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.1546173095703125,
+          "outside_target_red_fraction": 0.1546173095703125
+        },
+        {
+          "index": 201,
+          "camera": "frame_000082",
+          "rank": 142,
+          "selected": false,
+          "target_pixels": 14966,
+          "global_red_fraction": 0.1163177490234375,
+          "outside_target_red_fraction": 0.12321484921797247,
+          "target_red_fraction": 0.002405452358679674
+        },
+        {
+          "index": 202,
+          "camera": "frame_000155",
+          "rank": 23,
+          "selected": true,
+          "target_pixels": 6334,
+          "global_red_fraction": 0.05027008056640625,
+          "outside_target_red_fraction": 0.051506977835111996,
+          "target_red_fraction": 0.00031575623618566466
+        },
+        {
+          "index": 203,
+          "camera": "frame_000283",
+          "rank": 297,
+          "selected": false,
+          "target_pixels": 7220,
+          "global_red_fraction": 0.015140533447265625,
+          "outside_target_red_fraction": 0.015522273304985014,
+          "target_red_fraction": 0.0016620498614958448
+        },
+        {
+          "index": 204,
+          "camera": "frame_000116",
+          "rank": 13,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2707977294921875,
+          "outside_target_red_fraction": 0.2707977294921875
+        },
+        {
+          "index": 205,
+          "camera": "frame_000200",
+          "rank": 36,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.1013031005859375,
+          "outside_target_red_fraction": 0.1013031005859375
+        },
+        {
+          "index": 206,
+          "camera": "frame_000276",
+          "rank": 275,
+          "selected": false,
+          "target_pixels": 1690,
+          "global_red_fraction": 0.00244140625,
+          "outside_target_red_fraction": 0.002453408279389067,
+          "target_red_fraction": 0.000591715976331361
+        },
+        {
+          "index": 207,
+          "camera": "frame_000206",
+          "rank": 22,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08340835571289062,
+          "outside_target_red_fraction": 0.08340835571289062
+        },
+        {
+          "index": 208,
+          "camera": "frame_000348",
+          "rank": 27,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.06779098510742188,
+          "outside_target_red_fraction": 0.06779098510742188
+        },
+        {
+          "index": 209,
+          "camera": "frame_000012",
+          "rank": 118,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2617759704589844,
+          "outside_target_red_fraction": 0.2617759704589844
+        },
+        {
+          "index": 210,
+          "camera": "frame_000045",
+          "rank": 292,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.03359222412109375,
+          "outside_target_red_fraction": 0.03359222412109375
+        },
+        {
+          "index": 211,
+          "camera": "frame_000039",
+          "rank": 43,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0236968994140625,
+          "outside_target_red_fraction": 0.0236968994140625
+        },
+        {
+          "index": 212,
+          "camera": "frame_000222",
+          "rank": 164,
+          "selected": false,
+          "target_pixels": 286,
+          "global_red_fraction": 0.01739501953125,
+          "outside_target_red_fraction": 0.01739874283008348,
+          "target_red_fraction": 0.013986013986013986
+        },
+        {
+          "index": 213,
+          "camera": "frame_000199",
+          "rank": 37,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.05826568603515625,
+          "outside_target_red_fraction": 0.05826568603515625
+        },
+        {
+          "index": 214,
+          "camera": "frame_000027",
+          "rank": 86,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0177154541015625,
+          "outside_target_red_fraction": 0.0177154541015625
+        },
+        {
+          "index": 215,
+          "camera": "frame_000021",
+          "rank": 71,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.018901824951171875,
+          "outside_target_red_fraction": 0.018901824951171875
+        },
+        {
+          "index": 216,
+          "camera": "frame_000140",
+          "rank": 301,
+          "selected": false,
+          "target_pixels": 4079,
+          "global_red_fraction": 0.03757476806640625,
+          "outside_target_red_fraction": 0.03811830352818089,
+          "target_red_fraction": 0.003187055650894827
+        },
+        {
+          "index": 217,
+          "camera": "frame_000077",
+          "rank": 130,
+          "selected": false,
+          "target_pixels": 7818,
+          "global_red_fraction": 0.09915924072265625,
+          "outside_target_red_fraction": 0.10220347113547179,
+          "target_red_fraction": 0.00012790995139421848
+        },
+        {
+          "index": 218,
+          "camera": "frame_000194",
+          "rank": 209,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.029003143310546875,
+          "outside_target_red_fraction": 0.029003143310546875
+        },
+        {
+          "index": 219,
+          "camera": "frame_000180",
+          "rank": 152,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.026371002197265625,
+          "outside_target_red_fraction": 0.026371002197265625
+        },
+        {
+          "index": 220,
+          "camera": "frame_000011",
+          "rank": 246,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.057178497314453125,
+          "outside_target_red_fraction": 0.057178497314453125
+        },
+        {
+          "index": 221,
+          "camera": "frame_000292",
+          "rank": 12,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.11554718017578125,
+          "outside_target_red_fraction": 0.11554718017578125
+        },
+        {
+          "index": 222,
+          "camera": "frame_000242",
+          "rank": 166,
+          "selected": false,
+          "target_pixels": 400,
+          "global_red_fraction": 0.02117919921875,
+          "outside_target_red_fraction": 0.021207744972186564,
+          "target_red_fraction": 0.0025
+        },
+        {
+          "index": 223,
+          "camera": "frame_000333",
+          "rank": 263,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.309600830078125,
+          "outside_target_red_fraction": 0.309600830078125
+        },
+        {
+          "index": 224,
+          "camera": "frame_000310",
+          "rank": 106,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.24891281127929688,
+          "outside_target_red_fraction": 0.24891281127929688
+        },
+        {
+          "index": 225,
+          "camera": "frame_000284",
+          "rank": 299,
+          "selected": false,
+          "target_pixels": 9760,
+          "global_red_fraction": 0.01186370849609375,
+          "outside_target_red_fraction": 0.012298719411690123,
+          "target_red_fraction": 0.0006147540983606558
+        },
+        {
+          "index": 226,
+          "camera": "frame_000071",
+          "rank": 60,
+          "selected": false,
+          "target_pixels": 1428,
+          "global_red_fraction": 0.057239532470703125,
+          "outside_target_red_fraction": 0.05754921063532733,
+          "target_red_fraction": 0.0007002801120448179
+        },
+        {
+          "index": 227,
+          "camera": "frame_000170",
+          "rank": 128,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.005832672119140625,
+          "outside_target_red_fraction": 0.005832672119140625
+        },
+        {
+          "index": 228,
+          "camera": "frame_000094",
+          "rank": 3,
+          "selected": true,
+          "target_pixels": 6352,
+          "global_red_fraction": 0.09050369262695312,
+          "outside_target_red_fraction": 0.0927433226996935,
+          "target_red_fraction": 0.00031486146095717883
+        },
+        {
+          "index": 229,
+          "camera": "frame_000114",
+          "rank": 124,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.166046142578125,
+          "outside_target_red_fraction": 0.166046142578125
+        },
+        {
+          "index": 230,
+          "camera": "frame_000307",
+          "rank": 271,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08166885375976562,
+          "outside_target_red_fraction": 0.08166885375976562
+        },
+        {
+          "index": 231,
+          "camera": "frame_000175",
+          "rank": 94,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0209503173828125,
+          "outside_target_red_fraction": 0.0209503173828125
+        },
+        {
+          "index": 232,
+          "camera": "frame_000028",
+          "rank": 113,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.017681121826171875,
+          "outside_target_red_fraction": 0.017681121826171875
+        },
+        {
+          "index": 233,
+          "camera": "frame_000346",
+          "rank": 306,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10866165161132812,
+          "outside_target_red_fraction": 0.10866165161132812
+        },
+        {
+          "index": 234,
+          "camera": "frame_000085",
+          "rank": 119,
+          "selected": false,
+          "target_pixels": 15447,
+          "global_red_fraction": 0.08245849609375,
+          "outside_target_red_fraction": 0.08758517533654646,
+          "target_red_fraction": 0.0005826374053214216
+        },
+        {
+          "index": 235,
+          "camera": "frame_000173",
+          "rank": 151,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.009967803955078125,
+          "outside_target_red_fraction": 0.009967803955078125
+        },
+        {
+          "index": 236,
+          "camera": "frame_000317",
+          "rank": 72,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.15068817138671875,
+          "outside_target_red_fraction": 0.15068817138671875
+        },
+        {
+          "index": 237,
+          "camera": "frame_000178",
+          "rank": 296,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.025299072265625,
+          "outside_target_red_fraction": 0.025299072265625
+        },
+        {
+          "index": 238,
+          "camera": "frame_000309",
+          "rank": 145,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.14357376098632812,
+          "outside_target_red_fraction": 0.14357376098632812
+        },
+        {
+          "index": 239,
+          "camera": "frame_000061",
+          "rank": 149,
+          "selected": false,
+          "target_pixels": 3707,
+          "global_red_fraction": 0.046314239501953125,
+          "outside_target_red_fraction": 0.04693987316057685,
+          "target_red_fraction": 0.002697599136768276
+        },
+        {
+          "index": 240,
+          "camera": "frame_000159",
+          "rank": 233,
+          "selected": false,
+          "target_pixels": 6658,
+          "global_red_fraction": 0.05913543701171875,
+          "outside_target_red_fraction": 0.06060606060606061,
+          "target_red_fraction": 0.0027035145689396217
+        },
+        {
+          "index": 241,
+          "camera": "frame_000271",
+          "rank": 176,
+          "selected": false,
+          "target_pixels": 1014,
+          "global_red_fraction": 0.01819610595703125,
+          "outside_target_red_fraction": 0.01825910466051392,
+          "target_red_fraction": 0.0019723865877712033
+        },
+        {
+          "index": 242,
+          "camera": "frame_000239",
+          "rank": 191,
+          "selected": false,
+          "target_pixels": 343,
+          "global_red_fraction": 0.021030426025390625,
+          "outside_target_red_fraction": 0.02104652006676827,
+          "target_red_fraction": 0.008746355685131196
+        },
+        {
+          "index": 243,
+          "camera": "frame_000099",
+          "rank": 170,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.07627105712890625,
+          "outside_target_red_fraction": 0.07627105712890625
+        },
+        {
+          "index": 244,
+          "camera": "frame_000162",
+          "rank": 283,
+          "selected": false,
+          "target_pixels": 4628,
+          "global_red_fraction": 0.006008148193359375,
+          "outside_target_red_fraction": 0.006073409030895168,
+          "target_red_fraction": 0.0023768366464995676
+        },
+        {
+          "index": 245,
+          "camera": "frame_000331",
+          "rank": 225,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.2630615234375,
+          "outside_target_red_fraction": 0.2630615234375
+        },
+        {
+          "index": 246,
+          "camera": "frame_000207",
+          "rank": 17,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.06421661376953125,
+          "outside_target_red_fraction": 0.06421661376953125
+        },
+        {
+          "index": 247,
+          "camera": "frame_000086",
+          "rank": 144,
+          "selected": false,
+          "target_pixels": 14919,
+          "global_red_fraction": 0.09959793090820312,
+          "outside_target_red_fraction": 0.10558802710081909,
+          "target_red_fraction": 0.0003351431061063074
+        },
+        {
+          "index": 248,
+          "camera": "frame_000163",
+          "rank": 278,
+          "selected": false,
+          "target_pixels": 3558,
+          "global_red_fraction": 0.00331878662109375,
+          "outside_target_red_fraction": 0.0033412481727549057,
+          "target_red_fraction": 0.0016863406408094434
+        },
+        {
+          "index": 249,
+          "camera": "frame_000090",
+          "rank": 2,
+          "selected": true,
+          "target_pixels": 9644,
+          "global_red_fraction": 0.07975006103515625,
+          "outside_target_red_fraction": 0.08278415841584158,
+          "target_red_fraction": 0.00031107424305267526
+        },
+        {
+          "index": 250,
+          "camera": "frame_000032",
+          "rank": 171,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.029346466064453125,
+          "outside_target_red_fraction": 0.029346466064453125
+        },
+        {
+          "index": 251,
+          "camera": "frame_000144",
+          "rank": 153,
+          "selected": false,
+          "target_pixels": 4353,
+          "global_red_fraction": 0.0260772705078125,
+          "outside_target_red_fraction": 0.02646717689911595,
+          "target_red_fraction": 0.0029864461291063634
+        },
+        {
+          "index": 252,
+          "camera": "frame_000274",
+          "rank": 248,
+          "selected": false,
+          "target_pixels": 1309,
+          "global_red_fraction": 0.002574920654296875,
+          "outside_target_red_fraction": 0.0025878428891828167,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 253,
+          "camera": "frame_000150",
+          "rank": 214,
+          "selected": false,
+          "target_pixels": 5778,
+          "global_red_fraction": 0.011890411376953125,
+          "outside_target_red_fraction": 0.012142795846563116,
+          "target_red_fraction": 0.0006922810661128419
+        },
+        {
+          "index": 254,
+          "camera": "frame_000258",
+          "rank": 179,
+          "selected": false,
+          "target_pixels": 600,
+          "global_red_fraction": 0.002155303955078125,
+          "outside_target_red_fraction": 0.0021602483712109626,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 255,
+          "camera": "frame_000188",
+          "rank": 298,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.006763458251953125,
+          "outside_target_red_fraction": 0.006763458251953125
+        },
+        {
+          "index": 256,
+          "camera": "frame_000048",
+          "rank": 92,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.024097442626953125,
+          "outside_target_red_fraction": 0.024097442626953125
+        },
+        {
+          "index": 257,
+          "camera": "frame_000054",
+          "rank": 208,
+          "selected": false,
+          "target_pixels": 75,
+          "global_red_fraction": 0.01813507080078125,
+          "outside_target_red_fraction": 0.01814026077101832
+        },
+        {
+          "index": 258,
+          "camera": "frame_000263",
+          "rank": 137,
+          "selected": false,
+          "target_pixels": 740,
+          "global_red_fraction": 0.01779937744140625,
+          "outside_target_red_fraction": 0.017849765114535357,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 259,
+          "camera": "frame_000084",
+          "rank": 61,
+          "selected": false,
+          "target_pixels": 15736,
+          "global_red_fraction": 0.11223220825195312,
+          "outside_target_red_fraction": 0.11922908347131586,
+          "target_red_fraction": 0.0026690391459074734
+        },
+        {
+          "index": 260,
+          "camera": "frame_000141",
+          "rank": 258,
+          "selected": false,
+          "target_pixels": 4127,
+          "global_red_fraction": 0.03502655029296875,
+          "outside_target_red_fraction": 0.035509288147680194,
+          "target_red_fraction": 0.00484613520717228
+        },
+        {
+          "index": 261,
+          "camera": "frame_000131",
+          "rank": 99,
+          "selected": false,
+          "target_pixels": 2613,
+          "global_red_fraction": 0.025127410888671875,
+          "outside_target_red_fraction": 0.025372691508914157,
+          "target_red_fraction": 0.0007654037504783774
+        },
+        {
+          "index": 262,
+          "camera": "frame_000112",
+          "rank": 59,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.10518646240234375,
+          "outside_target_red_fraction": 0.10518646240234375
+        },
+        {
+          "index": 263,
+          "camera": "frame_000038",
+          "rank": 242,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.023967742919921875,
+          "outside_target_red_fraction": 0.023967742919921875
+        },
+        {
+          "index": 264,
+          "camera": "frame_000191",
+          "rank": 284,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.027858734130859375,
+          "outside_target_red_fraction": 0.027858734130859375
+        },
+        {
+          "index": 265,
+          "camera": "frame_000143",
+          "rank": 148,
+          "selected": false,
+          "target_pixels": 4312,
+          "global_red_fraction": 0.028411865234375,
+          "outside_target_red_fraction": 0.028817214310093393,
+          "target_red_fraction": 0.004174397031539889
+        },
+        {
+          "index": 266,
+          "camera": "frame_000196",
+          "rank": 26,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.04042816162109375,
+          "outside_target_red_fraction": 0.04042816162109375
+        },
+        {
+          "index": 267,
+          "camera": "frame_000290",
+          "rank": 140,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.1208038330078125,
+          "outside_target_red_fraction": 0.1208038330078125
+        },
+        {
+          "index": 268,
+          "camera": "frame_000002",
+          "rank": 57,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0880126953125,
+          "outside_target_red_fraction": 0.0880126953125
+        },
+        {
+          "index": 269,
+          "camera": "frame_000235",
+          "rank": 189,
+          "selected": false,
+          "target_pixels": 324,
+          "global_red_fraction": 0.003002166748046875,
+          "outside_target_red_fraction": 0.002998243067756474,
+          "target_red_fraction": 0.006172839506172839
+        },
+        {
+          "index": 270,
+          "camera": "frame_000055",
+          "rank": 202,
+          "selected": false,
+          "target_pixels": 559,
+          "global_red_fraction": 0.1094818115234375,
+          "outside_target_red_fraction": 0.10965078272836745,
+          "target_red_fraction": 0.03041144901610018
+        },
+        {
+          "index": 271,
+          "camera": "frame_000010",
+          "rank": 168,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.053058624267578125,
+          "outside_target_red_fraction": 0.053058624267578125
+        },
+        {
+          "index": 272,
+          "camera": "frame_000037",
+          "rank": 160,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.038051605224609375,
+          "outside_target_red_fraction": 0.038051605224609375
+        },
+        {
+          "index": 273,
+          "camera": "frame_000154",
+          "rank": 7,
+          "selected": true,
+          "target_pixels": 6286,
+          "global_red_fraction": 0.10024261474609375,
+          "outside_target_red_fraction": 0.10263896380023294,
+          "target_red_fraction": 0.002704422526248807
+        },
+        {
+          "index": 274,
+          "camera": "frame_000306",
+          "rank": 269,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.08292007446289062,
+          "outside_target_red_fraction": 0.08292007446289062
+        },
+        {
+          "index": 275,
+          "camera": "frame_000260",
+          "rank": 190,
+          "selected": false,
+          "target_pixels": 649,
+          "global_red_fraction": 0.005168914794921875,
+          "outside_target_red_fraction": 0.005181743436776994,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 276,
+          "camera": "frame_000341",
+          "rank": 289,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.37233734130859375,
+          "outside_target_red_fraction": 0.37233734130859375
+        },
+        {
+          "index": 277,
+          "camera": "frame_000120",
+          "rank": 276,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0681304931640625,
+          "outside_target_red_fraction": 0.0681304931640625
+        },
+        {
+          "index": 278,
+          "camera": "frame_000186",
+          "rank": 290,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0167694091796875,
+          "outside_target_red_fraction": 0.0167694091796875
+        },
+        {
+          "index": 279,
+          "camera": "frame_000255",
+          "rank": 240,
+          "selected": false,
+          "target_pixels": 589,
+          "global_red_fraction": 0.007373809814453125,
+          "outside_target_red_fraction": 0.00739041501787387,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 280,
+          "camera": "frame_000208",
+          "rank": 21,
+          "selected": true,
+          "target_pixels": 0,
+          "global_red_fraction": 0.051975250244140625,
+          "outside_target_red_fraction": 0.051975250244140625
+        },
+        {
+          "index": 281,
+          "camera": "frame_000060",
+          "rank": 132,
+          "selected": false,
+          "target_pixels": 3372,
+          "global_red_fraction": 0.06195068359375,
+          "outside_target_red_fraction": 0.0627231694310049,
+          "target_red_fraction": 0.0026690391459074734
+        },
+        {
+          "index": 282,
+          "camera": "frame_000277",
+          "rank": 285,
+          "selected": false,
+          "target_pixels": 2011,
+          "global_red_fraction": 0.00185394287109375,
+          "outside_target_red_fraction": 0.0018375215755017625,
+          "target_red_fraction": 0.003978120338140228
+        },
+        {
+          "index": 283,
+          "camera": "frame_000195",
+          "rank": 272,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.03858184814453125,
+          "outside_target_red_fraction": 0.03858184814453125
+        },
+        {
+          "index": 284,
+          "camera": "frame_000044",
+          "rank": 114,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0494232177734375,
+          "outside_target_red_fraction": 0.0494232177734375
+        },
+        {
+          "index": 285,
+          "camera": "frame_000059",
+          "rank": 220,
+          "selected": false,
+          "target_pixels": 3163,
+          "global_red_fraction": 0.06729507446289062,
+          "outside_target_red_fraction": 0.06810924353524003,
+          "target_red_fraction": 0.0006323110970597534
+        },
+        {
+          "index": 286,
+          "camera": "frame_000182",
+          "rank": 193,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.01976776123046875,
+          "outside_target_red_fraction": 0.01976776123046875
+        },
+        {
+          "index": 287,
+          "camera": "frame_000087",
+          "rank": 133,
+          "selected": false,
+          "target_pixels": 13427,
+          "global_red_fraction": 0.11459732055664062,
+          "outside_target_red_fraction": 0.12075169771266138,
+          "target_red_fraction": 0.0005958144038132122
+        },
+        {
+          "index": 288,
+          "camera": "frame_000312",
+          "rank": 183,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.1212158203125,
+          "outside_target_red_fraction": 0.1212158203125
+        },
+        {
+          "index": 289,
+          "camera": "frame_000148",
+          "rank": 256,
+          "selected": false,
+          "target_pixels": 4932,
+          "global_red_fraction": 0.013706207275390625,
+          "outside_target_red_fraction": 0.013937918915136151,
+          "target_red_fraction": 0.0016220600162206002
+        },
+        {
+          "index": 290,
+          "camera": "frame_000056",
+          "rank": 121,
+          "selected": false,
+          "target_pixels": 1760,
+          "global_red_fraction": 0.048931121826171875,
+          "outside_target_red_fraction": 0.04924265699889394,
+          "target_red_fraction": 0.002840909090909091
+        },
+        {
+          "index": 291,
+          "camera": "frame_000336",
+          "rank": 48,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.283966064453125,
+          "outside_target_red_fraction": 0.283966064453125
+        },
+        {
+          "index": 292,
+          "camera": "frame_000166",
+          "rank": 286,
+          "selected": false,
+          "target_pixels": 215,
+          "global_red_fraction": 0.008697509765625,
+          "outside_target_red_fraction": 0.008693195484272456,
+          "target_red_fraction": 0.013953488372093023
+        },
+        {
+          "index": 293,
+          "camera": "frame_000083",
+          "rank": 165,
+          "selected": false,
+          "target_pixels": 15193,
+          "global_red_fraction": 0.16324996948242188,
+          "outside_target_red_fraction": 0.17303432664779653,
+          "target_red_fraction": 0.004212466267359968
+        },
+        {
+          "index": 294,
+          "camera": "frame_000296",
+          "rank": 126,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.06762313842773438,
+          "outside_target_red_fraction": 0.06762313842773438
+        },
+        {
+          "index": 295,
+          "camera": "frame_000128",
+          "rank": 234,
+          "selected": false,
+          "target_pixels": 2322,
+          "global_red_fraction": 0.01885223388671875,
+          "outside_target_red_fraction": 0.019013016603674823,
+          "target_red_fraction": 0.0008613264427217916
+        },
+        {
+          "index": 296,
+          "camera": "frame_000211",
+          "rank": 167,
+          "selected": false,
+          "target_pixels": 5,
+          "global_red_fraction": 0.02275848388671875,
+          "outside_target_red_fraction": 0.02275891797862966
+        },
+        {
+          "index": 297,
+          "camera": "frame_000280",
+          "rank": 259,
+          "selected": false,
+          "target_pixels": 3230,
+          "global_red_fraction": 0.003162384033203125,
+          "outside_target_red_fraction": 0.003197973072139784,
+          "target_red_fraction": 0.00030959752321981426
+        },
+        {
+          "index": 298,
+          "camera": "frame_000179",
+          "rank": 197,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0302886962890625,
+          "outside_target_red_fraction": 0.0302886962890625
+        },
+        {
+          "index": 299,
+          "camera": "frame_000238",
+          "rank": 154,
+          "selected": false,
+          "target_pixels": 331,
+          "global_red_fraction": 0.002300262451171875,
+          "outside_target_red_fraction": 0.002287892503428019,
+          "target_red_fraction": 0.012084592145015106
+        },
+        {
+          "index": 300,
+          "camera": "frame_000285",
+          "rank": 304,
+          "selected": false,
+          "target_pixels": 14387,
+          "global_red_fraction": 0.017253875732421875,
+          "outside_target_red_fraction": 0.018142776995200942,
+          "target_red_fraction": 0.0019462014318481964
+        },
+        {
+          "index": 301,
+          "camera": "frame_000300",
+          "rank": 70,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.080413818359375,
+          "outside_target_red_fraction": 0.080413818359375
+        },
+        {
+          "index": 302,
+          "camera": "frame_000152",
+          "rank": 198,
+          "selected": false,
+          "target_pixels": 6127,
+          "global_red_fraction": 0.0175018310546875,
+          "outside_target_red_fraction": 0.01791677896389693,
+          "target_red_fraction": 0.00016321201240411296
+        },
+        {
+          "index": 303,
+          "camera": "frame_000024",
+          "rank": 51,
+          "selected": false,
+          "target_pixels": 0,
+          "global_red_fraction": 0.0149688720703125,
+          "outside_target_red_fraction": 0.0149688720703125
+        },
+        {
+          "index": 304,
+          "camera": "frame_000247",
+          "rank": 211,
+          "selected": false,
+          "target_pixels": 475,
+          "global_red_fraction": 0.003833770751953125,
+          "outside_target_red_fraction": 0.003840730082661683,
+          "target_red_fraction": 0.0
+        },
+        {
+          "index": 305,
+          "camera": "frame_000227",
+          "rank": 110,
+          "selected": false,
+          "target_pixels": 311,
+          "global_red_fraction": 0.02013397216796875,
+          "outside_target_red_fraction": 0.020150248440800052,
+          "target_red_fraction": 0.006430868167202572
+        }
+      ]
+    }
+  }
+}
