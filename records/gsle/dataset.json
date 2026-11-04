@@ -1,0 +1,17 @@
+{
+  "source": "/mnt/sda/ubuntu/lkx/papers/paper_eli/data/industrial",
+  "dataset": "/mnt/sda/ubuntu/lkx/papers/paper_eli/data/gsle_langsplat",
+  "train": 306,
+  "held_out": 44,
+  "image_resize": [
+    938,
+    528
+  ],
+  "feature_levels": [
+    1,
+    2,
+    3
+  ],
+  "base_checkpoint": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/chkpnt30000.pth",
+  "manual_localization_used": false
+}

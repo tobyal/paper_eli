@@ -1,0 +1,426 @@
+{
+  "stage": "autoencoder",
+  "captured_utc": "2026-11-04T19:05:46Z",
+  "host": "ubuntu",
+  "CUDA_VISIBLE_DEVICES": "0",
+  "git_head": null,
+  "git_worktree_status": "?? ../../.codex/\n?? ../../apps/\n?? ../../datasets/\n?? ../../downloads/\n?? ../../gs2mesh_roi/\n?? ../../kxliu_test.txt\n?? ../../model_checkpoint/\n?? ../../mvr/\n?? ../../mvs/\n?? ../../newstart/\n?? ../../od/\n?? ../../paper1/\n?? ../../paper_nyx/\n?? ../\n?? ../../projects/\n?? ../../thin/\n?? ../../tools/",
+  "source_sha256": {
+    "gsle/00_prepare.sh": "d254e3c50b80694eeb2e46efac58671cded8691f45dcc31e8c99d58e77f00d21",
+    "gsle/01_environments.sh": "5ca08e2e7fdc9df8f78862eea7065862aa8971f7ed4793524d1b12a0b3ad6538",
+    "gsle/02_download.sh": "a67b532f45f0792a05a27231d3afc2b7bb418f89d18ca22613a97155dca57d80",
+    "gsle/03_features.sh": "ae9277651f793aa7126c3a21606e046928a83fee0d2a26e9ab722a8ea37a8b67",
+    "gsle/04_language.sh": "71b5643dd0f581e3f84592362a3b4b074acef0389c811fbbd25103d0b040c956",
+    "gsle/04_language_optimized.sh": "4b6ecb34f951b4b8860a1436ffcf3466c44dcb20b8f42c6709b2c914b1c05ef1",
+    "gsle/05_localize.sh": "5ac91495ca8f2d7a421c20c92eeb1ef70d4f0a4117f7f4d56a925bc6e9626f90",
+    "gsle/06_anchor.sh": "508e5fbfd36d4a2ac2481cf9049fc6355d6a256299d003492d3b5c5e3a6bc1f1",
+    "gsle/07_coarse.sh": "881397e1aab77dcf6ae916566045c480d5cb75006d445c1759fec79dcc0f2ee5",
+    "gsle/08_refine.sh": "507f93fd4c0633e9f0af8a3c3c9a460307bbd8de60b5657e2cbcc284902d3a82",
+    "gsle/LICENSE.DreamGaussian": "ad69e3d0cd6a33bcea74b2d59b4cc8dfc1010d0020a0017c279d7c7dfdb0c318",
+    "gsle/LICENSE.GSGen": "3285d47a95d5edfd6634727a2977340487e0db4153924b6a47608ffcb97b93f0",
+    "gsle/LICENSE.LangSplat": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f",
+    "gsle/LICENSE.SAM": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "gsle/PAPER_NOTES.txt": "ffac55a96af4e10efd497082f9684aeb539415f2c230ce1af13db828bc29bb18",
+    "gsle/README.txt": "3a60ee94a2f22ce566a318d6dc8ed2c9d0cdd72e406cdb8475e8aa9d06be87e2",
+    "gsle/THIRD_PARTY.txt": "82382fe9a599ea2448aef7dfdf55e5c8c91062721586c52ec282dcde83743364",
+    "gsle/ae_graph.py": "0db3777e6bf98be41fa09f8bcc103b62b8ce9271f8b9d890ba78bf8d15adfec1",
+    "gsle/avp.py": "574d58f2fff7f44f787e06a21040f8818b04862ef129d6bf7b29c6b87d528fc0",
+    "gsle/bootstrap_sources.py": "83a2bba8c400ba8f7a06f1dfee716eaa5257707b0b1ea07e44dc2c63e881b9d8",
+    "gsle/camera_sampling.py": "656f66d8c4c58ead7cda1792ebdb363661d842b9fced3086d9d834b50ed0a1a5",
+    "gsle/camera_source.json": "215970a848a21f9ccc660237c8230cd02c609f6ff75e3970ff8935c8d4dc8f73",
+    "gsle/common.py": "6d1ee4e49ae72f8ad28c36e298a2ac8608f729d5f0e4720f58de5a4ff4b60bd1",
+    "gsle/compose.py": "a132447aa6f04564ad4605daef634200d8cf9542673c28b6dc3533d6f7740707",
+    "gsle/config.json": "1e4b76b1217fd4a55bae0ac9d7317b8a9a55b6785928e282a404176a61d4ffd6",
+    "gsle/diffusion.py": "f43f92d2b4bc0ce8145d7d0b71d197f89a54ab76f0ad5bd17097c551b4772813",
+    "gsle/download_models.py": "66284d98918e74cfc2eacda4e564dfe0f46381ae01231b3e9c48d3d277df9102",
+    "gsle/inpaint.py": "280de277d23cb159e271309ab3a9fe55a313874a067b45cc65d4e1c4b9ced6a5",
+    "gsle/lang_features.py": "02cb3a8b7d49773ffd55b8a19e5158c51205654e0fca285cbb90e62cc125e57d",
+    "gsle/lang_nms.py": "71f08d339e5383039dda48f733c1ace2d8e1916f4a31c8d09a15fd79f68b4991",
+    "gsle/localize.py": "d9c9c216dee89713e1368cd32c9e08a10825c141b6e38b734b60fd985b12c3a7",
+    "gsle/object_model.py": "9296713b247757694b93eddaba401d023f34e3a972bbea6e66699f71ff05907c",
+    "gsle/package_results.py": "a5c5ff595a1114cdb6b2923b5b2a72762c11ebf0ddaea47200fa7d53aaee2112",
+    "gsle/prepare_dataset.py": "1cf6af8e47c2bb9e49f2a500a87d2d943c02749fe3a30e1e310e54c38c910eb5",
+    "gsle/provenance.py": "efc9d9ae1b961ae4e02c9c4e987560ae45d6abf58384ff17e46569b830c3c812",
+    "gsle/query_language.py": "34a86c1bfd397a09a1d6ae04832bddaed61a47e4e7ee88e224fb4ead0340bef6",
+    "gsle/record_assets.py": "181074982c8c4334e9129ee0a4c2d7a2fd7e069c3696c2dd1784cd7026951981",
+    "gsle/reference_proposals.py": "89aaff9a02f19613a5d5e8c2fee0815c0b9fafa7eba6c94f06c9b2eef3ed7d8e",
+    "gsle/render_results.py": "f72b85cac5076d5640660fb96733c268126f0fd5ca7e6a11ef30a529e14065ef",
+    "gsle/resolve_models.py": "c7730ccd0b47ebba8fc35ef71405aabcd9c39b26df525ea035d3db08cfbb9b8d",
+    "gsle/review_results.py": "87f2ae88d830841c83801f2a794448d006ca30d07231955447b8e7b8d687e0c0",
+    "gsle/sam_foreground.py": "8b8ea68c6e33be29fd98921bbec45b5dd4e8dd7b95a5dd6280a6d10c7a57eee6",
+    "gsle/sam_regions.py": "ed9e8419506e1c918121d63de2bfcf667aba6f2176309fb2266a01424fb44c96",
+    "gsle/status.py": "07542b1a24122453e7285dfb47b99c31c39c01786b59b2c4629998157fc15f0a",
+    "gsle/train_autoencoder.py": "0f2e398789cbb98b3193c78f47344688e1a54bccdf21febcefd5f9f1d82d70bc",
+    "gsle/train_object.py": "95d5b18b751beb11dbdfb1a054c22f74e78b4dcffacc4c62aa8ee8779fa01911",
+    "gsle/upstream.json": "4380f5d86ebf272e04c9c758ff9e4db34428f592fd1bbd99b6e8afbbc15a3d84",
+    "gsle/validate_ae_graph.py": "205b6a72f6b7a77b3e48db0f031540d971af4b8275565548f8eeb6c3034d2ddc",
+    "gsle/validate_cameras.py": "95aa2ff599100b5a66d9b5b576b84680220b5230180f96898fa60a3a899f15c3",
+    "gsle/validate_compactness.py": "2e75ab34d0e41bfc550e5d2b214f50d002d6c38cf4f31815ad2aa7cfb8505246",
+    "gsle/validate_diffusion.py": "21359f186a1957005fa680a0de207cd08d2882bc0b19119508bcb603595bcd46",
+    "gsle/validate_feature_cache.py": "3e3ff22fe64e40eff42ffdbb4c550819905fca1f21e175160f1a26539829f284",
+    "gsle/validate_language_renderer.py": "2f60f7390aee894ffe6c78459ccf97cb31ca0ac1ab352776a30852646623f0d7",
+    "gsle/validate_renderer.py": "5e4a90a689660dbb039a85ce6b07bc91c40db677ed7d8205fc9bb5182413f8c6",
+    "gsle/world_up.py": "0c9bf0e62ed65472d75b9f266aaeb917a39fb8bec81a475a4d42f814c43c273a"
+  },
+  "config": {
+    "seed": 42,
+    "target_text": "an industrial machine with a black assembly on a white base",
+    "reference_image": "frame_000151.jpg",
+    "replacement_text": "a yellow six-axis industrial robotic arm mounted on a metal base, realistic industrial equipment",
+    "negative_text": "",
+    "avp": {
+      "views": 100,
+      "in_plane_rotations": 8,
+      "scoring": "text_contrast",
+      "resolution": 512
+    },
+    "inpainting": {
+      "steps": 50,
+      "guidance_scale": 7.5,
+      "controlnet_scale": 1.0,
+      "seed": 42
+    },
+    "initialization": {
+      "points": 4096,
+      "sphere_radius": 0.5,
+      "scale": 0.02,
+      "opacity_peak": 0.1,
+      "opacity_radial_std": 0.25,
+      "color_min": 0.05,
+      "color_max": 0.15
+    },
+    "coarse": {
+      "iterations": 6500,
+      "batch": 6,
+      "random_resolutions": [
+        64,
+        128,
+        256
+      ],
+      "reference_resolutions": [
+        128,
+        256,
+        512
+      ],
+      "resolution_milestones": [
+        0,
+        200,
+        300
+      ],
+      "guidance_scale": 3.0,
+      "sds_weight": 1.0,
+      "xyz_lr": [
+        0.001,
+        1e-05,
+        1000
+      ],
+      "scale_lr": [
+        0.005,
+        0.0005,
+        1000
+      ]
+    },
+    "refine": {
+      "iterations": 2000,
+      "batch": 4,
+      "resolution": 512,
+      "guidance_scale": 100.0,
+      "unconditional_conditioning": "drop_all_eq7",
+      "sds_weight": 0.1,
+      "rgb_weight": 1500.0,
+      "mask_weight": 1500.0,
+      "xyz_lr": [
+        0.0001,
+        1e-05,
+        10000
+      ],
+      "scale_lr": [
+        0.0005,
+        5e-05,
+        10000
+      ]
+    },
+    "optimizer": {
+      "rotation_lr": 0.005,
+      "color_lr": 0.01,
+      "opacity_lr": 0.01,
+      "eps": 1e-15
+    },
+    "densification": {
+      "algorithm": "GSGen_compactness",
+      "neighbors": 3,
+      "start": 2000,
+      "end": 6000,
+      "period": 1000,
+      "prune_period": 500,
+      "prune_opacity": 0.01,
+      "max_points_fail": 1000000
+    },
+    "camera_sampling": {
+      "strategy": "threestudio_2c202276",
+      "azimuth": [
+        -180,
+        180
+      ],
+      "elevation": [
+        -10,
+        90
+      ],
+      "radius_multiplier": [
+        1.0,
+        1.5
+      ],
+      "fovy": [
+        40,
+        70
+      ],
+      "camera_perturb": 0.1,
+      "center_perturb": 0.2,
+      "up_perturb": 0.02,
+      "progressive_until": 0,
+      "eval_elevation": 15,
+      "stratified_azimuth": true
+    },
+    "diffusion_timesteps": [
+      0.02,
+      0.98
+    ],
+    "assumptions": [
+      "GSLE has no public source release on the author project page at implementation time.",
+      "Initialization point count/scale use GSGen defaults; low color/radial opacity constants are implementation choices because GSLE does not publish them.",
+      "Densification periods, opacity pruning threshold, camera elevation/radius range, inpainting settings and SDS timestep limits are exposed implementation choices, not reported GSLE constants.",
+      "AVP paper prose and supplement pseudocode disagree; both scores and selections are saved, text-consistent directional contrast drives this run.",
+      "Coarse iterations use the supplement hardware section's 6500; an intermediate 3500 checkpoint is also saved.",
+      "CFG for DI-SDS follows paper Eq7: conditioned+s*(conditioned-unconditioned). Its unconditional expression omits all conditions; implement empty text and zero mask/context/depth residuals, padding to the required nine UNet channels. The paper does not specify this channel-padding detail.",
+      "Use the published physical batches when memory permits; --microbatch may accumulate the same effective batch on the shared GPU. Frozen-background shading and depth conditions are outside autograd without changing joint visibility."
+    ]
+  },
+  "upstream": {
+    "LangSplat": {
+      "repository": "minghanqin/LangSplat",
+      "commit": "d70edb86df0fcbda19dc0d9739a3e5140a5e65fc",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/LangSplat"
+    },
+    "GSGen": {
+      "repository": "gsgen3d/gsgen",
+      "commit": "e60994e557b685d5df57ec0bb48460782091ec4d",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/GSGen"
+    },
+    "DreamGaussian": {
+      "repository": "dreamgaussian/dreamgaussian",
+      "commit": "69a3c7065d580da124dc0bf2e9a21cd3b7973b35",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/DreamGaussian"
+    },
+    "segment-anything-langsplat": {
+      "repository": "minghanqin/segment-anything-langsplat",
+      "commit": "e5dbe4b5616e24f02f15ce5a439a5edf228b3a75",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/segment-anything-langsplat"
+    }
+  },
+  "models": {
+    "openclip": {
+      "repository": "laion/CLIP-ViT-B-16-laion2B-s34B-b88K",
+      "revision": "7288da5a0d6f0b51c4a2b27c624837a9236d0112",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--laion--CLIP-ViT-B-16-laion2B-s34B-b88K/snapshots/7288da5a0d6f0b51c4a2b27c624837a9236d0112",
+      "files": [
+        {
+          "name": "open_clip_config.json",
+          "bytes": 469
+        },
+        {
+          "name": "open_clip_pytorch_model.bin",
+          "bytes": 598529951,
+          "sha256": "1f16b1274ca25493b1f36225efe81d05f66a3f33c487acd1a07c5ba87920de6f"
+        }
+      ]
+    },
+    "inpainting": {
+      "repository": "stable-diffusion-v1-5/stable-diffusion-inpainting",
+      "revision": "8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-inpainting/snapshots/8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+      "files": [
+        {
+          "name": "feature_extractor/preprocessor_config.json",
+          "bytes": 342
+        },
+        {
+          "name": "model_index.json",
+          "bytes": 548
+        },
+        {
+          "name": "safety_checker/config.json",
+          "bytes": 4777
+        },
+        {
+          "name": "safety_checker/model.fp16.safetensors",
+          "bytes": 608018440,
+          "sha256": "08902f19b1cfebd7c989f152fc0507bef6898c706a91d666509383122324b511"
+        },
+        {
+          "name": "scheduler/scheduler_config.json",
+          "bytes": 313
+        },
+        {
+          "name": "text_encoder/config.json",
+          "bytes": 617
+        },
+        {
+          "name": "text_encoder/model.fp16.safetensors",
+          "bytes": 246144864,
+          "sha256": "77795e2023adcf39bc29a884661950380bd093cf0750a966d473d1718dc9ef4e"
+        },
+        {
+          "name": "tokenizer/merges.txt",
+          "bytes": 524619
+        },
+        {
+          "name": "tokenizer/special_tokens_map.json",
+          "bytes": 472
+        },
+        {
+          "name": "tokenizer/tokenizer_config.json",
+          "bytes": 806
+        },
+        {
+          "name": "tokenizer/vocab.json",
+          "bytes": 1059962
+        },
+        {
+          "name": "unet/config.json",
+          "bytes": 748
+        },
+        {
+          "name": "unet/diffusion_pytorch_model.fp16.safetensors",
+          "bytes": 1719154104,
+          "sha256": "24b788b4a777748377cc20364eea4ae113c8c42f4468c16bc8c02fdae5492af9"
+        },
+        {
+          "name": "vae/config.json",
+          "bytes": 552
+        },
+        {
+          "name": "vae/diffusion_pytorch_model.fp16.safetensors",
+          "bytes": 167335342,
+          "sha256": "4fbcf0ebe55a0984f5a5e00d8c4521d52359af7229bb4d81890039d2aa16dd7c"
+        }
+      ]
+    },
+    "controlnet_depth": {
+      "repository": "lllyasviel/control_v11f1p_sd15_depth",
+      "revision": "539f99181d33db39cf1af2e517cd8056785f0a87",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lllyasviel--control_v11f1p_sd15_depth/snapshots/539f99181d33db39cf1af2e517cd8056785f0a87",
+      "files": [
+        {
+          "name": "config.json",
+          "bytes": 945
+        },
+        {
+          "name": "diffusion_pytorch_model.fp16.bin",
+          "bytes": 722698343,
+          "sha256": "e809f8a7e4c3dd40f906e35213afa0e0e90feea363d9a59b653cacbc0a7c9d84"
+        }
+      ]
+    },
+    "stable_zero123": {
+      "repository": "ashawkey/stable-zero123-diffusers",
+      "revision": "a6c09344fbd45843d35f2095c203c4a8e55b4dbb",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--ashawkey--stable-zero123-diffusers/snapshots/a6c09344fbd45843d35f2095c203c4a8e55b4dbb",
+      "files": [
+        {
+          "name": "clip_camera_projection/config.json",
+          "bytes": 132
+        },
+        {
+          "name": "clip_camera_projection/diffusion_pytorch_model.safetensors",
+          "bytes": 1187512
+        },
+        {
+          "name": "clip_camera_projection/zero123.py",
+          "bytes": 30628
+        },
+        {
+          "name": "feature_extractor/preprocessor_config.json",
+          "bytes": 546
+        },
+        {
+          "name": "image_encoder/config.json",
+          "bytes": 585
+        },
+        {
+          "name": "image_encoder/model.safetensors",
+          "bytes": 607980096,
+          "sha256": "0dd0c1777bb75e2e9b7aa29b799b3ee8ebaaaa731e2c471a9ec589f12542cce7"
+        },
+        {
+          "name": "model_index.json",
+          "bytes": 562
+        },
+        {
+          "name": "scheduler/scheduler_config.json",
+          "bytes": 502
+        },
+        {
+          "name": "unet/config.json",
+          "bytes": 1778
+        },
+        {
+          "name": "unet/diffusion_pytorch_model.safetensors",
+          "bytes": 1719148344,
+          "sha256": "df42cdcac55d5b89c15a0512845db20a6213f1eaa129f201dfc080fc8642d220"
+        },
+        {
+          "name": "vae/config.json",
+          "bytes": 601
+        },
+        {
+          "name": "vae/diffusion_pytorch_model.safetensors",
+          "bytes": 167335342,
+          "sha256": "3e4c08995484ee61270175e9e7a072b66a6e4eeb5f0c266667fe1f45b90daf9a"
+        }
+      ]
+    },
+    "view_text": {
+      "repository": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+      "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+      "files": [
+        {
+          "name": "text_encoder/config.json",
+          "bytes": 617
+        },
+        {
+          "name": "text_encoder/pytorch_model.bin",
+          "bytes": 492305335,
+          "sha256": "770a47a9ffdcfda0b05506a7888ed714d06131d60267e6cf52765d61cf59fd67"
+        },
+        {
+          "name": "tokenizer/merges.txt",
+          "bytes": 524619
+        },
+        {
+          "name": "tokenizer/special_tokens_map.json",
+          "bytes": 472
+        },
+        {
+          "name": "tokenizer/tokenizer_config.json",
+          "bytes": 806
+        },
+        {
+          "name": "tokenizer/vocab.json",
+          "bytes": 1059962
+        }
+      ]
+    }
+  },
+  "camera_source": {
+    "repository": "https://github.com/threestudio-project/threestudio",
+    "commit": "2c202276747a892cfc1ded8e27a005715be8f5f2",
+    "path": "threestudio/data/uncond.py",
+    "selection": "Last camera-module commit before GSLE's August2024 first paper version",
+    "adaptations": [
+      "Map the normalized object frame into the existing COLMAP scene",
+      "Express the random camera distance relative to the selected anchor radius",
+      "No synthetic light sampling, since the method uses baked Gaussian colors"
+    ]
+  }
+}

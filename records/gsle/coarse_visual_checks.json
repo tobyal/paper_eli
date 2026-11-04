@@ -1,0 +1,11 @@
+{
+  "reviewer": "Assistant visual inspection of actual checkpoint orbit renders",
+  "source": "gsle/preview_checkpoint.py; 12 matched azimuths at30-degree intervals",
+  "checks": [
+    {"step": 1000, "artifact": "outputs/gsle/coarse/checkpoint_reviews/checkpoint_001000/contact_sheet.jpg", "observation": "Yellow arm silhouette visible in the reference direction; substantial cloud-like noise and poorly resolved side/back structure."},
+    {"step": 2000, "artifact": "outputs/gsle/coarse/checkpoint_reviews/checkpoint_002000/contact_sheet.jpg", "observation": "Reference silhouette is clearer. Immediately after compactness densification, side/back views still have many visible isolated dark/yellow splats."},
+    {"step": 3500, "artifact": "outputs/gsle/coarse/checkpoint_reviews/checkpoint_003500/contact_sheet.jpg", "observation": "Connected yellow mass and dark pedestal persist over the orbit; backside is swollen and blurred, with remaining floaters. This is not yet a high-quality mechanical reconstruction."},
+    {"step": 5000, "artifact": "outputs/gsle/coarse/checkpoint_reviews/checkpoint_005000/contact_sheet.jpg", "observation": "Reference arm/cable outline and pedestal are recognizable; novel views show rotation-dependent shapes, but rounded/blurry side and back geometry and residual speckles remain. Exact six-axis kinematics cannot be established from these renders."}
+  ],
+  "scope": "Interim coarse-stage quality checks. Do not interpret falling reference loss or finite gradients as proof of multiview quality. Full coarse and DI-SDS outputs still require final inspection."
+}

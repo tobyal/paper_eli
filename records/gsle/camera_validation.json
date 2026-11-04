@@ -1,0 +1,6 @@
+{
+  "tested_orbits": 20,
+  "maximum_pose_error": 2.384185791015625e-07,
+  "elevation_conversion": "DreamGaussian = -GSLE elevation",
+  "azimuth_conversion": "identical; positive moves from local+z toward local+x"
+}

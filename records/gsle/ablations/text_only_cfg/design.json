@@ -1,0 +1,20 @@
+{
+  "kind": "Explicit implementation-ambiguity ablation, not a replacement of the primary run",
+  "only_config_difference": {
+    "refine.unconditional_conditioning": {
+      "primary": "drop_all_eq7",
+      "ablation": "text_only"
+    }
+  },
+  "shared_input_sha256": {
+    "coarse/final.pth": "b090c48709fe3bd5dda086a3eb4ef6f755cd4bb38104049d8f4cdfd78b6a333f",
+    "foreground/reference_white.png": "31c195c53a5b4f9c3bf8494d1149f0d75716e93e1d4c70e5ca15af3ca0e4a046",
+    "foreground/mask.png": "35e7ff55fa67cc8eb6ba3cd172d0eb421f80d3339a446bd0ebc1e40863eb4340",
+    "avp/anchor.json": "aa38c94004a4bddfd79b153be8bb2501644d2e6ebcf87e256d1601d3a10f607f",
+    "localization/edit_region.json": "f4c22b7e68724c5c3578f5806632a4b1fb8040fb3f5bc4e869bbc13228058d2e",
+    "localization/keep_indices.npy": "3fc235ec5e28c70cded2342a1c1778be81b638f969a4eebbfe98bac5e29411a0"
+  },
+  "iterations": 2000,
+  "seed": 42,
+  "meaning": "The ablation retains mask, masked-image context and ControlNet conditions in the empty-text branch, as conventional text CFG does. GSLE Eq7 omits these inputs but does not document nine-channel unconditional padding."
+}

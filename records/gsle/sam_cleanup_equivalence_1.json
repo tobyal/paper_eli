@@ -1,0 +1,5 @@
+{
+  "mask_count": 16,
+  "exact_mask_and_box_agreement": true,
+  "workers": 8
+}

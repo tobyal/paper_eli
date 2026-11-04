@@ -1,0 +1,14 @@
+{
+  "library": "diffusers",
+  "version": "0.30.3",
+  "inspected_file": "envs/editsplat/lib/python3.9/site-packages/diffusers/pipelines/controlnet/pipeline_controlnet_inpaint.py",
+  "sha256": "99c50b4f4b01d9590c6a58d7c2ef42403e875293897fd5e01431b8b101fc547b",
+  "upstream_url": "https://github.com/huggingface/diffusers/blob/v0.30.3/src/diffusers/pipelines/controlnet/pipeline_controlnet_inpaint.py",
+  "observed_source_behavior": [
+    "Lines932-934 duplicate the inpainting mask and masked-image latents across the CFG batch.",
+    "Lines1380-1406 run ControlNet on both branches and control_image when guess_mode is false.",
+    "The standard pipeline's coefficient uses uncond+s*(cond-uncond); both of our experiments deliberately retain GSLE Eq7's cond+s*(cond-uncond), so only the conditioning convention is tested."
+  ],
+  "inference": "The installed official pipeline supports context-preserving empty-text conditioning as a reasonable interpretation of GSLE's under-specified unconditional branch. It does not establish which unpublished implementation the GSLE authors used.",
+  "evaluation": "Both interpretations receive full2000-step runs from the exact same coarse checkpoint. Compare actual renders as well as losses; do not infer visual improvement from numerical stability alone."
+}

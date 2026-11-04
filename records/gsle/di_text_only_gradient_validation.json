@@ -1,0 +1,25 @@
+{
+  "teacher": "di",
+  "probe_only": true,
+  "seconds": 53.60049867630005,
+  "loss": 183.86691284179688,
+  "gradient_L1": {
+    "xyz": 2196.574951171875,
+    "log_scale": 39.196327209472656,
+    "rotation": 9.335840331914369e-07,
+    "opacity_logit": 25.662147521972656,
+    "color_logit": 24.59584617614746
+  },
+  "teachers_frozen": true,
+  "gpu_peak_GiB": 6.98712158203125,
+  "timestep": 956,
+  "noise_residual_rms": 0.14981552958488464,
+  "latent_shape": [
+    1,
+    4,
+    64,
+    64
+  ],
+  "inpainting_channels": 9,
+  "controlnet_channels": 4
+}

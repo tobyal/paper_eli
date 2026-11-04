@@ -1,0 +1,78 @@
+{
+  "step": 2000,
+  "stage": "refine",
+  "attempt": "20261104T210701Z",
+  "points": 314524,
+  "seconds": 0.9562466144561768,
+  "elapsed": 1877.0036489963531,
+  "rgb_mse": 0.0016914932057261467,
+  "mask_mse": 0.001037288922816515,
+  "reference_weight": 1500.0,
+  "sds_loss": 1453.68701171875,
+  "gradient_norms": {
+    "xyz": 431.672119140625,
+    "log_scale": 8.415928840637207,
+    "rotation": 14.179021835327148,
+    "opacity_logit": 1.6252264976501465,
+    "color_logit": 0.9517226219177246
+  },
+  "random_resolution": 512,
+  "reference_resolution": 512,
+  "densified": 0,
+  "pruned": 0,
+  "diffusion": [
+    {
+      "timestep": 648,
+      "noise_residual_rms": 0.3203108608722687,
+      "latent_shape": [
+        1,
+        4,
+        64,
+        64
+      ],
+      "inpainting_channels": 9,
+      "controlnet_channels": 4,
+      "unconditional_conditioning": "text_only"
+    },
+    {
+      "timestep": 630,
+      "noise_residual_rms": 0.29674580693244934,
+      "latent_shape": [
+        1,
+        4,
+        64,
+        64
+      ],
+      "inpainting_channels": 9,
+      "controlnet_channels": 4,
+      "unconditional_conditioning": "text_only"
+    },
+    {
+      "timestep": 401,
+      "noise_residual_rms": 0.706824779510498,
+      "latent_shape": [
+        1,
+        4,
+        64,
+        64
+      ],
+      "inpainting_channels": 9,
+      "controlnet_channels": 4,
+      "unconditional_conditioning": "text_only"
+    },
+    {
+      "timestep": 838,
+      "noise_residual_rms": 0.13982009887695312,
+      "latent_shape": [
+        1,
+        4,
+        64,
+        64
+      ],
+      "inpainting_channels": 9,
+      "controlnet_channels": 4,
+      "unconditional_conditioning": "text_only"
+    }
+  ],
+  "gpu_peak_GiB": 13.938400745391846
+}

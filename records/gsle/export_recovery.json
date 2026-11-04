@@ -1,0 +1,14 @@
+{
+  "affected_run": "drop_all_eq7 primary refinement",
+  "training_completed_iterations": 2000,
+  "training_final_summary": "outputs/gsle/refine/final_summary.json",
+  "original_log": "logs/gsle/08_refine.log",
+  "observed_error": "gsle/08_refine.sh: line13: n_object.py: command not found",
+  "cause": "The running Bash entry script was updated in place while its Python training command was blocked. Its subsequent file read resumed at an obsolete byte offset. The fragment and update history identify an export-launch issue, after training had already completed.",
+  "recovery": "Run the independent gsle/10_export.sh refine entry point on the saved final PLY/checkpoint.",
+  "recovery_log": "logs/gsle/10_export_primary.log",
+  "optimizer_updates_repeated_for_recovery": 0,
+  "composition_after_recovery": "Retained background rows were again verified bitwise identical.",
+  "final_verification_record": "records/gsle/final_artifact_verification.json",
+  "prevention": "Keep active shell launchers unchanged until they exit; use a separate postprocessing entry point for recovery."
+}

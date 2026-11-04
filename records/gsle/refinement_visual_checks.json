@@ -1,0 +1,11 @@
+{
+  "reviewer": "Assistant visual inspection of actual saved Gaussian renders",
+  "checks": [
+    {"variant": "drop_all_eq7", "step": 100, "artifact": "outputs/gsle/refine/previews/reference_000100.png", "observation": "Reference arm outline remains, with speckles and blur; no established improvement."},
+    {"variant": "drop_all_eq7", "step": 300, "artifact": "outputs/gsle/refine/previews/reference_000300.png", "observation": "Increasing brightness and a softened yellow halo accompany increasing reference error."},
+    {"variant": "drop_all_eq7", "step": 500, "artifact": "outputs/gsle/refine/checkpoint_reviews/checkpoint_000500/contact_sheet_scene.jpg", "observation": "Strong saturated yellow fog in multiple scene views; clear visual degradation relative to the coarse object."},
+    {"variant": "text_only", "step": 100, "artifact": "outputs/gsle/ablations/text_only_cfg/refine/previews/reference_000100.png", "observation": "Arm outline and dark pedestal remain; no comparable strong yellow halo in this reference image."},
+    {"variant": "text_only", "step": 500, "artifact": "outputs/gsle/ablations/text_only_cfg/refine/checkpoint_reviews/checkpoint_000500/contact_sheet_scene.jpg", "observation": "Less saturated fog than the drop-all branch and preserved front outline. Side/back geometry is still rounded/blocky and poorly resolved, with visible speckles. Not yet a high-quality replacement."}
+  ],
+  "scope": "Interim checks; full2000-step models and final matching-view comparisons still require inspection. Exact six-axis kinematics are not verified."
+}

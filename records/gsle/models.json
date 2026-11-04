@@ -1,0 +1,195 @@
+{
+  "openclip": {
+    "repository": "laion/CLIP-ViT-B-16-laion2B-s34B-b88K",
+    "revision": "7288da5a0d6f0b51c4a2b27c624837a9236d0112",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--laion--CLIP-ViT-B-16-laion2B-s34B-b88K/snapshots/7288da5a0d6f0b51c4a2b27c624837a9236d0112",
+    "files": [
+      {
+        "name": "open_clip_config.json",
+        "bytes": 469
+      },
+      {
+        "name": "open_clip_pytorch_model.bin",
+        "bytes": 598529951,
+        "sha256": "1f16b1274ca25493b1f36225efe81d05f66a3f33c487acd1a07c5ba87920de6f"
+      }
+    ]
+  },
+  "inpainting": {
+    "repository": "stable-diffusion-v1-5/stable-diffusion-inpainting",
+    "revision": "8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-inpainting/snapshots/8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+    "files": [
+      {
+        "name": "feature_extractor/preprocessor_config.json",
+        "bytes": 342
+      },
+      {
+        "name": "model_index.json",
+        "bytes": 548
+      },
+      {
+        "name": "safety_checker/config.json",
+        "bytes": 4777
+      },
+      {
+        "name": "safety_checker/model.fp16.safetensors",
+        "bytes": 608018440,
+        "sha256": "08902f19b1cfebd7c989f152fc0507bef6898c706a91d666509383122324b511"
+      },
+      {
+        "name": "scheduler/scheduler_config.json",
+        "bytes": 313
+      },
+      {
+        "name": "text_encoder/config.json",
+        "bytes": 617
+      },
+      {
+        "name": "text_encoder/model.fp16.safetensors",
+        "bytes": 246144864,
+        "sha256": "77795e2023adcf39bc29a884661950380bd093cf0750a966d473d1718dc9ef4e"
+      },
+      {
+        "name": "tokenizer/merges.txt",
+        "bytes": 524619
+      },
+      {
+        "name": "tokenizer/special_tokens_map.json",
+        "bytes": 472
+      },
+      {
+        "name": "tokenizer/tokenizer_config.json",
+        "bytes": 806
+      },
+      {
+        "name": "tokenizer/vocab.json",
+        "bytes": 1059962
+      },
+      {
+        "name": "unet/config.json",
+        "bytes": 748
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.fp16.safetensors",
+        "bytes": 1719154104,
+        "sha256": "24b788b4a777748377cc20364eea4ae113c8c42f4468c16bc8c02fdae5492af9"
+      },
+      {
+        "name": "vae/config.json",
+        "bytes": 552
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.fp16.safetensors",
+        "bytes": 167335342,
+        "sha256": "4fbcf0ebe55a0984f5a5e00d8c4521d52359af7229bb4d81890039d2aa16dd7c"
+      }
+    ]
+  },
+  "controlnet_depth": {
+    "repository": "lllyasviel/control_v11f1p_sd15_depth",
+    "revision": "539f99181d33db39cf1af2e517cd8056785f0a87",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lllyasviel--control_v11f1p_sd15_depth/snapshots/539f99181d33db39cf1af2e517cd8056785f0a87",
+    "files": [
+      {
+        "name": "config.json",
+        "bytes": 945
+      },
+      {
+        "name": "diffusion_pytorch_model.fp16.bin",
+        "bytes": 722698343,
+        "sha256": "e809f8a7e4c3dd40f906e35213afa0e0e90feea363d9a59b653cacbc0a7c9d84"
+      }
+    ]
+  },
+  "stable_zero123": {
+    "repository": "ashawkey/stable-zero123-diffusers",
+    "revision": "a6c09344fbd45843d35f2095c203c4a8e55b4dbb",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--ashawkey--stable-zero123-diffusers/snapshots/a6c09344fbd45843d35f2095c203c4a8e55b4dbb",
+    "files": [
+      {
+        "name": "clip_camera_projection/config.json",
+        "bytes": 132
+      },
+      {
+        "name": "clip_camera_projection/diffusion_pytorch_model.safetensors",
+        "bytes": 1187512
+      },
+      {
+        "name": "clip_camera_projection/zero123.py",
+        "bytes": 30628
+      },
+      {
+        "name": "feature_extractor/preprocessor_config.json",
+        "bytes": 546
+      },
+      {
+        "name": "image_encoder/config.json",
+        "bytes": 585
+      },
+      {
+        "name": "image_encoder/model.safetensors",
+        "bytes": 607980096,
+        "sha256": "0dd0c1777bb75e2e9b7aa29b799b3ee8ebaaaa731e2c471a9ec589f12542cce7"
+      },
+      {
+        "name": "model_index.json",
+        "bytes": 562
+      },
+      {
+        "name": "scheduler/scheduler_config.json",
+        "bytes": 502
+      },
+      {
+        "name": "unet/config.json",
+        "bytes": 1778
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.safetensors",
+        "bytes": 1719148344,
+        "sha256": "df42cdcac55d5b89c15a0512845db20a6213f1eaa129f201dfc080fc8642d220"
+      },
+      {
+        "name": "vae/config.json",
+        "bytes": 601
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.safetensors",
+        "bytes": 167335342,
+        "sha256": "3e4c08995484ee61270175e9e7a072b66a6e4eeb5f0c266667fe1f45b90daf9a"
+      }
+    ]
+  },
+  "view_text": {
+    "repository": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+    "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+    "files": [
+      {
+        "name": "text_encoder/config.json",
+        "bytes": 617
+      },
+      {
+        "name": "text_encoder/pytorch_model.bin",
+        "bytes": 492305335,
+        "sha256": "770a47a9ffdcfda0b05506a7888ed714d06131d60267e6cf52765d61cf59fd67"
+      },
+      {
+        "name": "tokenizer/merges.txt",
+        "bytes": 524619
+      },
+      {
+        "name": "tokenizer/special_tokens_map.json",
+        "bytes": 472
+      },
+      {
+        "name": "tokenizer/tokenizer_config.json",
+        "bytes": 806
+      },
+      {
+        "name": "tokenizer/vocab.json",
+        "bytes": 1059962
+      }
+    ]
+  }
+}

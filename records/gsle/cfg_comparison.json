@@ -1,0 +1,78 @@
+{
+  "design": {
+    "kind": "Explicit implementation-ambiguity ablation, not a replacement of the primary run",
+    "only_config_difference": {
+      "refine.unconditional_conditioning": {
+        "primary": "drop_all_eq7",
+        "ablation": "text_only"
+      }
+    },
+    "shared_input_sha256": {
+      "coarse/final.pth": "b090c48709fe3bd5dda086a3eb4ef6f755cd4bb38104049d8f4cdfd78b6a333f",
+      "foreground/reference_white.png": "31c195c53a5b4f9c3bf8494d1149f0d75716e93e1d4c70e5ca15af3ca0e4a046",
+      "foreground/mask.png": "35e7ff55fa67cc8eb6ba3cd172d0eb421f80d3339a446bd0ebc1e40863eb4340",
+      "avp/anchor.json": "aa38c94004a4bddfd79b153be8bb2501644d2e6ebcf87e256d1601d3a10f607f",
+      "localization/edit_region.json": "f4c22b7e68724c5c3578f5806632a4b1fb8040fb3f5bc4e869bbc13228058d2e",
+      "localization/keep_indices.npy": "3fc235ec5e28c70cded2342a1c1778be81b638f969a4eebbfe98bac5e29411a0"
+    },
+    "iterations": 2000,
+    "seed": 42,
+    "meaning": "The ablation retains mask, masked-image context and ControlNet conditions in the empty-text branch, as conventional text CFG does. GSLE Eq7 omits these inputs but does not document nine-channel unconditional padding."
+  },
+  "matched_camera_count": 8,
+  "variants": {
+    "drop_all_eq7": {
+      "optimizer_updates": 2000,
+      "batch": 4,
+      "logged_step_seconds_sum": 2224.050788640976,
+      "all_attempt_logged_steps": 2000,
+      "all_attempt_logged_step_seconds": 2224.050788640976,
+      "median_step_seconds": 1.1143412590026855,
+      "p90_step_seconds": 1.178074312210083,
+      "peak_allocated_GiB": 13.937850952148438,
+      "final_points": 314524,
+      "last_reference_rgb_mse": 0.037731245160102844,
+      "last_reference_mask_mse": 0.061253227293491364,
+      "attempts": [
+        "20261104T205900Z"
+      ],
+      "median_diffusion_noise_residual_rms": 21.42018222808838,
+      "p90_diffusion_noise_residual_rms": 30.995979690551756,
+      "mean_dilated_old_new_projection_fraction": 0.16732778880070548,
+      "max_dilated_old_new_projection_fraction": 0.9392843364197531,
+      "retained_background_bitwise_identical": true,
+      "scene": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/final/scene.ply",
+      "independent_object": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/final/object_world.ply"
+    },
+    "text_only": {
+      "optimizer_updates": 2000,
+      "batch": 4,
+      "logged_step_seconds_sum": 1871.3463938236237,
+      "all_attempt_logged_steps": 2000,
+      "all_attempt_logged_step_seconds": 1871.3463938236237,
+      "median_step_seconds": 0.9316262006759644,
+      "p90_step_seconds": 0.986958646774292,
+      "peak_allocated_GiB": 13.938400745391846,
+      "final_points": 314524,
+      "last_reference_rgb_mse": 0.0016914932057261467,
+      "last_reference_mask_mse": 0.001037288922816515,
+      "attempts": [
+        "20261104T210701Z"
+      ],
+      "median_diffusion_noise_residual_rms": 0.3402257114648819,
+      "p90_diffusion_noise_residual_rms": 0.6238397300243378,
+      "mean_dilated_old_new_projection_fraction": 0.06169294532627866,
+      "max_dilated_old_new_projection_fraction": 0.280835262345679,
+      "retained_background_bitwise_identical": true,
+      "scene": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/scene.ply",
+      "independent_object": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/object_world.ply"
+    }
+  },
+  "limits": [
+    "This tests an unpublished implementation detail, not a different editing method or access to the authors' source.",
+    "Reference errors share the same foreground image/mask, but are full-frame and include white background.",
+    "Both runs use a shared server and different physical A6000 GPUs; timing differences are not a controlled method-speed comparison.",
+    "Background MAE masks are variant-specific old/new projection unions; their values are not directly comparable on an identical pixel set.",
+    "Noise residual magnitude is a diagnostic, not a perceptual quality score. Inspect all actual matched views."
+  ]
+}

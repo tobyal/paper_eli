@@ -1,0 +1,14 @@
+{
+  "pinned_GSGen_source_extracted_at_runtime": true,
+  "exact_knn_indices_agree": true,
+  "input_gaussians": 128,
+  "added": 384,
+  "maximum_errors": {
+    "xyz": 0.0,
+    "log_scale": 0.0,
+    "rotation": 0.0,
+    "color_logit": 0.0,
+    "opacity_logit": 0.0
+  },
+  "adam_moments_extended_and_pruned": true
+}

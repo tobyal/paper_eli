@@ -1,0 +1,12 @@
+{
+  "sam": {
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/torch/hub/checkpoints/sam_vit_h_4b8939.pth",
+    "bytes": 2564550879,
+    "url": "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth",
+    "sha256": "a7bf3b02f3ebf1267aba913ff637d9a2d5c33d3173bb679e46d9f338c26f262e"
+  },
+  "source_identity_record": "/mnt/sda/ubuntu/lkx/papers/paper_eli/records/common_source_identity.json",
+  "source_ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+  "source_checkpoint": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/chkpnt30000.pth",
+  "renderer_commit": "2eee0e26d2d5fd00ec462df47752223952f6bf4e"
+}

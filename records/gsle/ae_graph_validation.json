@@ -1,0 +1,38 @@
+{
+  "actual_features": true,
+  "updates": [
+    {
+      "update": 1,
+      "batch": 64,
+      "maximum_parameter_and_buffer_difference": 1.1920928955078125e-07,
+      "loss_difference": 0.0
+    },
+    {
+      "update": 2,
+      "batch": 64,
+      "maximum_parameter_and_buffer_difference": 2.913177013397217e-06,
+      "loss_difference": 5.587935447692871e-09
+    },
+    {
+      "update": 3,
+      "batch": 37,
+      "maximum_parameter_and_buffer_difference": 2.9802322387695312e-06,
+      "loss_difference": 6.984919309616089e-09
+    },
+    {
+      "update": 4,
+      "batch": 64,
+      "maximum_parameter_and_buffer_difference": 3.4943222999572754e-06,
+      "loss_difference": 4.6566128730773926e-09
+    },
+    {
+      "update": 5,
+      "batch": 64,
+      "maximum_parameter_and_buffer_difference": 1.691817305982113e-05,
+      "loss_difference": 5.820766091346741e-09
+    }
+  ],
+  "100_update_seconds": 0.11243534088134766,
+  "dtype": "float32",
+  "optimizer": "Adam, unchanged learning rate/loss; capturable=True for graph execution"
+}

@@ -1,0 +1,293 @@
+{
+  "source_video_seconds": 174.89655,
+  "replacement": "a photo of one yellow six-axis industrial robot arm, a single articulated KUKA-style robotic manipulator standing on a square steel pedestal, shoulder and elbow bent upward, round rotary joints and a compact two-finger gripper",
+  "target": {
+    "text": "an industrial machine with a black assembly on a white base",
+    "reference_camera": {
+      "R": [
+        [
+          0.05012684687972069,
+          0.28589048981666565,
+          -0.956950306892395
+        ],
+        [
+          -0.23574718832969666,
+          0.9344666600227356,
+          0.2668245732784271
+        ],
+        [
+          0.9705207943916321,
+          0.21222327649593353,
+          0.11423974484205246
+        ]
+      ],
+      "t": [
+        2.4814629554748535,
+        -0.5801049470901489,
+        2.027266025543213
+      ],
+      "width": 938,
+      "height": 528,
+      "fx": 706.663949110369,
+      "fy": 703.1808795079689,
+      "cx": 469.0,
+      "cy": 264.0,
+      "name": "frame_000151.jpg"
+    },
+    "reference_proposal": {
+      "level": 3,
+      "feature_index": 1223,
+      "area_fraction": 0.027244055695548233,
+      "centroid": [
+        0.45086269955660496,
+        0.5492443893466646
+      ],
+      "text_scores": [
+        0.654296875,
+        0.69677734375,
+        0.55126953125
+      ],
+      "semantic_score": 0.69677734375,
+      "rank": 0.6834188852753184,
+      "bbox": [
+        354,
+        216,
+        504,
+        364
+      ]
+    },
+    "selected_level": 3,
+    "seed_count": 7520,
+    "target_gaussians": 31352,
+    "retained_gaussians": 1797425,
+    "bbox_low": [
+      -0.12916018611076893,
+      -0.8411020551177354,
+      2.1729955463884774
+    ],
+    "bbox_high": [
+      1.0565429445947743,
+      0.45987116611375434,
+      3.2685046766489743
+    ],
+    "bbox_corners": [
+      [
+        0.9769474575787876,
+        0.17749916601191001,
+        3.2685046766489743
+      ],
+      [
+        -0.07820480895132578,
+        0.25859517372674423,
+        3.1718970871617005
+      ],
+      [
+        0.9259920804193446,
+        -0.8411020551177354,
+        2.9699899218225423
+      ],
+      [
+        -0.12916018611076893,
+        -0.7600060474029011,
+        2.8733823323352685
+      ],
+      [
+        1.0565429445947743,
+        0.3787751583989201,
+        2.568117890702183
+      ],
+      [
+        0.0013906780646607277,
+        0.45987116611375434,
+        2.4715103012149093
+      ],
+      [
+        1.005587567435331,
+        -0.6398260627307253,
+        2.269603135875751
+      ],
+      [
+        -0.04956469909478242,
+        -0.558730055015891,
+        2.1729955463884774
+      ]
+    ],
+    "center": [
+      0.46369137924200265,
+      -0.19061544450199056,
+      2.720750111518726
+    ],
+    "up": [
+      -0.04795057699084282,
+      -0.9585350751876831,
+      -0.28091156482696533
+    ],
+    "up_estimation": {
+      "method": "LangSplat factory-floor query + robust plane fit",
+      "normal": [
+        -0.04795057699084282,
+        -0.9585350751876831,
+        -0.28091156482696533
+      ],
+      "offset": 1.0350412130355835,
+      "tolerance": 0.014751100540161132,
+      "initial_ransac_tolerance": 0.0055313147604465485,
+      "initial_inlier_fraction": 0.2562552376391716,
+      "acceptance": "fraction>0.3, or fraction>0.2 with >=1000 inliers and normal/up alignment>0.95; refit within three initial tolerances",
+      "semantic_candidates": 16706,
+      "inlier_fraction": 0.48180294504968274,
+      "camera_pca_singular_values": [
+        61.860084533691406,
+        30.07849884033203,
+        0.8651629686355591
+      ]
+    },
+    "source_ply": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+    "source_indices_preserved": true,
+    "manual_roi_used": false,
+    "extent_rule": "0.5%/99.5% quantiles of visible text-positive 3D seeds, plus 5% per-axis margin",
+    "removal_rule": "Gaussian centers inside the semantic-derived 3D bounding box; preserve coplanar floor-semantic Gaussians when a supported floor plane is available",
+    "preserved_floor_gaussians": 118,
+    "floor_preservation_applied": true,
+    "semantic_boundary": 0.5,
+    "object_scale": 1.0626645257923413,
+    "object_scale_definition": "world units per local unit; initial local sphere diameter maps to the largest generation-box side",
+    "original_localization": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/localization/target.json",
+    "original_bbox_corners": [
+      [
+        -0.019557789554819467,
+        -0.21581866158917548,
+        2.519342902004719
+      ],
+      [
+        -0.019557789554819467,
+        -0.21581866158917548,
+        3.042225769460201
+      ],
+      [
+        -0.019557789554819467,
+        0.24428901142254472,
+        2.519342902004719
+      ],
+      [
+        -0.019557789554819467,
+        0.24428901142254472,
+        3.042225769460201
+      ],
+      [
+        0.9674358213227242,
+        -0.21581866158917548,
+        2.519342902004719
+      ],
+      [
+        0.9674358213227242,
+        -0.21581866158917548,
+        3.042225769460201
+      ],
+      [
+        0.9674358213227242,
+        0.24428901142254472,
+        2.519342902004719
+      ],
+      [
+        0.9674358213227242,
+        0.24428901142254472,
+        3.042225769460201
+      ]
+    ],
+    "region_axes": [
+      [
+        0.10857854335179773,
+        -0.04795057699084282,
+        -0.9929307330019072
+      ],
+      [
+        0.27456649722715715,
+        -0.9585350751876831,
+        0.0763138372896824
+      ],
+      [
+        -0.9554182008544799,
+        -0.28091156482696533,
+        -0.09091071278138431
+      ]
+    ],
+    "original_oriented_side_lengths": [
+      0.7330682891747289,
+      0.6352401005907029,
+      1.0626645257923413
+    ],
+    "generation_oriented_side_lengths": [
+      0.7330682891747289,
+      1.0626645257923413,
+      1.0626645257923413
+    ],
+    "generation_region_rule": "preserve original floor-aligned horizontal extents and bottom; raise height to the largest original oriented extent",
+    "manual_coordinates": false,
+    "paper_status": "explicit industrial replacement adaptation; GSLE does not prescribe new-object box sizing"
+  },
+  "stages": {
+    "coarse": {
+      "optimizer_updates": 6500,
+      "batch": 6,
+      "logged_step_seconds_sum": 2287.9625215530396,
+      "all_attempt_logged_steps": 6500,
+      "all_attempt_logged_step_seconds": 2287.9625215530396,
+      "median_step_seconds": 0.3205223083496094,
+      "p90_step_seconds": 0.42969458103179936,
+      "peak_allocated_GiB": 5.991086006164551,
+      "final_points": 314524,
+      "last_reference_rgb_mse": 0.0027825208380818367,
+      "last_reference_mask_mse": 0.0022558753844350576,
+      "attempts": [
+        "20261104T201828Z"
+      ]
+    },
+    "refine": {
+      "optimizer_updates": 2000,
+      "batch": 4,
+      "logged_step_seconds_sum": 1871.3463938236237,
+      "all_attempt_logged_steps": 2000,
+      "all_attempt_logged_step_seconds": 1871.3463938236237,
+      "median_step_seconds": 0.9316262006759644,
+      "p90_step_seconds": 0.986958646774292,
+      "peak_allocated_GiB": 13.938400745391846,
+      "final_points": 314524,
+      "last_reference_rgb_mse": 0.0016914932057261467,
+      "last_reference_mask_mse": 0.001037288922816515,
+      "attempts": [
+        "20261104T210701Z"
+      ]
+    }
+  },
+  "background_preservation": {
+    "train": {
+      "views": 306,
+      "mean_RGB_MAE_outside_edit": 9.79068301112896e-06,
+      "max_view_RGB_MAE_outside_edit": 0.0006958542508073151
+    },
+    "test": {
+      "views": 44,
+      "mean_RGB_MAE_outside_edit": 4.3033953051557266e-06,
+      "max_view_RGB_MAE_outside_edit": 0.00011969823390245438
+    }
+  },
+  "composition": {
+    "stage": "refine",
+    "source": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply",
+    "source_gaussians": 1828777,
+    "background_gaussians": 1797425,
+    "new_object_gaussians": 314524,
+    "retained_background_bitwise_identical": true,
+    "placement": "already world-space; exact similarity recorded in object checkpoint/effective_config.json",
+    "seconds": 26.241753816604614,
+    "scene": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/scene.ply",
+    "object": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/object_world.ply"
+  },
+  "metric_limits": [
+    "No ground-truth replacement object or edited scene exists.",
+    "Background error excludes the dilated union of old/new object projections.",
+    "Multiview geometric quality and text compliance require inspection of the actual orbit renders.",
+    "Step timings exclude setup/checkpoint/render overhead; this is a shared GPU server."
+  ]
+}

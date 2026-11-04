@@ -1,0 +1,10 @@
+{
+  "epoch": 99,
+  "train_loss": 0.0006331555952869334,
+  "evaluation_loss": 0.2503667946604786,
+  "seconds": 6.098113059997559,
+  "elapsed": 399.2971749305725,
+  "feature_vectors": 337721,
+  "best_epoch": 98,
+  "best_loss": 0.24917160573986288
+}

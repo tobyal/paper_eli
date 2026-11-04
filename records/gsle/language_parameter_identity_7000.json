@@ -1,0 +1,33 @@
+{
+  "levels": [
+    {
+      "level": 1,
+      "iteration": 7000,
+      "source_geometry_and_appearance_exactly_identical": true,
+      "gaussians": 1828777,
+      "finite_language_features": true,
+      "nonzero_language_fraction": 0.8710548281669617,
+      "language_norm_mean": 0.02518824301660061
+    },
+    {
+      "level": 2,
+      "iteration": 7000,
+      "source_geometry_and_appearance_exactly_identical": true,
+      "gaussians": 1828777,
+      "finite_language_features": true,
+      "nonzero_language_fraction": 0.8712543845176697,
+      "language_norm_mean": 0.02536468394100666
+    },
+    {
+      "level": 3,
+      "iteration": 7000,
+      "source_geometry_and_appearance_exactly_identical": true,
+      "gaussians": 1828777,
+      "finite_language_features": true,
+      "nonzero_language_fraction": 0.8711275458335876,
+      "language_norm_mean": 0.025159183889627457
+    }
+  ],
+  "seconds": 4.445556163787842,
+  "scope": "Actual saved training checkpoints, not synthetic probe"
+}

@@ -1,5 +1,21 @@
 # Industrial 3DGS editing reproduction
 
+## GSLE 三维物体替换（2026-11-05）
+
+新增 [GSLE 代码与运行说明](gsle/README.txt)，基于同一场景自动定位整台黑色组件及白色底座，并生成黄色工业机械臂。已实际完成 LangSplat 三尺度训练、AVP、深度 Inpainting、SAM、6500 步 Stable Zero123 3D-SDS、合成，以及两种无条件分支解释各 2000 步 DI-SDS。此实现依据论文及补充材料编写，复用官方组件，并非作者官方 GSLE 源码。
+
+**流程已完整运行，但高质量替换目标尚未达成。** 保留背景条件的 `text_only` 版本正面可以辨认机械臂，侧后方仍存在块状结构、孔洞和漂浮点；`drop_all_eq7` 版本产生黄色雾状伪影，作为负结果保留。两套实际模型、同相机对照、350 视角原轨迹渲染和 360° 视频均已导出并核验。原速视频为 175 秒，29.17 秒版本是 6 倍速预览。
+
+- [实际运行报告与局限](gsle/REPORT.txt)
+- [论文算法、歧义与适配记录](gsle/PAPER_NOTES.txt)
+- [模块输入输出与坐标约定](gsle/interfaces.json)
+- [交付索引及逐文件 SHA256](records/gsle/deliverables.json)
+- [最终视觉检查](records/gsle/final_visual_review.json)与[两种条件分支对照](records/gsle/cfg_comparison.json)
+
+服务器较好版本位于 `outputs/gsle/ablations/text_only_cfg`，完整结果归档为 `gsle_results.tar.gz`。本机执行 `powershell -ExecutionPolicy Bypass -File gsle/download_results.ps1` 可下载模型及预览到 `results/gsle`，并自动校验 SHA256。大型模型、图片、视频和权重不进入 Git。
+
+## 原有四方法颜色编辑基线
+
 在同一段工业场景视频上，依次运行 GaussianEditor、DGE、DreamCatalyst 和 EditSplat 的官方开源代码。仓库包含数据预处理、环境安装、模型下载、场景适配、运行、渲染与评价脚本，以及本次实验的版本记录和实际测量结果。
 
 **当前结果：四种方法均完成实际运行，但均未明显将指定设备外壳改红。流程完成不代表编辑目标达成。** 本仓库记录的是可复现的负结果基线，不能作为四篇论文在其他场景上的性能结论。

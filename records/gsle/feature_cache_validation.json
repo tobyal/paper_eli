@@ -1,0 +1,18 @@
+{
+  "views": 306,
+  "feature_vectors": 337721,
+  "feature_dimension": 512,
+  "segment_shape": [
+    4,
+    528,
+    938
+  ],
+  "all_finite": true,
+  "all_segment_indices_valid": true,
+  "embedding_norm_range": [
+    0.9994955658912659,
+    1.0004929304122925
+  ],
+  "ordered_filename_and_file_bytes_sha256": "21629bdb03900e5242d603e406f94c96118442d1da796474497859a40562c75f",
+  "seconds": 15.777007341384888
+}

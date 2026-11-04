@@ -1,0 +1,99 @@
+{
+  "checked_at": "2026-11-05T05:59:45.9354392+08:00",
+  "downloaded_files": 17,
+  "downloaded_bytes": 873817991.0,
+  "sha256_verified_by": "gsle/download_results.ps1",
+  "local_root": "E:/codex_projects/paper_eli/results/gsle",
+  "visually_inspected_decoded_frames": [
+    "comparison_original_speed_2fps.mp4 at 75s",
+    "object_360.mp4 at 3s"
+  ],
+  "observations": "Decoded front video frame matches the saved structural replacement. Rear orbit frame retains substantial yellow blob geometry and floaters; high quality replacement is not achieved.",
+  "verification": [
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\scene.ply",
+      "sha256": "76a3b70387a2444f0f96d6aea5dd30ce5a8b38dc8f2be18403ea05c0990b2b0d",
+      "bytes": 523764884
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\object_world.ply",
+      "sha256": "e2addaf8c184c624b755d06644a0385a24a096d21267d2310f07cc6cbe665fb4",
+      "bytes": 78003483
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\object_local.ply",
+      "sha256": "f49adfa55ddf2b35a26f335dd9ebfe5fb252a545a52935258d87e292765fb8db",
+      "bytes": 78003483
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\object_checkpoint.pth",
+      "sha256": "df9a1edae9ad77557ca74273216eae123fcbb1da408c4383bead9f8ceed35ad2",
+      "bytes": 52860997
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\effective_config.json",
+      "sha256": "874055eddae7e360fbee2787bd7b7684570724d9e38ee447eaa5fe7cb7061d11",
+      "bytes": 5734
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\render_metrics_and_cameras.json",
+      "sha256": "b339618feee5eff6d4764c9d82857ffa6061ef690c4c463594f3da5bfeb2e450",
+      "bytes": 310319
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\run_summary.json",
+      "sha256": "8187491410e536f99cad560dd815dc083962e01e133afdc6e51fe7553da754f9",
+      "bytes": 8773
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\anchor_comparison.png",
+      "sha256": "b0cfba580db30822d180a794024f0668216e48559f929c8f02591318d3f17168",
+      "bytes": 276128
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\matched_views_1.jpg",
+      "sha256": "16e04d12796ff564099c169102931740935ca452fd3af52ecd1787132042685f",
+      "bytes": 1045538
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\matched_views_2.jpg",
+      "sha256": "906994fe70a46471dc236f0113ce1b4de6a5d00b88e8f7dc64251a8fbbd5803e",
+      "bytes": 1124754
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\training_curves.png",
+      "sha256": "ae71deb712a9e511d49551fdb17899c8573ac0cee119ef9af89a89eab0b98822",
+      "bytes": 237372
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\comparison_original_speed_2fps.mp4",
+      "sha256": "95a960c3930be78f9c88b21a8c1d9d529912aa9bc9e48bb025093b1d66d0ba04",
+      "bytes": 68142048
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\comparison_6x_preview_12fps.mp4",
+      "sha256": "f74236e107577d6c58e5dc2f07398d5ca8cb22c6805a0e7564f4abd963dd9ab6",
+      "bytes": 32739002
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\edited_original_speed_2fps.mp4",
+      "sha256": "2ea3792b6778c6b7b94c496801ab08de9b86dcff8e2cb176cd56427cd69ccb5b",
+      "bytes": 34320944
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\object_360.mp4",
+      "sha256": "8dbecc6f64e27918e06bdbdb0559ac1addd2b1a54f37bc3e79c8e8f1d7d6b705",
+      "bytes": 378371
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\scene_360.mp4",
+      "sha256": "7a7794c8b9e2616158f2067fb597d68503cddfcc4f6ee3de52d010156bae1442",
+      "bytes": 2298174
+    },
+    {
+      "file": "E:\\codex_projects\\paper_eli\\results\\gsle\\cfg_comparison.png",
+      "sha256": "4fb90dc2afcf2c4d34e70edd44cb7f640928dacfb7443b2230effb75d9efb3fd",
+      "bytes": 297987
+    }
+  ]
+}

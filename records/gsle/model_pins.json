@@ -1,0 +1,467 @@
+{
+  "openclip": {
+    "repository": "laion/CLIP-ViT-B-16-laion2B-s34B-b88K",
+    "revision": "7288da5a0d6f0b51c4a2b27c624837a9236d0112",
+    "patterns": [
+      "open_clip_pytorch_model.bin",
+      "open_clip_config.json"
+    ],
+    "available_files": [
+      {
+        "name": ".gitattributes",
+        "bytes": 1477
+      },
+      {
+        "name": "README.md",
+        "bytes": 7762
+      },
+      {
+        "name": "merges.txt",
+        "bytes": 524657
+      },
+      {
+        "name": "open_clip_config.json",
+        "bytes": 469
+      },
+      {
+        "name": "open_clip_model.safetensors",
+        "bytes": 598516980
+      },
+      {
+        "name": "open_clip_pytorch_model.bin",
+        "bytes": 598529951
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 472
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 2224053
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 806
+      },
+      {
+        "name": "vocab.json",
+        "bytes": 862328
+      }
+    ]
+  },
+  "inpainting": {
+    "repository": "stable-diffusion-v1-5/stable-diffusion-inpainting",
+    "revision": "8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+    "patterns": [
+      "model_index.json",
+      "scheduler/*",
+      "tokenizer/*",
+      "text_encoder/config.json",
+      "text_encoder/model.fp16.safetensors",
+      "unet/config.json",
+      "unet/diffusion_pytorch_model.fp16.safetensors",
+      "vae/config.json",
+      "vae/diffusion_pytorch_model.fp16.safetensors",
+      "feature_extractor/*",
+      "safety_checker/config.json",
+      "safety_checker/model.fp16.safetensors"
+    ],
+    "available_files": [
+      {
+        "name": ".gitattributes",
+        "bytes": 1753
+      },
+      {
+        "name": "README.md",
+        "bytes": 15107
+      },
+      {
+        "name": "config.json",
+        "bytes": 748
+      },
+      {
+        "name": "feature_extractor/preprocessor_config.json",
+        "bytes": 342
+      },
+      {
+        "name": "model_index.json",
+        "bytes": 548
+      },
+      {
+        "name": "safety_checker/config.json",
+        "bytes": 4777
+      },
+      {
+        "name": "safety_checker/model.fp16.safetensors",
+        "bytes": 608018440
+      },
+      {
+        "name": "safety_checker/pytorch_model.bin",
+        "bytes": 1216061799
+      },
+      {
+        "name": "safety_checker/pytorch_model.fp16.bin",
+        "bytes": 608103564
+      },
+      {
+        "name": "scheduler/scheduler_config.json",
+        "bytes": 313
+      },
+      {
+        "name": "sd-v1-5-inpainting.ckpt",
+        "bytes": 4265437280
+      },
+      {
+        "name": "text_encoder/config.json",
+        "bytes": 617
+      },
+      {
+        "name": "text_encoder/model.fp16.safetensors",
+        "bytes": 246144864
+      },
+      {
+        "name": "text_encoder/pytorch_model.bin",
+        "bytes": 492305335
+      },
+      {
+        "name": "text_encoder/pytorch_model.fp16.bin",
+        "bytes": 246187076
+      },
+      {
+        "name": "tokenizer/merges.txt",
+        "bytes": 524619
+      },
+      {
+        "name": "tokenizer/special_tokens_map.json",
+        "bytes": 472
+      },
+      {
+        "name": "tokenizer/tokenizer_config.json",
+        "bytes": 806
+      },
+      {
+        "name": "tokenizer/vocab.json",
+        "bytes": 1059962
+      },
+      {
+        "name": "unet/config.json",
+        "bytes": 748
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.bin",
+        "bytes": 3438412325
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.fp16.bin",
+        "bytes": 1719356693
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.fp16.safetensors",
+        "bytes": 1719154104
+      },
+      {
+        "name": "vae/config.json",
+        "bytes": 552
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.bin",
+        "bytes": 334707217
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.fp16.bin",
+        "bytes": 167405651
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.fp16.safetensors",
+        "bytes": 167335342
+      }
+    ]
+  },
+  "controlnet_depth": {
+    "repository": "lllyasviel/control_v11f1p_sd15_depth",
+    "revision": "539f99181d33db39cf1af2e517cd8056785f0a87",
+    "patterns": [
+      "config.json",
+      "diffusion_pytorch_model.fp16.bin"
+    ],
+    "available_files": [
+      {
+        "name": ".gitattributes",
+        "bytes": 1477
+      },
+      {
+        "name": "README.md",
+        "bytes": 16998
+      },
+      {
+        "name": "config.json",
+        "bytes": 945
+      },
+      {
+        "name": "control_net_depth.py",
+        "bytes": 1559
+      },
+      {
+        "name": "diffusion_pytorch_model.bin",
+        "bytes": 1445254969
+      },
+      {
+        "name": "diffusion_pytorch_model.fp16.bin",
+        "bytes": 722698343
+      },
+      {
+        "name": "diffusion_pytorch_model.fp16.safetensors",
+        "bytes": 722598642
+      },
+      {
+        "name": "diffusion_pytorch_model.safetensors",
+        "bytes": 1445157124
+      },
+      {
+        "name": "images/control.png",
+        "bytes": 145217
+      },
+      {
+        "name": "images/image_out.png",
+        "bytes": 865140
+      },
+      {
+        "name": "images/input.png",
+        "bytes": 890252
+      },
+      {
+        "name": "sd.png",
+        "bytes": 59531
+      }
+    ]
+  },
+  "stable_zero123": {
+    "repository": "ashawkey/stable-zero123-diffusers",
+    "revision": "a6c09344fbd45843d35f2095c203c4a8e55b4dbb",
+    "patterns": [
+      "model_index.json",
+      "scheduler/*",
+      "feature_extractor/*",
+      "image_encoder/config.json",
+      "image_encoder/model.safetensors",
+      "clip_camera_projection/*",
+      "unet/config.json",
+      "unet/diffusion_pytorch_model.safetensors",
+      "vae/config.json",
+      "vae/diffusion_pytorch_model.safetensors"
+    ],
+    "available_files": [
+      {
+        "name": ".gitattributes",
+        "bytes": 1519
+      },
+      {
+        "name": "README.md",
+        "bytes": 4272
+      },
+      {
+        "name": "clip_camera_projection/config.json",
+        "bytes": 132
+      },
+      {
+        "name": "clip_camera_projection/diffusion_pytorch_model.safetensors",
+        "bytes": 1187512
+      },
+      {
+        "name": "clip_camera_projection/zero123.py",
+        "bytes": 30628
+      },
+      {
+        "name": "feature_extractor/preprocessor_config.json",
+        "bytes": 546
+      },
+      {
+        "name": "image_encoder/config.json",
+        "bytes": 585
+      },
+      {
+        "name": "image_encoder/model.safetensors",
+        "bytes": 607980096
+      },
+      {
+        "name": "model_index.json",
+        "bytes": 562
+      },
+      {
+        "name": "scheduler/scheduler_config.json",
+        "bytes": 502
+      },
+      {
+        "name": "unet/config.json",
+        "bytes": 1778
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.safetensors",
+        "bytes": 1719148344
+      },
+      {
+        "name": "vae/config.json",
+        "bytes": 601
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.safetensors",
+        "bytes": 167335342
+      }
+    ]
+  },
+  "view_text": {
+    "repository": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+    "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+    "patterns": [
+      "tokenizer/*",
+      "text_encoder/config.json",
+      "text_encoder/pytorch_model.bin"
+    ],
+    "available_files": [
+      {
+        "name": ".gitattributes",
+        "bytes": 1548
+      },
+      {
+        "name": "README.md",
+        "bytes": 14461
+      },
+      {
+        "name": "feature_extractor/preprocessor_config.json",
+        "bytes": 342
+      },
+      {
+        "name": "model_index.json",
+        "bytes": 541
+      },
+      {
+        "name": "safety_checker/config.json",
+        "bytes": 4723
+      },
+      {
+        "name": "safety_checker/model.fp16.safetensors",
+        "bytes": 608018440
+      },
+      {
+        "name": "safety_checker/model.safetensors",
+        "bytes": 1215981830
+      },
+      {
+        "name": "safety_checker/pytorch_model.bin",
+        "bytes": 1216061799
+      },
+      {
+        "name": "safety_checker/pytorch_model.fp16.bin",
+        "bytes": 608103564
+      },
+      {
+        "name": "scheduler/scheduler_config.json",
+        "bytes": 308
+      },
+      {
+        "name": "text_encoder/config.json",
+        "bytes": 617
+      },
+      {
+        "name": "text_encoder/model.fp16.safetensors",
+        "bytes": 246144864
+      },
+      {
+        "name": "text_encoder/model.safetensors",
+        "bytes": 492265874
+      },
+      {
+        "name": "text_encoder/pytorch_model.bin",
+        "bytes": 492305335
+      },
+      {
+        "name": "text_encoder/pytorch_model.fp16.bin",
+        "bytes": 246187076
+      },
+      {
+        "name": "tokenizer/merges.txt",
+        "bytes": 524619
+      },
+      {
+        "name": "tokenizer/special_tokens_map.json",
+        "bytes": 472
+      },
+      {
+        "name": "tokenizer/tokenizer_config.json",
+        "bytes": 806
+      },
+      {
+        "name": "tokenizer/vocab.json",
+        "bytes": 1059962
+      },
+      {
+        "name": "unet/config.json",
+        "bytes": 743
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.bin",
+        "bytes": 3438354725
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.fp16.bin",
+        "bytes": 1719327893
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.fp16.safetensors",
+        "bytes": 1719125304
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.non_ema.bin",
+        "bytes": 3438366373
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.non_ema.safetensors",
+        "bytes": 3438167536
+      },
+      {
+        "name": "unet/diffusion_pytorch_model.safetensors",
+        "bytes": 3438167540
+      },
+      {
+        "name": "v1-5-pruned-emaonly.ckpt",
+        "bytes": 4265380512
+      },
+      {
+        "name": "v1-5-pruned-emaonly.safetensors",
+        "bytes": 4265146304
+      },
+      {
+        "name": "v1-5-pruned.ckpt",
+        "bytes": 7703807346
+      },
+      {
+        "name": "v1-5-pruned.safetensors",
+        "bytes": 7703324286
+      },
+      {
+        "name": "v1-inference.yaml",
+        "bytes": 1873
+      },
+      {
+        "name": "vae/config.json",
+        "bytes": 547
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.bin",
+        "bytes": 334707217
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.fp16.bin",
+        "bytes": 167405651
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.fp16.safetensors",
+        "bytes": 167335342
+      },
+      {
+        "name": "vae/diffusion_pytorch_model.safetensors",
+        "bytes": 334643276
+      }
+    ]
+  }
+}

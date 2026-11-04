@@ -1,0 +1,6 @@
+{
+  "LangSplat": {"repository": "minghanqin/LangSplat", "commit": "d70edb86df0fcbda19dc0d9739a3e5140a5e65fc"},
+  "GSGen": {"repository": "gsgen3d/gsgen", "commit": "e60994e557b685d5df57ec0bb48460782091ec4d"},
+  "DreamGaussian": {"repository": "dreamgaussian/dreamgaussian", "commit": "69a3c7065d580da124dc0bf2e9a21cd3b7973b35"},
+  "segment-anything-langsplat": {"repository": "minghanqin/segment-anything-langsplat", "commit": "e5dbe4b5616e24f02f15ce5a439a5edf228b3a75"}
+}

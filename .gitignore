@@ -8,7 +8,9 @@
 !/AGENTS.md
 !/scripts/
 !/records/
+!/gsle/
 !/reproduction_results.tar.gz.sha256
+!/gsle_results.tar.gz.sha256
 
 __pycache__/
 *.py[cod]
@@ -39,6 +41,9 @@ __pycache__/
 /records/*.completed
 /records/*.reviewed
 /records/*.verified
+/records/gsle/*.completed
+/records/gsle/current_status.json
+*.pstats
 /records/current_status.json
 
 # Full logs and resource traces remain in the delivered results archive.

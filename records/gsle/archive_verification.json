@@ -1,0 +1,34 @@
+{
+  "checked_utc": "2026-11-04T22:02:55Z",
+  "archive": "/mnt/sda/ubuntu/lkx/papers/paper_eli/gsle_results.tar.gz",
+  "bytes": 4119675010,
+  "sha256": "5fc40101ef86ac5793b092e3d6426d6e3eff298a806fa857c347f80c3c8338e9",
+  "manifest_members_verified": 3736,
+  "selected_artifacts_hash_verified": 17,
+  "relative_symlinks_verified": [
+    {
+      "path": "outputs/gsle/ablations/text_only_cfg/avp",
+      "target": "outputs/gsle/avp"
+    },
+    {
+      "path": "outputs/gsle/ablations/text_only_cfg/coarse",
+      "target": "outputs/gsle/coarse"
+    },
+    {
+      "path": "outputs/gsle/ablations/text_only_cfg/composition",
+      "target": "outputs/gsle/composition"
+    },
+    {
+      "path": "outputs/gsle/ablations/text_only_cfg/foreground",
+      "target": "outputs/gsle/foreground"
+    },
+    {
+      "path": "outputs/gsle/ablations/text_only_cfg/localization",
+      "target": "outputs/gsle/localization"
+    }
+  ],
+  "manifest_exact": true,
+  "archive_checksum_matches_sidecar": true,
+  "verification_location": "/mnt/sda/ubuntu/lkx/papers/paper_eli",
+  "note": "Post-package verification; this record is outside the immutable archive it verifies."
+}

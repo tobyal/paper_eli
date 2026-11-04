@@ -1,0 +1,424 @@
+{
+  "stage": "features_in_progress",
+  "captured_utc": "2026-11-04T18:34:38Z",
+  "host": "ubuntu",
+  "CUDA_VISIBLE_DEVICES": "0",
+  "git_head": null,
+  "git_worktree_status": "?? ../../.codex/\n?? ../../apps/\n?? ../../datasets/\n?? ../../downloads/\n?? ../../gs2mesh_roi/\n?? ../../kxliu_test.txt\n?? ../../model_checkpoint/\n?? ../../mvr/\n?? ../../mvs/\n?? ../../newstart/\n?? ../../od/\n?? ../../paper1/\n?? ../../paper_nyx/\n?? ../\n?? ../../projects/\n?? ../../thin/\n?? ../../tools/",
+  "source_sha256": {
+    "gsle/00_prepare.sh": "d254e3c50b80694eeb2e46efac58671cded8691f45dcc31e8c99d58e77f00d21",
+    "gsle/01_environments.sh": "5ca08e2e7fdc9df8f78862eea7065862aa8971f7ed4793524d1b12a0b3ad6538",
+    "gsle/02_download.sh": "a67b532f45f0792a05a27231d3afc2b7bb418f89d18ca22613a97155dca57d80",
+    "gsle/03_features.sh": "ae9277651f793aa7126c3a21606e046928a83fee0d2a26e9ab722a8ea37a8b67",
+    "gsle/04_language.sh": "71b5643dd0f581e3f84592362a3b4b074acef0389c811fbbd25103d0b040c956",
+    "gsle/04_language_optimized.sh": "4b6ecb34f951b4b8860a1436ffcf3466c44dcb20b8f42c6709b2c914b1c05ef1",
+    "gsle/05_localize.sh": "5ac91495ca8f2d7a421c20c92eeb1ef70d4f0a4117f7f4d56a925bc6e9626f90",
+    "gsle/06_anchor.sh": "508e5fbfd36d4a2ac2481cf9049fc6355d6a256299d003492d3b5c5e3a6bc1f1",
+    "gsle/07_coarse.sh": "881397e1aab77dcf6ae916566045c480d5cb75006d445c1759fec79dcc0f2ee5",
+    "gsle/08_refine.sh": "507f93fd4c0633e9f0af8a3c3c9a460307bbd8de60b5657e2cbcc284902d3a82",
+    "gsle/LICENSE.DreamGaussian": "ad69e3d0cd6a33bcea74b2d59b4cc8dfc1010d0020a0017c279d7c7dfdb0c318",
+    "gsle/LICENSE.GSGen": "3285d47a95d5edfd6634727a2977340487e0db4153924b6a47608ffcb97b93f0",
+    "gsle/LICENSE.LangSplat": "cd5c95b3cfff3acc1bd412420c770f88809331c3db6872df11a970147aa8e81f",
+    "gsle/LICENSE.SAM": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "gsle/PAPER_NOTES.txt": "85411b6b43c5332f1151c87777aee275bf22bf97d8d6bea6e6258178e45a1884",
+    "gsle/README.txt": "60489b3a653cce9eabb037ac440f900648d7de15e928e876196b7c62cfab4661",
+    "gsle/THIRD_PARTY.txt": "82382fe9a599ea2448aef7dfdf55e5c8c91062721586c52ec282dcde83743364",
+    "gsle/ae_graph.py": "e2fff7c73ea6621f8a4cefb46272fcdc4b2a0baf61bebe0981dd86e5e99d6597",
+    "gsle/avp.py": "cd242ada2a3199db4a53610fa90bb249b61f8bfb8b64d05d9aee39dab3451aa7",
+    "gsle/bootstrap_sources.py": "dc8a3e818bdee1a6e91e2a4d49cd0ce71961e67ba1aab82a527b4c621b04cbfb",
+    "gsle/camera_sampling.py": "78fef466b35e83577a9f97f4ace95d75a3a45843b316ac8096fe338063e4992f",
+    "gsle/camera_source.json": "215970a848a21f9ccc660237c8230cd02c609f6ff75e3970ff8935c8d4dc8f73",
+    "gsle/common.py": "7f9201446acd1a5e84117492b406c5aabba5b828db0810ec0f98c76de919aabb",
+    "gsle/compose.py": "2f6e4221652c695e1beb3c6b602b38440a8eca25cd1d862551aeba18a359fb74",
+    "gsle/config.json": "1e4b76b1217fd4a55bae0ac9d7317b8a9a55b6785928e282a404176a61d4ffd6",
+    "gsle/diffusion.py": "ceb2cbb0982accf290478b7689b60ee3abf23c3183d1a6f0ed071f4e88868562",
+    "gsle/download_models.py": "65bd04556e978fa0a8b510db69b1ea4de555ae5e227c29c5fe3407356b25fdbb",
+    "gsle/inpaint.py": "49ac35f2a755e5d265b2114ee41c825fb66593a1af18aaf8fc1cc94fd41c1582",
+    "gsle/lang_features.py": "d4695aa54b2431c13687b60c6e122af876e2db57f1673de875535ed729550e75",
+    "gsle/lang_nms.py": "b26775d4fe7394b2446c7efe52cea10c3293a8eadda4075706860021deea4ed5",
+    "gsle/localize.py": "a2556f09f9aed427df19049aeb96b7251ec75564c258e9afa48a084fd0cb958b",
+    "gsle/object_model.py": "861eb967344c51281224665fab88c445429c1361b0ae27782a15273fab1baf6a",
+    "gsle/prepare_dataset.py": "e17c2a2f7095744179365c8caffb6d6cc095f3acb4f13d2d8c0b0f8f0d388fd0",
+    "gsle/provenance.py": "842a5097bc7ad9699124926d905131c89707859ad0d2150c1735221322eee853",
+    "gsle/query_language.py": "de5de87446c5cf7d49f4de5f8d2a7d1e06f8eaa6bee7de23f9b8774faa6c3b2d",
+    "gsle/record_assets.py": "879dcee61345f6ac4b1fff1af0c9e9584ace51d680a70e3601f09798f1048550",
+    "gsle/reference_proposals.py": "2d82c69e838bfd8689248d7766c8d3c52a43fa7c7bed858aa3c39a4657217bed",
+    "gsle/render_results.py": "261a953ff02bb97154ee1aef2780942e1d62f274b10b35f6ad8fca7773b5ac99",
+    "gsle/resolve_models.py": "94e5792cdbddf16ef2bc79b7b3cecf68c5ecd9a61ba6e266477f9073f4dbc83f",
+    "gsle/review_results.py": "9d7a68edc2ccd5f8f4e74e4917ff46bf2ac770523327b2fde1c897dfa20f0fdd",
+    "gsle/sam_foreground.py": "c44a93fad42e6999b8667937f812421e688893177deed0c14ee4e3c146718f9a",
+    "gsle/sam_regions.py": "943185cad5872e76270863a0da5a27228355d20c2e3a013cb20c5bacd7ab9821",
+    "gsle/status.py": "5062441605eaa9a51d639bc2b577954cd67edcbe21c7052beb256d98d64f7158",
+    "gsle/train_autoencoder.py": "243c583d2fd9abdb5c7721097af5a90ea89408326faf3c864aad5059ec524dc5",
+    "gsle/train_object.py": "735db7bd360c75e0220c1d5bd0058d1f951f4da8b0ac27fd172235bfe1957b36",
+    "gsle/upstream.json": "4380f5d86ebf272e04c9c758ff9e4db34428f592fd1bbd99b6e8afbbc15a3d84",
+    "gsle/validate_ae_graph.py": "9fb080992f9322c742d0d3af37ec6ef55ee6affa0d7e0934d9e2e39fc1f6b909",
+    "gsle/validate_cameras.py": "d5102050137921be75c155e7196cb24a329f8d2a49988abc4312b51b7b35f53f",
+    "gsle/validate_compactness.py": "ad5bb53afff04781ff8b31804d67c7ac487ead1c13b3b67c8873de7382c7c735",
+    "gsle/validate_diffusion.py": "02e39a539087252c5a28da2df3e475ff00aebd54e9cf5ef88114eb90ca4d52e7",
+    "gsle/validate_language_renderer.py": "47d170b72e08f8fa9fe97fd37e665ff474072a4c9a5ae67d0f64f130798d0fef",
+    "gsle/validate_renderer.py": "1ced34e23218781bf98084536431ad1e16b5a315f232573e24b6daea4c5dbd75",
+    "gsle/world_up.py": "706a362ca37a2d883186aab921f390f5afd32afbdb68c69b3a18a07304288545"
+  },
+  "config": {
+    "seed": 42,
+    "target_text": "an industrial machine with a black assembly on a white base",
+    "reference_image": "frame_000151.jpg",
+    "replacement_text": "a yellow six-axis industrial robotic arm mounted on a metal base, realistic industrial equipment",
+    "negative_text": "",
+    "avp": {
+      "views": 100,
+      "in_plane_rotations": 8,
+      "scoring": "text_contrast",
+      "resolution": 512
+    },
+    "inpainting": {
+      "steps": 50,
+      "guidance_scale": 7.5,
+      "controlnet_scale": 1.0,
+      "seed": 42
+    },
+    "initialization": {
+      "points": 4096,
+      "sphere_radius": 0.5,
+      "scale": 0.02,
+      "opacity_peak": 0.1,
+      "opacity_radial_std": 0.25,
+      "color_min": 0.05,
+      "color_max": 0.15
+    },
+    "coarse": {
+      "iterations": 6500,
+      "batch": 6,
+      "random_resolutions": [
+        64,
+        128,
+        256
+      ],
+      "reference_resolutions": [
+        128,
+        256,
+        512
+      ],
+      "resolution_milestones": [
+        0,
+        200,
+        300
+      ],
+      "guidance_scale": 3.0,
+      "sds_weight": 1.0,
+      "xyz_lr": [
+        0.001,
+        1e-05,
+        1000
+      ],
+      "scale_lr": [
+        0.005,
+        0.0005,
+        1000
+      ]
+    },
+    "refine": {
+      "iterations": 2000,
+      "batch": 4,
+      "resolution": 512,
+      "guidance_scale": 100.0,
+      "unconditional_conditioning": "drop_all_eq7",
+      "sds_weight": 0.1,
+      "rgb_weight": 1500.0,
+      "mask_weight": 1500.0,
+      "xyz_lr": [
+        0.0001,
+        1e-05,
+        10000
+      ],
+      "scale_lr": [
+        0.0005,
+        5e-05,
+        10000
+      ]
+    },
+    "optimizer": {
+      "rotation_lr": 0.005,
+      "color_lr": 0.01,
+      "opacity_lr": 0.01,
+      "eps": 1e-15
+    },
+    "densification": {
+      "algorithm": "GSGen_compactness",
+      "neighbors": 3,
+      "start": 2000,
+      "end": 6000,
+      "period": 1000,
+      "prune_period": 500,
+      "prune_opacity": 0.01,
+      "max_points_fail": 1000000
+    },
+    "camera_sampling": {
+      "strategy": "threestudio_2c202276",
+      "azimuth": [
+        -180,
+        180
+      ],
+      "elevation": [
+        -10,
+        90
+      ],
+      "radius_multiplier": [
+        1.0,
+        1.5
+      ],
+      "fovy": [
+        40,
+        70
+      ],
+      "camera_perturb": 0.1,
+      "center_perturb": 0.2,
+      "up_perturb": 0.02,
+      "progressive_until": 0,
+      "eval_elevation": 15,
+      "stratified_azimuth": true
+    },
+    "diffusion_timesteps": [
+      0.02,
+      0.98
+    ],
+    "assumptions": [
+      "GSLE has no public source release on the author project page at implementation time.",
+      "Initialization point count/scale use GSGen defaults; low color/radial opacity constants are implementation choices because GSLE does not publish them.",
+      "Densification periods, opacity pruning threshold, camera elevation/radius range, inpainting settings and SDS timestep limits are exposed implementation choices, not reported GSLE constants.",
+      "AVP paper prose and supplement pseudocode disagree; both scores and selections are saved, text-consistent directional contrast drives this run.",
+      "Coarse iterations use the supplement hardware section's 6500; an intermediate 3500 checkpoint is also saved.",
+      "CFG for DI-SDS follows paper Eq7: conditioned+s*(conditioned-unconditioned). Its unconditional expression omits all conditions; implement empty text and zero mask/context/depth residuals, padding to the required nine UNet channels. The paper does not specify this channel-padding detail.",
+      "Use the published physical batches when memory permits; --microbatch may accumulate the same effective batch on the shared GPU. Frozen-background shading and depth conditions are outside autograd without changing joint visibility."
+    ]
+  },
+  "upstream": {
+    "LangSplat": {
+      "repository": "minghanqin/LangSplat",
+      "commit": "d70edb86df0fcbda19dc0d9739a3e5140a5e65fc",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/LangSplat"
+    },
+    "GSGen": {
+      "repository": "gsgen3d/gsgen",
+      "commit": "e60994e557b685d5df57ec0bb48460782091ec4d",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/GSGen"
+    },
+    "DreamGaussian": {
+      "repository": "dreamgaussian/dreamgaussian",
+      "commit": "69a3c7065d580da124dc0bf2e9a21cd3b7973b35",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/DreamGaussian"
+    },
+    "segment-anything-langsplat": {
+      "repository": "minghanqin/segment-anything-langsplat",
+      "commit": "e5dbe4b5616e24f02f15ce5a439a5edf228b3a75",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/repos/segment-anything-langsplat"
+    }
+  },
+  "models": {
+    "openclip": {
+      "repository": "laion/CLIP-ViT-B-16-laion2B-s34B-b88K",
+      "revision": "7288da5a0d6f0b51c4a2b27c624837a9236d0112",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--laion--CLIP-ViT-B-16-laion2B-s34B-b88K/snapshots/7288da5a0d6f0b51c4a2b27c624837a9236d0112",
+      "files": [
+        {
+          "name": "open_clip_config.json",
+          "bytes": 469
+        },
+        {
+          "name": "open_clip_pytorch_model.bin",
+          "bytes": 598529951,
+          "sha256": "1f16b1274ca25493b1f36225efe81d05f66a3f33c487acd1a07c5ba87920de6f"
+        }
+      ]
+    },
+    "inpainting": {
+      "repository": "stable-diffusion-v1-5/stable-diffusion-inpainting",
+      "revision": "8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-inpainting/snapshots/8a4288a76071f7280aedbdb3253bdb9e9d5d84bb",
+      "files": [
+        {
+          "name": "feature_extractor/preprocessor_config.json",
+          "bytes": 342
+        },
+        {
+          "name": "model_index.json",
+          "bytes": 548
+        },
+        {
+          "name": "safety_checker/config.json",
+          "bytes": 4777
+        },
+        {
+          "name": "safety_checker/model.fp16.safetensors",
+          "bytes": 608018440,
+          "sha256": "08902f19b1cfebd7c989f152fc0507bef6898c706a91d666509383122324b511"
+        },
+        {
+          "name": "scheduler/scheduler_config.json",
+          "bytes": 313
+        },
+        {
+          "name": "text_encoder/config.json",
+          "bytes": 617
+        },
+        {
+          "name": "text_encoder/model.fp16.safetensors",
+          "bytes": 246144864,
+          "sha256": "77795e2023adcf39bc29a884661950380bd093cf0750a966d473d1718dc9ef4e"
+        },
+        {
+          "name": "tokenizer/merges.txt",
+          "bytes": 524619
+        },
+        {
+          "name": "tokenizer/special_tokens_map.json",
+          "bytes": 472
+        },
+        {
+          "name": "tokenizer/tokenizer_config.json",
+          "bytes": 806
+        },
+        {
+          "name": "tokenizer/vocab.json",
+          "bytes": 1059962
+        },
+        {
+          "name": "unet/config.json",
+          "bytes": 748
+        },
+        {
+          "name": "unet/diffusion_pytorch_model.fp16.safetensors",
+          "bytes": 1719154104,
+          "sha256": "24b788b4a777748377cc20364eea4ae113c8c42f4468c16bc8c02fdae5492af9"
+        },
+        {
+          "name": "vae/config.json",
+          "bytes": 552
+        },
+        {
+          "name": "vae/diffusion_pytorch_model.fp16.safetensors",
+          "bytes": 167335342,
+          "sha256": "4fbcf0ebe55a0984f5a5e00d8c4521d52359af7229bb4d81890039d2aa16dd7c"
+        }
+      ]
+    },
+    "controlnet_depth": {
+      "repository": "lllyasviel/control_v11f1p_sd15_depth",
+      "revision": "539f99181d33db39cf1af2e517cd8056785f0a87",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lllyasviel--control_v11f1p_sd15_depth/snapshots/539f99181d33db39cf1af2e517cd8056785f0a87",
+      "files": [
+        {
+          "name": "config.json",
+          "bytes": 945
+        },
+        {
+          "name": "diffusion_pytorch_model.fp16.bin",
+          "bytes": 722698343,
+          "sha256": "e809f8a7e4c3dd40f906e35213afa0e0e90feea363d9a59b653cacbc0a7c9d84"
+        }
+      ]
+    },
+    "stable_zero123": {
+      "repository": "ashawkey/stable-zero123-diffusers",
+      "revision": "a6c09344fbd45843d35f2095c203c4a8e55b4dbb",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--ashawkey--stable-zero123-diffusers/snapshots/a6c09344fbd45843d35f2095c203c4a8e55b4dbb",
+      "files": [
+        {
+          "name": "clip_camera_projection/config.json",
+          "bytes": 132
+        },
+        {
+          "name": "clip_camera_projection/diffusion_pytorch_model.safetensors",
+          "bytes": 1187512
+        },
+        {
+          "name": "clip_camera_projection/zero123.py",
+          "bytes": 30628
+        },
+        {
+          "name": "feature_extractor/preprocessor_config.json",
+          "bytes": 546
+        },
+        {
+          "name": "image_encoder/config.json",
+          "bytes": 585
+        },
+        {
+          "name": "image_encoder/model.safetensors",
+          "bytes": 607980096,
+          "sha256": "0dd0c1777bb75e2e9b7aa29b799b3ee8ebaaaa731e2c471a9ec589f12542cce7"
+        },
+        {
+          "name": "model_index.json",
+          "bytes": 562
+        },
+        {
+          "name": "scheduler/scheduler_config.json",
+          "bytes": 502
+        },
+        {
+          "name": "unet/config.json",
+          "bytes": 1778
+        },
+        {
+          "name": "unet/diffusion_pytorch_model.safetensors",
+          "bytes": 1719148344,
+          "sha256": "df42cdcac55d5b89c15a0512845db20a6213f1eaa129f201dfc080fc8642d220"
+        },
+        {
+          "name": "vae/config.json",
+          "bytes": 601
+        },
+        {
+          "name": "vae/diffusion_pytorch_model.safetensors",
+          "bytes": 167335342,
+          "sha256": "3e4c08995484ee61270175e9e7a072b66a6e4eeb5f0c266667fe1f45b90daf9a"
+        }
+      ]
+    },
+    "view_text": {
+      "repository": "stable-diffusion-v1-5/stable-diffusion-v1-5",
+      "revision": "451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+      "files": [
+        {
+          "name": "text_encoder/config.json",
+          "bytes": 617
+        },
+        {
+          "name": "text_encoder/pytorch_model.bin",
+          "bytes": 492305335,
+          "sha256": "770a47a9ffdcfda0b05506a7888ed714d06131d60267e6cf52765d61cf59fd67"
+        },
+        {
+          "name": "tokenizer/merges.txt",
+          "bytes": 524619
+        },
+        {
+          "name": "tokenizer/special_tokens_map.json",
+          "bytes": 472
+        },
+        {
+          "name": "tokenizer/tokenizer_config.json",
+          "bytes": 806
+        },
+        {
+          "name": "tokenizer/vocab.json",
+          "bytes": 1059962
+        }
+      ]
+    }
+  },
+  "camera_source": {
+    "repository": "https://github.com/threestudio-project/threestudio",
+    "commit": "2c202276747a892cfc1ded8e27a005715be8f5f2",
+    "path": "threestudio/data/uncond.py",
+    "selection": "Last camera-module commit before GSLE's August2024 first paper version",
+    "adaptations": [
+      "Map the normalized object frame into the existing COLMAP scene",
+      "Express the random camera distance relative to the selected anchor radius",
+      "No synthetic light sampling, since the method uses baked Gaussian colors"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/threestudio-project/threestudio",
+  "commit": "2c202276747a892cfc1ded8e27a005715be8f5f2",
+  "path": "threestudio/data/uncond.py",
+  "selection": "Last camera-module commit before GSLE's August2024 first paper version",
+  "adaptations": [
+    "Map the normalized object frame into the existing COLMAP scene",
+    "Express the random camera distance relative to the selected anchor radius",
+    "No synthetic light sampling, since the method uses baked Gaussian colors"
+  ]
+}

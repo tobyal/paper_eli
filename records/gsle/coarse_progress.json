@@ -1,0 +1,25 @@
+{
+  "step": 6500,
+  "stage": "coarse",
+  "attempt": "20261104T201828Z",
+  "points": 314524,
+  "seconds": 0.7552192211151123,
+  "elapsed": 2307.4701755046844,
+  "rgb_mse": 0.0027825208380818367,
+  "mask_mse": 0.0022558753844350576,
+  "reference_weight": 1000.0,
+  "sds_loss": 17.39780044555664,
+  "gradient_norms": {
+    "xyz": 96.64019775390625,
+    "log_scale": 2.5316314697265625,
+    "rotation": 3.28511905670166,
+    "opacity_logit": 0.410623162984848,
+    "color_logit": 0.5796290636062622
+  },
+  "random_resolution": 256,
+  "reference_resolution": 512,
+  "densified": 0,
+  "pruned": 11843,
+  "diffusion": [],
+  "gpu_peak_GiB": 5.991086006164551
+}

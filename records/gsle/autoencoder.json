@@ -1,0 +1,34 @@
+{
+  "epochs": 100,
+  "batch": 64,
+  "lr": 0.0007,
+  "encoder": [
+    256,
+    128,
+    64,
+    32,
+    3
+  ],
+  "decoder": [
+    16,
+    32,
+    64,
+    128,
+    256,
+    256,
+    512
+  ],
+  "training_loss": "MSE + .001*cosine(dim=0)",
+  "checkpoint_metric": "MSE + cosine(dim=0), epochs96..99",
+  "best_epoch": 98,
+  "best_loss": 0.24917160573986288,
+  "vectors": 337721,
+  "seed": 42,
+  "execution_adaptations": [
+    "GPU feature cache",
+    "no per-batch histograms",
+    "no anomaly-debug tracing",
+    "epoch checkpoints",
+    "validated CUDA graph with capturable Adam; fp32 equations unchanged; numerical comparison in ae_graph_validation.json"
+  ]
+}

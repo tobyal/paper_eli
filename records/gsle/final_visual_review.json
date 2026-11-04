@@ -1,0 +1,34 @@
+{
+  "review_date": "2026-11-05",
+  "selected_variant": "text_only",
+  "pipeline_executed": true,
+  "high_quality_replacement_achieved": false,
+  "selection_reason": "The context-preserving empty-text branch is substantially more stable than the drop-all interpretation. This selects the better actual artifact, not a claim of satisfactory geometry or the authors' implementation.",
+  "reviewed_outputs": [
+    "outputs/gsle/localization/multiview/contact_sheet.jpg",
+    "outputs/gsle/foreground/reference_white.png",
+    "outputs/gsle/final/review/matched_views_1.jpg",
+    "outputs/gsle/final/review/matched_views_2.jpg",
+    "outputs/gsle/ablations/text_only_cfg/final/review/matched_views_1.jpg",
+    "outputs/gsle/ablations/text_only_cfg/final/review/matched_views_2.jpg",
+    "outputs/gsle/ablations/text_only_cfg/final/renders/object_contact_sheet.jpg"
+  ],
+  "observations": {
+    "localization": "The complete black assembly and white support base were localized automatically; adjacent equipment remains in the retained scene.",
+    "generated_reference": "The SAM foreground contains a recognizable yellow articulated arm, cables and a dark pedestal; the generated background cabinet is excluded.",
+    "coarse": "Real volumetric Gaussian structure and view-dependent occlusion are present. The anchor/front resembles an articulated arm, but most unseen directions are rounded, blocky, translucent or speckled.",
+    "drop_all_eq7": "All eight matched views show severe saturated yellow fog and expanded object support. This refinement is a visual failure and is retained as a negative experiment.",
+    "text_only": "The front view remains recognizable and sharper than the failed variant. Side/back views still contain yellow slabs or blobs, holes, floaters and incomplete joint geometry. Refinement does not resolve the single-view coarse geometry limitations.",
+    "scene_integration": "Old equipment is replaced by new 3D Gaussians and nearby objects occlude it. Base contact remains diffuse; previously unobserved floor contains dark/smeared regions. Original scene extrapolation also degrades in novel orbit views.",
+    "background": "All retained background Gaussian parameters are bitwise unchanged. This does not guarantee unchanged visibility, valid cast shadows or physically consistent relighting."
+  },
+  "six_axis_geometry_verified": false,
+  "manual_mesh_or_painted_result_used": false,
+  "review_limits": [
+    "Eight matched scene directions, a twelve-view object contact sheet, the reference and original-path frame151 were visually reviewed; not every rendered frame was visually inspected.",
+    "Both complete 350-frame exports and 72-frame orbits passed image/file and decoded video checks.",
+    "No edited-scene ground truth exists. Reference fitting MSE and fixed-background metrics do not establish perceptual quality.",
+    "Two unconditional-conditioning interpretations test an unpublished implementation detail, not two different papers."
+  ],
+  "outcome": "Complete reproducible execution with a partially successful structural replacement and substantial multiview quality limitations."
+}

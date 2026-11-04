@@ -9,3 +9,12 @@
 - GPU resources are shared. Inspect availability; never stop other users' processes or modify their environments.
 - Use isolated project environments and model caches. Save exact upstream commits, effective configs, commands, logs, timing, checkpoints, renders, and videos.
 - Never label setup, queued jobs, or unsuccessful runs as completed experiments. Compare only actual outputs on common cameras and masks.
+
+## GSLE object replacement (2026-11-05)
+
+- New work lives in `gsle/`, with separate `records/gsle`, `logs/gsle`, `outputs/gsle`, and isolated environments. Preserve all previous experiments.
+- User-approved target: the entire machine at the previous 75-second reference, including the black assembly and white base. Generate a yellow six-axis industrial robot arm mounted on a metal base.
+- Reproduce LangSplat localization, AVP, depth-conditioned inpainting, automatic SAM extraction, Stable Zero123 3D-SDS, composition, and DI-SDS refinement in that order. Do not reuse the old hand-selected housing ROI as the GSLE localization result.
+- Freeze pretrained diffusion models and retained background Gaussians. Optimize new object geometry and appearance. Do not substitute recoloring, manual assets, or simple 2D fitting for 3D generation.
+- The GSLE project page currently exposes no public implementation. Clearly distinguish paper-derived implementation, reused official dependencies, published ambiguities, and implementation assumptions.
+- Do not overwrite active shell launchers while their training commands run; Bash may later resume at a changed byte offset. Recover exports through the separate `gsle/10_export.sh` entry point.

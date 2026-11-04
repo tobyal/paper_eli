@@ -1,0 +1,181 @@
+{
+  "selected_variant": "text_only",
+  "server_root": "/mnt/sda/ubuntu/lkx/papers/paper_eli",
+  "source_video_seconds": 174.89655,
+  "comparison_video_seconds": 175.0,
+  "preview_speed_multiplier": 6,
+  "visual_review": {
+    "review_date": "2026-11-05",
+    "selected_variant": "text_only",
+    "pipeline_executed": true,
+    "high_quality_replacement_achieved": false,
+    "selection_reason": "The context-preserving empty-text branch is substantially more stable than the drop-all interpretation. This selects the better actual artifact, not a claim of satisfactory geometry or the authors' implementation.",
+    "reviewed_outputs": [
+      "outputs/gsle/localization/multiview/contact_sheet.jpg",
+      "outputs/gsle/foreground/reference_white.png",
+      "outputs/gsle/final/review/matched_views_1.jpg",
+      "outputs/gsle/final/review/matched_views_2.jpg",
+      "outputs/gsle/ablations/text_only_cfg/final/review/matched_views_1.jpg",
+      "outputs/gsle/ablations/text_only_cfg/final/review/matched_views_2.jpg",
+      "outputs/gsle/ablations/text_only_cfg/final/renders/object_contact_sheet.jpg"
+    ],
+    "observations": {
+      "localization": "The complete black assembly and white support base were localized automatically; adjacent equipment remains in the retained scene.",
+      "generated_reference": "The SAM foreground contains a recognizable yellow articulated arm, cables and a dark pedestal; the generated background cabinet is excluded.",
+      "coarse": "Real volumetric Gaussian structure and view-dependent occlusion are present. The anchor/front resembles an articulated arm, but most unseen directions are rounded, blocky, translucent or speckled.",
+      "drop_all_eq7": "All eight matched views show severe saturated yellow fog and expanded object support. This refinement is a visual failure and is retained as a negative experiment.",
+      "text_only": "The front view remains recognizable and sharper than the failed variant. Side/back views still contain yellow slabs or blobs, holes, floaters and incomplete joint geometry. Refinement does not resolve the single-view coarse geometry limitations.",
+      "scene_integration": "Old equipment is replaced by new 3D Gaussians and nearby objects occlude it. Base contact remains diffuse; previously unobserved floor contains dark/smeared regions. Original scene extrapolation also degrades in novel orbit views.",
+      "background": "All retained background Gaussian parameters are bitwise unchanged. This does not guarantee unchanged visibility, valid cast shadows or physically consistent relighting."
+    },
+    "six_axis_geometry_verified": false,
+    "manual_mesh_or_painted_result_used": false,
+    "review_limits": [
+      "Eight matched scene directions, a twelve-view object contact sheet, the reference and original-path frame151 were visually reviewed; not every rendered frame was visually inspected.",
+      "Both complete 350-frame exports and 72-frame orbits passed image/file and decoded video checks.",
+      "No edited-scene ground truth exists. Reference fitting MSE and fixed-background metrics do not establish perceptual quality.",
+      "Two unconditional-conditioning interpretations test an unpublished implementation detail, not two different papers."
+    ],
+    "outcome": "Complete reproducible execution with a partially successful structural replacement and substantial multiview quality limitations."
+  },
+  "artifacts": [
+    {
+      "filename": "scene.ply",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/scene.ply",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/scene.ply",
+      "bytes": 523764884,
+      "sha256": "76a3b70387a2444f0f96d6aea5dd30ce5a8b38dc8f2be18403ea05c0990b2b0d",
+      "preview": false
+    },
+    {
+      "filename": "object_world.ply",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/object_world.ply",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/object_world.ply",
+      "bytes": 78003483,
+      "sha256": "e2addaf8c184c624b755d06644a0385a24a096d21267d2310f07cc6cbe665fb4",
+      "preview": false
+    },
+    {
+      "filename": "object_local.ply",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/refine/final_object_local.ply",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/refine/final_object_local.ply",
+      "bytes": 78003483,
+      "sha256": "f49adfa55ddf2b35a26f335dd9ebfe5fb252a545a52935258d87e292765fb8db",
+      "preview": false
+    },
+    {
+      "filename": "object_checkpoint.pth",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/refine/final.pth",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/refine/final.pth",
+      "bytes": 52860997,
+      "sha256": "df9a1edae9ad77557ca74273216eae123fcbb1da408c4383bead9f8ceed35ad2",
+      "preview": false
+    },
+    {
+      "filename": "effective_config.json",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/refine/effective_config.json",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/refine/effective_config.json",
+      "bytes": 5734,
+      "sha256": "874055eddae7e360fbee2787bd7b7684570724d9e38ee447eaa5fe7cb7061d11",
+      "preview": false
+    },
+    {
+      "filename": "render_metrics_and_cameras.json",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/renders/render_metrics.json",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/renders/render_metrics.json",
+      "bytes": 310319,
+      "sha256": "b339618feee5eff6d4764c9d82857ffa6061ef690c4c463594f3da5bfeb2e450",
+      "preview": false
+    },
+    {
+      "filename": "run_summary.json",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/review/summary.json",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/review/summary.json",
+      "bytes": 8773,
+      "sha256": "8187491410e536f99cad560dd815dc083962e01e133afdc6e51fe7553da754f9",
+      "preview": false
+    },
+    {
+      "filename": "anchor_comparison.png",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/review/anchor_comparison.png",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/review/anchor_comparison.png",
+      "bytes": 276128,
+      "sha256": "b0cfba580db30822d180a794024f0668216e48559f929c8f02591318d3f17168",
+      "preview": true
+    },
+    {
+      "filename": "matched_views_1.jpg",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/review/matched_views_1.jpg",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/review/matched_views_1.jpg",
+      "bytes": 1045538,
+      "sha256": "16e04d12796ff564099c169102931740935ca452fd3af52ecd1787132042685f",
+      "preview": true
+    },
+    {
+      "filename": "matched_views_2.jpg",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/review/matched_views_2.jpg",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/review/matched_views_2.jpg",
+      "bytes": 1124754,
+      "sha256": "906994fe70a46471dc236f0113ce1b4de6a5d00b88e8f7dc64251a8fbbd5803e",
+      "preview": true
+    },
+    {
+      "filename": "training_curves.png",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/review/training_curves.png",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/review/training_curves.png",
+      "bytes": 237372,
+      "sha256": "ae71deb712a9e511d49551fdb17899c8573ac0cee119ef9af89a89eab0b98822",
+      "preview": true
+    },
+    {
+      "filename": "comparison_original_speed_2fps.mp4",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/renders/comparison_original_speed_2fps.mp4",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/renders/comparison_original_speed_2fps.mp4",
+      "bytes": 68142048,
+      "sha256": "95a960c3930be78f9c88b21a8c1d9d529912aa9bc9e48bb025093b1d66d0ba04",
+      "preview": true
+    },
+    {
+      "filename": "comparison_6x_preview_12fps.mp4",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/renders/comparison_6x_preview_12fps.mp4",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/renders/comparison_6x_preview_12fps.mp4",
+      "bytes": 32739002,
+      "sha256": "f74236e107577d6c58e5dc2f07398d5ca8cb22c6805a0e7564f4abd963dd9ab6",
+      "preview": true
+    },
+    {
+      "filename": "edited_original_speed_2fps.mp4",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/renders/edited_original_speed_2fps.mp4",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/renders/edited_original_speed_2fps.mp4",
+      "bytes": 34320944,
+      "sha256": "2ea3792b6778c6b7b94c496801ab08de9b86dcff8e2cb176cd56427cd69ccb5b",
+      "preview": true
+    },
+    {
+      "filename": "object_360.mp4",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/renders/object_360.mp4",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/renders/object_360.mp4",
+      "bytes": 378371,
+      "sha256": "8dbecc6f64e27918e06bdbdb0559ac1addd2b1a54f37bc3e79c8e8f1d7d6b705",
+      "preview": true
+    },
+    {
+      "filename": "scene_360.mp4",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/renders/scene_360.mp4",
+      "archive_path": "outputs/gsle/ablations/text_only_cfg/final/renders/scene_360.mp4",
+      "bytes": 2298174,
+      "sha256": "7a7794c8b9e2616158f2067fb597d68503cddfcc4f6ee3de52d010156bae1442",
+      "preview": true
+    },
+    {
+      "filename": "cfg_comparison.png",
+      "server_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablation_comparison/anchor_comparison.png",
+      "archive_path": "outputs/gsle/ablation_comparison/anchor_comparison.png",
+      "bytes": 297987,
+      "sha256": "4fb90dc2afcf2c4d34e70edd44cb7f640928dacfb7443b2230effb75d9efb3fd",
+      "preview": true
+    }
+  ],
+  "other_experiments_preserved": true,
+  "complete_module_artifacts_bundle": "gsle_results.tar.gz"
+}

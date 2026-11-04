@@ -1,0 +1,140 @@
+{
+  "checked_utc": "2026-11-04T21:49:19Z",
+  "training": {
+    "coarse": {
+      "updates": 6500,
+      "finite_saved_gradient_norms": true
+    },
+    "refine": {
+      "updates": 2000,
+      "finite_saved_gradient_norms": true
+    }
+  },
+  "gaussians": {
+    "coarse/final_object_world.ply": {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/coarse/final_object_world.ply",
+      "points": 314524,
+      "bytes": 78003483,
+      "sha256": "5cb011a6f4a8cbc9a4527b042cea847b221b4d9391be25cc161c79ddb2c9a5db",
+      "finite_all_fields": true
+    },
+    "refine/final_object_local.ply": {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/refine/final_object_local.ply",
+      "points": 314524,
+      "bytes": 78003483,
+      "sha256": "f49adfa55ddf2b35a26f335dd9ebfe5fb252a545a52935258d87e292765fb8db",
+      "finite_all_fields": true
+    },
+    "final/object_world.ply": {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/object_world.ply",
+      "points": 314524,
+      "bytes": 78003483,
+      "sha256": "e2addaf8c184c624b755d06644a0385a24a096d21267d2310f07cc6cbe665fb4",
+      "finite_all_fields": true
+    },
+    "final/scene.ply": {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/outputs/gsle/ablations/text_only_cfg/final/scene.ply",
+      "points": 2111949,
+      "bytes": 523764884,
+      "sha256": "76a3b70387a2444f0f96d6aea5dd30ce5a8b38dc8f2be18403ea05c0990b2b0d",
+      "finite_all_fields": true,
+      "retained_background_bitwise_identical": true,
+      "removed_original_points": 31352,
+      "retained_original_points": 1797425
+    }
+  },
+  "render_images": {
+    "before": {
+      "count": 350,
+      "dimensions": [
+        960,
+        540
+      ],
+      "all_pngs_verified": true
+    },
+    "after": {
+      "count": 350,
+      "dimensions": [
+        960,
+        540
+      ],
+      "all_pngs_verified": true
+    },
+    "side_by_side": {
+      "count": 350,
+      "dimensions": [
+        1920,
+        540
+      ],
+      "all_pngs_verified": true
+    },
+    "orbit_object": {
+      "count": 72,
+      "dimensions": [
+        512,
+        512
+      ],
+      "all_pngs_verified": true
+    },
+    "orbit_scene": {
+      "count": 72,
+      "dimensions": [
+        512,
+        512
+      ],
+      "all_pngs_verified": true
+    }
+  },
+  "videos": {
+    "comparison_original_speed_2fps.mp4": {
+      "width": 1920,
+      "height": 540,
+      "avg_frame_rate": "2/1",
+      "duration": "175.000000",
+      "nb_read_frames": "350",
+      "sha256": "95a960c3930be78f9c88b21a8c1d9d529912aa9bc9e48bb025093b1d66d0ba04",
+      "bytes": 68142048
+    },
+    "comparison_6x_preview_12fps.mp4": {
+      "width": 1920,
+      "height": 540,
+      "avg_frame_rate": "12/1",
+      "duration": "29.166667",
+      "nb_read_frames": "350",
+      "sha256": "f74236e107577d6c58e5dc2f07398d5ca8cb22c6805a0e7564f4abd963dd9ab6",
+      "bytes": 32739002
+    },
+    "edited_original_speed_2fps.mp4": {
+      "width": 960,
+      "height": 540,
+      "avg_frame_rate": "2/1",
+      "duration": "175.000000",
+      "nb_read_frames": "350",
+      "sha256": "2ea3792b6778c6b7b94c496801ab08de9b86dcff8e2cb176cd56427cd69ccb5b",
+      "bytes": 34320944
+    },
+    "object_360.mp4": {
+      "width": 512,
+      "height": 512,
+      "avg_frame_rate": "12/1",
+      "duration": "6.000000",
+      "nb_read_frames": "72",
+      "sha256": "8dbecc6f64e27918e06bdbdb0559ac1addd2b1a54f37bc3e79c8e8f1d7d6b705",
+      "bytes": 378371
+    },
+    "scene_360.mp4": {
+      "width": 512,
+      "height": 512,
+      "avg_frame_rate": "12/1",
+      "duration": "6.000000",
+      "nb_read_frames": "72",
+      "sha256": "7a7794c8b9e2616158f2067fb597d68503cddfcc4f6ee3de52d010156bae1442",
+      "bytes": 2298174
+    }
+  },
+  "source_video_seconds": 174.89655,
+  "original_speed_render_seconds": 175.0,
+  "duration_explanation": "350 calibrated samples at 2fps; 12fps is explicitly a 6x preview. The small duration difference is frame sampling/encoding rounding.",
+  "quality_scope": "Integrity and full execution verification, not proof of visual or mechanical correctness. See inspected matching views and GSLE report.",
+  "seconds": 44.45611023902893
+}

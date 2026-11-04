@@ -1,0 +1,16 @@
+{
+  "teacher": "zero",
+  "probe_only": true,
+  "seconds": 42.29541993141174,
+  "loss": 6.174731254577637,
+  "gradient_L1": {
+    "xyz": 451.7598876953125,
+    "log_scale": 8.723947525024414,
+    "rotation": 1.4959661598368257e-07,
+    "opacity_logit": 7.56434965133667,
+    "color_logit": 1.9070448875427246
+  },
+  "teachers_frozen": true,
+  "gpu_peak_GiB": 3.1957578659057617,
+  "use_stable_zero123": true
+}

@@ -1,0 +1,14 @@
+{
+  "probe_only": true,
+  "feature_image_shape": [
+    3,
+    528,
+    938
+  ],
+  "language_gradient_l1": 195292064.0,
+  "gaussians_with_gradient": 452972,
+  "geometry_and_appearance_frozen": true,
+  "optimizer_groups": [
+    "language_feature"
+  ]
+}
