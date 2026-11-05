@@ -1,0 +1,15 @@
+envs/
+models/
+third_party/
+outputs/
+logs/
+downloads/
+tmp/
+records/*_progress.json
+records/*.lock
+secrets/
+*.env
+*.glb
+*.obj
+*.mtl
+*.exr

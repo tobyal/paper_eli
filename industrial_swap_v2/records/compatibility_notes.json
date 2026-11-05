@@ -1,0 +1,15 @@
+{
+  "scope": "industrial_swap_v2 only; previous experiments unchanged",
+  "patches": [
+    {"component": "Qwen credential loader", "problem": "Substring regex truncated dot-separated Qianwen keys", "resolution": "Read one complete opaque key, reject ambiguous content; regression test for dotted keys", "actual_effect": "Two authorized HTTP 401 attempts; a third explicitly authorized attempt succeeded with exactly one image"},
+    {"component": "Context.path", "problem": "Python 3.8 SAM environment lacks Path.is_relative_to", "resolution": "Use relative_to with ValueError to enforce write-root constraint"},
+    {"component": "Context.source", "problem": "Resolving virtualenv Python symlinks selected base environments without their isolated packages", "resolution": "Keep absolute interpreter path without symlink resolution"},
+    {"component": "TRELLIS environment", "problem": "Proxy timeout during fresh Torch wheel download; gated model dependencies", "resolution": "User supplied previously working TRELLIS.2 project; create a new system-site-packages venv and read-only reuse validated official cached snapshots"},
+    {"component": "TRELLIS launch", "problem": "Historical common.sh exports CUDA 11.8", "resolution": "Explicit CUDA 12.4 in TRELLIS child, all new module/JIT/cache paths under v2; initial loading attempt stopped and restarted before generation"},
+    {"component": "GPU resource use", "problem": "Shared A6000 GPUs have less than 24GiB currently free", "resolution": "Official low_vram and unchanged 1024_cascade; require 18GiB free and cap Torch allocator at 16GiB; fail honestly if insufficient"},
+    {"component": "AVP adapter", "problem": "Historical avp.py contains a hard-coded legacy record destination", "resolution": "Redirect that one record through a validated v2 path without editing legacy code"},
+    {"component": "M4 initialization", "problem": "Legacy refinement expects a Zero123-generated checkpoint", "resolution": "Initialize from TRELLIS Graphdeco PLY; preserve geometry buffers, optimize color/opacity with the same text_only depth/inpainting guidance"},
+    {"component": "Scene video export", "problem": "Legacy GSLE environment imageio lacks the video plugin and selected TIFF for MP4", "resolution": "Pipe RGB frames to existing system FFmpeg/libx264, use four encoder threads, and atomically rename completed MP4; resume from saved Gaussian assets"},
+    {"component": "M4 resources", "problem": "Need to complete the published effective batch on shared hardware", "resolution": "GPU 0 became available; microbatch 2 accumulates effective batch 4, Torch allocator cap 20GiB and minimum initial free memory 24GiB"}
+  ]
+}

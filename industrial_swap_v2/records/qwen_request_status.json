@@ -1,0 +1,11 @@
+{
+  "stage": "qwen_request",
+  "status": "response_saved",
+  "utc": "2026-11-05T09:00:46Z",
+  "request_id": "68c4aefd-692c-9924-82f8-a7e054a1d8be",
+  "usage": {
+    "width": 1024,
+    "height": 1024,
+    "image_count": 1
+  }
+}

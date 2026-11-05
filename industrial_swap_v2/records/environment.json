@@ -1,0 +1,403 @@
+{
+  "python": "3.10.20 (main, Mar 11 2026, 17:46:40) [GCC 14.3.0]",
+  "modules": {
+    "torch": {
+      "file": "/mnt/sda/ubuntu/anaconda3/envs/trellis2/lib/python3.10/site-packages/torch/__init__.py",
+      "version": "2.6.0+cu124"
+    },
+    "flash_attn": {
+      "file": "/mnt/sda/ubuntu/anaconda3/envs/trellis2/lib/python3.10/site-packages/flash_attn/__init__.py",
+      "version": "2.7.3"
+    },
+    "nvdiffrast": {
+      "file": "/mnt/sda/ubuntu/anaconda3/envs/trellis2/lib/python3.10/site-packages/nvdiffrast/__init__.py",
+      "version": "0.4.0"
+    },
+    "nvdiffrec_render": {
+      "file": "/mnt/sda/ubuntu/anaconda3/envs/trellis2/lib/python3.10/site-packages/nvdiffrec_render/__init__.py",
+      "version": null
+    },
+    "cumesh": {
+      "file": "/mnt/sda/ubuntu/anaconda3/envs/trellis2/lib/python3.10/site-packages/cumesh/__init__.py",
+      "version": null
+    },
+    "flex_gemm": {
+      "file": "/mnt/sda/ubuntu/anaconda3/envs/trellis2/lib/python3.10/site-packages/flex_gemm/__init__.py",
+      "version": null
+    },
+    "o_voxel": {
+      "file": "/mnt/sda/ubuntu/anaconda3/envs/trellis2/lib/python3.10/site-packages/o_voxel/__init__.py",
+      "version": null
+    },
+    "trellis2.pipelines": {
+      "file": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/third_party/TRELLIS.2/trellis2/pipelines/__init__.py",
+      "version": null
+    }
+  },
+  "upstream_commits": {
+    "TRELLIS.2": "75fbf0183001ed9876c8dbb35de6b68552ee08bd"
+  },
+  "installed_distributions": {
+    "torch": {
+      "version": "2.6.0+cu124",
+      "direct_url": null
+    },
+    "torchvision": {
+      "version": "0.21.0+cu124",
+      "direct_url": null
+    },
+    "transformers": {
+      "version": "4.57.6",
+      "direct_url": null
+    },
+    "flash-attn": {
+      "version": "2.7.3",
+      "direct_url": null
+    },
+    "nvdiffrast": {
+      "version": "0.4.0",
+      "direct_url": {
+        "dir_info": {},
+        "url": "file:///tmp/extensions/nvdiffrast"
+      }
+    },
+    "nvdiffrec_render": {
+      "version": "0.0.0",
+      "direct_url": {
+        "dir_info": {},
+        "url": "file:///tmp/extensions/nvdiffrec"
+      }
+    },
+    "cumesh": {
+      "version": "0.0.1",
+      "direct_url": {
+        "dir_info": {},
+        "url": "file:///tmp/extensions/CuMesh"
+      }
+    },
+    "flex_gemm": {
+      "version": "1.0.0",
+      "direct_url": {
+        "dir_info": {},
+        "url": "file:///tmp/extensions/FlexGEMM"
+      }
+    },
+    "o_voxel": {
+      "version": "0.0.1",
+      "direct_url": {
+        "dir_info": {},
+        "url": "file:///tmp/extensions/o-voxel"
+      }
+    },
+    "trimesh": {
+      "version": "4.11.3",
+      "direct_url": null
+    }
+  },
+  "extension_package_fingerprints": {
+    "nvdiffrast": {
+      "__init__.py": {
+        "bytes": 518,
+        "sha256": "1b569050844b7deacdf78ba4fea254ae74e35a4c062f812f08a4c7453f53ac19"
+      },
+      "torch/__init__.py": {
+        "bytes": 850,
+        "sha256": "61f7b47e6402c5db311a546dd02bc672544a1db5e0e8dcd81faaed7d0729bf36"
+      },
+      "torch/ops.py": {
+        "bytes": 26334,
+        "sha256": "135f7b64bd8eb7698491b8224cdb737faf7672b558e6c5c841e596401424cabf"
+      }
+    },
+    "nvdiffrec_render": {
+      "__init__.py": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "light.py": {
+        "bytes": 7396,
+        "sha256": "125b8e3acd8daaf3a6992786af46797f3be617b58d1d425ae0b86a563fada286"
+      },
+      "material.py": {
+        "bytes": 7475,
+        "sha256": "38a425eeb72117d06b1a6f8e8dfac7e3dfe67b60228ab7aa02e9c1ae9c8acc86"
+      },
+      "mesh.py": {
+        "bytes": 9853,
+        "sha256": "d245f50aaba038b4bc9a74f8efb8d265a8984f3b238500e72247a30f06ff91ee"
+      },
+      "mlptexture.py": {
+        "bytes": 4504,
+        "sha256": "8e8bf5f147547e27ae5141ba3cd79aa58d39f8cc5fa2b138aa3278b551c5ae04"
+      },
+      "obj.py": {
+        "bytes": 7254,
+        "sha256": "08ed672cb3e1ab165e31590a60cab6977a511d952da88ac412bbaeea11874a32"
+      },
+      "regularizer.py": {
+        "bytes": 3813,
+        "sha256": "0843be7d766177e7dcad477eadb6bad1a3862f12545d0baadce0ccdfeadf8234"
+      },
+      "render.py": {
+        "bytes": 12041,
+        "sha256": "92d754c8e03bc997c0520b99d5465f1216967139b93a949483beb637cd344d7e"
+      },
+      "renderutils/_C.cpython-310-x86_64-linux-gnu.so": {
+        "bytes": 1053872,
+        "sha256": "716bd84863df035e08986a2c55d1c5f885612a741c5fdfed7e5c32069160a0da"
+      },
+      "renderutils/__init__.py": {
+        "bytes": 942,
+        "sha256": "b92523854cd0ca309d01658520914cbea736ec65202b0984ae65669442d534e7"
+      },
+      "renderutils/bsdf.py": {
+        "bytes": 6266,
+        "sha256": "bdfea2e98df10e511b9b0d8cf76c1ca20e4903475aac776d2617ce5943d0dd01"
+      },
+      "renderutils/loss.py": {
+        "bytes": 1642,
+        "sha256": "f3ef9a2c825e082823c7cb7979231babdbfebc82dcb640d8c27ddc2dc6982ff4"
+      },
+      "renderutils/ops.py": {
+        "bytes": 19054,
+        "sha256": "71186851663744f6b13adeaa402a8a45a22b90e7a71f43d4538a1ab4adbf6322"
+      },
+      "texture.py": {
+        "bytes": 8218,
+        "sha256": "3c2d5c01e678ab705956edc9f1e1b49595a7ffe68c8bda56fe29d524e3af473d"
+      },
+      "util.py": {
+        "bytes": 19607,
+        "sha256": "ec6e8a267e094b5b40cd4fedbe19f13174eed8577deaa04b16c48115f3e1893e"
+      }
+    },
+    "cumesh": {
+      "_C.cpython-310-x86_64-linux-gnu.so": {
+        "bytes": 6747192,
+        "sha256": "658cab3c08742c5192e7a88da0d049c512fc70f9da07fdcb137eb2d9d66c9543"
+      },
+      "__init__.py": {
+        "bytes": 99,
+        "sha256": "eacfdab33feb9fdeb01719ce015d9ed52bb5519abb65d00a26bfd728e3ca2b1d"
+      },
+      "_cubvh.cpython-310-x86_64-linux-gnu.so": {
+        "bytes": 1890464,
+        "sha256": "edea72db7113e68bbcb716742f5892ebe0bf940f349982bf1672ce6a87b1fd2b"
+      },
+      "_cumesh_xatlas.cpython-310-x86_64-linux-gnu.so": {
+        "bytes": 462032,
+        "sha256": "bf4d4df9205c97dfd1450a05260962b6f39ad244012bc2ea1504247548cdaa8b"
+      },
+      "bvh.py": {
+        "bytes": 3561,
+        "sha256": "c2e2c33413a606a1bcb57bf4df891f39a2c580fdc15dd81dc0ad637cf45a12bb"
+      },
+      "cumesh.py": {
+        "bytes": 17479,
+        "sha256": "2d1bc2dce13fd98b215a23f470f2204a38568bf9c71103b63dee9c628f452bfd"
+      },
+      "remeshing.py": {
+        "bytes": 12422,
+        "sha256": "3afefd2efd15b4b7bc3d94910fd88a0f30bb6d00f9422ba917490600c3aaebf0"
+      },
+      "xatlas.py": {
+        "bytes": 8312,
+        "sha256": "8037a14863022df74079e6e48cdb916d7d86741f1166d9398e87391aef0a9f32"
+      }
+    },
+    "flex_gemm": {
+      "__init__.py": {
+        "bytes": 439,
+        "sha256": "6ae240bfd4fcaac89e49b01523df5953d6cc2e48cfae37df9037dd186f7c5f20"
+      },
+      "kernels/__init__.py": {
+        "bytes": 40,
+        "sha256": "e946095b9811b2abf5a74e0f6aed5a5c41e3a4f2e3198039f664ae7eb971ade5"
+      },
+      "kernels/cuda/ext.cpp": {
+        "bytes": 1561,
+        "sha256": "a63abfab1abccec4ab30f78845a80ad21b8c61297eb11c3966151c142dad8af3"
+      },
+      "kernels/cuda/grid_sample/grid_sample.cu": {
+        "bytes": 10610,
+        "sha256": "e73d39650030eb105829288709dedf68f9ff06a6b10990197c5325a086c26c5d"
+      },
+      "kernels/cuda/hash/hash.cu": {
+        "bytes": 16731,
+        "sha256": "7b2c87015fca4a9bd858ae81de43a435357a9d4a675e2a6a0f8b32d65f405dfd"
+      },
+      "kernels/cuda/serialize/api.cu": {
+        "bytes": 7394,
+        "sha256": "3ca044ad2614f055be5350f4cd4ab186ab9ceac09e9b9dd54c81562d0cac3e19"
+      },
+      "kernels/cuda/spconv/neighbor_map.cu": {
+        "bytes": 15968,
+        "sha256": "8eb94703adedd872b7a9c93bba43953ad10512b688adb7573ef9a44cb6b32792"
+      },
+      "kernels/cuda.cpython-310-x86_64-linux-gnu.so": {
+        "bytes": 584080,
+        "sha256": "bd94735c6f05f943582b59216054e778e94b75c1a87acb22084b43365e1e551e"
+      },
+      "kernels/triton/__init__.py": {
+        "bytes": 49,
+        "sha256": "bf97af5144bd6eee5b517f3faf09b163cc73b119d2876441ee1904995e8b0807"
+      },
+      "kernels/triton/grid_sample/__init__.py": {
+        "bytes": 145,
+        "sha256": "1b16d0c4540a6008dae8ce7833d4a01c269f2ad78832e8fe58943400f411df03"
+      },
+      "kernels/triton/grid_sample/config.py": {
+        "bytes": 825,
+        "sha256": "f523e5293e6ad8a47dc2699f7e5a57e7939c369f10b362582ae0b73f2e3c01ba"
+      },
+      "kernels/triton/grid_sample/indice_weighed_sum_bwd.py": {
+        "bytes": 3392,
+        "sha256": "c3ac6118b893216a06bdedbb2aeff88e7d2d106f375660cd491de4ea298e6d4e"
+      },
+      "kernels/triton/grid_sample/indice_weighed_sum_fwd.py": {
+        "bytes": 3300,
+        "sha256": "50b4d37d22edae858591b29f3a57ae08ebb950aa46d532bf4d95e4102b4780b6"
+      },
+      "kernels/triton/spconv/__init__.py": {
+        "bytes": 909,
+        "sha256": "09b2609ef0d05c0f7e371e5416f786e5bd99e29a9578a38835767df0e3e0d204"
+      },
+      "kernels/triton/spconv/config.py": {
+        "bytes": 5210,
+        "sha256": "2c3431f090a5509f74dca22f75ce24504a07617a54c7e25806a8ec61d2d89f99"
+      },
+      "kernels/triton/spconv/sparse_submanifold_conv_bwd_implicit_gemm.py": {
+        "bytes": 9176,
+        "sha256": "4757febd3c3ff085595b5aa8545e7b4118ba46679bd8aa6de02f14bbc88ba012"
+      },
+      "kernels/triton/spconv/sparse_submanifold_conv_bwd_implicit_gemm_splitk.py": {
+        "bytes": 13978,
+        "sha256": "adf14933d6d441a8ead189e24f4fc9cd09b6da7df8140aaa306ddecd4f2d6563"
+      },
+      "kernels/triton/spconv/sparse_submanifold_conv_bwd_masked_implicit_gemm.py": {
+        "bytes": 10906,
+        "sha256": "967d4545d3510a63cf7122740178c0bd762acc1c69236a95dda86f5c9ad6f4ce"
+      },
+      "kernels/triton/spconv/sparse_submanifold_conv_bwd_masked_implicit_gemm_splitk.py": {
+        "bytes": 16574,
+        "sha256": "6cd7e52f59d60484a243be8f81e07fcfb9f20c1cb9939f4d1236af64b94840dd"
+      },
+      "kernels/triton/spconv/sparse_submanifold_conv_fwd_implicit_gemm.py": {
+        "bytes": 4484,
+        "sha256": "ff355cfe5a4c7eedf66252d7a538920fc199fb7bbf3eb9551998519663ae21ec"
+      },
+      "kernels/triton/spconv/sparse_submanifold_conv_fwd_implicit_gemm_splitk.py": {
+        "bytes": 6431,
+        "sha256": "409005b5139b16a2fe6eb78c85a02910c1c48c08a792d5e4055cb5e8d73cb0ab"
+      },
+      "kernels/triton/spconv/sparse_submanifold_conv_fwd_masked_implicit_gemm.py": {
+        "bytes": 5535,
+        "sha256": "64efca9e7d94d2f857b9970b536f305c9755701b6575914794b4b9f27cb7eac5"
+      },
+      "kernels/triton/spconv/sparse_submanifold_conv_fwd_masked_implicit_gemm_splitk.py": {
+        "bytes": 7766,
+        "sha256": "cd9622ea05484268db1bf923b751cb0a95ae1586fa4b23c2eac857d1e5374923"
+      },
+      "kernels/triton/utils.py": {
+        "bytes": 1216,
+        "sha256": "da2932bf4d0e9b998722ea4b71500d74d2f80af712351c5b010d0019cb42f41f"
+      },
+      "ops/__init__.py": {
+        "bytes": 71,
+        "sha256": "10feab273d4c9132507f3df6c05a1d3373e78eeb433b88ca43375ba7edca4e1e"
+      },
+      "ops/grid_sample/__init__.py": {
+        "bytes": 272,
+        "sha256": "e9ea2771cc9b7e15f170e8df0c7eb393d7ebf333e0dc1328b07ebcb92078bff8"
+      },
+      "ops/grid_sample/grid_sample.py": {
+        "bytes": 7783,
+        "sha256": "665b41c9b3e908686d4d7f8f4152d342d59f7448f12d42d13c969e8b36499ea2"
+      },
+      "ops/grid_sample/grid_sample_torch.py": {
+        "bytes": 6708,
+        "sha256": "8b7002a02b0766c662700ad72b2c224ead7c65c3ae7356bcc5a7bada89b53d8a"
+      },
+      "ops/serialize.py": {
+        "bytes": 2156,
+        "sha256": "f41f8635b430b64208d28eccdefcfb036a1dc4001611693acad60d1db001327a"
+      },
+      "ops/spconv/__init__.py": {
+        "bytes": 704,
+        "sha256": "d89ccc9cb46439a43a553f20c50ea5dd69c1395c15b48ac63777014f472a1d69"
+      },
+      "ops/spconv/submanifold_conv3d.py": {
+        "bytes": 16734,
+        "sha256": "5422abaf4c3ec207a8e9d3582c391d22fd6ed0058fcaf4079e5623739786cc98"
+      },
+      "ops/utils.py": {
+        "bytes": 772,
+        "sha256": "59037fee897db84d8a1a3fb25ebe49013ab1cd288346488ba70300209858be70"
+      },
+      "utils/__init__.py": {
+        "bytes": 94,
+        "sha256": "812c97264022eccfc5784d40931b0522fd64f130f87910754f51b2355f8765f6"
+      },
+      "utils/autotuner.py": {
+        "bytes": 15797,
+        "sha256": "23c7e07a42bed108fbfa84e3b31c8b39a14bafb6680a238e7b3ab568cf2344cb"
+      }
+    },
+    "o_voxel": {
+      "_C.cpython-310-x86_64-linux-gnu.so": {
+        "bytes": 686296,
+        "sha256": "ebe4f481f84fc1036d95a5156f830b0e7df59113289451bfe6f15cb50c58311c"
+      },
+      "__init__.py": {
+        "bytes": 84,
+        "sha256": "ca30e1545d11f3e862b7d11b31af6200427c91482f11d8b543982d692cd8588b"
+      },
+      "convert/__init__.py": {
+        "bytes": 63,
+        "sha256": "c7a5f70493d8fdaec2c87c0bb8e60fd1aa23be8f69321d74db9ae44ae79a9ded"
+      },
+      "convert/flexible_dual_grid.py": {
+        "bytes": 14939,
+        "sha256": "112bd474d580f279ac196129f7989df6fdafa7ed7e08c350f2b386553e73e17d"
+      },
+      "convert/volumetic_attr.py": {
+        "bytes": 30010,
+        "sha256": "2d189c63cef83a27986b3d2007d9a5c0ea55bbee412d560f27103adfd225d0e5"
+      },
+      "io/__init__.py": {
+        "bytes": 1336,
+        "sha256": "528b2c4cf73f8a45ffe6462d9892e6e442fc8551ede3f97833435ed15d8204ff"
+      },
+      "io/npz.py": {
+        "bytes": 1171,
+        "sha256": "485eba0857a65db8b4cd0825b2e76480ef14f0d08f6068657e85e42375cd9f82"
+      },
+      "io/ply.py": {
+        "bytes": 2232,
+        "sha256": "407db437123df61317eafe62f61e0f8cbf2440fec71ae508b8f58e3731bf2e8b"
+      },
+      "io/vxz.py": {
+        "bytes": 13151,
+        "sha256": "f77430850cbd7e5f6253b322684ddbf3cfa3531e995ab9bf39fa9940bfd45ab3"
+      },
+      "postprocess.py": {
+        "bytes": 13770,
+        "sha256": "ef51a1ba0f2748ffb4c265b47d382cee956f23c6a52d0f3587e6d8beccb7e54a"
+      },
+      "rasterize.py": {
+        "bytes": 3535,
+        "sha256": "0749fdf3470bd574597a185d28ac4d46ad7c2ca59c83cc3abe3df339c0fc8f47"
+      },
+      "serialize.py": {
+        "bytes": 2574,
+        "sha256": "fff25f98b8a2f2e3b61b8a897d2ece652b6723c5de25282af1dabc60669eb886"
+      }
+    }
+  },
+  "legacy_extension_source_commit_note": "The reused installation records /tmp/extensions directories which no longer exist. Those historical build commits cannot be recovered from its metadata; package versions and full installed source/binary hashes are recorded instead. Do not claim an exact source revision for those reused binaries.",
+  "pip_check": {
+    "exit_code": 1,
+    "output": "jupyter-client 8.8.0 requires jupyter-core, which is not installed.\njupyter-client 8.8.0 requires tornado, which is not installed.\njupyter-client 8.8.0 requires traitlets, which is not installed.\n",
+    "note": "Inherited Jupyter packages are not part of this inference pipeline; imports above are checked independently."
+  }
+}

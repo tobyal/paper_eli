@@ -1,0 +1,30 @@
+{
+  "model": "qwen-image-2.1-pro",
+  "endpoint": "https://maas.qianwenaiapi.com/api/v1/services/aigc/multimodal-generation/generation",
+  "documentation": "https://platform.qianwenai.com/docs/api-reference/image-generation/qwen-image-editing",
+  "parameters": {
+    "n": 1,
+    "size": "1024*1024",
+    "seed": 42,
+    "prompt_extend": false,
+    "watermark": false
+  },
+  "prompt": "Edit image 1 and return one photorealistic RGB image of the same factory from exactly the same camera. Image 1 is the original scene. Image 2 is ONLY a position guide: the translucent magenta polygon encloses the allowed replacement volume; remove all magenta markings in the output. Replace the entire old machine consisting of a black assembly and a white support base inside that polygon. Image 3 is ONLY a background depth reference, with the editing area blacked out as UNKNOWN depth. Use it for surrounding floor/equipment perspective, not the old machine's shape. Do not copy its grayscale appearance. Generate exactly one complete device: A yellow six-axis industrial robotic arm mounted on a square steel base, with articulated rotary joints, shoulder, elbow, wrist, and a compact two-finger gripper. Show a coherent complete base, shoulder, elbow, wrist, distinct rotary joints and gripper with clear solid mechanical geometry. Place its base on the factory floor at the old device's base location. Fit the complete arm, gripper and pedestal within the marked volume without clipping. Keep the original camera, surrounding equipment, blue containers, railings, floor and lighting unchanged. Match the factory perspective, scale, color temperature and shading. Generate no cabinet, enclosure, extra machinery, duplicate arm, text, annotations or new background behind the robot. The output is the edited full factory view, not a collage or depth map.",
+  "reference_images": [
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/anchor.png",
+      "sha256": "192115763768273b48dc796866a61b6732114a829259bc9287de4982eada1d27"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/position_hint.png",
+      "sha256": "be0de60536597041e65c45d3af394392cee3a5d77d4a59747f8a209bf9eea001"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/depth_background.png",
+      "sha256": "a464881ecef187e3997d23a8824cbd80738cc399fe7ad93ebb8218665a05dbdf"
+    }
+  ],
+  "payload_sha256": "f9cd4c75ae64d0f3549165d4fb5c4d4dcfc215d33d5c31313d14780d394ca1ec",
+  "authentication": "DASHSCOPE_API_KEY or explicitly configured protected file; value never saved",
+  "depth_role": "visual reference, not native ControlNet conditioning"
+}

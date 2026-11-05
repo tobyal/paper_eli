@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-05",
+  "stages": {"m1": "complete", "m2": "complete", "m3": "complete", "m4": "complete"},
+  "qwen": {"model": "qwen-image-2.1-pro", "submission_attempts": 3, "http_401_attempts": 2, "successful_generation_requests": 1, "generated_images": 1, "automatic_post_retries": 0, "additional_attempts_explicitly_authorized": true},
+  "trellis": {"model": "microsoft/TRELLIS.2-4B", "model_revision": "af44b45f2e35a493886929c6d786e563ec68364d", "code_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd", "pipeline": "1024_cascade", "native_vertices": 2672405, "native_faces": 5409012, "new_gaussians": 200000},
+  "refinement": {"method": "DI-SDS", "conditioning": "text_only", "iterations": 2000, "effective_batch": 4, "microbatch": 2, "training_seconds": 1962.4143118858337, "torch_peak_gib": 8.684964179992676, "geometry_bitwise_preserved": true, "background_bitwise_preserved": true},
+  "scene": {"background_points": 1797425, "new_object_points": 200000, "final_points": 1997425},
+  "exports": {"calibrated_frames": 350, "orbit_frames": 72, "fps": 12, "input_video_seconds": 174.89655, "trajectory_video_is_accelerated": true},
+  "validation": {"offline_tests_passed": 4, "server_artifacts_verified": 28, "downloaded_artifacts_verified": 28, "all_stage_resume_reused_outputs": true},
+  "known_limitations": ["The retained background has visible floor artifacts in the former device occlusion region; these remain in the final composition.", "The generated device surface is not CAD-regularized.", "Some reused extension binaries lack recoverable source commits after their historical build directories were removed; installed package hashes and versions are recorded."]
+}

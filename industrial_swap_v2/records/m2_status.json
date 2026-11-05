@@ -1,0 +1,60 @@
+{
+  "stage": "m2",
+  "status": "complete",
+  "utc": "2026-11-05T09:16:44Z",
+  "artifacts": [
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/anchor.png",
+      "bytes": 1136829,
+      "sha256": "192115763768273b48dc796866a61b6732114a829259bc9287de4982eada1d27"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/edit_mask.png",
+      "bytes": 2696,
+      "sha256": "51dd4248495d818d45c74b2683bc3ec33b536e76fa6548cf589361c63be9803b"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/depth.png",
+      "bytes": 277482,
+      "sha256": "d0410d1c3c1d2ab5a2cf153b020c01b6c286595cfc2581be405894f7cb9d1034"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/depth_background.png",
+      "bytes": 215306,
+      "sha256": "a464881ecef187e3997d23a8824cbd80738cc399fe7ad93ebb8218665a05dbdf"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/edited_scene.png",
+      "bytes": 1487743,
+      "sha256": "51c700dc4b6fb8427eaa4c41c31481249ea022b11d04df6cf135eb2f7b21dc11"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/object_rgba.png",
+      "bytes": 1461616,
+      "sha256": "cf4af6c4ec1432bdda5aca9956a3ce8bd0a850627c37b019e7449a014934b677"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/object_mask.png",
+      "bytes": 4057,
+      "sha256": "e5cf7a88233ef2fd9000d332447f4bf1e96456b1abcc1fc8e3dfb2c846a294c7"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/object_white.png",
+      "bytes": 117312,
+      "sha256": "fea55427bad82b73e0fe65da8815e071ca4173d2ed0bd60b27038a00dad0ff7e"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/anchor_camera.json",
+      "bytes": 519,
+      "sha256": "7146d838fb6b9d0e7ce20b2929a27b92b4f143628424c560b54845fd43d6ec47"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/generation.json",
+      "bytes": 3079,
+      "sha256": "7e94db25bca2565475399b94552b97624bd74265df62ffb549862e181b39293b"
+    }
+  ],
+  "config_signature": "b6fa3f5a669bd9b9e06687f976489ada9478f0650977931ccf78d4edc3331e5a",
+  "submission_attempts": 3,
+  "successful_generation_requests": 1
+}

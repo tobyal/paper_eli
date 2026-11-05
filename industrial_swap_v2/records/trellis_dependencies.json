@@ -1,0 +1,20 @@
+{
+  "microsoft/TRELLIS-image-large": {
+    "revision": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "snapshot_path": "/home/kxliu/.cache/huggingface/hub/models--microsoft--TRELLIS-image-large/snapshots/25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "status": "complete",
+    "read_only_reuse": true
+  },
+  "facebook/dinov3-vitl16-pretrain-lvd1689m": {
+    "revision": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "snapshot_path": "/home/kxliu/.cache/huggingface/hub/models--facebook--dinov3-vitl16-pretrain-lvd1689m/snapshots/ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "status": "complete",
+    "read_only_reuse": true
+  },
+  "briaai/RMBG-2.0": {
+    "revision": "5df4c9c76d8170882c34f6986e848ee07fd0ba43",
+    "snapshot_path": "/home/kxliu/.cache/huggingface/hub/models--briaai--RMBG-2.0/snapshots/5df4c9c76d8170882c34f6986e848ee07fd0ba43",
+    "status": "complete",
+    "read_only_reuse": true
+  }
+}

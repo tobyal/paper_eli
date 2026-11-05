@@ -1,0 +1,39 @@
+{
+  "stage": "m4",
+  "status": "complete",
+  "utc": "2026-11-05T10:16:13Z",
+  "artifacts": [
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/object_refined.ply",
+      "bytes": 49601531,
+      "sha256": "ba555c973329ed4ac96f8dd1e386cacb4955e1d78710f1146f13a3894f3362d6"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/scene_final.ply",
+      "bytes": 495362932,
+      "sha256": "204b50b5b2ac26091c2900c1342b61a349a4ba511ec8adc760d3212fea185810"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/final_checkpoint.pth",
+      "bytes": 53618190,
+      "sha256": "b5b49d3175e29707d1b93f77be2f4a4fbaa4d4a76c7d017b3f85bad984df9bb0"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/renders/anchor_after.png",
+      "bytes": 1123220,
+      "sha256": "a92e397ca62f55d7b1b7e4afdec0cc0a45e6a5f0e232d309faa62b55a60a5aa4"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/renders/trajectory_before_after.mp4",
+      "bytes": 30939382,
+      "sha256": "225a76da54e46c1aa1ffd40316419f8b97924aadd0c9518d03f8c09fc7351d26"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/renders/orbit_before_after.mp4",
+      "bytes": 4240375,
+      "sha256": "d3acb46086d689b813d4a0a98481ee2b6f3d677162755fb42ee266c81125909b"
+    }
+  ],
+  "config_signature": "4b468575b8fdc5f5d7162acba30451ebaa862efae40165e2d2e61bbf5a0310d4",
+  "iterations": 2000
+}

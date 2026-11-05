@@ -1,0 +1,37 @@
+{
+  "stage": "m1",
+  "status": "complete",
+  "utc": "2026-11-05T08:42:37Z",
+  "artifacts": [
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/manifest.json",
+      "bytes": 4315,
+      "sha256": "d91ed8cec4e90be0da6dfdada5a7609f9653623fe641ab3ff598f3dda4511d53"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/target_gaussians.ply",
+      "bytes": 7776826,
+      "sha256": "a9b36fd801d54000f68fc8d38e04b85aa7d263bc1bff0b6a9fa4a5dd54be8856"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/background_gaussians.ply",
+      "bytes": 445762932,
+      "sha256": "a4f4860770321d88e024725a6c173cfa10d2deecacda8955faa03195f462e0c3"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/target_indices.npy",
+      "bytes": 250944,
+      "sha256": "5e6e244d84943eff875191e0401a96ae4330293aca53a2b599f86bf6542d26df"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/keep_indices.npy",
+      "bytes": 14379528,
+      "sha256": "3fc235ec5e28c70cded2342a1c1778be81b638f969a4eebbfe98bac5e29411a0"
+    }
+  ],
+  "counts": {
+    "source": 1828777,
+    "target": 31352,
+    "background": 1797425
+  }
+}

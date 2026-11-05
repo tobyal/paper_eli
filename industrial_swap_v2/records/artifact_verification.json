@@ -1,0 +1,18 @@
+{
+  "m1": {
+    "status": "verified",
+    "artifacts": 5
+  },
+  "m2": {
+    "status": "verified",
+    "artifacts": 10
+  },
+  "m3": {
+    "status": "verified",
+    "artifacts": 7
+  },
+  "m4": {
+    "status": "verified",
+    "artifacts": 6
+  }
+}

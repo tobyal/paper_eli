@@ -1,0 +1,8 @@
+{
+  "stage": "qwen_request",
+  "status": "http_error_no_retry",
+  "utc": "2026-11-05T08:57:13Z",
+  "http_status": 401,
+  "api_error_code": "InvalidApiKey",
+  "request_id": "4816b50b-6c71-96b0-896a-4f7e1d06c434"
+}

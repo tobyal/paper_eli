@@ -1,0 +1,43 @@
+{
+  "stage": "m3",
+  "status": "complete",
+  "utc": "2026-11-05T09:39:59Z",
+  "artifacts": [
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/trellis_asset.glb",
+      "bytes": 39233188,
+      "sha256": "724f148eef272cca400245d255507119f29237d99c708d12b8568c779be7d1ed"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/trellis_asset_preview.png",
+      "bytes": 825865,
+      "sha256": "2c24ea3dbdf1f7d0ade01dd27cc80b078d382b64a751e791e9e0826e14cc15fb"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/object_local.ply",
+      "bytes": 49601531,
+      "sha256": "809f75c6f74b98335fc65bf6270309804ece23de5f325b1854898374b72a2a83"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/object_world.ply",
+      "bytes": 49601531,
+      "sha256": "de096ee53244d81701641eb46c1a27b948b048f76802db92db84850b147c32bc"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/scene_coarse.ply",
+      "bytes": 495362932,
+      "sha256": "8d9d1344d34f4a11f314be3da751990bbd0f10cf85e7736a0fd8e3e9a2e0b07f"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/transform.json",
+      "bytes": 2322,
+      "sha256": "e4252a959501c93b753982d2ab38d08cf290e5918bd92a97dcab36b4e7dfc95e"
+    },
+    {
+      "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/renders/trajectory_before_after.mp4",
+      "bytes": 31173291,
+      "sha256": "cec25215d0c1f9b587bbdc52675d824ec7b7b3ce9548e2ac0160a5eed59edc2a"
+    }
+  ],
+  "config_signature": "72c43cff03dc48ce826910151f29384bd574080e45903aa5a3ff68d0c22f3a18"
+}

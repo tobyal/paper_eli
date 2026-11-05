@@ -1,0 +1,78 @@
+project:
+  root: /mnt/sda/ubuntu/lkx/papers/paper_eli
+  output_dir: outputs
+  seed: 42
+  gpu: 2
+  gsle_python: envs/gsle/bin/python
+  sam_python: envs/gsle_langsplat/bin/python
+  trellis_python: industrial_swap_v2/envs/trellis2_reused/bin/python
+  source_ply: outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply
+  source_sha256: 1d5cc6a5b58e7d99fbefd54ba6de7ab351ee23b884b2fcacba11720906b5bf7a
+m1:
+  reuse_existing_localization: true
+  localization_dir: outputs/gsle/localization
+  target_text: an industrial machine with a black assembly on a white base
+m2:
+  model: qwen-image-2.1-pro
+  provider: qianwen_api
+  endpoint: https://maas.qianwenaiapi.com/api/v1/services/aigc/multimodal-generation/generation
+  api_key_file: /mnt/sda/ubuntu/lkx/papers/qwen-API.txt
+  max_api_requests: 1
+  candidates: 1
+  output_size: 1024*1024
+  timeout_seconds: 600
+  prompt_extend: false
+  seed: 42
+  use_avp: true
+  reuse_anchor: true
+  existing_anchor: outputs/gsle/avp/anchor.json
+  anchor_resolution: 1024
+  use_scene_depth: true
+  use_background_depth: true
+  use_sam: true
+  replacement_text: >-
+    A yellow six-axis industrial robotic arm mounted on a square steel base,
+    with articulated rotary joints, shoulder, elbow, wrist,
+    and a compact two-finger gripper.
+m3:
+  model: microsoft/TRELLIS.2-4B
+  repository: https://github.com/microsoft/TRELLIS.2
+  revision: 75fbf0183001ed9876c8dbb35de6b68552ee08bd
+  input_image: outputs/m2/object_rgba.png
+  pipeline_type: 1024_cascade
+  low_vram: true
+  minimum_free_gpu_gib: 18
+  memory_budget_gib: 16
+  gaussian_count: 200000
+  opacity: 0.8
+  tangent_scale_multiplier: 1.1
+  normal_scale_ratio: 0.15
+  texture_size: 4096
+  decimation_target: 1000000
+  fit_fraction: 0.95
+  output_type: mesh_and_gaussian
+  use_original_scene_transform: true
+m4:
+  method: di_sds
+  initialize_from: outputs/m3/object_world.ply
+  freeze_background: true
+  preserve_geometry: true
+  iterations: 2000
+  batch: 4
+  microbatch: 2
+  resolution: 512
+  unconditional_conditioning: text_only
+  guidance_scale: 100.0
+  sds_weight: 0.1
+  rgb_weight: 1500.0
+  mask_weight: 1500.0
+  color_lr: 0.002
+  opacity_lr: 0.002
+  checkpoint_every: 100
+  minimum_free_gpu_gib: 24
+  memory_budget_gib: 20
+render:
+  trajectory_width: 960
+  orbit_resolution: 512
+  orbit_frames: 72
+  fps: 12
