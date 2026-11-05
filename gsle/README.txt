@@ -195,3 +195,14 @@ Completed experiment (2026-11-05)
   On Windows: powershell -ExecutionPolicy Bypass -File gsle/download_results.ps1
   Add -PreviewOnly to skip PLY/checkpoint files. Default destination: results/gsle.
   Full archive includes both variants, module artifacts, cameras, source and logs.
+
+Stage preview panels
+  records/gsle/stage_results_index.txt lists the actual intermediate artifacts,
+  including localization, cameras, depth, masks, object models and training logs.
+  gsle/show_stages.py is the Windows preview utility used for the stage-by-stage
+  review. It reads the previously downloaded images in results/gsle/stages and
+  writes four labeled comparison panels plus INDEX.txt and display_manifest.json.
+  Run locally with Python, matplotlib, Pillow and the Microsoft YaHei font:
+    python gsle/show_stages.py
+  It arranges actual saved images; it does not run training or diffusion inference.
+  Preview images and large experiment artifacts remain outside Git.
