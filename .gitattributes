@@ -8,3 +8,5 @@
 *.txt text eol=lf
 *.md text eol=lf
 *.patch text eol=lf
+# Preserve pinned upstream viewer assets and their published byte checksums.
+industrial_swap_v2/webapp/static/vendor/** -text -whitespace

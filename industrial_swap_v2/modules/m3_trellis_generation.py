@@ -1,7 +1,7 @@
 import subprocess
 import os
 from ..core.context import Context, arguments, read_json, sha256
-from ..core.scene import compose
+from ..core.m3_composition import compose_m3
 from ..core.rendering import render_outputs
 
 
@@ -23,8 +23,8 @@ def run(ctx):
     else:
         subprocess.run([str(ctx.source(ctx.cfg['project']['trellis_python'])),'-m',
             'industrial_swap_v2.core.trellis_worker','--config',str(ctx.config_path)],cwd=ctx.root,env=env,check=True)
-    compose(ctx.stage('m1')/'background_gaussians.ply',out/'object_world.ply',out/'scene_coarse.ply',out/'composition.json')
-    render_outputs(ctx,'m3',out/'object_world.ply')
+    background=compose_m3(ctx)
+    render_outputs(ctx,'m3',out/'object_world.ply',background_path=background)
     ctx.complete('m3',[out/n for n in ('trellis_asset.glb','trellis_asset_preview.png',
         'object_local.ply','object_world.ply','scene_coarse.ply','transform.json','renders/trajectory_before_after.mp4')])
 

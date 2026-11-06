@@ -1,0 +1,26 @@
+设备高斯查看器
+================
+入口：http://127.0.0.1:18086/viewer
+指定实验：/viewer?experiment=<experiment_id>
+
+默认打开 records/multiview_scene_refinement_20261106.json 中记录的实验，
+直接读取原始 M3 object_world.ply。可切换 M4 object_refined.ply，
+叠加原始 M1 背景或阶段 A 优化背景。全程只读，无模型变换、抽样或地面补丁。
+
+左键拖动旋转，右键平移，滚轮缩放。
+F 聚焦整台设备，B 聚焦底座。底座是设备沿 world_up 最低 20% 的位置范围。
+自由漫游：左键拖动转头，W/S 前后，A/D 左右，Q/E 上下，Shift 加速。
+点击画布后可使用键盘。中心点显示仅用于位置诊断，非实体表面。
+“回到场景参考视角”使用 Anchor 相机位置、方向和垂直 FOV，
+画面宽高比随浏览器窗口变化，不用于逐像素离线评测。
+
+渲染器：Spark 2.4.0 + Three.js 0.180.0（MIT），固定版本位于 static/vendor。
+模型使用完整高斯数量，关闭 LOD，浮点中心位置，保持世界坐标。
+网页显示采用 Spark 的渲染实现，色彩、抗锯齿等可能与训练渲染器略有差异。
+设备约 50 MB；厂房背景约 440 MB，仅勾选后加载。
+
+服务：industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.webapp.manage start --port 18086
+延用现有 SSH 本地端口转发。服务仅绑定远程 loopback。
+新接口均为 GET：/api/viewer/catalog、/api/viewer/file/{experiment_id}/{resource_id}.ply。
+仅从已登记实验的固定素材名称读取，不接受任意文件路径，不触发生成或训练。
+第三方资源清单及 SHA256 位于 static/vendor/manifest.json；许可证随资源保存。

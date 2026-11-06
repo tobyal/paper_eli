@@ -1,0 +1,36 @@
+{
+  "status": "verified",
+  "method": "OAGOF",
+  "code_sha256": {
+    "core/object_occlusion_filter.py": "e2d0d9af04c2ce2b1958185d69188f6933ea1ac50e1222b4ec3178e6cc52a8d7",
+    "core/m3_composition.py": "df025c1e6456244ca51cd19dcc7e2e978dcbb32c1f5a97a0e0cf662a08fc5c28",
+    "core/rendering.py": "c917ee619095713da9083a050cb47fc883edf36fc0605285cd1de9818caad7c8",
+    "modules/m3_occlusion_filter.py": "9bf7341000e99aff5e0d72616d3f8dcd2d51bc2085f6bb990746a900e9c73664",
+    "modules/m3_trellis_generation.py": "3dda65a9e5dfb40526bb206bd03349b3a2709fcce61341f33a81489604cce24e",
+    "modules/m4_refinement.py": "2f100a79e3e93d30b51a75988d59c2eac8fbaed12f267ddb6e6fa63feb0783aa",
+    "configs/default.yaml": "8f4d6cd43a42d76e133fafe3dbf96f65c66fc3e47281abce1526015536685147",
+    "scripts/validate_oagof.py": "590e592992c18c70146497cc6e6dffb76d285ef6e3aa785b908e5e641160166d",
+    "scripts/run_oagof.sh": "abeee350a7d5a346a1f48495af038322e704d83159d1a6dd822298d94a60bd94",
+    "scripts/show_oagof.py": "2c0926fcf87af6c71e2ed1ef183c67c341ce32716498f93aa60af0150d443563",
+    "webapp/adapter.py": "06aca883426170b89c70bf2b25aa326ded745b4cb1a512ea6b8315e7915239e2",
+    "webapp/service.py": "01abd1512d19971ba356853954f3e69c4c52fe88f397a773c6710bfaf18293f0",
+    "webapp/worker.py": "70fcdef7d6bbc3a4841dff1d9de102bd95fefa0f44e0e80c10a474f916c3cbf2",
+    "webapp/app.py": "d6038f088421d24968700b572c238f6235650545a54c51f58211620b5649ad01",
+    "webapp/static/app.js": "30af2dff22feab1bece4103373f0f94ef79a57436fa58078cf3193b873977503",
+    "tests/test_object_occlusion_filter.py": "ba2d4a3714f2f2b75bd89f5f599fe444158f02f00e80bc46802d97a9b4365587",
+    "webapp/tests/test_webapp.py": "180e28a0ccd39fc0da5f976edbc96ee11422cd3534c92110e784d6b15db0ea10"
+  },
+  "local_artifact_sha256_verified": {
+    "background_filtered.ply": "02155e498bcce2721c2a4e423149d0726b92aaa600105ebcb1baf4c4839d0991",
+    "removed_occluders.ply": "991ab84027532b55d4cfda2835d36143ea125cf7358db89307a55f4965ff388d",
+    "scene_filtered.ply": "84dab6e6eaf30dd0eea75215204c0abd658d24f8c53db79e1a3b859e4c8ca81a"
+  },
+  "preview_directory": "E:\\codex_projects\\paper_eli\\industrial_swap_v2\\previews\\oagof\\final",
+  "core_tests": 6,
+  "web_tests": 18,
+  "no_model_generation": true,
+  "no_floor_generation": true,
+  "preserved_source_files": 39,
+  "m3_web_run": "d81d361403c344598aa75d56e6e37c0b",
+  "m3_web_experiment": "8a5834ec085a486595bbd0a35c829a19"
+}

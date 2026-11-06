@@ -1,0 +1,102 @@
+{
+  "status": "completed_with_visual_limitations",
+  "server": "ubuntuA6000",
+  "remote_output": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/multiview_scene_refinement/run_v1",
+  "web_experiment": "35cded5f5cff416785799ee3f3a503a1",
+  "web_runs": {
+    "m4": "228b887f3c744cf89f9e08c6c4ae1d9a",
+    "m3": "c1e83efe6eed4dc49d08c46e3e9cb8ca"
+  },
+  "runtime": {
+    "stage_a": {
+      "iterations": 1000,
+      "selected_step": 800,
+      "seconds": 223.61841249465942
+    },
+    "stage_b": {
+      "completed_steps": 2000,
+      "elapsed_seconds_this_attempt": 3656.4755375385284,
+      "peak_gpu_gib": 8.69008731842041,
+      "mean_step_seconds": 1.815576425075531
+    },
+    "qwen_calls": 0,
+    "trellis_calls": 0
+  },
+  "anchor": {
+    "name": "000_avp_099",
+    "split": "anchor",
+    "standalone_render_max_error": 0.0,
+    "stages": [
+      {
+        "stage": "M3",
+        "visibility": 0.8524351119995117,
+        "base_visibility": 0.536777913570404,
+        "base_visible_relative_to_m3": 0.536777913570404,
+        "visible_relative_to_m3_alpha": 0.8524351716041565,
+        "real_background_l1": 0.0,
+        "legal_foreground_pixels": 0,
+        "object_contribution_under_legal_foreground": 0.0,
+        "joint_outside_object_mae": 0.0,
+        "joint_outside_changed_005_fraction": 0.0
+      },
+      {
+        "stage": "M4_A",
+        "visibility": 0.8965368866920471,
+        "base_visibility": 0.5901036262512207,
+        "base_visible_relative_to_m3": 0.5901036262512207,
+        "visible_relative_to_m3_alpha": 0.8965369462966919,
+        "real_background_l1": 0.0,
+        "legal_foreground_pixels": 0,
+        "object_contribution_under_legal_foreground": 0.0,
+        "joint_outside_object_mae": 0.007581606041640043,
+        "joint_outside_changed_005_fraction": 0.00498389033600688
+      },
+      {
+        "stage": "M4_B",
+        "visibility": 0.8964213132858276,
+        "base_visibility": 0.5899029970169067,
+        "base_visible_relative_to_m3": 0.5876718163490295,
+        "visible_relative_to_m3_alpha": 0.8928679823875427,
+        "real_background_l1": 0.0,
+        "legal_foreground_pixels": 0,
+        "object_contribution_under_legal_foreground": 0.0,
+        "joint_outside_object_mae": 0.007593914866447449,
+        "joint_outside_changed_005_fraction": 0.005012518260627985
+      }
+    ]
+  },
+  "preservation": {
+    "frozen_background_rows_bitwise_identical": true,
+    "background_count_before": 1797425,
+    "background_count_after": 1797425,
+    "optimized_rows": 33110,
+    "background_geometry_bitwise_identical": true,
+    "object_geometry_bitwise_identical": true,
+    "object_count_before": 200000,
+    "object_count_after": 200000,
+    "original_inputs_unchanged": {
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/outputs/m3/object_world.ply": "c4a161b4e6df724b5e2febfdb6d955c158915711652f4cf3b35daca5bcfccfd4",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/outputs/m3/transform.json": "7b647603ee90bbb4122f61528af9d27fe1ffe162f106fc16790497f7d554b7eb",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/outputs/m1/background_gaussians.ply": "a4f4860770321d88e024725a6c173cfa10d2deecacda8955faa03195f462e0c3",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/outputs/m2/object_mask.png": "e5cf7a88233ef2fd9000d332447f4bf1e96456b1abcc1fc8e3dfb2c846a294c7",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/outputs/m2/object_rgba.png": "cf4af6c4ec1432bdda5aca9956a3ce8bd0a850627c37b019e7449a014934b677"
+    },
+    "historical_outputs_verified": 39,
+    "stage_b_uses_stage_a_background": true,
+    "final_ply_components_bitwise_identical": true,
+    "deleted_gaussians": 0,
+    "added_gaussians": 0,
+    "floor_completion": false
+  },
+  "tests": {
+    "web": 19,
+    "passed": 36,
+    "core": 17
+  },
+  "limits": [
+    "Validation background L1 improvement is only 0.13 percent.",
+    "Some residual background occlusion remains in regions without sufficient selected-view support.",
+    "DI-SDS adds mottled base texture and does not further improve visibility."
+  ],
+  "previews": "E:\\codex_projects\\paper_eli\\industrial_swap_v2\\previews\\multiview_scene_refinement"
+}

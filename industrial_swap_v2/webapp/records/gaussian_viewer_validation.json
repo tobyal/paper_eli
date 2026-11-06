@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-06T13:52:02.163237+08:00",
+  "url": "http://127.0.0.1:18086/viewer",
+  "experiment": "35cded5f5cff416785799ee3f3a503a1",
+  "renderer": "Spark 2.4.0 / Three.js 0.180.0",
+  "source_counts": {
+    "object_m3": 200000,
+    "object_m4": 200000,
+    "background_m1": 1797425,
+    "background_a": 1797425
+  },
+  "checks": {
+    "api_catalog": "passed",
+    "all_four_ply_range_requests": "206, matching vertex counts",
+    "unknown_asset": "404",
+    "existing_web_regression_tests": "19 passed",
+    "browser_visual_checks": [
+      "original independent device rendered",
+      "rotated device rendered from another side",
+      "base focus",
+      "Gaussian center points",
+      "M4 device version",
+      "optimized background + M4",
+      "original background + M3",
+      "free fly W movement and drag looking",
+      "reset to original independent device"
+    ]
+  },
+  "source_files": "read-only, original PLY served without transformation or LOD",
+  "preview_files": [
+    "industrial_swap_v2/previews/gaussian_viewer_device.jpg",
+    "industrial_swap_v2/previews/gaussian_viewer_scene.jpg"
+  ]
+}

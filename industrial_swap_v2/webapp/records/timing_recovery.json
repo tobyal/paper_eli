@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-11-05T18:04:09.430576+00:00",
+  "corrected": [
+    {
+      "run_id": "173dd1e87749494db5f66ab1287d37d7",
+      "seconds": 719.685752,
+      "basis": "Recovered wall time from persisted start/finish timestamps after worker restart"
+    },
+    {
+      "run_id": "d599bbd4b99f45ff80ac356cdc2dda2d",
+      "seconds": 160.775075,
+      "basis": "Recovered wall time from persisted start/finish timestamps after worker restart"
+    }
+  ]
+}

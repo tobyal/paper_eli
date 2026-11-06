@@ -1,0 +1,144 @@
+M3–M4 多视角局部场景优化
+======================
+
+入口与边界
+----------
+新默认流程：M3 多视角分析 → M4 A 局部背景优化 → M4 B DI-SDS。
+core/object_occlusion_filter.py、repair_background.py 和 background_repair 结果均为历史归档。
+新流程不调用这些算法，不删除或新增背景高斯，不调用 Qwen/TRELLIS，不改变已对齐设备的几何。
+M4 的 freeze_background 指阶段 B 冻结阶段 A 的结果；阶段 A 仅优化有真实观测支持的局部背景。
+
+本次原始资产来源
+----------------
+实验 9b0eeee5840d453e8f21e1763544a6cb，M3 运行 173dd1e87749494db5f66ab1287d37d7。
+原始背景 SHA256：a4f4860770321d88e024725a6c173cfa10d2deecacda8955faa03195f462e0c3
+原始设备 SHA256：c4a161b4e6df724b5e2febfdb6d955c158915711652f4cf3b35daca5bcfccfd4
+独立运行目录：industrial_swap_v2/outputs/multiview_scene_refinement/run_v1
+M1/M2 是原始结果的只读复用；M3 object_world.ply 为逐字节复制。该入口不会进入生成模块。
+
+M3：core/multiview_masks.py
+--------------------------
+prepare_multiview(ctx, output_dir=None) → 保存分析的目录。
+1. Anchor 使用 M2 Mask 与独立设备 Alpha 的交集；保存 IoU，低于 0.35 则禁用 Anchor 可见性损失。
+2. 其余视角从配准照片相机中取样，独立渲染当前设备 Alpha，不复用 Anchor Mask。
+3. 保存设备 RGB/Alpha/相机 z 深度、背景 RGB、联合 RGB/深度和实际设备贡献。
+   贡献通过在联合场景中给背景赋 0、设备赋 1 进行真实前向透明度合成计算。
+4. 原始完整场景渲染 z/z² 深度矩与 M1 被定位高斯的贡献。它们是模型估计，不是真实深度标注。
+5. 排除与旧设备包围盒相交且深度不确定的像素，排除旧语义高斯的贡献，并膨胀边缘。
+   只有能够确认在旧区域之前/之后的表面才能重新进入真实照片背景监督。
+6. 可优化候选考虑高斯旋转协方差的 3σ 支持范围，而非只看中心。
+   高斯须在至少两个训练视角的可信照片区域有真实渲染贡献，才可进入优化集合。
+7. 对可见贡献关于背景 opacity logit 求导，得到遮挡候选分数与跨视角票数；只保存候选，不删除。
+
+本次 41 视角：1 个 Anchor、30 个训练照片视角、10 个验证照片视角。
+验证照片不参与优化梯度和高斯观测支持计数，但用于检查点选择，因此不是独立的最终测试集。
+local_indices.npy：允许优化的背景行号；unsupported_local_indices.npy：证据不足且冻结的局部行号。
+occlusion_candidate_indices.npy：多视角遮挡候选，仅用于参数变化上限。
+cache/*.npz：真实照片、初始渲染、RGB/可见性权重、未知区和合法前景等。
+object_masks、object_alpha、object_depth、renders、supervision_masks：可单独检查的中间结果。
+
+M4 A：core/local_background_optimizer.py
+--------------------------------------
+optimize_background(ctx) → background_optimized.ply。
+对原始局部 SH0 和 opacity logit 使用零初始化增量；其他 SH 系数、位置、旋转和尺度全部冻结。
+RGB 损失只比较背景单独渲染与原始照片，绝不让新设备联合图匹配旧设备照片。
+可见性损失只约束可信设备像素；可靠的原场景前景遮挡不进入该损失。
+额外约束：局部参数保持、旧区域及设备轮廓之外的初始背景图像保持。
+前 100 步以照片监督为主；接着 100 步渐进加入可见性损失。
+背景 opacity 改变上限：普通局部高斯 0.12；多视角候选 0.60；SH0 对应 RGB 变化上限 0.18。
+这些是透明度/颜色单位；空间阈值和观测像素阈值按区域/图像尺寸归一化。
+不透明度被约束但不会被裁剪成 0，不进行 prune/densify。
+每 100 步评估照片误差、设备贡献、Mask 外变化和合法前景变化。
+检查点选择指标：验证 RGB L1 + 0.3 × (1 − 验证可信区域设备可见率)。
+默认允许验证 RGB L1 相对初始最多增加 1%；本次选中的第 800 步实际低于初始误差。
+仅保存原始结构化 PLY 中被允许改变的 SH0/opacity 字段；未优化行逐字节校验。
+checkpoint_latest.pth 保存参数、Adam 状态和随机相机采样状态，支持中断后恢复。
+在所选训练照片中没有足够可信观测的局部高斯保持冻结；没有地面补全，未知区域可以仍有残影。
+这个标记不是“所有原始视频视角均不可见”的证明，增加训练视角可能扩大可恢复范围。
+
+M4 B：modules/m4_refinement.py
+-----------------------------
+首先运行/校验阶段 A，显式载入 background_optimized.ply。
+背景、设备 xyz/scale/rotation、扩散模型参数冻结，只优化设备颜色和 opacity。
+DI-SDS 使用独立设备 Alpha 的轮廓，按图像短边的 1.5% 膨胀，Mask 不参与反向求导。
+M2 白底设备 RGB 与 SAM Mask 仍作为 Anchor 监督。
+最终 scene_final.ply 和所有 M4 渲染显式使用同一份优化背景，并记录 SHA256。
+模型在本地缓存离线加载。本次完整运行 2000 步，batch=4、microbatch=2、resolution=512。
+
+运行（SSH ubuntuA6000 上，在仓库根目录）
+---------------------------------------
+export CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=8 OPENBLAS_NUM_THREADS=8
+PY=envs/gsle/bin/python
+SRC=industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/config.yaml
+$PY -m industrial_swap_v2.scripts.run_multiview_refinement --source-config "$SRC" --destination outputs/multiview_scene_refinement/another_run --stage prepare
+CFG=industrial_swap_v2/outputs/multiview_scene_refinement/another_run/config.yaml
+$PY -m industrial_swap_v2.scripts.run_multiview_refinement --config "$CFG" --stage background
+$PY -m industrial_swap_v2.scripts.run_multiview_refinement --config "$CFG" --stage refine
+$PY -m industrial_swap_v2.scripts.run_multiview_refinement --config "$CFG" --stage validate
+
+也可 --stage all 顺序运行。不要把另一个已存在结果目录作为新 destination。
+GPU 为共享资源，运行前检查 nvidia-smi；不得终止其他用户进程。
+
+目录
+----
+m3/scene_coarse.ply：原始背景 + 原始对齐设备。
+m3_visibility → m3/multiview_visibility：多视角监督与分析。
+m4_background → m4/background_optimization：优化背景、初步合成、检查点、日志和统计。
+m4_refined → m4：精细化设备、最终场景、DI-SDS 检查点/日志/视频。
+validation：相同相机 M3/A/B 图像、验证相机图、三栏视频、贡献与背景误差报告、不可观测区报告、字节校验。
+executed_source.tar.gz：本次主要算法执行时的代码快照。
+
+Web 集成
+--------
+新实验默认启用多视角初始化和局部背景阶段；不显示旧的删除过滤为新方法。
+历史实验保留各自配置；复制历史实验仍会复制历史设置，便于复现。
+M3/M4 的缓存签名区分新旧方法。M4 复用旧 M3 时，缺失的多视角分析写到新 M4 目录，绝不写回旧 M3。
+已有生成素材仍可复用；新流程默认不重新对齐世界坐标模型。
+
+限制
+----
+生成模型的多视角轮廓仅是约束，不是真实几何标注；遮挡关系依赖已有 3DGS 的几何可信度。
+视频没有观察到的表面无法由真实 RGB 恢复。本次不通过删点、补点或抬高设备掩盖这种缺失。
+不假定黄色、机械臂或特定地面颜色。底部可见率指标使用设备中心沿 M1 world_up 最低 20% 的高斯集合。
+相邻视频帧存在相关性；应在新设备/更广视角上进一步检验泛化。
+
+本次实跑结果（2026-11-06）
+-------------------------
+阶段 A：1000 步，选择第 800 步；记录耗时 223.6 秒。
+阶段 B：完整 2000 步；训练耗时 3656.5 秒；显存峰值 8.69 GiB。共享 GPU，时长不宜直接用于算法横向速度排名。
+Anchor 640px、固定原始 M3 Alpha 基准：
+                    M3        阶段 A      阶段 B
+设备可见贡献        85.24%    89.65%      89.29%
+底部可见贡献        53.68%    59.01%      58.77%
+底部定义为沿 M1 world_up 最低 20% 的原始设备高斯，不与旧诊断中不同 ROI 的数字直接比较。
+训练照片可信背景 L1：0.02612375 → 0.02537547，降低 2.86%。
+验证照片可信背景 L1：0.02716132 → 0.02712669，降低 0.13%，改善很小。
+阶段 B 背景固定，因此其背景照片误差与阶段 A 一样。
+10 个验证相机中，最终设备 Mask 外平均 RGB 绝对变化为 0.002894（0–1 范围）。
+Mask 外平均 RGB 变化超过 0.05 的像素比例，逐视角平均为 0.182%。
+33,110 个局部高斯可优化；71,297 个局部高斯因所选训练照片支持不足保持冻结。
+背景总数 1,797,425，设备总数 200,000；零新增、零删除，背景和设备几何逐字节保持。
+11 个验证相机的独立最终 PLY 渲染与组件合成最大像素差为 0。
+原始 39 项历史产物与 43 个照片/COLMAP 输入文件校验通过；36 项核心/Web 回归检查通过。
+
+可见性改善主要来自阶段 A。阶段 B 改变了颜色和纹理，没有进一步改善遮挡，底座出现一些斑驳。
+冻结且观测不足的背景仍覆盖部分底座，黑色残影未完全消除；本次不能宣称完整恢复了不可见地面。
+这是已经实跑、可比较的研究基线，不是视觉问题已全部解决的结果。
+
+Web 实验：http://127.0.0.1:18086/#experiment/35cded5f5cff416785799ee3f3a503a1
+最终场景 SHA256：0901ac9d1de9e367884654a64f2c3b9ef9ddefec50af04d589f8e9c6a924b9e9
+本机预览：industrial_swap_v2/previews/multiview_scene_refinement/
+三栏轨迹视频是 350 个配准相机按 12 fps 导出的展示视频；它的播放时长不代表原始输入视频时长。
+
+监督与残余遮挡审计（2026-11-06）
+--------------------------------
+scripts/export_supervision_audit.py 只读导出实际输入、训练缓存和监督范围，不重新生成或训练。
+运行：envs/gsle/bin/python -m industrial_swap_v2.scripts.export_supervision_audit --run industrial_swap_v2/outputs/multiview_scene_refinement/run_v1 --output industrial_swap_v2/outputs/supervision_audit/new_audit
+输出：device_supervision.png、environment_supervision.png、全部 41 个视角的 RGB/Mask 张量与 report.json。
+设备 RGB/Mask 按训练中的尺寸和插值规则从 M2 输入重建；环境数据直接来自保存的多视角缓存。
+监督图中黑色零权重区域不是需要拟合的黑色地面。Anchor 无真实照片 RGB 监督，其环境目标为未使用的零占位。
+587 个遮挡候选中，314 个可优化，273 个因真实照片支持条件被冻结；冻结局部背景总数 71,297。
+当前实现把 RGB 观测支持资格同时用于遮挡优化资格，导致部分已识别遮挡仍无法更新。
+阶段 B 的 RGB/Mask 比较独立设备，背景冻结，不能消除这些残余背景遮挡；此问题尚未修复。
+DI-SDS 提供动态潜空间梯度，无固定的修复后 RGB 目标；历史运行仅保存了第一轮四张扩散 Mask。
+只读交互查看器入口与操作见 webapp/GAUSSIAN_VIEWER.txt，可独立检查 M3/M4 设备与背景。

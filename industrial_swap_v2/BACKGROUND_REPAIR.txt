@@ -1,0 +1,84 @@
+M3 背景残影修复（2026-11-06）
+
+本次仅修复背景，不重新定位、不重新生成机械臂、不移动机械臂。
+输入是 Web 实验 9b0eeee5840d453e8f21e1763544a6cb 的 M3 运行
+173dd1e87749494db5f66ab1287d37d7，沿用其 M1 背景及 object_world.ply。
+原 M1–M4 文件、实验记录和 Web 当前运行指针均未覆盖。
+
+已运行结果
+服务器根目录：/mnt/sda/ubuntu/lkx/papers/paper_eli
+结果目录：industrial_swap_v2/outputs/background_repair/fixed_v6
+本地完整场景：E:/codex_projects/paper_eli/industrial_swap_v2/outputs/background_repair/fixed_v6/scene_coarse_fixed.ply
+本地预览：E:/codex_projects/paper_eli/industrial_swap_v2/previews/background_repair/fixed_v6
+
+scene_coarse_fixed.ply：修复后的完整 3DGS，503772364 字节。
+SHA256：422e0600c46848c19bffde7d735518bf0f9519c8d0b5e97958c98fd3796c19a4
+background_fixed.ply：清理后背景与地面补丁。
+background_cleaned.ply：仅清理异常高斯，尚未补地面的背景。
+floor_patch.ply：新建的 34610 个地面高斯。
+removed_gaussians.ply / removed_background_indices.npy：移除的 701 个异常高斯及原背景索引。
+retained_background_indices.npy：保留的原背景高斯索引。
+floor_donor_indices.npy / floor_color_samples.npz：地面几何及颜色来源。
+repair_report.json：修复参数及输入校验值。
+validation/validation.json：交付 PLY、原文件不变性及 13 个视角的验证。
+validation/orbit_before_after.mp4：同相机连续侧向环绕，左为原 M3，右为修复结果，144 帧。
+validation/trajectory_before_after.mp4：175 个原始标定相机，同样左原 M3、右修复。
+validation/video_cameras.json：每帧相机参数。
+code/：运行代码快照；source_config.yaml：来源配置。
+
+方法
+1. inspect_background_repair.py 读取原背景、M1 坐标系及 LangSplat 地面分数。
+   对底座可见贡献反传背景透明度，定位造成遮挡的高斯；另对局部暗像素
+   反传颜色，定位不透明黑色残影。两种归因均来自实际三维高斯渲染。
+2. repair_background.py 联合检查三维位置、协方差支持范围、方向、尺度、
+   地面语义及渲染贡献，先删除异常高斯。大高斯即使中心在旧删除框外，
+   仍可能覆盖框内，这正是仅按中心删除不能处理的一部分残影。
+3. 从 220 个可靠周边地面高斯拟合局部地面，使用 1850 个经深度、颜色和
+   语义检查的周边地面颜色样本补全三维地表。补丁是有位置、旋转、尺度、
+   不透明度和 SH 参数的真正三维高斯，不是改渲染图。
+4. 原机械臂底部低于周围拟合平面，因此新补面在底座附近与其既有支撑高度
+   衔接，并过渡到周边地面。仅补面具有这个局部高度变化，机械臂完全不动。
+   补面外沿低于保留的薄地面和标线高斯，以免覆盖原标线。
+5. 与原 object_world.ply 合成，独立重新读取交付 PLY 渲染，并导出对比。
+
+验证
+原背景 1797425 个高斯，移除 701 个（0.0390%），其余逐字节保留。
+机械臂 200000 个高斯，合成后所有字段与输入逐字节相同。
+原 object_world.ply SHA256：c4a161b4e6df724b5e2febfdb6d955c158915711652f4cf3b35daca5bcfccfd4
+M1 manifest、M1 背景、M3 transform 文件 SHA256 未变化。
+未删除被颜色规则识别为黄色的背景高斯。
+13 个验证视角中，附近黄色高斯的总可见贡献均未降低。
+交付 PLY 与背景/物体联合渲染的逐像素最大误差为 0。
+参考视角底部 15% 高度范围内高斯的可见贡献：41.98% -> 95.91%。
+源相机 frame_000151：39.28% -> 93.86%（详见 JSON 精确数值）。
+该指标是相对于同视角独立物体渲染的 alpha 贡献，并非人工标注的底座面积准确率。
+其它视角仍有真实设备、货架遮挡，不能将参考视角的 95.91% 推广为所有视角。
+没有调用 Qwen 或 TRELLIS，没有运行本地 GPU 训练。
+
+限制
+原设备遮住的地面没有真实纹理观测；补全使用邻近地面信息，并非恢复真实隐蔽纹理。
+修补区域仍比原地面平滑，部分角度可看出颜色/纹理过渡；不能称为无缝真实地面。
+既有机械臂、黄色标线和周围场景的原始重建误差仍被保留。
+fixed_v1/v2/v4/v5 是调参中间候选，fixed_v3 因 OpenCV remap 尺寸限制失败；
+使用 fixed_v6 作为本次交付。失败和中间目录均未伪装成完成结果。
+
+复现（远端项目根目录，需保留项目现有 M1/M2/M3 数据与 GSLE 环境）
+SWAP_GPU=1 bash industrial_swap_v2/run_background_repair.sh
+可用第一个参数指定来源 config.yaml，第二个参数指定新的输出 run 名。
+脚本检查可用显存，所有输出进入新目录，目录已存在时拒绝覆盖。
+步骤为 inspect_background_repair -> repair_background -> export_background_repair。
+运行时 GPU 为共享资源，应选择空闲显存足够的卡；本次使用 GPU 1。
+
+模块输入输出
+inspect_background_repair --config CONFIG --output NEW_INSPECTION
+  输入：CONFIG 指向的 M1/M2/M3、现有地面语义分数。
+  输出：attributes.npz、dark_attribution.npz、统计 JSON 及归因渲染。
+repair_background --config CONFIG --inspection INSPECTION --output NEW_REPAIR
+  输入：归因结果、既有背景和机械臂。
+  输出：清理索引、三维地面、修复背景、scene_coarse_fixed.ply 及同视角图片。
+export_background_repair --config CONFIG --repair REPAIR
+  输入：修复结果。
+  输出：validation/ 下的独立校验、13 视角图像、两段视频及相机记录。
+show_background_repair --preview-dir LOCAL_PREVIEW
+  输入：下载的实际渲染和 repair_report.json。
+  输出：带文字、同区域放大对照的 same_view_comparison.png；不改原始渲染内容。

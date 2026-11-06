@@ -1,0 +1,112 @@
+{
+  "run": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/multiview_scene_refinement/run_v1",
+  "device_reference": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/supervision_audit/run_v1_20261106/device_reference",
+  "source_hashes": {
+    "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/f888f121869443f18c481bc792899e33/outputs/m2/object_mask.png": "e5cf7a88233ef2fd9000d332447f4bf1e96456b1abcc1fc8e3dfb2c846a294c7",
+    "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/f888f121869443f18c481bc792899e33/outputs/m2/object_white.png": "fea55427bad82b73e0fe65da8815e071ca4173d2ed0bd60b27038a00dad0ff7e",
+    "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/f888f121869443f18c481bc792899e33/outputs/m2/object_rgba.png": "cf4af6c4ec1432bdda5aca9956a3ce8bd0a850627c37b019e7449a014934b677",
+    "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/f888f121869443f18c481bc792899e33/outputs/m2/anchor_camera.json": "7146d838fb6b9d0e7ce20b2929a27b92b4f143628424c560b54845fd43d6ec47"
+  },
+  "device_target_resolution": 512,
+  "tensor_reconstruction": "Same conversion/interpolation as M4, replayed on CPU; PNG is 8-bit display, NPY keeps float32.",
+  "anchor": {
+    "name": "000_avp_099",
+    "camera": {
+      "R": [
+        [
+          0.04601765051484108,
+          0.27881649136543274,
+          -0.9592412114143372
+        ],
+        [
+          -0.18436548113822937,
+          0.9461327791213989,
+          0.2661617696285248
+        ],
+        [
+          0.9817798733711243,
+          0.1646028310060501,
+          0.09494294226169586
+        ]
+      ],
+      "t": [
+        2.641664505004883,
+        -0.45832350850105286,
+        1.6318583488464355
+      ],
+      "width": 640,
+      "height": 640,
+      "fx": 700.5551763527171,
+      "fy": 700.5551763527171,
+      "cx": 320.0,
+      "cy": 320.0,
+      "name": "avp_099"
+    },
+    "split": "anchor",
+    "original_image": null,
+    "reference_iou": 0.8500707726926288,
+    "reliable_pixels": 0,
+    "local_reliable_pixels": 0,
+    "unknown_pixels": 47559,
+    "visibility_pixels": 23944,
+    "legal_foreground_pixels": 0,
+    "cache_sha256": "24a6de0df7e01abb431c991080ae42d5223c774a77a36861db4c6e22cbdd961e",
+    "visibility_pixels_inside_unknown": 14594
+  },
+  "environment_panels": [
+    "018_frame_000147",
+    "038_frame_000277"
+  ],
+  "train_views": 30,
+  "validation_views": 10,
+  "candidate_count": 587,
+  "optimized_candidates": 314,
+  "frozen_candidates": 273,
+  "optimized_background_count": 33110,
+  "frozen_local_background_count": 71297,
+  "stage_b_frozen": [
+    "xyz",
+    "log_scale",
+    "rotation",
+    "background",
+    "diffusion_teachers"
+  ],
+  "stage_b_trainable": [
+    "color_logit",
+    "opacity_logit"
+  ],
+  "stage_b_reference_loss": "isolated white-background object RGB and SAM alpha; joint scene RGB/depth/mask for DI-SDS",
+  "diffusion": {
+    "fixed_rgb_target_exists": false,
+    "actual_condition": "Joint RGB / depth / dilated per-view object Alpha / text; frozen diffusion predicts a latent gradient.",
+    "saved_artifacts": "Only first-iteration four masks were saved, not per-step RGB/depth/noise/teacher prediction.",
+    "historical_denoised_target_not_reconstructed": true
+  },
+  "notes": [
+    "Anchor has no real-photo RGB supervision; its cached RGB is an unused all-zero placeholder.",
+    "Train and validation folders are both exported; only train contributes to RGB optimization.",
+    "Masked images and overlays are explanatory visualizations of cached weights, not new supervision.",
+    "No original experiment, PLY, model parameters, or masks were modified."
+  ],
+  "background_support_diagnostic": {
+    "anchor_resolution": 1024,
+    "results": [
+      {
+        "stage": "M3",
+        "base_visibility": 0.5423644185066223,
+        "unsupported_contribution_in_opaque_object": 0.08337109535932541,
+        "supported_contribution_in_opaque_object": 0.05721527710556984,
+        "device_contribution_in_opaque_object": 0.8553519248962402
+      },
+      {
+        "stage": "M4 A",
+        "base_visibility": 0.5964136719703674,
+        "unsupported_contribution_in_opaque_object": 0.08978668600320816,
+        "supported_contribution_in_opaque_object": 0.0072658429853618145,
+        "device_contribution_in_opaque_object": 0.8988810181617737
+      }
+    ],
+    "base_definition": "Lowest 20% of Gaussian centers along M1 world_up",
+    "interpretation": "Diagnostic rendered contributions include possible residual background transmission; they are not ground-truth segmentation or complete counterfactual attribution."
+  }
+}

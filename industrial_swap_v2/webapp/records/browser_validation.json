@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-11-06T01:49:44.0458958+08:00",
+  "browser": "Codex in-app browser",
+  "url": "http://127.0.0.1:18086",
+  "experiment_copy_and_rgba_upload": "passed",
+  "rgba_run": "0e5e7b670a774adba426f064e6655f90",
+  "rgba_skips_sam_and_qwen": true,
+  "running_history_shows_no_completed_output": true,
+  "refinement_run": "df572fdcee90444ab6fbc27fc13f45da",
+  "completed_progress": "2000/2000",
+  "same_camera_before_after_visible": true,
+  "video": {
+    "duration_seconds": 6,
+    "error": null,
+    "ready_state": 4,
+    "observed_current_time": 6
+  },
+  "qwen_button_clicked": false,
+  "screenshot": "industrial_swap_v2/webapp/data/previews/m4-completed.jpg"
+}

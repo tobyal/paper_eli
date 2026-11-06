@@ -1,0 +1,60 @@
+{
+  "status": "completed_with_texture_limitations",
+  "date": "2026-11-06",
+  "server": "ubuntuA6000",
+  "server_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/background_repair/fixed_v6",
+  "source_experiment": "9b0eeee5840d453e8f21e1763544a6cb",
+  "source_m3_run": "173dd1e87749494db5f66ab1287d37d7",
+  "original_sources": {
+    "background": "a4f4860770321d88e024725a6c173cfa10d2deecacda8955faa03195f462e0c3",
+    "object": "c4a161b4e6df724b5e2febfdb6d955c158915711652f4cf3b35daca5bcfccfd4",
+    "transform": "7b647603ee90bbb4122f61528af9d27fe1ffe162f106fc16790497f7d554b7eb",
+    "m1_manifest": "c672f69319535a5c1dbf882ee2e1351430dd25aac5e10cdbd65b69c7c6b30f3a"
+  },
+  "removed_count": 701,
+  "patch_count": 34610,
+  "object_bitwise_unchanged": true,
+  "m1_and_m3_transform_unchanged": true,
+  "original_m1_m4_outputs_overwritten": false,
+  "qwen_calls": 0,
+  "trellis_calls": 0,
+  "reference_base_visibility": {
+    "before": 0.4198361933231354,
+    "after": 0.9590983986854553
+  },
+  "view_count": 13,
+  "yellow_gaussians_removed": 0,
+  "nearby_yellow_total_visibility_non_decreasing_in_all_verified_views": true,
+  "artifacts": {
+    "scene_coarse_fixed.ply": {
+      "bytes": 503772364,
+      "sha256": "422e0600c46848c19bffde7d735518bf0f9519c8d0b5e97958c98fd3796c19a4"
+    },
+    "background_fixed.ply": {
+      "bytes": 454172364,
+      "sha256": "26b4d6c8f18366f96e94e7b0bccde6b643f6662041a0bc21a7b1f678af1997a8"
+    },
+    "floor_patch.ply": {
+      "bytes": 8584810,
+      "sha256": "5a8cdd5c5f96e4546693a6109a57057f086a34a9a1644d36f90e949a135923be"
+    },
+    "removed_gaussians.ply": {
+      "bytes": 175376,
+      "sha256": "1954c4199cf0bfcc03ec2b4fed217958898d9233fa9d69543dccc1b0b252dd34"
+    }
+  },
+  "local_scene_sha256_verified": true,
+  "limitations": [
+    "Hidden floor is completed from surrounding observed floor; its original texture is not recoverable.",
+    "Fixed object support is below the neighboring fitted plane; the new local floor meets its unchanged base and transitions to the surrounding floor.",
+    "Original reconstruction artifacts outside the repair area are retained.",
+    "Completed floor is visibly smoother, with remaining texture/color transition in some views."
+  ],
+  "code_sha256": {
+    "inspect_background_repair.py": "61e41ef6b5e4ac39157748b913d49618e240dc787fef2ffd3ffaa5185a2209b2",
+    "repair_background.py": "e55a710bcd1065210963d4afca5f4135dc56c8ffdc1192f35850a66a8afcd899",
+    "export_background_repair.py": "b0a48ef2534239d99a78c5f839ae12b38650ddfafe3d09263af666dd8d36b90f",
+    "show_background_repair.py": "4a45b995226c8b9a00cf97572d6eeeb6cc78ffe5a493b419e500f895edd90162",
+    "run_background_repair.sh": "bc85396408d2147710b6a369f4d809bbccd05e0cfa2077aee1b31b20a43bff3c"
+  }
+}

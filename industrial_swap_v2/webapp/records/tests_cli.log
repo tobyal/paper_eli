@@ -1,0 +1,10 @@
+test_complete_dotted_key_is_never_truncated (test_credentials.CredentialTests) ... ok
+test_textured_mesh_color_covariance_and_lossless_composition (test_geometry.GeometryTests) ... ok
+test_cached_response_and_download_resume_do_not_repost (test_qwen_once.OnceTests) ... ok
+test_reuse_mode_blocks_before_credentials_or_network (test_qwen_once.OnceTests) ... ok
+test_timeout_consumes_claim_without_resubmission (test_qwen_once.OnceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.057s
+
+OK

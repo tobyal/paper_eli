@@ -12,6 +12,7 @@ from PIL import Image
 from ..core.context import Context, arguments, gsle, read_json, write_json, sha256
 from ..core.scene import compose, read_vertices
 from ..core.rendering import render_outputs
+from ..core.m3_composition import effective_background
 
 
 class AppearanceGaussians(torch.nn.Module):
@@ -53,10 +54,18 @@ def run(ctx):
     assert cfg['resolution']==512 and 1<=cfg['microbatch']<=cfg['batch']
     source=ctx.path(cfg['initialize_from'])
     if not source.is_file(): raise FileNotFoundError('M3 world-space Gaussian asset is required')
-    fingerprint=hashlib.sha256(json.dumps({'m4':cfg,'source':sha256(source),
+    if cfg.get('local_background',{}).get('enabled',False):
+        from ..core.local_background_optimizer import optimize_background
+        background_path=optimize_background(ctx)
+    else:
+        background_path=effective_background(ctx)
+    fingerprint_data={'m4':cfg,'source':sha256(source),
         'reference':sha256(ctx.stage('m2')/'object_rgba.png'),
         'camera':read_json(ctx.stage('m2')/'anchor_camera.json'),
-        'text':ctx.cfg['m2']['replacement_text']},sort_keys=True).encode()).hexdigest()
+        'text':ctx.cfg['m2']['replacement_text']}
+    if background_path.resolve()!=(ctx.stage('m1')/'background_gaussians.ply').resolve():
+        fingerprint_data['background']=sha256(background_path)
+    fingerprint=hashlib.sha256(json.dumps(fingerprint_data,sort_keys=True).encode()).hexdigest()
     teacher_cfg=read_json(ctx.source('gsle/config.json'))
     teacher_cfg['replacement_text']=ctx.cfg['m2']['replacement_text']
     teacher_cfg['refine'].update(cfg)
@@ -84,7 +93,7 @@ def run(ctx):
         saved=torch.load(last,map_location='cuda',weights_only=False)
         assert saved['fingerprint']==fingerprint, 'Refinement checkpoint input/config mismatch'
         obj.load_state_dict(saved['state']); optimizer.load_state_dict(saved['optimizer']); first=saved['step']
-    background=c.GaussianData.load(ctx.stage('m1')/'background_gaussians.ply')
+    background=c.GaussianData.load(background_path)
     assert not any(getattr(background,n).requires_grad for n in ('xyz','log_scale','rotation','opacity_logit','sh'))
     reference=c.Camera.from_record(read_json(ctx.stage('m2')/'anchor_camera.json'))
     region=read_json(ctx.stage('m1')/'edit_region.json')
@@ -102,7 +111,9 @@ def run(ctx):
         rng=saved['rng']; random.setstate(rng['python']); np.random.set_state(rng['numpy'])
         torch.set_rng_state(rng['torch'].cpu()); torch.cuda.set_rng_state_all([v.cpu() for v in rng['cuda']])
     write_json(out/'effective_config.json',{'config':ctx.cfg,'fingerprint':fingerprint,
-        'source':str(source),'optimized_parameters':['color_logit','opacity_logit'],
+        'source':str(source),'background_source':str(background_path),'background_sha256':sha256(background_path),
+        'diffusion_mask_source':cfg.get('diffusion_mask_source','edit_bbox'),
+        'optimized_parameters':['color_logit','opacity_logit'],
         'frozen_parameters':['xyz','log_scale','rotation','background','diffusion_teachers'],
         'reference_loss':'isolated white-background object RGB and SAM alpha; joint scene RGB/depth/mask for DI-SDS',
         'checkpoint_interval':cfg['checkpoint_every']})
@@ -122,7 +133,14 @@ def run(ctx):
             for sample in views[begin:begin+cfg['microbatch']]:
                 camera=sample['camera']; result=c.render_joint(camera,background,obj.data())
                 rgbs.append(result['rgb'].clamp(0,1)); depths.append(c.depth_condition(result['depth'],result['alpha']))
-                masks.append(torch.tensor(c.bbox_mask(camera,np.asarray(region['bbox_corners'])),device='cuda',dtype=torch.float32)[None])
+                if cfg.get('diffusion_mask_source')=='object_alpha':
+                    from ..core.visibility_loss import object_projection_mask
+                    mask,_=object_projection_mask(c,camera,obj.data(),dilation_fraction=cfg.get('object_mask_dilation_fraction',.015))
+                    masks.append(mask)
+                    if step==0:
+                        c.save_image(out/f'diffusion_masks/view_{begin+len(masks):02d}.png',mask)
+                else:
+                    masks.append(torch.tensor(c.bbox_mask(camera,np.asarray(region['bbox_corners'])),device='cuda',dtype=torch.float32)[None])
                 az=abs(sample['azimuth']); el=sample['elevation']
                 view='overhead view' if el>60 else 'front view' if az<45 else 'back view' if az>135 else 'side view'
                 prompts.append(ctx.cfg['m2']['replacement_text']+', '+view)
@@ -148,12 +166,14 @@ def run(ctx):
     before,after=read_vertices(source),read_vertices(out/'object_refined.ply')
     for name in ['x','y','z']+[f'scale_{i}' for i in range(3)]+[f'rot_{i}' for i in range(4)]:
         assert np.array_equal(before[name],after[name]), ('Geometry changed',name)
-    compose(ctx.stage('m1')/'background_gaussians.ply',out/'object_refined.ply',out/'scene_final.ply',out/'composition.json')
+    compose(background_path,out/'object_refined.ply',out/'scene_final.ply',out/'composition.json')
     write_json(out/'summary.json',{'iterations':cfg['iterations'],'points':len(obj.xyz),
         'geometry_bitwise_preserved':True,'background_bitwise_preserved':True,'condition':'text_only',
+        'background_source':str(background_path),'background_sha256':sha256(background_path),
+        'diffusion_mask_source':cfg.get('diffusion_mask_source','edit_bbox'),
         'initialized_from_trellis':True,'zero123_used':False})
     del guide,obj,optimizer,background; torch.cuda.empty_cache()
-    render_outputs(ctx,'m4',out/'object_refined.ply')
+    render_outputs(ctx,'m4',out/'object_refined.ply',background_path=background_path)
     ctx.complete('m4',[out/n for n in ('object_refined.ply','scene_final.ply','final_checkpoint.pth',
         'renders/anchor_after.png','renders/trajectory_before_after.mp4','renders/orbit_before_after.mp4')],iterations=cfg['iterations'])
 

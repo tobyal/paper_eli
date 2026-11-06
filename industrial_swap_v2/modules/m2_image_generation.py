@@ -7,12 +7,8 @@ from ..core.qwen_client import generate
 from ..core.cameras import resized_camera
 
 
-def run(ctx, prepare_only=False):
-    out = ctx.stage("m2")
-    if not (out / "conditions.json").exists():
-        prepare_conditions(ctx)
-    images = [out / "anchor.png", out / "position_hint.png", out / "depth_background.png"]
-    prompt = (
+def build_prompt(ctx):
+    return (
         "Edit image 1 and return one photorealistic RGB image of the same factory from exactly the same camera. "
         "Image 1 is the original scene. Image 2 is ONLY a position guide: the translucent magenta polygon encloses the allowed replacement volume; remove all magenta markings in the output. "
         "Replace the entire old machine consisting of a black assembly and a white support base inside that polygon. "
@@ -23,7 +19,16 @@ def run(ctx, prepare_only=False):
         "Keep the original camera, surrounding equipment, blue containers, railings, floor and lighting unchanged. Match the factory perspective, scale, color temperature and shading. "
         "Generate no cabinet, enclosure, extra machinery, duplicate arm, text, annotations or new background behind the robot. The output is the edited full factory view, not a collage or depth map."
     )
+
+
+def run(ctx, prepare_only=False):
+    out = ctx.stage("m2")
+    if not (out / "conditions.json").exists():
+        prepare_conditions(ctx)
+    images = [out / "anchor.png", out / "position_hint.png", out / "depth_background.png"]
+    prompt = build_prompt(ctx)
     write_json(out / "generation_plan.json", {"model": ctx.cfg["m2"]["model"], "images": list(map(str, images)), "prompt": prompt, "max_requests": 1, "candidates": 1})
+    (out / 'generation_prompt.txt').write_text(prompt, encoding='utf-8')
     if prepare_only:
         ctx.receipt("m2", "conditions_prepared_api_not_called", images=list(map(str, images)))
         print("M2 conditions ready; Qwen has not been called", flush=True)

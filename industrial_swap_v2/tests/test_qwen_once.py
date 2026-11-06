@@ -1,5 +1,6 @@
 """Offline tests for the user's one-request constraint; no network calls."""
 import io
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -55,6 +56,15 @@ class FakeSession:
 
 
 class OnceTests(unittest.TestCase):
+    def test_reuse_mode_blocks_before_credentials_or_network(self):
+        session = FakeSession()
+        with patch.dict(os.environ, {'SWAP_DISABLE_QWEN':'1'}):
+            with patch('industrial_swap_v2.core.qwen_client.api_key') as key:
+                with self.assertRaisesRegex(RuntimeError, 'forbids'):
+                    generate(None, [], 'unused', session)
+                key.assert_not_called()
+        self.assertEqual((session.posts,session.gets),(0,0))
+
     @patch('industrial_swap_v2.core.qwen_client.api_key', return_value='offline-placeholder')
     def test_cached_response_and_download_resume_do_not_repost(self, _):
         with tempfile.TemporaryDirectory() as directory:

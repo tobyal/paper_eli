@@ -1,0 +1,86 @@
+{
+  "source_run_config": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/config.yaml",
+  "camera": {
+    "R": [
+      [
+        0.04601765051484108,
+        0.27881649136543274,
+        -0.9592412114143372
+      ],
+      [
+        -0.18436548113822937,
+        0.9461327791213989,
+        0.2661617696285248
+      ],
+      [
+        0.9817798733711243,
+        0.1646028310060501,
+        0.09494294226169586
+      ]
+    ],
+    "t": [
+      2.641664505004883,
+      -0.45832350850105286,
+      1.6318583488464355
+    ],
+    "width": 1024,
+    "height": 1024,
+    "fx": 1120.8882821643474,
+    "fy": 1120.8882821643474,
+    "cx": 512.0,
+    "cy": 512.0,
+    "name": "avp_099"
+  },
+  "original_scene_sha256": "85b337bf1e36f307801fdd455c36b098e4fad750e6ad441f0a1dffb5a506bc86",
+  "object_world_sha256": "c4a161b4e6df724b5e2febfdb6d955c158915711652f4cf3b35daca5bcfccfd4",
+  "plane": {
+    "normal": [
+      -0.04795057566135688,
+      -0.9585350486111748,
+      -0.280911557038363
+    ],
+    "offset": 1.0350411843378529,
+    "estimation": "LangSplat factory-floor query + robust plane fit"
+  },
+  "used_floor_local_y": -0.5313322869889875,
+  "estimated_floor_local_y": -0.4312283499967213,
+  "signed_height_quantiles": [
+    -0.10010389953732846,
+    -0.08315050060336822,
+    -0.048193336854593156,
+    -0.029639140885642488,
+    0.33987973775904445,
+    0.8065315273040266
+  ],
+  "below_floor_count": 25907,
+  "object_count": 200000,
+  "below_floor_fraction": 0.129535,
+  "height_only_correction": 0.10010389953732846,
+  "original_object_height": 0.906635426841355,
+  "uniform_transform_max_position_error": 1.1920846842983224e-07,
+  "base_definition": "bottom 15% of world-up object height, without semantic labels",
+  "base_gaussian_fraction": 0.1532,
+  "base_visibility": {
+    "original": {
+      "base_visibility_ratio": 0.4198361933231354,
+      "base_alpha_mass_isolated": 11767.4033203125,
+      "base_alpha_mass_in_scene": 4940.3818359375
+    },
+    "height_only_control": {
+      "base_visibility_ratio": 0.9236878156661987,
+      "base_alpha_mass_isolated": 11781.171875,
+      "base_alpha_mass_in_scene": 10882.125
+    }
+  },
+  "base_projected_bbox": [
+    [
+      423.7559564379323,
+      625.2816461268072
+    ],
+    [
+      609.9288456040596,
+      730.3301021175971
+    ]
+  ],
+  "control_limit": "Only translates along the existing estimated ground normal. No re-fit, new model, background changes or final production replacement."
+}

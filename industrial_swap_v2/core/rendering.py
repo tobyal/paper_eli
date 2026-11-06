@@ -30,10 +30,13 @@ class VideoWriter:
             if not code and kind is None: self.temporary.replace(self.path)
 
 
-def render_outputs(ctx, stage, object_path):
+def render_outputs(ctx, stage, object_path, background_path=None):
     c=gsle(ctx); out=ctx.stage(stage)/'renders'; out.mkdir(exist_ok=True)
     original=c.GaussianData.load(ctx.source(ctx.cfg['project']['source_ply']))
-    background=c.GaussianData.load(ctx.stage('m1')/'background_gaussians.ply')
+    if background_path is None:
+        from .m3_composition import effective_background
+        background_path=effective_background(ctx,stage)
+    background=c.GaussianData.load(background_path)
     obj=c.GaussianData.load(object_path)
     camera=c.Camera.from_record(read_json(ctx.stage('m2')/'anchor_camera.json'))
     m1=read_json(ctx.stage('m1')/'manifest.json')

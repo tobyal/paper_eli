@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>设备高斯查看器 · Industrial Swap</title>
+<link rel="stylesheet" href="/static/viewer.css">
+<script type="importmap">{"imports":{"three":"/static/vendor/three/three.module.js","spark":"/static/vendor/spark/spark.module.js","three/addons/postprocessing/Pass.js":"/static/vendor/three/Pass.js"}}</script>
+</head><body>
+<aside>
+  <a class="back" href="/">← 返回实验管理</a>
+  <div class="eyebrow">GAUSSIAN EXPLORER</div><h1>设备高斯查看器</h1>
+  <p class="intro">从任意角度，检查设备与底座。</p>
+  <label>设备版本<select id="object-version"><option value="object_m3">原始 M3 设备</option><option value="object_m4">M4 精细化设备</option></select></label>
+  <div class="stat"><strong id="point-count">—</strong><span>设备高斯</span></div>
+  <label class="check"><input type="checkbox" id="show-background"> 显示厂房背景</label>
+  <label id="background-field" hidden>背景版本<select id="background-version"><option value="background_a">阶段 A 优化背景</option><option value="background_m1">原始 M1 背景</option></select></label>
+  <div class="divider"></div>
+  <div class="label">快速定位</div>
+  <div class="buttons"><button id="focus-object" class="primary">整台设备</button><button id="focus-base">聚焦底座</button></div>
+  <button class="wide" id="anchor-view">回到场景参考视角</button>
+  <div class="divider"></div>
+  <label>导航方式<select id="navigation"><option value="orbit">旋转观察</option><option value="fly">自由漫游 · WASD</option></select></label>
+  <div class="help" id="navigation-help">左键拖动旋转 · 右键拖动平移<br>滚轮缩放 · F 聚焦设备 · B 聚焦底座</div>
+  <label id="speed-field" hidden>移动速度<input id="speed" type="range" min="0.1" max="3" step="0.1" value="0.6"></label>
+  <label>显示方式<select id="display-mode"><option value="gaussian">高斯渲染</option><option value="points">设备中心点 · 诊断</option></select></label>
+  <label class="color-row">画布背景<input id="canvas-color" type="color" value="#252a32"></label>
+  <button id="fullscreen" class="wide">全屏查看</button>
+  <p class="note">只读查看原始 PLY。旋转、漫游和中心点显示不会改动模型。网页预览与离线渲染可能略有差异。</p>
+  <a class="source" href="https://github.com/sparkjsdev/spark" target="_blank" rel="noreferrer">Powered by Spark · MIT</a>
+</aside>
+<main id="viewport"><div class="topbar"><span id="scene-title">原始 M3 · 独立设备</span><span id="fps">— FPS</span></div>
+  <div id="loading" role="status"><div class="spinner"></div><strong id="loading-title">准备查看器</strong><p id="loading-detail">读取当前实验中的高斯模型</p></div>
+  <div id="error" role="alert" hidden><strong>暂时无法显示模型</strong><p id="error-detail"></p><button id="retry">重新加载</button></div>
+  <div class="bottom-hint" id="scene-hint">加载后可直接拖动模型 · 随时按 F 找回设备</div>
+</main>
+<script type="module" src="/static/viewer.js"></script>
+</body></html>

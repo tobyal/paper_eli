@@ -2,6 +2,7 @@
 import base64
 import hashlib
 import json
+import os
 from pathlib import Path
 import time
 from urllib.parse import urlsplit
@@ -45,6 +46,8 @@ def image_urls(response):
 
 
 def generate(ctx, images, prompt, session=None):
+    if os.environ.get('SWAP_DISABLE_QWEN') == '1':
+        raise RuntimeError('This execution mode forbids Qwen API submissions')
     config = ctx.cfg["m2"]
     request = payload(config, images, prompt)
     digest = hashlib.sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()

@@ -1,0 +1,30 @@
+{
+  "source_experiment": "9b0eeee5840d453e8f21e1763544a6cb",
+  "source_heads": {
+    "m1": "f75a94ae6b7d42cf964a75086625f975",
+    "m2": "f888f121869443f18c481bc792899e33",
+    "m3": "173dd1e87749494db5f66ab1287d37d7",
+    "materials": "4f8ce3aa0c0f413a94ebe0374dff9324"
+  },
+  "source_m3": "173dd1e87749494db5f66ab1287d37d7",
+  "world_asset": "2311f29d19084f33b067f9338dab3dea",
+  "world_sha256": "c4a161b4e6df724b5e2febfdb6d955c158915711652f4cf3b35daca5bcfccfd4",
+  "experiment": "8a5834ec085a486595bbd0a35c829a19",
+  "run": "d81d361403c344598aa75d56e6e37c0b",
+  "status": "verified",
+  "original_heads_unchanged": true,
+  "original_outputs_sha256_verified": 39,
+  "object_sha256_unchanged": true,
+  "no_qwen_or_trellis_calls": true,
+  "new_gaussians": 0,
+  "web_matches_independently_validated_ply": true,
+  "held_out_validation": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/oagof/current_m3_v2/validation/validation.json",
+  "removed_count": 52,
+  "unresolved_count": 153,
+  "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/8a5834ec085a486595bbd0a35c829a19/runs/d81d361403c344598aa75d56e6e37c0b/outputs/m3",
+  "downstream_background_verified": true,
+  "cache_experiment": "64ba9c7832a94142b2cfc02c0d6db048",
+  "cache_run": "9f70fa1406764c22a8878cded393d148",
+  "cache_status": "completed",
+  "exact_stage_cache_verified": true
+}

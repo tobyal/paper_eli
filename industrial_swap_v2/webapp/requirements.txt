@@ -1,0 +1,9 @@
+fastapi==0.115.12
+uvicorn==0.34.2
+SQLAlchemy==2.0.40
+python-multipart==0.0.20
+PyYAML==6.0.2
+Pillow==10.4.0
+numpy==1.26.4
+plyfile==1.1
+httpx==0.28.1

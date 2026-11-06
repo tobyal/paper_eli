@@ -1,0 +1,21 @@
+test_asset_preserves_full_prepared_prompt (test_webapp.WebTests) ... ok
+test_asset_reuse_does_not_reserve_inference_memory (test_webapp.WebTests) ... ok
+test_cache_changes_when_identical_parameters_produce_different_pixels (test_webapp.WebTests) ... ok
+test_cache_integrity_checks_content_not_just_size (test_webapp.WebTests) ... ok
+test_file_endpoint_rejects_path_traversal (test_webapp.WebTests) ... ok
+test_glb_cannot_reference_external_files (test_webapp.WebTests) ... ok
+test_incompatible_camera_is_rejected (test_webapp.WebTests) ... ok
+test_missing_m4_reference_is_rejected (test_webapp.WebTests) ... ok
+test_no_cross_origin_or_unmarked_mutation (test_webapp.WebTests) ... ok
+test_qwen_requires_explicit_confirmation_and_is_idempotent (test_webapp.WebTests) ... ok
+test_resume_partial_directory_does_not_claim_stage_cache (test_webapp.WebTests) ... ok
+test_rgba_adapter_skips_sam_and_preserves_alpha (test_webapp.WebTests) ... ok
+test_rgba_requires_alpha_and_matching_canvas (test_webapp.WebTests) ... ok
+test_selection_preserves_history_and_invalidates_downstream (test_webapp.WebTests) ... ok
+test_upload_deduplicates_files_and_keeps_usage (test_webapp.WebTests) ... ok
+test_world_ply_needs_source_transform (test_webapp.WebTests) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 3.595s
+
+OK

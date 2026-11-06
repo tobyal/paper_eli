@@ -1,0 +1,14 @@
+{
+  "source_experiment": "9b0eeee5840d453e8f21e1763544a6cb",
+  "source_heads": {
+    "m1": "f75a94ae6b7d42cf964a75086625f975",
+    "m2": "f888f121869443f18c481bc792899e33",
+    "m3": "173dd1e87749494db5f66ab1287d37d7",
+    "materials": "4f8ce3aa0c0f413a94ebe0374dff9324"
+  },
+  "source_m3": "173dd1e87749494db5f66ab1287d37d7",
+  "world_asset": "2311f29d19084f33b067f9338dab3dea",
+  "world_sha256": "c4a161b4e6df724b5e2febfdb6d955c158915711652f4cf3b35daca5bcfccfd4",
+  "experiment": "a0ce428e67af49ddb16c7912ba9bc5ed",
+  "run": "72a9da8e7bb044bbae9a1b8fe0c811c5"
+}

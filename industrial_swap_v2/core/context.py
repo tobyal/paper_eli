@@ -45,8 +45,8 @@ class Context:
         self.root = Path(os.environ.get("SWAP_PROJECT_ROOT", self.cfg["project"]["root"])).resolve()
         self.base = self.root / "industrial_swap_v2"
         self.out = self.path(self.cfg["project"]["output_dir"])
-        self.records = self.path("records")
-        self.logs = self.path("logs")
+        self.records = self.path(self.cfg['project'].get('records_dir', 'records'))
+        self.logs = self.path(self.cfg['project'].get('logs_dir', 'logs'))
         for folder in (self.out, self.records, self.logs):
             folder.mkdir(parents=True, exist_ok=True)
 

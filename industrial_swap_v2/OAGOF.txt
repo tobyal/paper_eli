@@ -1,0 +1,145 @@
+Object-Aware Gaussian Occlusion Filtering（OAGOF）
+2026-11-06，industrial_swap_v2
+
+范围
+本模块只选择性删除实际遮挡新设备、且有多视角/三维证据的背景高斯。
+设备所有参数冻结；保留背景的所有字段逐字节不变；不添加任何高斯。
+不调用 repair_background.py，不拟合地面，不采集地面颜色，不补纹理/接触面，
+不使用黄色或其它类别颜色规则，不处理设备外整片黑色残影，不调用生成网络。
+当前真实验证仅覆盖已有工业场景/设备；规则不依赖设备类别和颜色，但不意味着
+已在其它场景证明效果。几何启发式无法在所有情况下判定合法前景，证据不足默认保留。
+
+主要代码
+core/object_occlusion_filter.py：独立筛选、重新合成、归因和实际图像外围影响验证。
+core/m3_composition.py：统一 M3 合成及背景选择；有效背景带 SHA256 校验。
+modules/m3_occlusion_filter.py：对现成 M3 只做过滤的独立入口，保护历史文件。
+scripts/validate_oagof.py：独立读取交付 PLY、字节校验、额外留出相机和视频验证。
+scripts/run_oagof.sh：过滤及独立验证的一键入口。
+scripts/show_oagof.py：排列实际渲染对比和 Mask 外差异图，不修改渲染结果。
+
+接口
+filter_object_occlusion(background_path, object_path, edit_region,
+                        reference_mask, cameras, output_dir, config)
+background_path：原 M1 background_gaussians.ply。
+object_path：已对齐的 M3 object_world.ply，Graphdeco Gaussian PLY。
+edit_region：M1 manifest 或 world_transform 字典（或 JSON 路径）。需要 center、
+  axes、local_bbox_low/high；使用 M1 局部坐标系，不估计地面。
+reference_mask：M2 的完整 Anchor 画布 object_mask.png。
+cameras：common.Camera 对象或字典列表，第一个必须是与 M2 Mask 对应的 Anchor；
+  后面是原始标定相机。遵循 COLMAP world-to-camera，+x 右、+y 下、+z 前。
+output_dir：新的独立目录，已经存在时拒绝覆盖。
+config：FilterConfig 对应字典。需启用 enabled=true；函数返回报告字典。
+运行需服务器 GSLE 环境的原版高斯渲染器，不需新的神经网络。
+
+算法
+1. 将 M1 编辑空间与新物体邻域作为三维约束，分析高斯旋转、尺度、协方差。
+   检查协方差椭球支持与扩展编辑框及新设备邻域的交集，允许中心在框外的
+   大高斯进入候选。过大的全局高斯、与目标空间不相交的前景不会仅因投影遮挡被删。
+2. 每个视角独立渲染 object_world 的 Alpha 和深度。Anchor 检查与 M2 Mask 的
+   IoU（本次 0.8501），使用二者交集及小边界容差作为归因区域。其它视角只使用
+   各自的三维设备 Alpha，不复用 Anchor Mask。IoU 不足时不使用 Anchor 的删除证据。
+3. 在真实联合渲染中令设备颜色为 1、背景为 0，得到设备可见贡献 A_obj。
+   对背景 opacity logit l_i 求导，并用
+       gain_i = max(-d(sum(mask*A_obj))/d(l_i), 0) / max(1-alpha_i, 0.01)
+   获得消除 sigmoid 饱和影响的一阶遮挡归因。它是实际渲染梯度，不是最终增益的
+   精确预测，因此删除后还要重新渲染验证。设备后方高斯不会产生有效遮挡梯度。
+4. 投影完整三维协方差，检查支持范围是否覆盖本视角设备区域，结合相机深度、
+   协方差深度范围与设备深度判断前景关系。只根据深度在前或颜色暗均不足以删除。
+5. 另对背景渲染的颜色求导，测量每个高斯在设备 Mask 内外的可见 Alpha 贡献。
+   此处不读取颜色类别：它用于限制横跨目标及正常周围场景的高斯。
+6. 默认 6 个分离视角提供删除证据，至少 2 个视角确认；另选最多 8 个跨方向
+   相机只限制外围影响，不增加删除票数。第二组相机很重要：第一版只检查目标
+   正面附近视角，在另一侧留下较大的外围变化，已经作为诊断候选保留，不交付。
+7. 根据目标内归一化增益/外围贡献排序，在删除数量及外围 Alpha 预算下挑选。
+   实际重渲染如超过 Mask 外 MAE 或变化像素比例阈值，回退删除集合，不放宽阈值。
+   同时记录严格原 Mask 外指标和带约 0.3% 图宽边缘容差的 guard 指标。
+8. 只用原背景的保留行与原设备行合成 scene_filtered.ply。独立验证再使用额外
+   留出相机；超限会报错，不将候选冒充验证成功。
+
+M3 与 Web 接入
+发生在空间对齐完成后、合成 scene_coarse.ply 前。
+modules/m3_trellis_generation.py 和 Web 模型复用路径共用 compose_m3。
+M3 输出 background_selection.json；渲染和 M4 读取同一背景，并检查 SHA256。
+旧实验没有此文件时仍使用其原 M1 背景。旧 M4 的无过滤检查点指纹保持兼容。
+启用过滤时，M4 指纹增加过滤背景 SHA，避免复用不同背景的优化检查点。
+本任务没有重新训练 M4，只验证了其背景选择入口。
+Web M3 页面增加“过滤新设备区域的异常遮挡”开关、同视角对比及报告下载。
+参数参与阶段缓存签名；生成素材缓存不受影响。复用世界 PLY 时关闭 realign，
+即可保持原设备参数。后台为归因预留至少 10 GiB 可用显存，不停止共享 GPU 进程。
+
+配置示例
+m3:
+  object_occlusion_filter:
+    enabled: true
+    use_multi_view: true
+    preserve_object_geometry: true
+    floor_repair: false
+    min_confirm_views: 2
+    region_expansion: 0.08
+    support_sigma: 3.0
+    min_occlusion_fraction: 0.000015
+    max_delete_fraction: 0.002
+    max_outside_mae: 0.0015
+    max_outside_changed_fraction: 0.003
+
+region_expansion / object_proximity / depth_margin_fraction 均相对编辑区域对角线，
+support_sigma 是协方差标准差倍数，min_occlusion_fraction 相对目标 Alpha 总量，
+min_inside_ratio 默认 0.25，max_delete_fraction 相对原背景总数量。
+max_views=6、max_guard_views=8；默认归因分辨率 640。
+outside_change_threshold=0.03（RGB 归一化到 0–1，约 7.65/255）。
+外围 MAE 和变化比例默认分别不超过 0.0015、0.003；详细有效配置保存在报告中。
+缺少开关的旧配置默认为关闭。默认模板为新实验开启。非布尔开关、未知参数、
+floor_repair=true、preserve_object_geometry=false 或过大的删除上限会拒绝执行。
+
+实际运行与结果（最终采用带跨方向 guard 的第二版）
+原 M3 运行：173dd1e87749494db5f66ab1287d37d7。
+独立验证目录（服务器项目根目录下）：
+  industrial_swap_v2/outputs/oagof/current_m3_v2
+Web 独立实验：8a5834ec085a486595bbd0a35c829a19
+Web M3 运行：d81d361403c344598aa75d56e6e37c0b
+Web 输出（项目根目录下）：
+  industrial_swap_v2/webapp/data/experiments/8a5834ec085a486595bbd0a35c829a19/runs/d81d361403c344598aa75d56e6e37c0b/outputs/m3/occlusion_filter
+Web 与独立验证的三份 PLY SHA256 完全一致。
+scene_filtered.ply SHA256：84dab6e6eaf30dd0eea75215204c0abd658d24f8c53db79e1a3b859e4c8ca81a
+原背景 1797425 个高斯，删除 52 个（约 0.00289%）；新背景 1797373 个。
+设备 200000 个高斯，全部字段逐字节不变；其余背景逐字节不变；新增高斯 0。
+39 个历史输出/记录的 SHA256、原实验 heads 均未改变。
+实际 Web 运行过滤步骤耗时约 73.1 秒，含文件读写和 14 个视角检查，不含 M3 完整视频导出。
+Anchor 全设备 Mask 内可见贡献：85.24% -> 86.61%。
+这是整个设备的 Alpha 可见贡献，不等同于先前地面补全实验的“底部 15%”指标。
+6 个删除归因视角 + 8 个外围 guard 视角，另验证 12 个留出相机及原参考相机高分辨率。
+所有保留检查视角未发现新设备可见性下降；额外留出视角均通过外围阈值。
+所有检查中严格 Mask 外最大 MAE 0.0001663；明显变化像素比例最高 0.1738%。
+设备外黑色残影仍在；没有以大范围删除来换取完整底座。
+153 个有遮挡贡献的候选保留：86 个缺少充分确认，67 个受外围/数量预算限制。
+因此当前是保守的局部改善，不能称为所有错误遮挡均已消除。
+真实 Web 复用及随后精确阶段缓存均验证成功；Qwen/TRELLIS 调用均为 0。
+
+输出说明
+background_filtered.ply：原背景的保留子集。
+removed_occluders.ply：删除子集，便于检查。
+removed_background_indices.npy / retained_background_indices.npy：索引相对原 M1 背景。
+scene_filtered.ply：保留背景 + 原 object_world.ply。
+occlusion_report.json：阈值、SHA、每视角可见性和 Mask 外变化、未解决候选统计。
+attribution.npz：候选原索引、遮挡梯度、内外贡献、深度/支持确认、票数及排序分数。
+unresolved_candidate_indices.npy：保留的有贡献候选，不将其全都认定为错误背景。
+cameras.json：归因与 guard 的实际相机参数。
+renders/：独立设备、背景、设备 Mask、归因 Mask、深度、同相机前后对比、外围差异。
+validation/：独立 PLY 检查、额外留出视角、175 帧原相机轨迹对比视频。
+preservation.json：历史文件 SHA256 保护记录（独立运行目录）。
+records/oagof_web_validation.json：Web 复用、缓存、原实验不变及后续背景读取验证。
+
+复现命令（在 ubuntuA6000 项目根目录；GPU 可通过 SWAP_GPU 修改）
+SWAP_GPU=1 bash industrial_swap_v2/scripts/run_oagof.sh \
+  industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/config.yaml \
+  fresh_oagof_run
+可选第三个参数是只包含 OAGOF 参数的 YAML 文件。
+入口不会调用 Qwen、TRELLIS、重新对齐或地面修复；输出到新的 outputs/oagof/fresh_oagof_run。
+
+测试
+tests/test_object_occlusion_filter.py：旋转协方差支持、中心在区域外、尺度/平移不变性、
+多视角与外围预算保护、非法配置拒绝、M4/渲染背景选择及 SHA/路径边界验证。
+test_geometry.py：原几何变换/合成回归。
+webapp/tests/test_webapp.py：原 Web 回归加 OAGOF 配置和复用显存要求。
+实际校验：独立 PLY 与联合渲染最大误差 0；原对象/背景字节比较通过；Web PLY 与
+独立验证 PLY 哈希一致；缓存命中且没有重跑生成器。

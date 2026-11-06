@@ -1,0 +1,467 @@
+{
+  "checked_at": "2026-11-05T18:04:29.905637+00:00",
+  "status": "complete",
+  "live_validation": {
+    "baseline_hashes": {
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/background_gaussians.ply": "a4f4860770321d88e024725a6c173cfa10d2deecacda8955faa03195f462e0c3",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/keep_indices.npy": "3fc235ec5e28c70cded2342a1c1778be81b638f969a4eebbfe98bac5e29411a0",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/manifest.json": "d91ed8cec4e90be0da6dfdada5a7609f9653623fe641ab3ff598f3dda4511d53",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/target_gaussians.ply": "a9b36fd801d54000f68fc8d38e04b85aa7d263bc1bff0b6a9fa4a5dd54be8856",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m1/target_indices.npy": "5e6e244d84943eff875191e0401a96ae4330293aca53a2b599f86bf6542d26df",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/anchor.png": "192115763768273b48dc796866a61b6732114a829259bc9287de4982eada1d27",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/anchor_camera.json": "7146d838fb6b9d0e7ce20b2929a27b92b4f143628424c560b54845fd43d6ec47",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/depth.png": "d0410d1c3c1d2ab5a2cf153b020c01b6c286595cfc2581be405894f7cb9d1034",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/depth_background.png": "a464881ecef187e3997d23a8824cbd80738cc399fe7ad93ebb8218665a05dbdf",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/edit_mask.png": "51dd4248495d818d45c74b2683bc3ec33b536e76fa6548cf589361c63be9803b",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/edited_scene.png": "51c700dc4b6fb8427eaa4c41c31481249ea022b11d04df6cf135eb2f7b21dc11",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/generation.json": "7e94db25bca2565475399b94552b97624bd74265df62ffb549862e181b39293b",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/object_mask.png": "e5cf7a88233ef2fd9000d332447f4bf1e96456b1abcc1fc8e3dfb2c846a294c7",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/object_rgba.png": "cf4af6c4ec1432bdda5aca9956a3ce8bd0a850627c37b019e7449a014934b677",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m2/object_white.png": "fea55427bad82b73e0fe65da8815e071ca4173d2ed0bd60b27038a00dad0ff7e",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/object_local.ply": "809f75c6f74b98335fc65bf6270309804ece23de5f325b1854898374b72a2a83",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/object_world.ply": "de096ee53244d81701641eb46c1a27b948b048f76802db92db84850b147c32bc",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/renders/trajectory_before_after.mp4": "cec25215d0c1f9b587bbdc52675d824ec7b7b3ce9548e2ac0160a5eed59edc2a",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/scene_coarse.ply": "8d9d1344d34f4a11f314be3da751990bbd0f10cf85e7736a0fd8e3e9a2e0b07f",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/transform.json": "e4252a959501c93b753982d2ab38d08cf290e5918bd92a97dcab36b4e7dfc95e",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/trellis_asset.glb": "724f148eef272cca400245d255507119f29237d99c708d12b8568c779be7d1ed",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m3/trellis_asset_preview.png": "2c24ea3dbdf1f7d0ade01dd27cc80b078d382b64a751e791e9e0826e14cc15fb",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/final_checkpoint.pth": "b5b49d3175e29707d1b93f77be2f4a4fbaa4d4a76c7d017b3f85bad984df9bb0",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/object_refined.ply": "ba555c973329ed4ac96f8dd1e386cacb4955e1d78710f1146f13a3894f3362d6",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/renders/anchor_after.png": "a92e397ca62f55d7b1b7e4afdec0cc0a45e6a5f0e232d309faa62b55a60a5aa4",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/renders/orbit_before_after.mp4": "d3acb46086d689b813d4a0a98481ee2b6f3d677162755fb42ee266c81125909b",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/renders/trajectory_before_after.mp4": "225a76da54e46c1aa1ffd40316419f8b97924aadd0c9518d03f8c09fc7351d26",
+      "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/m4/scene_final.ply": "204b50b5b2ac26091c2900c1342b61a349a4ba511ec8adc760d3212fea185810"
+    },
+    "completed_at": "2026-11-05T18:01:00.201027+00:00",
+    "experiment_a": "9b0eeee5840d453e8f21e1763544a6cb",
+    "experiment_b": "2b48c32790d8446598b9cb2bd3e959a2",
+    "experiment_c": "50eece7e98cf480aa0671fdc4546fc9a",
+    "experiment_d": "0de7dabc3ffc41cdb217c8f3d7e8543d",
+    "generated_model": "a72e4d4af4cb45e6ba6c6ef9b4187231",
+    "historical_results_unchanged": true,
+    "materials_zip": [
+      "anchor.png",
+      "position_hint.png",
+      "edit_mask.png",
+      "depth.png",
+      "depth_background.png",
+      "generation_prompt.txt",
+      "anchor_camera.json",
+      "conditions.json",
+      "generation_plan.json"
+    ],
+    "model_cache_verified": true,
+    "new_qwen_submissions": 0,
+    "requests": {
+      "m1_a": "08e2cf08-9f80-4c48-9282-20d8220d4f13",
+      "m2_a": "a9b88cf5-9ccd-4980-a7c0-1af239e4dae9",
+      "m3_a": "4fde8e00-0fd4-460b-ae2f-84abdd0d564c",
+      "m3_b": "e317d733-e211-444d-aa1d-d15d84b53588",
+      "m3_cache": "525f20bd-1eca-4e83-8a4a-022267bc8ad9",
+      "m3_cache_repeat": "8009e652-98d8-4342-87e6-c57572737e8d",
+      "m3_model_cache": "15fba4fd-8dc3-4dfd-ac98-4fb977396242",
+      "m4_b": "bb32f39a-d5a6-44c6-add6-03853a9858e4",
+      "materials_a": "77d27898-b86b-4ebd-b485-cd7472987525"
+    },
+    "runs": {
+      "m1_a": "f75a94ae6b7d42cf964a75086625f975",
+      "m2_a": "f888f121869443f18c481bc792899e33",
+      "m3_a": "173dd1e87749494db5f66ab1287d37d7",
+      "m3_b": "d599bbd4b99f45ff80ac356cdc2dda2d",
+      "m3_cache": "d4f36cc0f47c4e6b8f8f579b5cb5160c",
+      "m3_cache_repeat": "eb700a57637c4b399edf39951fec22af",
+      "m3_model_cache": "2fcad79c8201451fa7de0621f1ba640e",
+      "m4_b": "df572fdcee90444ab6fbc27fc13f45da",
+      "materials_a": "4f8ce3aa0c0f413a94ebe0374dff9324"
+    },
+    "stage_cache_verified": true,
+    "started_at": "2026-11-05T16:20:40.727342+00:00",
+    "status": "complete",
+    "upload_deduplicated": true,
+    "uploaded_image": "5b7d1148075f469d8a270694aafb6250"
+  },
+  "asset_routes": {
+    "completed_at": "2026-11-05T17:55:03.671450+00:00",
+    "glb_deduplicated": true,
+    "glb_upload": "29454ac90df242498a668659d092acb7",
+    "local": {
+      "experiment": "4b7542c13bf74baf870c4ef3c2d42ff7",
+      "imported_gaussian_attributes_preserved": true,
+      "output_integrity_verified": true,
+      "points": 200000,
+      "run": "8f735825908c46148d6a4f384691db6a",
+      "status": "complete",
+      "trellis_called": false
+    },
+    "status": "complete",
+    "world": {
+      "experiment": "c195d8fd4b9a402ab6991085ef1928c5",
+      "imported_gaussian_attributes_preserved": true,
+      "output_integrity_verified": true,
+      "points": 200000,
+      "run": "407bdca288de444d9563928015d794f1",
+      "status": "complete",
+      "trellis_called": false
+    }
+  },
+  "runs": [
+    {
+      "id": "0e5e7b670a774adba426f064e6655f90",
+      "experiment_id": "2ab6f9c53f2e4b658ef596ebe494b113",
+      "stage": "m2",
+      "action": "reuse",
+      "status": "completed",
+      "started_at": "2026-11-05T16:34:17.122395+00:00",
+      "finished_at": "2026-11-05T16:34:23.270120+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/2ab6f9c53f2e4b658ef596ebe494b113/runs/0e5e7b670a774adba426f064e6655f90/outputs/m2",
+      "assets": {
+        "anchor.png": "28209bc0b6c44f8fa4a42027c60b013e",
+        "depth.png": "9e41b1c46fbb4e69a5e264cf9408c822",
+        "depth_background.png": "013a93f11e6340e2b65ac394d41c4dfe",
+        "object_mask.png": "25c8e3d313fd4b3985c7938bff061570",
+        "object_rgba.png": "a9810dcb7bee40359bc35b505fe72289",
+        "object_white.png": "e86bc3929003496fb4108149c082c6fd",
+        "position_hint.png": "bcfdc6f3188f493ba6a2db11b869d565"
+      },
+      "execution": {
+        "seconds": 5.965395447798073,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": false,
+          "trellis_invoked": false
+        }
+      }
+    },
+    {
+      "id": "173dd1e87749494db5f66ab1287d37d7",
+      "experiment_id": "9b0eeee5840d453e8f21e1763544a6cb",
+      "stage": "m3",
+      "action": "trellis",
+      "status": "completed",
+      "started_at": "2026-11-05T16:22:17.222440+00:00",
+      "finished_at": "2026-11-05T16:34:16.908192+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/173dd1e87749494db5f66ab1287d37d7/outputs/m3",
+      "assets": {
+        "object_local.ply": "df66e2da0a94419eae26ba19e2dc549a",
+        "object_world.ply": "2311f29d19084f33b067f9338dab3dea",
+        "renders/anchor_after.png": "0a0c89530bcd45ed93fcb0f8e5e63ffe",
+        "trellis_asset.glb": "a72e4d4af4cb45e6ba6c6ef9b4187231",
+        "trellis_asset_preview.png": "4e57fe8cefad4a46b9338249654b6081",
+        "trellis_native.pt": "3e15dbb6be844cdea67695f103c24f04"
+      },
+      "execution": {
+        "seconds": 719.685752,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": false,
+          "timing_basis": "Recovered wall time from persisted start/finish timestamps after worker restart",
+          "trellis_invoked": true
+        }
+      }
+    },
+    {
+      "id": "2fcad79c8201451fa7de0621f1ba640e",
+      "experiment_id": "0de7dabc3ffc41cdb217c8f3d7e8543d",
+      "stage": "m3",
+      "action": "trellis",
+      "status": "completed",
+      "started_at": "2026-11-05T17:58:02.147179+00:00",
+      "finished_at": "2026-11-05T18:00:51.033287+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/0de7dabc3ffc41cdb217c8f3d7e8543d/runs/2fcad79c8201451fa7de0621f1ba640e/outputs/m3",
+      "assets": {
+        "object_local.ply": "1cfe3cb6fd2442d99ac6549434a7b8bf",
+        "object_world.ply": "2ca73576a874466e8d0b6d5e077a3548",
+        "renders/anchor_after.png": "8b490414b30d4fa2abc60297765fba2e",
+        "trellis_asset.glb": "29454ac90df242498a668659d092acb7"
+      },
+      "execution": {
+        "seconds": 167.1855991994962,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": false,
+          "trellis_invoked": false
+        }
+      }
+    },
+    {
+      "id": "407bdca288de444d9563928015d794f1",
+      "experiment_id": "c195d8fd4b9a402ab6991085ef1928c5",
+      "stage": "m3",
+      "action": "reuse",
+      "status": "completed",
+      "started_at": "2026-11-05T17:50:00.844808+00:00",
+      "finished_at": "2026-11-05T17:52:04.772166+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/c195d8fd4b9a402ab6991085ef1928c5/runs/407bdca288de444d9563928015d794f1/outputs/m3",
+      "assets": {
+        "object_world.ply": "2ca73576a874466e8d0b6d5e077a3548",
+        "renders/anchor_after.png": "8b490414b30d4fa2abc60297765fba2e"
+      },
+      "execution": {
+        "seconds": 122.3032535398379,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": false,
+          "trellis_invoked": false
+        }
+      }
+    },
+    {
+      "id": "4f8ce3aa0c0f413a94ebe0374dff9324",
+      "experiment_id": "9b0eeee5840d453e8f21e1763544a6cb",
+      "stage": "m2",
+      "action": "prepare",
+      "status": "completed",
+      "started_at": "2026-11-05T16:20:51.839518+00:00",
+      "finished_at": "2026-11-05T16:21:09.205701+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/4f8ce3aa0c0f413a94ebe0374dff9324/outputs/m2",
+      "assets": {
+        "anchor.png": "28209bc0b6c44f8fa4a42027c60b013e",
+        "depth.png": "9e41b1c46fbb4e69a5e264cf9408c822",
+        "depth_background.png": "013a93f11e6340e2b65ac394d41c4dfe",
+        "position_hint.png": "bcfdc6f3188f493ba6a2db11b869d565"
+      },
+      "execution": {
+        "seconds": 17.19525684695691,
+        "external_api": 0,
+        "metadata": {}
+      }
+    },
+    {
+      "id": "8f735825908c46148d6a4f384691db6a",
+      "experiment_id": "4b7542c13bf74baf870c4ef3c2d42ff7",
+      "stage": "m3",
+      "action": "reuse",
+      "status": "completed",
+      "started_at": "2026-11-05T17:46:41.567737+00:00",
+      "finished_at": "2026-11-05T17:50:00.668997+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/4b7542c13bf74baf870c4ef3c2d42ff7/runs/8f735825908c46148d6a4f384691db6a/outputs/m3",
+      "assets": {
+        "object_local.ply": "1cfe3cb6fd2442d99ac6549434a7b8bf",
+        "object_world.ply": "2ca73576a874466e8d0b6d5e077a3548",
+        "renders/anchor_after.png": "8b490414b30d4fa2abc60297765fba2e"
+      },
+      "execution": {
+        "seconds": 197.14233465399593,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": false,
+          "trellis_invoked": false
+        }
+      }
+    },
+    {
+      "id": "d4f36cc0f47c4e6b8f8f579b5cb5160c",
+      "experiment_id": "50eece7e98cf480aa0671fdc4546fc9a",
+      "stage": "m3",
+      "action": "reuse",
+      "status": "completed",
+      "started_at": "2026-11-05T17:52:04.919993+00:00",
+      "finished_at": "2026-11-05T17:54:53.981491+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/50eece7e98cf480aa0671fdc4546fc9a/runs/d4f36cc0f47c4e6b8f8f579b5cb5160c/outputs/m3",
+      "assets": {
+        "object_local.ply": "df66e2da0a94419eae26ba19e2dc549a",
+        "object_world.ply": "2311f29d19084f33b067f9338dab3dea",
+        "renders/anchor_after.png": "0a0c89530bcd45ed93fcb0f8e5e63ffe",
+        "trellis_asset.glb": "a72e4d4af4cb45e6ba6c6ef9b4187231"
+      },
+      "execution": {
+        "seconds": 167.43710211198777,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": false,
+          "trellis_invoked": false
+        }
+      }
+    },
+    {
+      "id": "d599bbd4b99f45ff80ac356cdc2dda2d",
+      "experiment_id": "2b48c32790d8446598b9cb2bd3e959a2",
+      "stage": "m3",
+      "action": "reuse",
+      "status": "completed",
+      "started_at": "2026-11-05T16:34:23.419373+00:00",
+      "finished_at": "2026-11-05T16:37:04.194448+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/2b48c32790d8446598b9cb2bd3e959a2/runs/d599bbd4b99f45ff80ac356cdc2dda2d/outputs/m3",
+      "assets": {
+        "object_local.ply": "df66e2da0a94419eae26ba19e2dc549a",
+        "object_world.ply": "2311f29d19084f33b067f9338dab3dea",
+        "renders/anchor_after.png": "0a0c89530bcd45ed93fcb0f8e5e63ffe",
+        "trellis_asset.glb": "a72e4d4af4cb45e6ba6c6ef9b4187231"
+      },
+      "execution": {
+        "seconds": 160.775075,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": false,
+          "timing_basis": "Recovered wall time from persisted start/finish timestamps after worker restart",
+          "trellis_invoked": false
+        }
+      }
+    },
+    {
+      "id": "df572fdcee90444ab6fbc27fc13f45da",
+      "experiment_id": "2b48c32790d8446598b9cb2bd3e959a2",
+      "stage": "m4",
+      "action": "refine",
+      "status": "completed",
+      "started_at": "2026-11-05T16:37:10.382875+00:00",
+      "finished_at": "2026-11-05T17:46:41.426077+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/2b48c32790d8446598b9cb2bd3e959a2/runs/df572fdcee90444ab6fbc27fc13f45da/outputs/m4",
+      "assets": {
+        "object_refined.ply": "0e343458d4154463934e817653ecb526",
+        "renders/anchor_after.png": "f5567574611b424c877a3d34e13b0d22"
+      },
+      "execution": {
+        "seconds": 4169.103791,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": false,
+          "trellis_invoked": false
+        }
+      },
+      "refinement_summary": {
+        "iterations": 2000,
+        "points": 200000,
+        "geometry_bitwise_preserved": true,
+        "background_bitwise_preserved": true,
+        "condition": "text_only",
+        "initialized_from_trellis": true,
+        "zero123_used": false
+      }
+    },
+    {
+      "id": "eb700a57637c4b399edf39951fec22af",
+      "experiment_id": "50eece7e98cf480aa0671fdc4546fc9a",
+      "stage": "m3",
+      "action": "reuse",
+      "status": "completed",
+      "started_at": null,
+      "finished_at": "2026-11-05T17:55:03.621153+00:00",
+      "reused_from": "d4f36cc0f47c4e6b8f8f579b5cb5160c",
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/50eece7e98cf480aa0671fdc4546fc9a/runs/eb700a57637c4b399edf39951fec22af/outputs/m3",
+      "assets": {
+        "object_local.ply": "df66e2da0a94419eae26ba19e2dc549a",
+        "object_world.ply": "2311f29d19084f33b067f9338dab3dea",
+        "renders/anchor_after.png": "0a0c89530bcd45ed93fcb0f8e5e63ffe",
+        "trellis_asset.glb": "a72e4d4af4cb45e6ba6c6ef9b4187231"
+      },
+      "execution": {
+        "seconds": 1.4239369677379727,
+        "external_api": 0,
+        "metadata": {
+          "stage_cache_hit": true,
+          "trellis_invoked": false
+        }
+      }
+    },
+    {
+      "id": "f75a94ae6b7d42cf964a75086625f975",
+      "experiment_id": "9b0eeee5840d453e8f21e1763544a6cb",
+      "stage": "m1",
+      "action": "reuse",
+      "status": "completed",
+      "started_at": "2026-11-05T16:20:46.334226+00:00",
+      "finished_at": "2026-11-05T16:20:49.699434+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/f75a94ae6b7d42cf964a75086625f975/outputs/m1",
+      "assets": {},
+      "execution": {
+        "seconds": 2.5087550189346075,
+        "external_api": 0,
+        "metadata": {}
+      }
+    },
+    {
+      "id": "f888f121869443f18c481bc792899e33",
+      "experiment_id": "9b0eeee5840d453e8f21e1763544a6cb",
+      "stage": "m2",
+      "action": "reuse",
+      "status": "completed",
+      "started_at": "2026-11-05T16:21:11.369015+00:00",
+      "finished_at": "2026-11-05T16:22:13.093932+00:00",
+      "reused_from": null,
+      "verified": true,
+      "output_directory": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/webapp/data/experiments/9b0eeee5840d453e8f21e1763544a6cb/runs/f888f121869443f18c481bc792899e33/outputs/m2",
+      "assets": {
+        "anchor.png": "28209bc0b6c44f8fa4a42027c60b013e",
+        "depth.png": "9e41b1c46fbb4e69a5e264cf9408c822",
+        "depth_background.png": "013a93f11e6340e2b65ac394d41c4dfe",
+        "edited_scene.png": "15be7f76bd974ded9fee8ed6e5c6e547",
+        "object_mask.png": "25c8e3d313fd4b3985c7938bff061570",
+        "object_rgba.png": "a9810dcb7bee40359bc35b505fe72289",
+        "object_white.png": "e86bc3929003496fb4108149c082c6fd",
+        "position_hint.png": "bcfdc6f3188f493ba6a2db11b869d565"
+      },
+      "execution": {
+        "seconds": 61.56391150504351,
+        "external_api": 0,
+        "metadata": {}
+      }
+    }
+  ],
+  "historical_artifacts_unchanged": true,
+  "web_qwen_submission_locks": 0,
+  "tests": {
+    "web": {
+      "count": 16,
+      "passed": true
+    },
+    "cli": {
+      "count": 5,
+      "passed": true
+    }
+  },
+  "source_sha256": {
+    "industrial_swap_v2/webapp/validate_asset_routes.py": "30cdc6eb6dbb6c001b51a16705b51bc4acf40e2408bdbc65dc1e54cb7104978e",
+    "industrial_swap_v2/webapp/deploy.py": "1b92b748b9e518694b3efc20d40f45419599a2ce449c720bea098991e7409a76",
+    "industrial_swap_v2/webapp/app.py": "ddbeb51dd41b69d6f5fddf5d5db5ec99bcafa78e2225d4cf5c35515a24a78199",
+    "industrial_swap_v2/webapp/adapter.py": "efa7d1337ec4e8429f72c6ab9d3def413ea1794bfc705e3348a6cf10b85fa0fa",
+    "industrial_swap_v2/webapp/__init__.py": "539af745ac6d0234f5a2ce5b2657ac59a7078f75952b8c864c3c1a4c251c5100",
+    "industrial_swap_v2/webapp/connect.ps1": "2c339099e54badd305f1e26e732edbb1ff3d709cc48b408ad27d7f4d41be5999",
+    "industrial_swap_v2/webapp/worker.py": "6aaec02dc77754ada8e267170a9a88abc36b6ae787cce56227d37602971df545",
+    "industrial_swap_v2/webapp/start.sh": "a4be5a9f21bba1a08e175772ba2ffa5dae63f99147457b5aef618fc30280246f",
+    "industrial_swap_v2/webapp/store.py": "4799e332e9b1cc93eca4a74c78161fb40274cf22be1ed343233fbb8b30ca2bdf",
+    "industrial_swap_v2/webapp/record_validation.py": "59bb9bf4a592a721d2e5f150975bd33230ac9a72b082b573a63c2e1ffa7db32b",
+    "industrial_swap_v2/webapp/validate_live.py": "9a4e17d289725f294ce565e90e8cb321ab23e85d7eaefb8bd6a3f384355f6a83",
+    "industrial_swap_v2/webapp/service.py": "049ff36042e16679ace45bb79aa463588d94cf6cbf30201ba8737533e0626a91",
+    "industrial_swap_v2/webapp/manage.py": "1c5158db04b3ce84117e712ad8fad9e5c556c0cb07a8af418709b951b44107ad",
+    "industrial_swap_v2/webapp/static/index.html": "c5f1b98b866b4c56d623724b625f09fce7c251d13774cd225c09ba059946fa0c",
+    "industrial_swap_v2/webapp/static/style.css": "4ae71fb8c167799ac81d28dbe3b38ed73cdc6641445ffc3ec2cb993654e4b0df",
+    "industrial_swap_v2/webapp/static/app.js": "0a3142aa1c6498a9b99464ef129fbdf56d2303cf36b9c9095cad683919317548",
+    "industrial_swap_v2/webapp/tests/test_webapp.py": "51c2d34c04dde426024ccff07d42a0e6684be39b1b7544292f56dff27416d60a",
+    "industrial_swap_v2/core/context.py": "6583551d72b26836a04f062f9a6949d585852b8a0a798945957ec261e00af630",
+    "industrial_swap_v2/core/qwen_client.py": "57c29ee11b1c1a6b27e844c0d118bd01d10d50d49cf877c682091a51beeaefe9",
+    "industrial_swap_v2/modules/m2_image_generation.py": "a20559342ce0fb4295de148178bce55fbda4d9444c86f146ae5bd4b96d52c7ac",
+    "industrial_swap_v2/tests/test_qwen_once.py": "31907f6afc6d04da4b0f80265f1c3d7ed7e6aa109a534bcc7b8115521832a085"
+  },
+  "python": "3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]",
+  "database_tables": [
+    "experiments",
+    "assets",
+    "stage_runs",
+    "generation_records",
+    "experiment_assets",
+    "asset_events"
+  ],
+  "baseline_commit": "993e968fd2d33b71f733caea4f1ba4305d89a4e7"
+}

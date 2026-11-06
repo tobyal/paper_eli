@@ -1,0 +1,17 @@
+{
+  "experiment": "35cded5f5cff416785799ee3f3a503a1",
+  "runs": {
+    "m3": "c1e83efe6eed4dc49d08c46e3e9cb8ca",
+    "m4": "228b887f3c744cf89f9e08c6c4ae1d9a"
+  },
+  "root": "/mnt/sda/ubuntu/lkx/papers/paper_eli/industrial_swap_v2/outputs/multiview_scene_refinement/run_v1",
+  "source_experiment": "9b0eeee5840d453e8f21e1763544a6cb",
+  "source_heads_unchanged": true,
+  "no_qwen_or_trellis_calls": true,
+  "completed": {
+    "all_checks_passed": true,
+    "source_object_sha256": "c4a161b4e6df724b5e2febfdb6d955c158915711652f4cf3b35daca5bcfccfd4",
+    "stage_a_background_sha256": "1d3c05bb048ba25e574c80512c7e5929831b1db6db4d4c9a6380cd1e469c9b6b",
+    "final_scene_sha256": "0901ac9d1de9e367884654a64f2c3b9ef9ddefec50af04d589f8e9c6a924b9e9"
+  }
+}

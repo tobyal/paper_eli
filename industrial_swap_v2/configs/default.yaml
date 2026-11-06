@@ -52,6 +52,26 @@ m3:
   fit_fraction: 0.95
   output_type: mesh_and_gaussian
   use_original_scene_transform: true
+  object_occlusion_filter:
+    enabled: false
+    use_multi_view: true
+    preserve_object_geometry: true
+    floor_repair: false
+    min_confirm_views: 2
+    region_expansion: 0.08
+    support_sigma: 3.0
+    min_occlusion_fraction: 0.000015
+    max_delete_fraction: 0.002
+    max_outside_mae: 0.0015
+    max_outside_changed_fraction: 0.003
+  visibility_initialization:
+    enabled: true
+    resolution: 640
+    source_views: 40
+    holdout_every: 4
+    local_expansion: 0.25
+    min_observed_views: 2
+    edge_dilation_fraction: 0.008
 m4:
   method: di_sds
   initialize_from: outputs/m3/object_world.ply
@@ -71,6 +91,23 @@ m4:
   checkpoint_every: 100
   minimum_free_gpu_gib: 24
   memory_budget_gib: 20
+  local_background:
+    enabled: true
+    iterations: 1000
+    color_lr: 0.004
+    opacity_lr: 0.015
+    rgb_weight: 1.0
+    visibility_weight: 0.3
+    outside_preserve_weight: 0.2
+    opacity_preserve_weight: 0.05
+    color_preserve_weight: 0.02
+    max_rgb_change: 0.18
+    max_opacity_change: 0.12
+    candidate_max_opacity_change: 0.6
+    warmup_steps: 100
+    evaluate_every: 100
+  diffusion_mask_source: object_alpha
+  object_mask_dilation_fraction: 0.015
 render:
   trajectory_width: 960
   orbit_resolution: 512
