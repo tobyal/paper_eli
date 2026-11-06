@@ -1,0 +1,60 @@
+旧、新设备 Mask 并集监督与短程背景优化
+====================================
+
+本模式固定 object_world.ply 的全部参数，只优化局部背景。没有 Qwen、TRELLIS、
+DI-SDS、地面补全、Gaussian 删除或新增，不移动设备。默认 250 步，最多 300 步。
+历史 old_new_union_v2 之前的 run_v1 仍使用旧逻辑，其结果不被覆盖。
+
+M3 监督
+-------
+multiview_masks.py 的 scheme=old_new_union_v2：
+M_old = 在原始完整场景中渲染 M1 目标高斯的可见贡献 > 0.02。
+M_new = 固定新设备独立渲染 Alpha > 0.25，每个相机独立计算。
+M_env = ~(M_old | M_new)，不使用大包围盒投影排除 RGB。
+RGB 实际权重在 M_env 内再排除图像边缘与约 0.3% 短边的 Mask 边界，并限于局部背景的可见区域。
+Anchor 没有对应真实照片，不参与环境 RGB；其可见性损失使用独立设备 Mask，M2 Mask 仅报告一致性。
+原始空间盒只用于三维局部支持和合法前景的深度保护，不作为环境 RGB 排除 Mask。
+
+两类独立权限
+------------
+rgb_indices.npy：局部高斯在至少两个训练照片的可信 M_env 中具有实际渲染贡献。
+occlusion_indices.npy：在 M1 空间附近具有 3σ 协方差支持，至少三个视角具有实际可见性遮挡梯度，
+确认方向跨度至少 5 度，收益/环境影响比通过阈值，且没有显著合法前景贡献。
+第二个集合不检查 RGB 观测次数；两集合可交叠。
+高斯中心在盒外、但协方差支持进入编辑空间时仍可能被选中；宽大、影响环境过多的高斯被保留。
+遮挡梯度来自联合场景真实前向透明度合成对背景 opacity logit 的导数，非二维颜色阈值。
+深度、旧设备语义贡献与空间盒共同用于保护确认在目标之前的合法前景。
+这些仍是基于重建的几何证据，不是人工标注的真实前景语义。
+
+优化
+----
+PermissionedBackground 保持同一份前向 opacity，但对不同损失使用独立梯度权限。
+真实 RGB 损失只更新 RGB 集合的 SH0 / opacity；可见性损失只更新遮挡集合的 opacity。
+遮挡集合还有环境变化、合法前景变化与参数变化约束，opacity 只能降低，最低 0.005。
+非遮挡 RGB 集合的 alpha 变化上限 0.08；SH0 对应 RGB 变化上限 0.08。
+所有背景几何、高阶 SH 和未选中行冻结；遮挡专用、无 RGB 权限的高斯颜色也冻结。
+每 50 步检查验证相机；在 250 步预算内选取通过环境/前景变化限制的最佳检查点。
+若没有检查点优于基准且通过限制，则输出未优化背景并如实报告，不自动放宽限制或继续训练。
+
+运行（服务器仓库根目录）
+-------------------------
+CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=4 envs/gsle/bin/python -m industrial_swap_v2.scripts.run_background_only \
+  --source-config industrial_swap_v2/outputs/multiview_scene_refinement/run_v1/config.yaml \
+  --destination outputs/background_only_union/new_run --steps 250 --gpu 1 --stage all
+
+--stage 可用 prepare/background/validate/all，根本没有 DI-SDS 阶段。
+已有独立目录可用 --config <新运行/config.yaml> 分阶段执行；不会静默覆盖部分训练或旧实验。
+m4_refinement.run 在 background_only=true 时完成背景优化和导出后立即 return。
+旧的完整 M4 路径仍保留，以复现历史实验，但不由本入口调用。
+
+输出
+----
+m3/multiview_visibility：old/new/environment Mask、可信权重、分离索引、实际贡献、多视角证据与相机。
+m4/background_optimization：background_optimized.ply、scene_visibility_optimized.ply、250 步日志及检查点。
+m4/object_fixed.ply：输入设备的逐字节复制。
+m4/scene_final.ply：通过保持检查的选定版本；若 selected_step=0，则为原始输入回退版本。
+m4/background_optimization/background_candidate_step250.ply、m4/scene_candidate_step250.ply：
+实际第 250 步优化背景与合成场景，始终导出，不能混同于通过检查的选定版本。
+m4/validation：实际第 250 步候选的同相机前后图、底座放大图、Mask 可视化和 report.json。
+renders/anchor_after.png 与保守 scene_final 一致；anchor_candidate_step250.png 明确展示训练候选。
+报告包含底座/设备可见贡献、并集 Mask 外变化、合法前景变化和源文件 SHA256 保持证明。

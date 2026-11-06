@@ -66,6 +66,7 @@ m3:
     max_outside_changed_fraction: 0.003
   visibility_initialization:
     enabled: true
+    scheme: old_new_union_v2
     resolution: 640
     source_views: 40
     holdout_every: 4
@@ -73,6 +74,7 @@ m3:
     min_observed_views: 2
     edge_dilation_fraction: 0.008
 m4:
+  background_only: true
   method: di_sds
   initialize_from: outputs/m3/object_world.ply
   freeze_background: true
@@ -93,19 +95,19 @@ m4:
   memory_budget_gib: 20
   local_background:
     enabled: true
-    iterations: 1000
+    iterations: 250
     color_lr: 0.004
-    opacity_lr: 0.015
+    opacity_lr: 0.06
     rgb_weight: 1.0
-    visibility_weight: 0.3
+    visibility_weight: 1.0
     outside_preserve_weight: 0.2
     opacity_preserve_weight: 0.05
     color_preserve_weight: 0.02
-    max_rgb_change: 0.18
-    max_opacity_change: 0.12
+    max_rgb_change: 0.08
+    max_opacity_change: 0.08
     candidate_max_opacity_change: 0.6
-    warmup_steps: 100
-    evaluate_every: 100
+    warmup_steps: 20
+    evaluate_every: 50
   diffusion_mask_source: object_alpha
   object_mask_dilation_fraction: 0.015
 render:

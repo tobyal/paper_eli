@@ -3,7 +3,8 @@ M3–M4 多视角局部场景优化
 
 入口与边界
 ----------
-新默认流程：M3 多视角分析 → M4 A 局部背景优化 → M4 B DI-SDS。
+本文件记录历史 run_v1 流程：M3 多视角分析 → M4 A 局部背景优化 → M4 B DI-SDS。
+当前默认已改为旧、新 Mask 并集监督和背景专用短程优化；见 BACKGROUND_ONLY.txt，不进入 DI-SDS。
 core/object_occlusion_filter.py、repair_background.py 和 background_repair 结果均为历史归档。
 新流程不调用这些算法，不删除或新增背景高斯，不调用 Qwen/TRELLIS，不改变已对齐设备的几何。
 M4 的 freeze_background 指阶段 B 冻结阶段 A 的结果；阶段 A 仅优化有真实观测支持的局部背景。

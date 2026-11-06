@@ -15,7 +15,45 @@ from .visibility_loss import object_contribution
 DEFAULTS={'enabled':True,'resolution':640,'source_views':40,'holdout_every':4,
           'local_expansion':.25,'edge_dilation_fraction':.008,'min_observed_views':2,
           'min_observed_pixels':.5,'candidate_contribution_fraction':1e-5,
-          'depth_margin_fraction':.015,'depth_uncertainty_fraction':.08}
+          'depth_margin_fraction':.015,'depth_uncertainty_fraction':.08,
+          'scheme':'legacy_bbox','old_alpha_threshold':.02,'new_alpha_threshold':.25,
+          'union_edge_fraction':.003,'occlusion_expansion':.08,
+          'min_occlusion_views':3,'min_occlusion_angle_degrees':5.,
+          'min_gain_to_environment':.03,'max_legal_fraction':.02}
+
+
+UNION_SCHEME='old_new_union_v2'
+
+
+def union_supervision_masks(camera,box,source_depth,source_std,source_alpha,old_alpha,
+                           obj_depth,obj_alpha,size,cfg):
+    """BBox is used only for conservative foreground protection, never RGB exclusion."""
+    old=old_alpha>cfg['old_alpha_threshold']; new=obj_alpha>cfg['new_alpha_threshold']
+    excluded=old|new; env=~excluded
+    radius=max(0,round(min(camera.width,camera.height)*cfg['union_edge_fraction']))
+    guarded=cv2.dilate(excluded.astype(np.uint8),np.ones((2*radius+1,2*radius+1),np.uint8)).astype(bool)
+    photo=env&~guarded
+    photo[:2]=False; photo[-2:]=False; photo[:,:2]=False; photo[:,-2:]=False
+    hit,near,_=ray_box_depth(camera,*box); margin=size*cfg['depth_margin_fraction']
+    confident=(source_alpha>.95)&(source_std<size*cfg['depth_uncertainty_fraction'])
+    front_of_old=(~hit)|(source_depth+2*source_std<near-margin)
+    legal=new&confident&(old_alpha<.01)&front_of_old&(source_depth+2*source_std<obj_depth-margin)
+    visibility=new&~legal
+    return old,new,env,photo,legal,visibility
+
+
+def occlusion_permissions(spatial_ids,votes,directions,legal_veto,cfg):
+    """No RGB-observation condition: multi-view negative-opacity evidence only."""
+    votes=np.asarray(votes,dtype=bool); directions=np.asarray(directions)
+    if len(votes)==0: return np.empty(0,np.int64),np.zeros(len(spatial_ids))
+    span=np.zeros(len(spatial_ids),np.float32)
+    dots=np.clip(directions@directions.T,-1,1)
+    for i in range(len(votes)):
+        for j in range(i):
+            angle=float(np.degrees(np.arccos(dots[i,j])))
+            span=np.maximum(span,np.where(votes[i]&votes[j],angle,0))
+    selected=(votes.sum(0)>=cfg['min_occlusion_views'])&(span>=cfg['min_occlusion_angle_degrees'])&~legal_veto
+    return np.asarray(spatial_ids)[selected],span
 
 
 def ray_box_depth(camera,low,high):
@@ -73,6 +111,8 @@ def choose_views(cameras,manifest,count):
 
 def prepare_multiview(ctx,output_dir=None):
     cfg={**DEFAULTS,**ctx.cfg['m3'].get('visibility_initialization',{})}
+    union=cfg['scheme']==UNION_SCHEME
+    if cfg['scheme'] not in ('legacy_bbox',UNION_SCHEME): raise ValueError('Unknown supervision scheme')
     if cfg['source_views']<8 or cfg['holdout_every']<2 or cfg['min_observed_views']<2:
         raise ValueError('Multiview optimization needs independent train/validation views and at least two observation votes')
     if not 0<=cfg['local_expansion']<=1 or not 0<cfg['edge_dilation_fraction']<.1:
@@ -92,6 +132,8 @@ def prepare_multiview(ctx,output_dir=None):
     for name in ('cache','object_masks','object_alpha','object_depth','renders','supervision_masks'): (out/name).mkdir(exist_ok=True)
     c=gsle(ctx); manifest=read_json(sources['manifest']); vertices=read_vertices(sources['background'])
     local_ids,size=local_support(vertices,manifest,cfg['local_expansion'])
+    spatial_ids,_=local_support(vertices,manifest,cfg['occlusion_expansion'])
+    vote_matrix=[]; vote_directions=[]; legal_veto=np.zeros(len(spatial_ids),bool)
     bg=c.GaussianData.load(sources['background']); obj=c.GaussianData.load(sources['object'])
     source=c.GaussianData.load(sources['original_scene']); old_indices=np.load(sources['target_indices'])
     flags=torch.zeros((len(source.xyz),3),device='cuda'); flags[torch.tensor(old_indices,device='cuda')]=1
@@ -124,39 +166,64 @@ def prepare_multiview(ctx,output_dir=None):
             local_alpha=c.raster(camera,bg,local_flags)[0].cpu().numpy()
         cpu=lambda tensor:tensor.detach().cpu().numpy()
         edit_projection=c.bbox_mask(camera,edit_corners)
-        reliable,wvis,unknown,legal,old_projection=supervision_masks(camera,box,cpu(sd),cpu(ss),cpu(sa),cpu(old),cpu(od),cpu(oa),edit_projection,size,cfg)
+        if union:
+            mold,mnew,menv,reliable,legal,wvis=union_supervision_masks(camera,box,cpu(sd),cpu(ss),cpu(sa),cpu(old),cpu(od),cpu(oa),size,cfg)
+            unknown=mold|mnew; old_projection=mold
+        else:
+            reliable,wvis,unknown,legal,old_projection=supervision_masks(camera,box,cpu(sd),cpu(ss),cpu(sa),cpu(old),cpu(od),cpu(oa),edit_projection,size,cfg)
         reference_iou=None
         if split=='anchor':
             with Image.open(sources['mask']) as image: reference=np.asarray(image.convert('L').resize((camera.width,camera.height),Image.Resampling.NEAREST))>127
             modelmask=cpu(oa)>.25; reference_iou=float((reference&modelmask).sum()/max((reference|modelmask).sum(),1))
-            wvis&=cv2.dilate(reference.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
-            if reference_iou<.35: wvis[:]=False
+            if not union:
+                wvis&=cv2.dilate(reference.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
+                if reference_iou<.35: wvis[:]=False
             c.save_image(out/'object_masks'/f'{name}_m2_reference.png',reference.astype(float))
             original=np.zeros((camera.height,camera.width,3),np.uint8); reliable[:]=False
         else:
             image_path=ctx.source('data/industrial/images')/camera.name
             with Image.open(image_path) as image: original=np.asarray(image.convert('RGB').resize((camera.width,camera.height),Image.Resampling.LANCZOS))
         train_mask=reliable&(local_alpha>.01)
-        # Only photo-supported splats may change. A mask pixel is not a proxy
-        # for 3D support: the renderer measures actual per-splat contribution.
-        if split=='train':
+        # RGB observation permission and occlusion permission are independent.
+        if split=='train' or (union and split=='anchor'):
             colors=torch.zeros((len(bg.xyz),3),device='cuda',requires_grad=True)
             rendered=c.raster(camera,bg,colors)
-            (rendered[0]*torch.tensor(train_mask,device='cuda')).sum().backward()
-            mass=colors.grad[:,0].detach().cpu().numpy()
+            if union:
+                (rendered*torch.tensor(np.stack((menv,legal,wvis)),device='cuda')).sum().backward()
+                masses=colors.grad.detach().cpu().numpy()
+                mass=masses[:,0]
+            else:
+                (rendered[0]*torch.tensor(train_mask,device='cuda')).sum().backward()
+                mass=colors.grad[:,0].detach().cpu().numpy()
             threshold=cfg['min_observed_pixels']*camera.width*camera.height/(640*360)
-            counts+=(mass>threshold); observed_mass+=mass
+            if split=='train':
+                # The local 3D set limits membership; zero weights stay excluded.
+                if union:
+                    colors.grad.zero_(); rendered=c.raster(camera,bg,colors)
+                    (rendered[0]*torch.tensor(train_mask,device='cuda')).sum().backward()
+                    mass=colors.grad[:,0].detach().cpu().numpy().copy()
+                counts+=(mass>threshold); observed_mass+=mass
             del colors,rendered
         if split in ('train','anchor'):
             bg.opacity_logit=bg.opacity_logit.detach().requires_grad_(True)
             contribution=object_contribution(c,camera,bg,obj)[0]
             (contribution*torch.tensor(wvis,device='cuda')).sum().backward()
             alpha=bg.opacity_logit.detach().sigmoid()[:,0].cpu().numpy()
-            gain=np.maximum(-bg.opacity_logit.grad[:,0].detach().cpu().numpy(),0)/np.maximum(1-alpha,.01)
+            gain=np.maximum(-bg.opacity_logit.grad[:,0].detach().cpu().numpy(),0)/np.maximum(1-alpha,1e-6 if union else .01)
             relative=gain/max(float((cpu(oa)*wvis).sum()),1)
             votes+=(relative>cfg['candidate_contribution_fraction']); score+=relative
+            if union:
+                outside=masses[spatial_ids,0]; inside=masses[spatial_ids,2]; protected=masses[spatial_ids,1]
+                # Actual visibility derivative proves front-to-back occlusion;
+                # 3-sigma support and spatial locality are checked by spatial_ids.
+                evidence=(relative[spatial_ids]>cfg['candidate_contribution_fraction'])&(gain[spatial_ids]/np.maximum(outside,1e-6)>=cfg['min_gain_to_environment'])
+                legal_veto|=(protected/np.maximum(inside+protected,1e-6)>cfg['max_legal_fraction'])&(protected>threshold)
+                vote_matrix.append(evidence)
+                direction=camera.center-np.asarray(manifest['world_transform']['center'])
+                vote_directions.append(direction/np.linalg.norm(direction))
             bg.opacity_logit=bg.opacity_logit.detach(); del contribution
-        np.savez_compressed(out/'cache'/f'{name}.npz',original_rgb=original,background_initial=cpu(background_rgb),
+        extra={'old_mask':mold,'new_mask':mnew,'environment_mask':menv} if union else {}
+        np.savez_compressed(out/'cache'/f'{name}.npz',**extra,original_rgb=original,background_initial=cpu(background_rgb),
             object_alpha=cpu(oa),object_depth=cpu(od),joint_depth=cpu(joint_depth),visible_initial=cpu(visible),
             reliable_background=reliable,background_train_mask=train_mask,visibility_weight=wvis,
             unknown_region=unknown,legal_foreground=legal,old_projection=old_projection,old_alpha=cpu(old),local_alpha=local_alpha)
@@ -166,6 +233,9 @@ def prepare_multiview(ctx,output_dir=None):
             c.save_image(out/'renders'/f'{name}_{label}.png',tensor)
         for label,mask in [('reliable',reliable),('unknown',unknown),('visibility',wvis),('legal_foreground',legal)]:
             c.save_image(out/'supervision_masks'/f'{name}_{label}.png',mask.astype(float))
+        if union:
+            for label,mask in [('old',mold),('new',mnew),('environment',menv),('environment_loss',train_mask)]:
+                c.save_image(out/'supervision_masks'/f'{name}_{label}.png',mask.astype(float))
         records.append({'name':name,'camera':camera.record(),'split':split,'original_image':None if split=='anchor' else str(image_path),
             'reference_iou':reference_iou,'reliable_pixels':int(reliable.sum()),'local_reliable_pixels':int(train_mask.sum()),
             'unknown_pixels':int(unknown.sum()),'visibility_pixels':int(wvis.sum()),'legal_foreground_pixels':int(legal.sum())})
@@ -173,15 +243,26 @@ def prepare_multiview(ctx,output_dir=None):
         torch.cuda.empty_cache()
     supported=counts[local_ids]>=cfg['min_observed_views']; optimizable=local_ids[supported]
     unsupported=local_ids[~supported]; candidates=local_ids[votes[local_ids]>=2]
+    if union:
+        rgb_indices=optimizable.copy()
+        candidates,span=occlusion_permissions(spatial_ids,vote_matrix,vote_directions,legal_veto,cfg)
+        optimizable=np.union1d(rgb_indices,candidates); unsupported=np.setdiff1d(local_ids,optimizable)
+        np.save(out/'rgb_indices.npy',rgb_indices); np.save(out/'occlusion_indices.npy',candidates)
+        np.savez_compressed(out/'occlusion_evidence.npz',spatial_indices=spatial_ids,votes=np.asarray(vote_matrix),
+            angular_span_degrees=span,legal_foreground_veto=legal_veto)
     np.save(out/'local_indices.npy',optimizable); np.save(out/'unsupported_local_indices.npy',unsupported)
     np.save(out/'occlusion_candidate_indices.npy',candidates)
     np.savez_compressed(out/'observational_support.npz',counts=counts,mass=observed_mass,occlusion_votes=votes,occlusion_score=score)
     write_json(out/'occlusion_candidates.json',{'analysis_only':True,'deleted_gaussians':0,'candidate_count':len(candidates),
-        'supported_candidate_count':int(np.isin(candidates,optimizable).sum()),'local_supported_count':len(optimizable),
+        'supported_candidate_count':int(np.isin(candidates,rgb_indices if union else optimizable).sum()),'local_supported_count':len(optimizable),
         'local_unsupported_frozen_count':len(unsupported),'top_candidates':[{'background_index':int(i),'score':float(score[i]),'views':int(votes[i]),'observed_views':int(counts[i])} for i in candidates[np.argsort(-score[candidates])[:50]]]})
     write_json(out/'manifest.json',{'signature':signature,'config':cfg,'sources':{k:str(v) for k,v in sources.items()},
         'source_hashes':{k:sha256(v) for k,v in sources.items()},'views':records,'region_scale':size,
+        'permission_scheme':cfg['scheme'],
+        'rgb_count':len(rgb_indices) if union else len(optimizable),
+        'occlusion_count':len(candidates),
+        'occlusion_without_rgb_count':int((~np.isin(candidates,rgb_indices)).sum()) if union else 0,
         'local_supported_count':len(optimizable),'local_unsupported_count':len(unsupported),
-        'semantics':'Old LangSplat-selected Gaussian contribution plus per-camera 3D exclusion/depth confidence. Generated object masks are visibility constraints, not real geometry labels.',
-        'unknown_policy':'No direct RGB loss in excluded/unknown pixels; no optimization of splats without multi-view real-photo support; no completion.'})
+        'semantics':('M_env = complement of visible old semantic mask union independently rendered new mask. RGB and occlusion permissions are separate; depth is used only for foreground protection.' if union else 'Old LangSplat-selected Gaussian contribution plus per-camera 3D exclusion/depth confidence. Generated object masks are visibility constraints, not real geometry labels.'),
+        'unknown_policy':('RGB excludes the union of old visible semantic mask and new isolated alpha mask; occlusion-only splats may change opacity without RGB support, subject to spatial/multiview/foreground guards; no completion.' if union else 'No direct RGB loss in excluded/unknown pixels; no optimization of splats without multi-view real-photo support; no completion.')})
     return out

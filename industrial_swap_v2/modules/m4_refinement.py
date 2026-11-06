@@ -48,6 +48,14 @@ def checkpoint(path,obj,optimizer,step,fingerprint):
 
 def run(ctx):
     cfg=ctx.cfg['m4']; out=ctx.stage('m4')
+    if cfg.get('background_only',False):
+        from ..core.local_background_optimizer import optimize_background
+        from ..scripts.run_background_only import validate_background_only
+        if ctx.cfg['m3'].get('visibility_initialization',{}).get('scheme')!='old_new_union_v2':
+            raise ValueError('Background-only mode requires union masks and separate permissions')
+        optimize_background(ctx)
+        validate_background_only(ctx)
+        return  # Never instantiate diffusion or train object appearance.
     if not cfg['freeze_background'] or not cfg['preserve_geometry']:
         raise ValueError('This v2 preset requires frozen background and preserved TRELLIS geometry')
     assert cfg['unconditional_conditioning']=='text_only'

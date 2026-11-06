@@ -19,6 +19,9 @@ def initialize(source_config, destination, gpu):
     cfg['m3']['object_occlusion_filter']={'enabled':False}
     cfg['m3']['visibility_initialization']={'enabled':True,'resolution':640,'source_views':40}
     cfg['m4']['local_background']={'enabled':True,'iterations':1000}
+    if cfg['m4'].get('background_only',False):
+        cfg['m3']['visibility_initialization']['scheme']='old_new_union_v2'
+        cfg['m4']['local_background']['iterations']=250
     cfg['m4']['diffusion_mask_source']='object_alpha'
     cfg['m4']['object_mask_dilation_fraction']=.015
     cfg['m4']['initialize_from']=str((root/'m3/object_world.ply').relative_to(base))
@@ -66,8 +69,12 @@ def main():
         from ..modules.m4_refinement import run
         run(ctx)
     if args.stage in ('validate','all'):
-        from .validate_multiview_refinement import validate
-        validate(ctx)
+        if ctx.cfg['m4'].get('background_only',False):
+            from .run_background_only import validate_background_only
+            validate_background_only(ctx)
+        else:
+            from .validate_multiview_refinement import validate
+            validate(ctx)
 
 
 if __name__=='__main__': main()
