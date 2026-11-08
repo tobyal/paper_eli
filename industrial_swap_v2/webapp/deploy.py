@@ -11,7 +11,11 @@ with tarfile.open(archive,'w') as tar:
         relative=path.relative_to(base/'webapp')
         if any(part in ('data','__pycache__') for part in relative.parts) or not path.is_file(): continue
         tar.add(path,arcname=path.relative_to(root).as_posix())
-    for name in ('core/context.py','core/qwen_client.py','modules/m2_image_generation.py','tests/test_qwen_once.py'):
+    for name in ('core/context.py','core/qwen_client.py','modules/m2_image_generation.py','tests/test_qwen_once.py',
+                 'core/m1_reference.py','configs/m1_semantic_library.json','scripts/m1_language.py',
+                 'scripts/m1_assisted_localize.py','scripts/audit_m1_assisted.py','tests/test_m1_reference.py',
+                 'core/m2_prompt.py','core/depth.py','core/observed_anchor.py','tests/test_case_preparation.py',
+                 'scripts/audit_m2_case_inputs.py','scripts/prepare_m2_description_batch.py','configs/m2_case_description_options.json'):
         path=base/name; tar.add(path,arcname=path.relative_to(root).as_posix())
 options=['-o','BatchMode=yes','-o','ClearAllForwardings=yes']
 remote='/mnt/sda/ubuntu/lkx/papers/paper_eli'

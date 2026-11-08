@@ -157,33 +157,90 @@ class WebTests(unittest.TestCase):
     def test_asset_reuse_does_not_reserve_inference_memory(self):
         from industrial_swap_v2.webapp.worker import choose_gpu
         cfg=s.config()
-        cfg['m3']['object_occlusion_filter']={'enabled':False}
-        cfg['m3']['visibility_initialization']={'enabled':False}
+        cfg['m3'].pop('method',None)  # Historical conversion-only reuse.
         with patch('industrial_swap_v2.webapp.worker.subprocess.check_output',return_value='0, 1024\n1, 6144\n'):
             self.assertEqual(choose_gpu(cfg,{'stage':'m1','action':'reuse','inputs':'{}'}),1)
             self.assertEqual(choose_gpu(cfg,{'stage':'m3','action':'reuse','inputs':'{}'}),1)
             with patch('industrial_swap_v2.webapp.worker.generation_cache',return_value=None):
                 self.assertIsNone(choose_gpu(cfg,{'stage':'m3','action':'trellis','inputs':'{}'}))
 
-    def test_filtering_reuse_requires_attribution_memory(self):
+    def test_m4_supervision_reservation_is_not_applied_to_m3_reuse(self):
         from industrial_swap_v2.webapp.worker import choose_gpu
-        cfg=s.config(); cfg['m3']['object_occlusion_filter']={'enabled':True}
+        cfg=s.config()
+        cfg['m3'].pop('method',None)
+        with patch('industrial_swap_v2.webapp.worker.subprocess.check_output',return_value='0, 1024\n1, 6144\n'):
+            self.assertEqual(choose_gpu(cfg,{'stage':'m3','action':'reuse','inputs':'{}'}),1)
+            self.assertIsNone(choose_gpu(cfg,{'stage':'m4','action':'refine','inputs':'{}'}))
+
+    def test_pbr_asset_reuse_still_reserves_gaussian_training_memory(self):
+        from industrial_swap_v2.webapp.worker import choose_gpu
+        cfg=s.config();self.assertEqual(cfg['m3']['method'],'pbr_multiview_gaussian')
         with patch('industrial_swap_v2.webapp.worker.subprocess.check_output',return_value='0, 1024\n1, 6144\n'):
             self.assertIsNone(choose_gpu(cfg,{'stage':'m3','action':'reuse','inputs':'{}'}))
+        with patch('industrial_swap_v2.webapp.worker.subprocess.check_output',return_value='0, 1024\n1, 16384\n'):
+            self.assertEqual(choose_gpu(cfg,{'stage':'m3','action':'reuse','inputs':'{}'}),1)
 
-    def test_multiview_reuse_reserves_rendering_memory(self):
-        from industrial_swap_v2.webapp.worker import choose_gpu
-        cfg=s.config(); cfg['m3']['object_occlusion_filter']={'enabled':False}
-        cfg['m3']['visibility_initialization']={'enabled':True}
-        with patch('industrial_swap_v2.webapp.worker.subprocess.check_output',return_value='0, 1024\n1, 6144\n'):
-            self.assertIsNone(choose_gpu(cfg,{'stage':'m3','action':'reuse','inputs':'{}'}))
-
-    def test_filter_options_reject_floor_repair_and_unknown_parameters(self):
-        for settings in ({'floor_repair':True},{'yellow_protection':True},{'enabled':'yes'}):
+    def test_archived_filter_is_not_a_formal_run_parameter(self):
+        for settings in ({'enabled':True},{'enabled':False},{'floor_repair':True}):
             response=self.client.post('/api/experiments/'+self.exp+'/runs',json={
                 'stage':'m3','action':'reuse','request_id':s.uid(),
                 'parameters':{'object_occlusion_filter':settings}})
             self.assertEqual(response.status_code,422)
+
+    def m4_dependencies(self):
+        m2=fixture(self.exp,'m2','reuse'); m3=fixture(self.exp,'m3','reuse')
+        with s.transaction() as conn:
+            s.sql(conn,'UPDATE experiments SET heads=:h WHERE id=:e',
+                h=s.dump({'m1':self.m1,'materials':self.material,'m2':m2,'m3':m3}),e=self.exp)
+
+    def test_m4_steps_reach_local_optimizer_and_use_new_cache_version(self):
+        import yaml
+        self.m4_dependencies()
+        rid=v.submit(self.exp,'m4','refine',s.uid(),{'iterations':275})
+        cfg=yaml.safe_load(Path(v.run(rid)['config_path']).read_text())
+        self.assertEqual(cfg['m4']['local_background']['iterations'],275)
+        self.assertNotIn('iterations',cfg['m4']); self.assertNotIn('initialize_from',cfg['m4'])
+        self.assertEqual(cfg['m4']['method'],'dual_mask_local_background')
+        self.assertFalse((Path(v.run(rid)['folder'])/'outputs/m4').exists())
+
+    def test_m4_rejects_invalid_training_steps(self):
+        self.m4_dependencies()
+        for steps in (1,199,2001,20000,True):
+            with self.assertRaises(ValueError): v.submit(self.exp,'m4','refine',s.uid(),{'iterations':steps})
+
+    def test_m4_accepts_2000_steps_with_500_step_snapshots(self):
+        import yaml
+        self.m4_dependencies()
+        rid=v.submit(self.exp,'m4','refine',s.uid(),{'iterations':2000})
+        cfg=yaml.safe_load(Path(v.run(rid)['config_path']).read_text())
+        self.assertEqual(cfg['m4']['local_background']['iterations'],2000)
+        self.assertEqual(cfg['m4']['save_every'],500)
+
+    def compare_mask_cache_signatures(self,stage,action):
+        self.m4_dependencies(); clone=v.create('mask cache comparison',copy_from=self.exp)
+        cfg=s.unpack(v.experiment(clone)['config'])
+        cfg['m4']['multiview_supervision']['new_alpha_threshold']=.3
+        with s.transaction() as conn:
+            s.sql(conn,'UPDATE experiments SET config=:cfg WHERE id=:e',cfg=s.dump(cfg),e=clone)
+        a=v.submit(self.exp,stage,action,s.uid()); b=v.submit(clone,stage,action,s.uid())
+        return v.run(a)['signature'],v.run(b)['signature']
+
+    def test_mask_settings_do_not_invalidate_m3_asset_composition_cache(self):
+        a,b=self.compare_mask_cache_signatures('m3','trellis'); self.assertEqual(a,b)
+
+    def test_mask_settings_do_invalidate_m4_cache(self):
+        a,b=self.compare_mask_cache_signatures('m4','refine'); self.assertNotEqual(a,b)
+
+    def test_copy_historical_experiment_preserves_assets_but_clears_obsolete_stage_heads(self):
+        self.m4_dependencies(); previous=v.experiment(self.exp); cfg=s.unpack(previous['config'])
+        cfg['m4']={'method':'di_sds','iterations':2000}
+        with s.transaction() as conn:
+            s.sql(conn,'UPDATE experiments SET config=:cfg WHERE id=:e',cfg=s.dump(cfg),e=self.exp)
+        clone=v.create('copy historical',copy_from=self.exp)
+        copied=v.experiment(clone); heads=s.unpack(copied['heads'])
+        self.assertIn('m1',heads); self.assertIn('m2',heads); self.assertNotIn('m3',heads); self.assertNotIn('m4',heads)
+        self.assertEqual(s.unpack(copied['config'])['m4']['method'],'dual_mask_local_background')
+        self.assertEqual(s.unpack(v.experiment(self.exp)['config'])['m4']['method'],'di_sds')
 
     def test_rgba_adapter_skips_sam_and_preserves_alpha(self):
         from industrial_swap_v2.core.context import Context

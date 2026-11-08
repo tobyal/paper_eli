@@ -17,6 +17,12 @@ s.init()
 app=FastAPI(title='Industrial Swap Lab',version='1.0',docs_url='/api/docs')
 from .gaussian_viewer import router as viewer_router
 app.include_router(viewer_router)
+from . import m1_cases
+m1_cases.init()
+app.include_router(m1_cases.router)
+from . import m2_cases
+m2_cases.init()
+app.include_router(m2_cases.router)
 STATIC=Path(__file__).parent/'static'
 
 
@@ -59,29 +65,41 @@ def public_run(value):
     for key in ('inputs','parameters','outputs'): value[key]=s.unpack(value[key])
     value['outputs'].pop('directory',None)
     value['outputs'].pop('integrity',None)
-    progress=folder/'records/m4_progress.json'
+    progress=folder/'outputs/m4/background_optimization/training.jsonl'
     if value['stage']=='m4' and progress.exists():
-        saved=json.loads(progress.read_text())
-        value['progress']={'step':saved['step'],'total':value['parameters'].get('iterations',2000),
-            'gpu_peak_gib':saved.get('gpu_peak_gib')}
+        with progress.open('rb') as stream:
+            stream.seek(max(0,progress.stat().st_size-8192)); lines=stream.read().splitlines()
+        for line in reversed(lines):
+            try: saved=json.loads(line)
+            except (ValueError,UnicodeDecodeError): continue
+            value['progress']={'step':saved['step'],'total':value['parameters'].get('iterations',250)}
+            break
+    else:
+        progress=folder/'records/m4_progress.json'
+        if value['stage']=='m4' and progress.exists():
+            saved=json.loads(progress.read_text())
+            value['progress']={'step':saved['step'],'total':value['parameters'].get('iterations',2000),
+                'gpu_peak_gib':saved.get('gpu_peak_gib'),'historical':True}
     return value
 
 
 def public_experiment(value):
     value=dict(value); cfg=s.unpack(value.pop('config')); value['heads']=s.unpack(value['heads'])
-    value['settings']={'iterations':cfg['m4']['iterations'],'scene_path':cfg['project']['source_ply'],
+    from ..core.workflow import current_config
+    execution=current_config(cfg)
+    value['settings']={'iterations':execution['m4']['local_background']['iterations'],
+        'save_every':execution['m4'].get('save_every',0),'scene_path':cfg['project']['source_ply'],
         'localization':cfg['m1']['localization_dir'],'anchor':cfg['m2']['existing_anchor'],
         'm2_model':cfg['m2']['model'],'m3_model':cfg['m3']['model'],
-        'multiview_initialization':cfg['m3'].get('visibility_initialization',{}).get('enabled',False),
-        'local_background':cfg['m4'].get('local_background',{}).get('enabled',False),
-        'object_occlusion_filter':cfg['m3'].get('object_occlusion_filter',{}).get('enabled',False)}
+        'm3_method':cfg['m3'].get('method','legacy_mesh_sampling'),
+        'confirmed_m1_case_id':cfg['m2'].get('confirmed_m1_case_id'),
+        'preparation_only':bool(cfg['m2'].get('preparation_only')),
+        'dual_mask_supervision':True,
+        'local_background':True,'method':execution['m4']['method']}
     value['runs']=[public_run(r) for r in s.rows('SELECT * FROM stage_runs WHERE experiment_id=:e ORDER BY created_at DESC',e=value['id'])]
     value['selected']={role:v.selected(value['id'],role) for role in ('m2','m3')}
     # Cloned experiments can reference completed immutable stages of another experiment.
     value['head_runs']={key:public_run(v.run(rid)) for key,rid in value['heads'].items()}
-    if 'm3' in value['head_runs']:
-        value['settings']['object_occlusion_filter']=value['head_runs']['m3']['parameters'].get(
-            'object_occlusion_filter',{}).get('enabled',value['settings']['object_occlusion_filter'])
     return value
 
 
@@ -260,3 +278,5 @@ def index(): return FileResponse(STATIC/'index.html')
 
 
 app.mount('/static',StaticFiles(directory=STATIC),name='static')
+(s.DATA/'m2_batches').mkdir(exist_ok=True)
+app.mount('/m2-batches',StaticFiles(directory=s.DATA/'m2_batches',html=True),name='m2-batches')

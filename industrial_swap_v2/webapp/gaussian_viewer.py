@@ -34,9 +34,12 @@ def sources(experiment):
     candidates={'object_m3':directories['m3']/'object_world.ply',
                 'background_m1':directories['m1']/'background_gaussians.ply'}
     if 'm4' in directories:
-        candidates['object_m4']=directories['m4']/'object_refined.ply'
+        if (directories['m4']/'object_world.ply').is_file():
+            candidates['object_m3']=directories['m4']/'object_world.ply'
+        fixed=directories['m4']/'object_fixed.ply'
+        candidates['object_m4']=fixed if fixed.is_file() else directories['m4']/'object_refined.ply'
         bg=directories['m4']/'background_optimization/background_optimized.ply'
-        if bg.is_file(): candidates['background_a']=bg
+        if bg.is_file(): candidates['background_m4']=bg
     return {k:contained(p) for k,p in candidates.items() if p.is_file()},directories
 
 
@@ -67,6 +70,7 @@ def catalog(experiment_id: str=None):
     manifest=json.loads((directories['m1']/'manifest.json').read_text())
     anchor=json.loads((directories['m2']/'anchor_camera.json').read_text())
     up=np.asarray(manifest['world_up'],dtype=float); up/=np.linalg.norm(up)
+    if 'object_m3' not in paths: raise HTTPException(409,'PBR M3 是局部设备；请完成 M4 空间对齐后查看场景漫游')
     obj=paths['object_m3']; stat=obj.stat()
     bounds=geometry(str(obj),stat.st_size,stat.st_mtime_ns,tuple(up))
     R=np.asarray(anchor['R']); t=np.asarray(anchor['t']); position=-R.T@t

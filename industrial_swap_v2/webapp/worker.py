@@ -34,8 +34,8 @@ def choose_gpu(cfg, value):
     if stage=='m1': required=0
     if stage=='m2' and action=='reuse' and s.asset(inputs['asset'])['kind']=='object_rgba': required=0
     if stage=='m3' and (action=='reuse' or generation_cache(value,cfg,inputs)): required=4
-    if stage=='m3' and cfg['m3'].get('object_occlusion_filter',{}).get('enabled',False): required=max(required,10)
-    if stage=='m3' and cfg['m3'].get('visibility_initialization',{}).get('enabled',False): required=max(required,10)
+    if stage=='m3' and cfg['m3'].get('method')=='pbr_multiview_gaussian':
+        required=max(required,cfg['m3']['pbr']['training']['minimum_free_gpu_gib'])
     result=subprocess.check_output(['nvidia-smi','--query-gpu=index,memory.free','--format=csv,noheader,nounits'],text=True)
     choices=[(int(free.strip())/1024,int(index)) for index,free in (line.split(',') for line in result.strip().splitlines())]
     free,gpu=max(choices)
@@ -68,12 +68,18 @@ def prepare(value, cfg):
         source=v.stage_dir(rid)
         if key=='materials':
             target=out/'m2'; target.mkdir(exist_ok=True)
-            for name in v.MATERIALS:
+            for name in (*v.MATERIALS,*v.SPATIAL_MATERIALS):
                 if (source/name).is_file() and not (target/name).exists(): shutil.copy2(source/name,target/name)
         else:
             target=out/key
             if not target.exists(): target.symlink_to(source,target_is_directory=True)
     records=folder/'records'; records.mkdir(exist_ok=True)
+    if value['stage']=='m2' and value['action']=='prepare':
+        from .m2_condition_cache import reuse_conditions
+        reused=reuse_conditions(cfg,out/'m2',out/'m1')
+        if reused:
+            with Path(value['log_path']).open('a') as log:
+                log.write('Reused verified same-case AVP/RGB/depth conditions: '+reused+'; build a new prompt independently.\n')
     for name in ('trellis_model.json','trellis_dependencies.json'):
         shutil.copy2(s.BASE/'records'/name,records/name)
     aid=inputs.get('asset') or generation_cache(value,cfg,inputs)
@@ -140,10 +146,13 @@ def recover():
 
 def main():
     s.init(); lock=(s.DATA/'service/worker.lock').open('w')
+    from . import m1_cases, m1_worker
+    m1_cases.init()
     try: fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError: return
     while True:
-        if not recover(): time.sleep(3); continue
+        if not recover() or not m1_worker.recover(): time.sleep(3); continue
+        if m1_worker.tick(): time.sleep(2); continue
         value=s.one("SELECT * FROM stage_runs WHERE status='pending' ORDER BY created_at LIMIT 1")
         if value:
             try:

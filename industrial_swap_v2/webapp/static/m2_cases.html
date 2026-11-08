@@ -1,0 +1,17 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M2 · Qwen 输入准备</title><link rel="stylesheet" href="/static/m1_cases.css"><link rel="stylesheet" href="/static/m2_cases.css?v=description-options-1"></head>
+<body><header><a id="back-m1" href="/m1-cases">← M1 案例</a><strong>M2 · Qwen 输入准备</strong><span id="mode">只准备输入 · 不调用 Qwen API</span></header>
+<main><div class="intro"><h1>为已确认的设备准备生成条件</h1><p>复用真实 M1 结果 → AVP 自动选视角 → 对齐 RGB / 位置 / 深度 → 保存 Prompt。原始 M1 结果保持不变。</p></div>
+<div class="m2-layout"><section><h2>1　选择案例与新设备</h2><label class="field">已确认的 M1 案例<select id="case-select" aria-label="已确认的 M1 案例"></select></label><p id="case-source" class="hint"></p>
+<div id="description-options" aria-label="新设备描述方案"></div><p id="description-note" class="hint"></p>
+<label class="field">新设备英文描述<textarea id="replacement" rows="4" maxlength="3000" placeholder="例如 A blue industrial control cabinet with a touch screen and a compact metal base." aria-label="新设备英文描述"></textarea></label>
+<p class="hint">M2 Anchor 由 AVP 独立选择，不直接使用 M1 参考照片。没有合格轨道视角时，使用已有配准视角备选并记录来源。</p>
+<button id="default-prompt">根据描述更新默认 Prompt</button><label class="field">Qwen Prompt（可编辑）<textarea id="prompt" rows="13" maxlength="12000" aria-label="Qwen Prompt" placeholder="填写新设备描述后生成默认 Prompt；也可修改完整文本。"></textarea></label>
+<div class="toolbar"><button id="copy-prompt">复制当前 Prompt</button><button id="prepare" class="primary">准备 M2 输入</button></div><p class="hint">修改描述后会清空旧 Prompt；每次提交保存新版本。页面没有 API 生成按钮。</p><p id="status" role="status" aria-live="polite"></p><details><summary>运行日志</summary><pre id="log"></pre></details></section>
+<section><h2>2　检查 Qwen 输入</h2><p id="empty">选择已确认案例、填写新设备描述，然后点击准备。仅在结果完成后显示实际渲染。</p><div id="result" hidden><p id="version"></p><p id="anchor-source" class="quality"></p><div id="input-images" class="input-images"></div>
+<div class="toolbar"><a id="download-bundle">下载完整输入 ZIP</a><a id="download-camera">相机参数</a><a id="download-depth">原始数值深度 NPZ</a><a id="download-mask">编辑 Mask</a></div>
+<p id="spatial-files" class="toolbar" hidden><a id="download-region">M3 三维生成空间 JSON</a><a id="download-mask-report">Mask 与前景保护检查报告</a></p>
+<p class="hint">提交给 Qwen 的顺序：① Anchor RGB　② 位置提示图　③ 背景深度图。原始深度仅供检查。黑色屏蔽区域表示未知深度，不代表真实表面。新版本按目标几何与新设备结构描述构建空间，二维区域采用可见轮廓和深度约束扩展；请检查保留的前景孔洞。</p>
+<h3>此版本已保存的 Prompt</h3><pre id="saved-prompt" class="saved-prompt"></pre><div class="toolbar"><button id="copy-saved-prompt">复制已保存 Prompt</button><a id="download-prompt">下载 Prompt TXT</a></div>
+<p id="folder" class="hint"></p><a id="continue-experiment" class="continue">后续上传生成图 → 对应实验</a><p class="hint">后续可复用实验工作台的图像上传与素材库，绑定本版本 Anchor。上传不会提交 Qwen；前景分割及 M3/M4 需要另行操作。</p></div></section></div>
+<section><h2>该案例的 M2 输入版本</h2><div id="versions"></div></section></main><div id="error" role="alert" hidden></div><script src="/static/m2_cases.js?v=adaptive-visible-1"></script></body></html>

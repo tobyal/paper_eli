@@ -19,11 +19,3 @@ def visibility_loss(common,camera,background,obj,alone_alpha,weight):
     visible=object_contribution(common,camera,background,obj)
     # Only penalize missing contribution in the explicitly trusted region.
     return (F.relu(alone_alpha-visible)*weight).sum()/weight.sum().clamp_min(1),visible
-
-
-@torch.no_grad()
-def object_projection_mask(common,camera,obj,threshold=.25,dilation_fraction=.015):
-    alpha=common.raster(camera,obj,torch.ones((len(obj.xyz),3),device=obj.xyz.device))[0:1]
-    radius=max(1,round(min(camera.width,camera.height)*dilation_fraction))
-    mask=F.max_pool2d((alpha>threshold).float()[None],2*radius+1,stride=1,padding=radius)[0]
-    return mask,alpha

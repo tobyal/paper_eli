@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-07",
+  "source": "Assistant-authored proposals based on confirmed M1 reference photos, selected SAM overlays and per-case editing-region proportions; no generation API was used.",
+  "scope": "Text proposals only. User selects a proposal before preparing M2 inputs. No case is automatically submitted.",
+  "cases": [
+    {
+      "case_id": "7cc6465e6d56459d9a904658cdefc57b",
+      "case_number": 1,
+      "original_text": "a white automotive assembly workstation",
+      "reference_frame": "frame_000155.jpg",
+      "region_side_lengths": [
+        0.843,
+        1.144,
+        1.144
+      ],
+      "design_note": "原设备为较宽的装配工位，方案采用完整落地设备；机械臂保持收拢姿态，避免伸到相邻设备上方。",
+      "options": [
+        {
+          "id": "A",
+          "label": "黄色六轴机械臂",
+          "description": "A yellow six-axis industrial robot arm with black joint covers and a compact two-finger gripper, folded inward above a dark rectangular steel pedestal. The arm and pedestal form one complete freestanding machine with a clearly visible support base, entirely contained within the marked replacement volume."
+        },
+        {
+          "id": "B",
+          "label": "蓝色封闭式数控加工中心",
+          "description": "A compact blue enclosed CNC machining center with a light-gray sliding front door, a dark inspection window, an integrated control panel, and a broad solid steel plinth. The entire machine rests on the floor and fits inside the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "白色机器视觉检测工位",
+          "description": "A white machine-vision inspection station with a rigid rectangular portal frame, a central dark inspection table, a small overhead camera housing, and an integrated lower equipment cabinet. All components are mounted on one steel base and remain inside the marked replacement volume."
+        }
+      ]
+    },
+    {
+      "case_id": "97c7133e8efc4377b338c608a2ab4c26",
+      "case_number": 2,
+      "original_text": "a white machine base with wheels and vertical support posts",
+      "reference_frame": "frame_000211.jpg",
+      "region_side_lengths": [
+        0.765,
+        1.26,
+        1.26
+      ],
+      "same_target_as": "7f7b633c05f545748aa8fe935771d1a4",
+      "design_note": "原占地较长，适合紧凑装配设备。原案例 11 与本案例定位相同，现已按用户要求归档，不计入当前 10 个目标。",
+      "options": [
+        {
+          "id": "A",
+          "label": "橙色 SCARA 搬运工作站",
+          "description": "A compact orange SCARA pick-and-place workstation with two folded horizontal links, a short vertical gripper spindle, and a dark worktable on a rectangular gray equipment base. The complete self-contained station fits inside the marked volume with its robot links kept above its own base."
+        },
+        {
+          "id": "B",
+          "label": "不锈钢电动滚筒输送单元",
+          "description": "A short stainless-steel powered roller conveyor with parallel silver rollers, blue side rails, an enclosed motor housing, and four sturdy square legs. It is one complete freestanding transfer unit, oriented along the existing equipment footprint and contained within the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "蓝白色自动锁螺丝工作站",
+          "description": "A blue-and-white automatic screwdriving station with a rigid rectangular gantry, one vertical driver head above a flat fixture table, and an integrated lower control cabinet. The machine has a compact rectangular base with visible leveling feet and fits entirely inside the marked replacement volume."
+        }
+      ]
+    },
+    {
+      "case_id": "46d2dd7ecc6b4ceea260c4c0bd0bcb92",
+      "case_number": 3,
+      "original_text": "a gray portable industrial air cooler",
+      "reference_frame": "frame_000220.jpg",
+      "region_side_lengths": [
+        0.321,
+        0.418,
+        0.373
+      ],
+      "design_note": "中等竖直箱体占地，采用控制柜、圆筒除尘器或立式压缩机，保持单一设备和清晰支撑。",
+      "options": [
+        {
+          "id": "A",
+          "label": "蓝色工业电气控制柜",
+          "description": "A compact blue industrial electrical control cabinet with a light-gray front door, a small recessed touchscreen, a vertical door handle, and a dark rectangular plinth. The cabinet is a complete floor-standing unit of proportions suited to the marked replacement volume."
+        },
+        {
+          "id": "B",
+          "label": "橙色圆筒工业除尘器",
+          "description": "A compact orange industrial dust collector with a cylindrical filter housing above a dark removable collection bin, a short side inlet, and four small caster wheels on a square steel base. All parts remain close to the main body and fit inside the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "红色立式空气压缩机",
+          "description": "A compact red vertical air compressor with an upright cylindrical receiver tank, a small black motor and pump assembly mounted on top, visible pressure gauges, and a stable four-foot base. The complete compressor fits inside the marked replacement volume with no external hoses extending beyond it."
+        }
+      ]
+    },
+    {
+      "case_id": "e3fede00ebf14046b7b6e7685fd60741",
+      "case_number": 4,
+      "original_text": "a portable industrial air cooler with a gray vented front",
+      "reference_frame": "frame_000252.jpg",
+      "region_side_lengths": [
+        0.263,
+        0.412,
+        0.262
+      ],
+      "design_note": "占地紧凑且偏竖直，优先选用窄体设备，避免大型机械臂或展开式工作台。",
+      "options": [
+        {
+          "id": "A",
+          "label": "不锈钢立式搅拌罐",
+          "description": "A compact stainless-steel mixing tank with a vertical cylindrical vessel, a closed rounded lid, a small top-mounted mixer motor, and three short support legs attached to a compact base. The entire freestanding unit fits inside the marked replacement volume."
+        },
+        {
+          "id": "B",
+          "label": "绿色工业冷水机",
+          "description": "A narrow green industrial process chiller with a tall rectangular enclosure, a circular black ventilation grille, a small upper control panel, and an integrated dark base on four caster wheels. The complete unit has no protruding pipes and stays inside the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "蓝色液压动力单元",
+          "description": "A compact blue hydraulic power unit with a rectangular oil reservoir, a vertical black electric motor, a short valve block, and neatly routed pipes contained above the reservoir. All components are fixed to one small steel skid resting on the floor inside the marked replacement volume."
+        }
+      ]
+    },
+    {
+      "case_id": "df693978c1d44caf818c8796b8f4dc86",
+      "case_number": 5,
+      "original_text": "a gray wheeled assembly stand",
+      "reference_frame": "frame_000274.jpg",
+      "region_side_lengths": [
+        0.61,
+        0.747,
+        0.747
+      ],
+      "design_note": "参考照片中目标为带轮框架工装，空间接近方形，三个方案分别采用封闭箱体、开放框架和抽屉结构。",
+      "options": [
+        {
+          "id": "A",
+          "label": "橙色封闭激光打标工作站",
+          "description": "A compact orange enclosed laser-marking workstation with a dark front viewing window, a sliding access door, a small side control panel, and a solid gray lower cabinet. It forms one complete floor-standing machine with a rectangular base contained inside the marked replacement volume."
+        },
+        {
+          "id": "B",
+          "label": "银灰色精密测量工位",
+          "description": "A compact silver-gray industrial measuring station with a rigid bridge frame, a short central measurement probe above a dark granite table, and an enclosed lower equipment base. Its frame, table, and base form one complete machine within the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "黄色移动工具工作台",
+          "description": "A yellow mobile industrial tool workstation with several wide front drawers, a dark flat worktop, a short rear tool panel, and four heavy-duty caster wheels. The complete rectangular cabinet stays within the marked replacement volume, with all drawers closed and the full base visible."
+        }
+      ]
+    },
+    {
+      "case_id": "a0ee4103b79a4fcb8911ffaecb1720aa",
+      "case_number": 6,
+      "original_text": "a gray portable industrial air cooler",
+      "reference_frame": "frame_000274.jpg",
+      "region_side_lengths": [
+        0.233,
+        0.442,
+        0.395
+      ],
+      "design_note": "靠近侧面料架，横向空间较窄；电缆、把手和机械臂关节均收在设备自身占地内。",
+      "options": [
+        {
+          "id": "A",
+          "label": "蓝灰色移动焊接电源",
+          "description": "A compact blue-and-gray industrial welding power supply mounted on a narrow steel trolley, with a sloped front control panel, black ventilation slots, and a neatly coiled cable secured to the side. The wheels and all attachments stay inside the marked replacement volume."
+        },
+        {
+          "id": "B",
+          "label": "红色工业吸尘设备",
+          "description": "A narrow red industrial vacuum unit with a tall cylindrical metal collection drum, a black motor head, a short hose coiled tightly against the body, and a compact four-wheel steel base. The complete machine remains within the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "灰蓝色收拢协作机械臂",
+          "description": "A small light-gray collaborative robot arm with blue joint covers and a compact gripper, folded closely above a narrow dark steel pedestal. The full arm and pedestal form one floor-standing device, with every joint and the support base contained inside the marked replacement volume."
+        }
+      ]
+    },
+    {
+      "case_id": "c2a9cf06880d4527863b1114e7a4c80a",
+      "case_number": 7,
+      "original_text": "a stack of gray plastic storage crates on a blue pallet",
+      "reference_frame": "frame_000280.jpg",
+      "region_side_lengths": [
+        0.862,
+        0.948,
+        0.948
+      ],
+      "design_note": "参考照片所选区域包含多层金属料架及容器，原语义记录保持不变；替换方案按较宽方形占地设计。",
+      "options": [
+        {
+          "id": "A",
+          "label": "蓝色自动化零件存储柜",
+          "description": "A wide blue automated parts-storage cabinet with a compact rectangular enclosure, several closed horizontal storage drawers, one central dispensing hatch, and a small integrated touchscreen. It stands on a solid dark plinth and fits entirely inside the marked replacement volume."
+        },
+        {
+          "id": "B",
+          "label": "不锈钢工业零件清洗机",
+          "description": "A compact stainless-steel industrial parts washer with a rectangular wash chamber, a closed sloping lid, a front control strip, and an integrated lower tank cabinet. The complete machine stands on four short leveling feet within the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "橙色箱式工业干燥设备",
+          "description": "A compact orange industrial drying oven with a square insulated chamber, a thick dark front door, a silver latch, a small upper control panel, and a broad steel support base. The closed machine is a single freestanding unit contained within the marked replacement volume."
+        }
+      ]
+    },
+    {
+      "case_id": "98afc97208334966962293031d895523",
+      "case_number": 8,
+      "original_text": "a white industrial belt conveyor",
+      "reference_frame": "frame_000309.jpg",
+      "region_side_lengths": [
+        0.605,
+        1.018,
+        1.018
+      ],
+      "design_note": "参考照片选中的是带白色底座的装配设备，原语义保持不变；候选按较长占地设计，避免向侧面走道伸展。",
+      "options": [
+        {
+          "id": "A",
+          "label": "绿色紧凑型数控车床",
+          "description": "A compact green CNC lathe with a horizontal enclosed machining chamber, a dark sliding-door window, an integrated front control panel, and a gray rectangular lower base. The complete machine is aligned with the existing long footprint and fits within the marked replacement volume."
+        },
+        {
+          "id": "B",
+          "label": "橙色双柱装配压力机",
+          "description": "A compact orange two-column assembly press with a rigid upper crossbeam, a central vertical ram above a steel worktable, and a rectangular dark equipment base. The entire freestanding press stays inside the marked replacement volume with clear space around its own working area."
+        },
+        {
+          "id": "C",
+          "label": "蓝色短节自动输送模块",
+          "description": "A short blue industrial belt-conveyor module with a flat black belt, low silver side guides, an enclosed drive motor, and four sturdy steel legs joined by a lower crossframe. The complete conveyor follows the original long footprint and fits inside the marked replacement volume."
+        }
+      ]
+    },
+    {
+      "case_id": "7475983b23234dd894b453c5062eb884",
+      "case_number": 9,
+      "original_text": "an entire portable evaporative air cooler including its lower water tank and base",
+      "reference_frame": "frame_000330.jpg",
+      "region_side_lengths": [
+        0.301,
+        0.41,
+        0.354
+      ],
+      "design_note": "完整冷风机及底座占地，候选保留单机完整性，同时改变主体轮廓或功能结构。",
+      "options": [
+        {
+          "id": "A",
+          "label": "黄色移动烟尘净化器",
+          "description": "A compact yellow mobile fume-extraction unit with a rounded filter housing, a large circular side intake, a dark lower collection compartment, and a square caster base. The intake is short and has no extended duct, keeping the entire unit inside the marked replacement volume."
+        },
+        {
+          "id": "B",
+          "label": "深蓝色工业除湿机",
+          "description": "A dark-blue industrial dehumidifier with a compact upright enclosure, a large recessed front grille, a small digital control panel, a lower condensate drawer, and four caster wheels. The complete floor-standing machine fits inside the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "白色集中润滑装置",
+          "description": "A compact white industrial lubrication unit with a vertical cylindrical reservoir, a small black pump motor, a front gauge panel, and short pipes mounted neatly above a rectangular steel base. The complete assembly remains inside the marked replacement volume with no external pipe connections."
+        }
+      ]
+    },
+    {
+      "case_id": "60c31fa1a02c4a09b8b57494a1d1455d",
+      "case_number": 10,
+      "original_text": "a portable industrial air cooler",
+      "reference_frame": "frame_000342.jpg",
+      "region_side_lengths": [
+        0.179,
+        0.366,
+        0.303
+      ],
+      "design_note": "参考照片所选目标呈窄长金属框架外形，与旧冷风机语义不完全一致；本次不修改定位，候选按其窄占地设计。",
+      "options": [
+        {
+          "id": "A",
+          "label": "蓝色独立操作终端",
+          "description": "A slim blue industrial operator terminal with a dark tilted touchscreen, a narrow vertical steel pedestal, a small emergency-stop button, and a compact rectangular floor base. The entire single-unit terminal fits inside the marked replacement volume without protruding arms or shelves."
+        },
+        {
+          "id": "B",
+          "label": "橙色立式执行器测试台",
+          "description": "A narrow orange actuator test stand with two vertical steel guide columns, one compact central electric actuator, a small lower fixture plate, and a solid rectangular base. The complete upright testing machine stays inside the marked replacement volume."
+        },
+        {
+          "id": "C",
+          "label": "红色窄体工业工具柜",
+          "description": "A slim red industrial tool cabinet with vertically stacked shallow drawers, a dark flat top, recessed handles, and four small caster wheels integrated beneath its narrow rectangular body. All drawers remain closed and the complete cabinet fits inside the marked replacement volume."
+        }
+      ]
+    }
+  ],
+  "archived_cases": [
+    {
+      "case_id": "7f7b633c05f545748aa8fe935771d1a4",
+      "case_number": 11,
+      "original_text": "a white machine base with wheels and vertical support posts",
+      "reference_frame": "frame_000211.jpg",
+      "region_side_lengths": [
+        0.765,
+        1.26,
+        1.26
+      ],
+      "same_target_as": "97c7133e8efc4377b338c608a2ab4c26",
+      "design_note": "与案例 02 的目标高斯索引完全相同，此处提供另一组结构变化方案，不能计为另一台独立原设备。",
+      "options": [
+        {
+          "id": "A",
+          "label": "黄色液压剪叉升降台",
+          "description": "A yellow industrial hydraulic scissor-lift table with a thick rectangular steel platform, one visible pair of crossed lifting arms in a partly raised position, and a dark solid lower base. The complete lift is contained within the marked replacement volume and rests firmly on the floor."
+        },
+        {
+          "id": "B",
+          "label": "青绿色 C 形液压压力机",
+          "description": "A compact turquoise C-frame hydraulic press with a thick curved steel body, a short downward-facing ram, a flat metal worktable, and an integrated rectangular equipment base. The complete freestanding press fits inside the marked replacement volume without any separate external components."
+        },
+        {
+          "id": "C",
+          "label": "灰蓝色转盘装配工作站",
+          "description": "A gray-and-blue rotary indexing assembly station with a circular metal turntable, several small fixture blocks, one compact overhead tool head, and a square lower control cabinet. All components are integrated into one freestanding machine contained within the marked replacement volume."
+        }
+      ]
+    }
+  ],
+  "exclusion": {
+    "case_number": 11,
+    "reason": "User excluded the duplicate M1 target; retain 10 targets x 3 replacement descriptions = 30 input sets."
+  }
+}

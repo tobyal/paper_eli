@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M1 · 人工案例准备</title><link rel="stylesheet" href="/static/m1_cases.css"></head>
+<body><header><a href="/">← 实验工作台</a><strong>M1 · 人工辅助设备定位</strong><span id="mode">仅 M1 · 无生成调用</span><span id="case-count">已确认 0 / 10</span></header>
+<main><div class="intro"><h1>选好设备，再让语义找到它</h1><p>原始照片 → SAM 区域 → CLIP 推荐 → LangSplat 三维定位 → 检查并确认。框选只用于挑选缓存区域，不直接指定三维包围盒。</p></div>
+<details id="photo-browser" open><summary>1　浏览 COLMAP 原始照片 <span id="photo-count"></span></summary>
+<div class="toolbar"><input id="photo-search" placeholder="搜索照片，如 000260" aria-label="搜索原始照片"><button id="search">搜索</button><button id="previous">上一页</button><button id="next">下一页</button><span id="page-info"></span></div><div id="photos" class="photos"></div></details>
+<div class="workspace"><section><h2>2　点击或框选旧设备</h2><div class="toolbar"><strong id="frame-name">先选择一张原始照片</strong><label>SAM 尺度 <select id="level"><option value="1">1 · 小区域</option><option value="2">2 · 中区域</option><option value="3" selected>3 · 大区域</option></select></label><button id="clear">清空区域</button></div>
+<div class="canvas-wrap"><canvas id="photo" width="938" height="528" aria-label="点击或拖动框选设备"></canvas><div id="photo-placeholder">在上方选择设备清晰的原始照片</div></div>
+<p class="hint">点击选择一个区域；拖动框选后勾选合适区域，可继续点击合并同尺度区域。切换尺度会清空选择。</p><div id="regions" class="regions"></div><p id="selection-status">尚未选择 SAM 区域</p></section>
+<section><h2>3　选择英文语义</h2><p class="hint">按所选区域的真实 CLIP 余弦相似度排序。分数不是正确率；可切换描述比较三维定位。</p><div id="recommendations"><div class="empty">选择 SAM 区域后自动推荐 5 个描述</div></div>
+<details><summary>手动修改英文描述（可选）</summary><textarea id="manual-text" rows="3" maxlength="250" aria-label="英文设备描述"></textarea></details>
+<button id="localize" class="primary" disabled>使用所选描述运行 M1</button><p id="progress" role="status" aria-live="polite"></p><details><summary>运行日志</summary><pre id="log"></pre></details></section></div>
+<section id="inspection" hidden><h2>4　检查三维定位</h2><p id="result-title"></p><div id="quality"></div><div id="views"></div><div class="toolbar"><a id="target-ply">下载独立目标 PLY</a><a id="background-ply">下载背景 PLY</a><a id="indices">下载删除索引</a></div><p class="hint">检查目标是否完整，是否误选地面或相邻设备。切换语义或 Mask 可重新定位；每次结果独立保留。</p>
+<div class="toolbar"><input id="case-name" placeholder="案例名称，例如 工位旁的白色冷风机" maxlength="120" aria-label="案例名称"><button id="confirm" class="primary">确认此定位并保存 M1 案例</button></div></section>
+<section><h2>已确认的 M1 案例 <span id="saved-count"></span></h2><p class="hint">只有明确确认的定位才计入案例。确认后可点击“准备 M2 输入”；后续阶段不会自动执行。</p><div id="cases"></div></section>
+<details><summary>本页面的定位记录（可重新查看）</summary><div id="jobs"></div></details>
+</main><div id="error" role="alert" hidden></div><script src="/static/m1_cases.js?v=m2-case-inputs-1"></script></body></html>

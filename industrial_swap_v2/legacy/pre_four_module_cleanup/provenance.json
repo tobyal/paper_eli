@@ -1,0 +1,201 @@
+{
+  "source_commit": "071e179d1d63fed4605d1108f17cadfe293b5647",
+  "files": [
+    {
+      "path": "repair_background.py",
+      "action": "archive",
+      "sha256": "e55a710bcd1065210963d4afca5f4135dc56c8ffdc1192f35850a66a8afcd899"
+    },
+    {
+      "path": "inspect_background_repair.py",
+      "action": "archive",
+      "sha256": "61e41ef6b5e4ac39157748b913d49618e240dc787fef2ffd3ffaa5185a2209b2"
+    },
+    {
+      "path": "export_background_repair.py",
+      "action": "archive",
+      "sha256": "b0a48ef2534239d99a78c5f839ae12b38650ddfafe3d09263af666dd8d36b90f"
+    },
+    {
+      "path": "show_background_repair.py",
+      "action": "archive",
+      "sha256": "4a45b995226c8b9a00cf97572d6eeeb6cc78ffe5a493b419e500f895edd90162"
+    },
+    {
+      "path": "run_background_repair.sh",
+      "action": "archive",
+      "sha256": "bc85396408d2147710b6a369f4d809bbccd05e0cfa2077aee1b31b20a43bff3c"
+    },
+    {
+      "path": "diagnose_placement.py",
+      "action": "archive",
+      "sha256": "759e89df9b0585c357d73b5b72c478c29fcf60695f13edf3e68ebca3d11702a1"
+    },
+    {
+      "path": "show_placement_diagnosis.py",
+      "action": "archive",
+      "sha256": "6002dcceeccc2ebe5cae9a3d5d4b59b4466b98acd01893854e8580dcb48d18ff"
+    },
+    {
+      "path": "core/object_occlusion_filter.py",
+      "action": "archive",
+      "sha256": "e2d0d9af04c2ce2b1958185d69188f6933ea1ac50e1222b4ec3178e6cc52a8d7"
+    },
+    {
+      "path": "modules/m3_occlusion_filter.py",
+      "action": "archive",
+      "sha256": "9bf7341000e99aff5e0d72616d3f8dcd2d51bc2085f6bb990746a900e9c73664"
+    },
+    {
+      "path": "scripts/run_multiview_refinement.py",
+      "action": "archive",
+      "sha256": "68c72fbb2fccd5bd15704db0655f33c1ad1dc7ba97ad45e2ece96371aa472339"
+    },
+    {
+      "path": "scripts/check_refinement_checkpoint.py",
+      "action": "archive",
+      "sha256": "6347092836edf9bcaee62efa956c58928f2011fed1026afefc0d71a1fef00d47"
+    },
+    {
+      "path": "scripts/inspect_background_support.py",
+      "action": "archive",
+      "sha256": "4b8ff05162a713b8e8df7d7206bad8df40110479b8520460788abb05bfe02599"
+    },
+    {
+      "path": "scripts/plot_refinement_metrics.py",
+      "action": "archive",
+      "sha256": "c1b0667cae2926d926c3f158ff882d1679a8dc11b03b5a22eb8c3a34cae7782b"
+    },
+    {
+      "path": "scripts/validate_multiview_refinement.py",
+      "action": "archive",
+      "sha256": "a276eeb86fc4b4d91d6bce8ab71ce8af8198864776426ae3b10f045327d86488"
+    },
+    {
+      "path": "scripts/run_oagof.sh",
+      "action": "archive",
+      "sha256": "abeee350a7d5a346a1f48495af038322e704d83159d1a6dd822298d94a60bd94"
+    },
+    {
+      "path": "scripts/show_oagof.py",
+      "action": "archive",
+      "sha256": "2c0926fcf87af6c71e2ed1ef183c67c341ce32716498f93aa60af0150d443563"
+    },
+    {
+      "path": "scripts/validate_oagof.py",
+      "action": "archive",
+      "sha256": "590e592992c18c70146497cc6e6dffb76d285ef6e3aa785b908e5e641160166d"
+    },
+    {
+      "path": "scripts/export_supervision_audit.py",
+      "action": "archive",
+      "sha256": "c3dc3fb4fba55f8ead1b71904378421d01a18c15f3b7b87c99c13ece6dfdf975"
+    },
+    {
+      "path": "scripts/compare_stages.py",
+      "action": "archive",
+      "sha256": "a3dcd13391908082df6a8f76ea45f0bbfedf4865509b1beac8e88105395aec4b"
+    },
+    {
+      "path": "tests/test_object_occlusion_filter.py",
+      "action": "archive",
+      "sha256": "ba2d4a3714f2f2b75bd89f5f599fe444158f02f00e80bc46802d97a9b4365587"
+    },
+    {
+      "path": "tests/test_multiview_refinement.py",
+      "action": "archive",
+      "sha256": "2122d778cb4386749815fc1502132a53ae0d545a89eb5c533690f1f750466688"
+    },
+    {
+      "path": "webapp/audit_oagof.py",
+      "action": "archive",
+      "sha256": "79a5dbe7d161f4c6ab48f118096e71eb6023ed6ed273ba592be976e67db37db0"
+    },
+    {
+      "path": "webapp/validate_oagof_reuse.py",
+      "action": "archive",
+      "sha256": "c5c7b18028e4017cd9d66b1d934e5b4b6f42acf4aa73ef5ac390b7cae4fdb0d5"
+    },
+    {
+      "path": "webapp/register_multiview_result.py",
+      "action": "archive",
+      "sha256": "d2ee61009dbcddfdf73120348024555b4e8e6bfe0310cecbe3dd722d41d59645"
+    },
+    {
+      "path": "BACKGROUND_REPAIR.txt",
+      "action": "archive",
+      "sha256": "97e2b6b8bc971d23feddb1f8d0f503c634bb3df730f482ead96a05a67a9eedb2"
+    },
+    {
+      "path": "OAGOF.txt",
+      "action": "archive",
+      "sha256": "ec56be8199d62b3bfc1afb14edf6614ddfd155bb4b44dbc0b471fc9bf5ad7d38"
+    },
+    {
+      "path": "MULTIVIEW_REFINEMENT.txt",
+      "action": "archive",
+      "sha256": "d5a9f162a694b814f2ce0297368a79426f0aa24a3597d017e4349af62e44fc72"
+    },
+    {
+      "path": "BACKGROUND_ONLY.txt",
+      "action": "archive",
+      "sha256": "2f9b0fe9b4edbe4ee21fcbcd620f4e3f8d70800949bb7c62ae39b2dd5b0f56f5"
+    },
+    {
+      "path": "README.md",
+      "action": "archive",
+      "sha256": "c1f5d67b7f06803980cfdcce890e2396de0b5ca40d8e5b1c6639912560e1cd02"
+    },
+    {
+      "path": "core/multiview_masks.py",
+      "action": "snapshot_before_cleanup",
+      "sha256": "bc0c4fec2fa6411f59eed548c8efcc1407569cf05f4278cf2b57f26edf49c3c7"
+    },
+    {
+      "path": "core/local_background_optimizer.py",
+      "action": "snapshot_before_cleanup",
+      "sha256": "386b072c5fdae1f93d3926305358c41013905fb67b36ac26662e62920e2c979e"
+    },
+    {
+      "path": "core/visibility_loss.py",
+      "action": "snapshot_before_cleanup",
+      "sha256": "b933e768a3e2c431d9f566ab7d5fcad7a043845eb0c1bf2f667f7ba10aacc2b2"
+    },
+    {
+      "path": "core/m3_composition.py",
+      "action": "snapshot_before_cleanup",
+      "sha256": "ab6f9155f2abf517a0e5ad450a0aee7fa6a442908640371bf13dde437cbba340"
+    },
+    {
+      "path": "modules/m4_refinement.py",
+      "action": "snapshot_before_cleanup",
+      "sha256": "c4b48f3bbfc6149a5aed5d76b733ac49424f70c1ab966293a9740cba024d5d27"
+    },
+    {
+      "path": "configs/default.yaml",
+      "action": "snapshot_before_cleanup",
+      "sha256": "138bf88f4759147170e0a135c0d93208cb26014425cb2c411c29036176a32742"
+    },
+    {
+      "path": "scripts/run_background_only.py",
+      "action": "snapshot_before_cleanup",
+      "sha256": "cb2558230bb114f61302ef7e7d60299f1c4d1b52c87430205f363068d7350887"
+    },
+    {
+      "path": "tests/test_background_only.py",
+      "action": "snapshot_before_cleanup",
+      "sha256": "79060ae43f28a76ff8d3ddfabe3999f694d16be0c2703584ab01b105e8695a2f"
+    },
+    {
+      "path": "webapp/validate_live.py",
+      "action": "archive",
+      "sha256": "9a4e17d289725f294ce565e90e8cb321ab23e85d7eaefb8bd6a3f384355f6a83"
+    },
+    {
+      "path": "webapp/record_validation.py",
+      "action": "archive",
+      "sha256": "59bb9bf4a592a721d2e5f150975bd33230ac9a72b082b573a63c2e1ffa7db32b"
+    }
+  ],
+  "note": "Byte-preserved local source snapshots. Remote commit is the runnable historical baseline; local line endings can differ."
+}

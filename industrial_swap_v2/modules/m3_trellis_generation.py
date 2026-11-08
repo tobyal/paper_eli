@@ -6,6 +6,10 @@ from ..core.rendering import render_outputs
 
 
 def run(ctx):
+    from ..core.workflow import validate_workflow
+    validate_workflow(ctx.cfg,stage='m3')
+    from ..core import pbr_pipeline
+    if pbr_pipeline.enabled(ctx): return pbr_pipeline.run(ctx)
     out=ctx.stage('m3')
     env=ctx.env()
     env.update(CUDA_HOME='/usr/local/cuda-12.4',HF_HOME=str(ctx.path('models/huggingface')),
@@ -15,6 +19,10 @@ def run(ctx):
         TMPDIR=str(ctx.path('tmp')),MAX_JOBS='4',CMAKE_BUILD_PARALLEL_LEVEL='4',TORCH_CUDA_ARCH_LIST='8.6')
     env['PATH']='/usr/local/cuda-12.4/bin:'+env['PATH']
     if all((out/n).is_file() for n in ('object_world.ply','object_local.ply','transform.json','trellis_asset.glb','trellis_asset_preview.png')):
+        from ..core.m2_space import VERSION, generation_frame
+        if read_json(ctx.stage('m2')/'conditions.json').get('spatial_method')==VERSION:
+            if read_json(out/'transform.json').get('generation_frame')!=generation_frame(ctx):
+                raise ValueError('Saved M3 alignment belongs to another generation space; use a new run')
         record=read_json(out/'trellis_generation.json')
         assert record['input_sha256']==sha256(ctx.path(ctx.cfg['m3']['input_image']))
         assert record['repository_commit']==ctx.cfg['m3']['revision']

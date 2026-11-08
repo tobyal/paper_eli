@@ -4,8 +4,8 @@
 指定实验：/viewer?experiment=<experiment_id>
 
 默认打开 records/multiview_scene_refinement_20261106.json 中记录的实验，
-直接读取原始 M3 object_world.ply。可切换 M4 object_refined.ply，
-叠加原始 M1 背景或阶段 A 优化背景。全程只读，无模型变换、抽样或地面补丁。
+直接读取原始 M3 object_world.ply。可切换 M4 object_fixed.ply（历史记录兼容 object_refined.ply），
+叠加原始 M1 背景或M4 优化背景。全程只读，无模型变换、抽样或地面补丁。
 
 左键拖动旋转，右键平移，滚轮缩放。
 F 聚焦整台设备，B 聚焦底座。底座是设备沿 world_up 最低 20% 的位置范围。

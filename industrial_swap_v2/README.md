@@ -1,93 +1,125 @@
-# Industrial device replacement v2
+# Industrial Swap v2：正式四模块流程
 
-独立路线：**复用 LangSplat → Qwen 场景编辑 + SAM → 官方 TRELLIS.2 → Mesh 表面高斯化与场景合成 → text_only DI-SDS**。
+**LangSplat 定位 → Qwen 深度参考二维生成 → PBR 多视角设备 Gaussian 训练 → 双 Mask 场景融合与背景优化。**
 
-所有实验在 `ubuntuA6000:/mnt/sda/ubuntu/lkx/papers/paper_eli` 运行。本机仅存代码、输入和下载预览。旧 `gsle/`、脚本及历史结果均保留。
+实验仅在 `ubuntuA6000:/mnt/sda/ubuntu/lkx/papers/paper_eli` 执行。M1/M2 保持原样。新版 M3 使用 TRELLIS.2 GLB 与工厂 HDRI 的 RGB/Depth 监督；空间对齐移入 M4。M4 保留 `old_new_union_v2` 的优化权限和损失，不加载扩散教师。旧配置缺少 `m3.method` 时仍可读取与复用历史结果。
 
-## 本次实际运行结果（2026-11-05）
+## 代码与数据接口
 
-M1–M4 均已完成。M2 成功生成 1 张 Qwen 图像并完成自动 SAM 提取；M3 使用官方 TRELLIS.2 生成原生 Mesh、带材质 GLB 和 200,000 个新高斯；M4 实际执行 2,000 次 DI-SDS 更新，训练约 32.7 分钟，Torch 显存峰值约 8.69GiB。最终场景共 1,997,425 个高斯。几何字段及保留背景通过逐字节保持校验。
+| 模块 | 正式入口 / 核心代码 | 输入与输出 |
+|---|---|---|
+| M1 | `modules/m1_localization.py` | 原场景、LangSplat 索引 → `target_gaussians.ply`、`background_gaussians.ply`、索引与 `manifest.json` |
+| M2 | `modules/m2_image_generation.py`；`core/cameras.py`、`depth.py`、`qwen_client.py`、`segmentation.py` | M1 空间、AVP → RGB/Depth/Mask 条件、Qwen 图像、SAM 前景和 Anchor 相机 |
+| M3 | `modules/m3_trellis_generation.py`；`core/pbr_pipeline.py`、`pbr_gaussian_optimizer.py`、`mesh_to_gaussian.py`；`scripts/blender_pbr_views.py` | PBR GLB + HDRI → 36 视角 RGB/Depth/Mask/Camera → 初始高斯 → `object_refined_local.ply`、最佳 checkpoint、独立验证渲染 |
+| M4 | `modules/m4_refinement.py`；`core/scene_integration.py`、`multiview_masks.py`、`local_background_optimizer.py`、`m4_outputs.py` | 局部设备 → 空间对齐（含 SH 旋转）、`object_world.ply`/`scene_initial.ply` → 双 Mask/遮挡证据 → 局部背景优化与最终场景 |
 
-最终场景：`outputs/m4/scene_final.ply`；独立设备：`outputs/m4/object_refined.ply`；原始带材质资产：`outputs/m3/trellis_asset.glb`。前后对比、72 视角环绕和 350 帧轨迹视频位于 `outputs/m4/renders/`。本机已下载主要结果，服务器保留完整中间数据和日志。
+双 Mask 配置仅属于 `m4.multiview_supervision`，构建发生在 M4 优化前。旧配置的 `m3.visibility_initialization` 和旧 M3 缓存仅为只读兼容保留，不再由 M3 生成。
 
-服务器和本机均通过 28 项登记产物的大小/SHA256 检查。4 个离线测试通过，涵盖完整 Key 解析、禁止重复 POST、失败后锁定、材质/协方差转换及背景不变性。再次执行 `--stage all` 已验证会复用全部完成阶段。
+共享入口为 `run.py`；`core/workflow.py` 负责正式流程校验与新实验配置迁移。Web 的 `adapter.py` 调用相同模块，素材库继续支持图像、Mesh、局部/世界 Gaussian 复用。无需为复用素材调用 Qwen 或 TRELLIS。
 
-实际可见的限制：旧设备移除后露出的地面在纯背景渲染中已有拖影和缺失，最终合成仍保留这些问题；生成设备表面也有粗糙细节。本次完成的是所要求的四模块运行基线，尚未解决背景补全或 CAD 级几何规整。可查看 `outputs/m4/renders/anchor_background.png` 区分背景问题与新设备。
+## M4 监督与权限
 
-## 运行
+每个相机分别渲染旧目标的可见贡献以及固定新设备的独立 Alpha。环境区域严格为 `M_env = ~(M_old | M_new)`；真实照片损失另保留既有的小幅边界保护、图像边缘和局部支持限制。大包围盒仅用于合法前景的保守深度判定，不再作为环境 RGB 的主要排除区域。
+
+M4 的 `multiview_supervision/` 保存 `cache/*.npz`、Mask/Alpha/Depth、相机清单、`rgb_indices.npy`、`occlusion_indices.npy` 和多视角遮挡证据。Anchor 的 M2 Mask 仅用于一致性审计，其他视角使用各自独立渲染。遮挡证据仍使用真实渲染贡献梯度、三维协方差支持、视角数量/角度和合法前景保护。
+
+M4 固定新设备全部参数、全部高斯几何与数量。RGB 集合允许更新局部背景 SH0 颜色和透明度；遮挡集合只通过可见性及保持损失更新透明度，两组梯度权限独立。未选中背景逐字节冻结。默认 250 步，可设置 200–10000 步；优化结束即导出，没有后续训练阶段、地面补全或删除操作。
+
+本次清理保持上一版 union 路径的损失、有效默认值、采样顺序、梯度权限、训练循环及检查点选择行为。历史 union 缓存中的无效旧参数在兼容性比较时忽略；有数值影响的参数、源文件校验值变化均不可复用。历史 bbox 缓存不会进入新 M4；复用旧 M3 时，必要的新 Mask 写入本次 M4 目录，避免修改原资产。
+
+## M4 输出约定
+
+- `m4/background_optimization/background_optimized.ply`：通过既有环境保持约束的选中背景。
+- `m4/scene_final.ply`：选中背景与对齐后的设备合成；`object_fixed.ply` 与 `m4/object_world.ply` SHA256 相同（历史流程对应 `m3/object_world.ply`）。
+- `m4/background_optimization/background_candidate_stepN.ply`、`m4/scene_candidate_stepN.ply`：最后一步的真实候选，可能未通过检查。
+- `m4/background_optimization/`：训练 JSONL、检查点、基线/最终指标、两组索引。
+- `m4/validation/`：同相机候选对比、逐视角指标、双 Mask 可视化；`m4/summary.json` 汇总选择状态。
+- `m4/renders/anchor_after.png` 始终对应 `scene_final.ply`；末步候选另存 `anchor_candidate_stepN.png`。
+
+保留已有 `scene_visibility_optimized.ply` 缓存文件名以兼容先前 union 结果，它不是额外阶段。若所有检查点都未通过保持约束，选中结果退回 step 0，候选仍单独公开。**完成短程执行不等于候选通过质量检查。** 既有 2026-11-06 250 步实验即为这种情况；本次没有重新训练或改写其结果。
+
+## 命令行和素材复用
+
+默认配置为 `configs/default.yaml`，新的默认输出位于 `outputs/official`，记录/日志位于 `records/official`、`logs/official`，避开历史 `outputs/m1`–`m4`。每个新实验请使用独立目录；输入或有效配置变化时不要覆盖完成结果。
 
 ```bash
 cd /mnt/sda/ubuntu/lkx/papers/paper_eli
-source scripts/common.sh
-# 根据 nvidia-smi 的实际空闲情况选择；不能停止其他用户进程。
-export SWAP_GPU=2
-envs/gsle/bin/python industrial_swap_v2/run.py --stage m1
-envs/gsle/bin/python industrial_swap_v2/run.py --stage m2 --prepare-only
-envs/gsle/bin/python industrial_swap_v2/run.py --stage m2
-envs/gsle/bin/python industrial_swap_v2/run.py --stage m3
-envs/gsle/bin/python industrial_swap_v2/run.py --stage m4
-# 或使用上述已保存结果继续全部阶段
-bash industrial_swap_v2/scripts/run_all.sh
+envs/gsle/bin/python industrial_swap_v2/run.py --config NEW_CONFIG.yaml --stage m1
+envs/gsle/bin/python industrial_swap_v2/run.py --config NEW_CONFIG.yaml --stage m2 --prepare-only
+# 生成阶段仅在明确需要时执行；已有图片/模型可从 Web 素材库直接复用。
+envs/gsle/bin/python industrial_swap_v2/run.py --config NEW_CONFIG.yaml --stage m3
+envs/gsle/bin/python industrial_swap_v2/run.py --config NEW_CONFIG.yaml --stage m4
 ```
 
-统一配置为 `configs/default.yaml`。`project.output_dir` 相对于 **industrial_swap_v2/**；历史输入相对于原项目根。模块写入必须留在新目录。解释器路径保留 virtualenv 的符号链接，不能 resolve 到基础 Python。
-
-## 模块接口
-
-| 模块 | 读取 | 保存至 |
-|---|---|---|
-| M1 | 原场景 PLY、已有 target/edit_region、target/keep indices、AVP 相机 | `outputs/m1/manifest.json`、旧目标/背景 PLY、原始索引、区域 JSON |
-| M2 | M1 区域、原场景、已有 AVP | `outputs/m2/anchor.png`、`edit_mask.png`、完整/背景深度、Qwen 编辑图、SAM RGBA/Mask/白底图、相机、请求与分割记录 |
-| M3 | M2 RGBA、相机/Mask、M1 世界区域 | `outputs/m3/trellis_native.pt`、带 PBR 的 GLB、官方资产预览、局部/世界物体 PLY、粗合成 PLY、变换矩阵、视频 |
-| M4 | M3 世界物体、M1 冻结背景、M2 参考图与 Mask | `outputs/m4/object_refined.ply`、`scene_final.ply`、checkpoint、训练日志、多视角渲染及视频 |
-
-完成状态及文件 SHA256 在 `records/m*_status.json`；命令和异常在 `logs/m*.log`。目录存在不代表阶段完成。安装、单元测试及输入准备不能当作生成结果。
-
-完成或下载结果后，可用标准 Python 执行 `python industrial_swap_v2/scripts/verify_outputs.py` 核对四阶段全部登记产物的大小和 SHA256；它同时支持服务器与本机目录。单阶段使用 `--stage m3` 等选项。
-
-原输入视频长约 **174.897 秒**，已有重建包含 350 个注册相机。轨迹展示视频使用全部 350 帧，以 12 fps 播放约 29.17 秒，属于加速展示，不是截取原视频前 29 秒。环绕视频为 72 个新相机视角。`renders/cameras.json` 保存每一帧的完整相机参数。
-
-M1 直接复用已有 LangSplat 结果，验证源 PLY SHA256、索引完整分区以及点数。原场景 1,828,777 点，旧目标 31,352 点，保留背景 1,797,425 点。
-
-M2 默认复用 AVP。`reuse_anchor: false` 会在独立目录调用现有 AVP 算法，重定向旧实现中硬编码的记录路径。深度采用现有 GSLE 体渲染加权欧氏距离及反向归一化；编辑区域内部深度置零表示未知。Qwen 收到的深度是**视觉参考，不是 ControlNet 条件**。位置提示图、背景深度及原图一并送入官方多模态接口。SAM 使用图像自动提示和 OpenCLIP 排序，最终 Mask 由 SAM 产生，没有手工坐标或人工资产。
-
-M3 固定官方仓库 commit `75fbf0183001ed9876c8dbb35de6b68552ee08bd`、`microsoft/TRELLIS.2-4B`，默认 `1024_cascade`、low_vram，保留官方采样器配置。模型及依赖 snapshot 的 revision 单独记录。官方原生 Mesh 为 Z-up，官方 GLB 导出已转换到 Y-up `(x,z,-y)`；高斯化从 GLB 读取，避免二次坐标翻转。按面面积采样 200,000 个点，插值 UV 基色，按面切线/法线建立各向异性高斯，输出 Graphdeco log-scale、wxyz 四元数、opacity logit、SH0。原始 GLB 保留 PBR；Gaussian 基色不包含完整的金属/粗糙度着色模型。姿态适配仅拟合统一尺度、绕竖直轴旋转和地面平移，使用真实 Anchor Mask 自动拟合投影。
-
-共享 A6000 具有 48GB 物理显存。当前资源策略要求至少 18GiB 空闲，给 Torch 分配器设置 16GiB 上限，使用官方 low_vram，不改变分辨率/采样器。CUDA 扩展的工作区可能在 Torch 分配器之外；实际峰值与失败记录需一并检查。若不足则保留 checkpoint，不降低核心推理配置冒充完成。
-
-M4 直接读取 M3 PLY，复用 `gsle/diffusion.py` 的九通道 Inpainting UNet、ControlNet Depth 和 **text_only** CFG；不实例化 Zero123。固定教师与背景，默认严格保持新物体位置、尺度、旋转，只优化 RGB/opacity。参考 RGB/Mask 损失使用白底前景，DI-SDS 使用联合场景 RGB、深度、区域 Mask 和视角文本。有效批量 4、microbatch 2、2,000 次更新；每 100 步保存参数、Adam 状态、随机状态和输入签名。M4 要求 24GiB 空闲并限制 Torch 分配器为 20GiB；实际 GPU 通过 SWAP_GPU 选择。每次合成校验背景逐字节不变，M4 导出额外校验几何字段不变。
-
-## API 调用限制与断点恢复
-
-本次用户限制为只生成一张图。`qwen_client.py` 强制 `qwen-image-2.1-pro`、`n=1`，无负提示参数、无 POST 重试。Key 优先来自 `DASHSCOPE_API_KEY`，否则读取配置明确指定的受保护服务器文件，**整个 token 原样读取，不能按字符子串提取**。Key 不写入日志、Git 或本机。
-
-提交前独占创建 `records/qwen_generation_once.lock`。超时或失败也保留锁；只有收到新的明确用户授权后，才允许独立的 `scripts/authorize_one_retry.py` 归档旧记录。流水线永远不会调用该授权脚本。成功后复用响应和 `edited_scene.png`，下载中断只恢复 GET，不重复生成。
-
-实际排查中前两次鉴权失败来自最初 Key 解析代码截断带句点 token，已修复并添加回归测试。两次都返回 401，未获得图片；第三次在用户再次明确授权后成功，返回 1 张 1024×1024 图。所有尝试和授权记录保留。不能把三个提交记录表述为只提交过一次。
-
-TRELLIS 保存原生 Mesh/voxel checkpoint；导出中断可读取该文件继续，避免重新三维生成。M4 读取 checkpoint_latest.pth 恢复训练。更改输入或主要配置时必须核对签名，不可把旧结果作为新实验。
-
-## 环境
+针对已有完整 M1/M2/M3 建立新 M4 实验，保留兼容的独立入口：
 
 ```bash
-bash industrial_swap_v2/scripts/setup.sh
-source scripts/common.sh
-envs/download/bin/python industrial_swap_v2/scripts/download_models.py
-envs/download/bin/python industrial_swap_v2/scripts/download_dependencies.py
+envs/gsle/bin/python -m industrial_swap_v2.scripts.run_background_only \
+  --source-config EXISTING_CONFIG.yaml --destination outputs/NEW_EXPERIMENT \
+  --steps 250 --gpu AVAILABLE_GPU --stage all
 ```
 
-独立环境为 `industrial_swap_v2/envs/trellis2`，Python 3.10、Torch 2.6/CUDA 12.4、flash-attn 2.7.3；模型、pip 缓存、源码、编译临时文件均留在新目录。使用本机代理通过 SSH 转发至服务器 17891。DINOv3 和 RMBG-2.0 的官方仓库可能要求 Hugging Face 访问授权；缺少授权时明确报错，不替换权重。旧 GSLE/SAM 环境只读复用。
+该命令复用源 M1/M2、复制现有 M3 设备及变换，明确生成新配置，不执行生成网络。M4 中断时保存现场，请另建实验；已完成优化但导出中断可读回已完成背景继续导出。清理验证期间没有执行上述训练命令。
 
-实际接入中，用户指定可复用 `/mnt/sda/ubuntu/lkx/projects/TRELLIS.2`。已找到对应 `/mnt/sda/ubuntu/anaconda3/envs/trellis2` 和用户 HF 缓存。当前配置改用 `envs/trellis2_reused`，通过 `setup_reuse.sh` 创建独立 venv，只读继承上述已有环境的包；不向原环境安装依赖。官方源码仍用本项目固定 commit。现有主模型和 DINOv3 的 revision 与本次下载目标相同；RMBG 使用用户已运行过的官方 snapshot `5df4c9c76d8170882c34f6986e848ee07fd0ba43`。逐文件哈希与只读路径在 `records/reused_model_integrity.json`，实际包版本在环境记录中。所有新输出和新增包仍写入 v2。
+Web 操作详见 `webapp/README.md`。复制历史实验保留素材选择。新阶段缓存版本为 `web-v8-pbr-local-gaussian` / `web-v8-pbr-scene-integration`，原始 TRELLIS GLB 生成缓存仍可复用；PBR M3 素材输入需带材质 GLB。M4 Mask 设置不影响 M3 训练缓存。历史结果与文件下载保持可读。
 
-若全新安装而不是复用，运行 `setup.sh` 后将 `project.trellis_python` 改为 `industrial_swap_v2/envs/trellis2/bin/python`。下载脚本固定到本次官方模型 snapshot。历史环境的 CUDA 扩展构建目录 `/tmp/extensions` 已被清理，无法追溯其中部分二进制的原始 Git commit；环境记录保留了实际包版本和源码/二进制文件 SHA256。当前服务器可按复用路径继续复现；全新编译环境需重新验证扩展兼容性。
+## PBR 训练与 case00 验证
 
-## 来源及实现边界
+配置集中在 `m3.pbr`（Blender、HDRI、光照、渲染和训练）以及 `m4.integration`（对齐）。
+默认 36 视角：12 个方位角 × -10/10/30 度俯仰，512²、Cycles 64 samples；每层 150/330 度共 6 视角只用于验证。
+`RGB Loss` 是白底 display-sRGB L1；`Depth Loss` 是物体有效像素的相机 Z L1，除以 GLB 包围盒对角线。仅这两项损失，权重 1 / 0.2；不含 Mask Loss。
+初始化保留 GLB Y-up 坐标、面积加权表面采样、法线方向、纹理 SH0、面积采样间距尺度；训练调整每个高斯的 SH3/Opacity/尺度/有界位置偏移，旋转与数量固定。
+Blender 导出的浮点 EXR 必须先经过 `validate_pbr_calibration.py` 的独立三角面求交验证；4.5.4 的实测定义为 camera Z，不能误用欧氏射线距离。
+SH 在空间旋转时按实球谐基逐阶变换，保持同一局部观察方向的颜色，不丢弃训练出的高阶系数。
 
-- [Qwen 官方图像编辑 API](https://platform.qianwenai.com/docs/api-reference/image-generation/qwen-image-editing)
-- [TRELLIS.2 官方代码](https://github.com/microsoft/TRELLIS.2)
-- [TRELLIS.2 官方模型](https://huggingface.co/microsoft/TRELLIS.2-4B)
-- 原项目 GSLE 属于论文推导实现，公开论文未提供官方完整代码；本次复用其 DI-SDS，不将本项目声称为 GSLE 官方实现。
-- Mesh→Gaussian、刚体尺度适配、冻结几何的外观优化是本次 v2 明确采用的接口适配。没有额外三维生成网络、消融实验或评价指标。
+case00 使用既有 GLB 和已验证的相同 GLB 变换以保持位置可比；其他案例默认自动 Anchor 轮廓对齐。新设备在 M4 始终固定，仅优化局部背景。
+本轮独立输出：`outputs/pbr_case00_20261108`，复现入口：
 
-实际运行进度以服务器的 receipts 和日志为准。CPU 合成几何测试只验证坐标、材质转换和背景不变性，不作为机械臂生成结果。
+```bash
+# 只对新目录运行 prepare；不要覆盖完成实验。
+industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.scripts.prepare_pbr_case00 --output outputs/NEW_PBR_CASE00 --gpu 2
+envs/gsle/bin/python industrial_swap_v2/run.py --config industrial_swap_v2/outputs/NEW_PBR_CASE00/config.yaml --stage m3
+envs/gsle/bin/python industrial_swap_v2/run.py --config industrial_swap_v2/outputs/NEW_PBR_CASE00/config.yaml --stage m4
+```
+
+依赖：Blender 4.5.4 LTS（项目 tools 下官方二进制、下载 SHA256 校验），项目 `envs/gsle` 中 trimesh 4.6.8、rtree 1.4.1、OpenEXR 3.3.2。
+项目依赖安装入口为 `bash industrial_swap_v2/scripts/setup_pbr.sh`，通过既有本机代理隧道下载，不修改系统环境。
+Blender 保留 GLB 原材质/纹理，Standard/sRGB 输出，HDRI 强度 1、旋转 0；照明不会把室内照片重投影成纹理。
+学到的是固定 HDRI 下的 SH3 外观近似，不能等同于可任意重新打光的 PBR 材质。M4 也不会补全真实照片中未观测的地面。
+
+## M2 自适应空间与可见性编辑区域（2026-11-07）
+
+`core/m2_space.py` 从实际 M1 目标高斯的中心、协方差和透明度估计稳健尺寸，在 M1 场景竖直方向建立局部坐标。支撑位置默认取观测底部；只有与已有 M1 地面平面足够接近时才吸附到该平面，避免将架高设备强行落到地面。
+
+英文描述的设备主体匹配结构先验（机械臂、SCARA、加工中心、柜体、龙门工位、输送机、圆筒设备、推车/工作台）。这些是显式比例启发式，不是语言模型预测的真实物理尺寸；未识别类型保守沿用测量尺寸。高度变化有上限，参数和命中的短语写入 `m2/generation_region.json`。不再使用“高度统一等于最长边”的规则。
+
+`core/m2_edit_mask.py` 在 Anchor 上独立渲染目标 Alpha，并通过原场景的目标贡献及深度检查得到可见轮廓。按投影尺度去除小孤立区域、闭合窄裂缝、填补有限面积孔洞；沿新旧三维边长差对应的投影方向扩展轮廓，扩展限制在新生成框内。保留原目标清除轮廓，因此二维编辑区域可以包含新生成框之外的小部分旧设备。
+
+前景保护使用真实高斯合成权重：33 个深度阈值下渲染背景的累积贡献，再查询生成体前方/内部的遮挡质量。它避免把后方多层背景导致的较大深度方差误认为禁止扩展。阈值之间采用线性插值，深度以高斯中心相机 z 为准；不是精确表面深度。高置信前景和邻近占据被保留，证据不足不授权扩展。扩展大部分被阻挡或旧设备贡献保留不足时，报告要求人工检查。
+
+- `generation_region.json`：独立三维生成框、精确局部坐标、尺寸来源、支撑关系、语义先验，供 M3 尺度拟合使用。
+- `edit_mask.png`：可见旧轮廓与受约束扩展的并集，不是整框投影。
+- `position_hint.png`：仅编辑 Mask 内叠加紫色位置提示；前景孔洞及 Mask 外 RGB 不变。
+- `depth_background.png`：仅编辑 Mask 内设为未知；Mask 外深度与 `depth.png` 逐字节相同。
+- `old_visible_mask.png`、`old_clean_mask.png`、`generation_bbox_mask.png`、`extension_proposal.png`、`protected_foreground_mask.png`、`mask_report.json`、`spatial_depth.npz`：检查依据。
+
+M3 的生成和素材导入均优先读取 M2 的精确 `world_transform`，并验证生成空间 SHA256；历史 M2 仍使用其原 M1 坐标。M2 条件缓存包含算法版本、设备描述、有效参数及 M1 文件哈希；不同设备描述不再共享 Mask/生成框。完成版本不可原地切换算法或描述，须新建 M2 准备版本。历史 30 组 Qwen 输入不会自动更新或覆盖。
+
+只准备输入：`--stage m2 --prepare-only`。同相机实际渲染检查入口为 `python -m industrial_swap_v2.scripts.validate_m2_spatial_conditions --batch <已有批次 manifest.json> --output <新的独立目录>`，默认检查三个位置的五种描述；入口禁止 Qwen，不运行 M1、SAM、TRELLIS、M3/M4 或训练。主 AVP 仍使用已有亮度/可见性评分，对新的三维空间选择相机。
+
+## 历史代码与依赖
+
+`legacy/pre_four_module_cleanup/` 保存旧 DI-SDS、地面补丁、调整高度诊断、OAGOF 删除、旧 bbox/多视角优化及相关脚本/文档；`provenance.json` 记录源路径和 SHA256。正式入口不导入归档代码。完整可运行历史基线为提交 `071e179d1d63fed4605d1108f17cadfe293b5647`，比较实验请在独立 checkout 和新输出目录运行。
+
+原 `gsle/` 未修改。正式流程仍只读复用其中相机/高斯/raster/SH 工具及 AVP/SAM 等已有适配依赖；现有环境可能仍安装扩散相关包，但正式 M4 不导入或初始化它们。Qwen、SAM、TRELLIS.2 的版本、模型缓存、官方 revision 和生成约束维持原样。Qwen 深度是视觉参考，不是 ControlNet 条件。当前 SAM 适配的既有限制及上传 RGBA 路径见 Web 文档。
+
+## 轻量验证
+
+CPU 测试覆盖 Mask 定义、两组梯度权限、固定设备、场景合成、历史配置迁移/缓存、图像/模型素材复用和 Web 接口。关键函数及完整训练循环与归档版本进行 AST 等价回归。只读已有结果检查另外核对 41 个相机缓存及 Gaussian 保持信息，不执行渲染、训练或网络生成。具体结果见 `CLEANUP_REPORT.md`。
+
+## 2,000 步与分段保存
+
+按后续运行要求，M4 允许 200–10000 步（默认仍为 250）；`m4.save_every: 500` 每 500 步及最终一步保存 `m4/snapshots/iteration_000500` 等独立目录。包含实际迭代的背景 PLY、合成场景 PLY、优化器/采样状态检查点、41 视角指标和 4 个相机预览。快照反映当时训练状态，不以保持约束筛选结果替代；`snapshot.json` 单独记录是否通过约束及文件 SHA256。独立入口支持 `--steps 2000 --save-every 500`，新实验从原始 M1 背景开始，复用固定设备与通过校验的监督缓存。
+
+
+M4 支持从实际迭代快照连续训练：使用 `--source-config <旧实验/config.yaml> --destination <新目录> --resume-checkpoint <旧实验/m4/snapshots/iteration_002000/checkpoint.pth> --steps 10000 --save-every 2000`。总步数包含已完成的 2000 步；新运行执行 2001–10000，保存 4000/6000/8000/10000。恢复背景参数、Adam 状态、相机采样顺序及随机状态，并验证来源哈希、监督签名和冻结缓冲区。除总步数与保存间隔外不允许改变优化参数；原实验保持只读。新运行 `background_optimization/resume_verification.json` 记录恢复检查。默认 `scene_final.ply` 仍经过环境保持检查；实际迭代结果位于 snapshots。

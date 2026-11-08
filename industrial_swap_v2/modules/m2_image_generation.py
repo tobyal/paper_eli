@@ -5,30 +5,32 @@ from ..core.context import Context, arguments, read_json, write_json
 from ..core.depth import prepare_conditions
 from ..core.qwen_client import generate
 from ..core.cameras import resized_camera
+from ..core.m2_space import VERSION, signature
 
 
-def build_prompt(ctx):
-    return (
-        "Edit image 1 and return one photorealistic RGB image of the same factory from exactly the same camera. "
-        "Image 1 is the original scene. Image 2 is ONLY a position guide: the translucent magenta polygon encloses the allowed replacement volume; remove all magenta markings in the output. "
-        "Replace the entire old machine consisting of a black assembly and a white support base inside that polygon. "
-        "Image 3 is ONLY a background depth reference, with the editing area blacked out as UNKNOWN depth. Use it for surrounding floor/equipment perspective, not the old machine's shape. Do not copy its grayscale appearance. "
-        "Generate exactly one complete device: " + ctx.cfg["m2"]["replacement_text"] + " "
-        "Show a coherent complete base, shoulder, elbow, wrist, distinct rotary joints and gripper with clear solid mechanical geometry. "
-        "Place its base on the factory floor at the old device's base location. Fit the complete arm, gripper and pedestal within the marked volume without clipping. "
-        "Keep the original camera, surrounding equipment, blue containers, railings, floor and lighting unchanged. Match the factory perspective, scale, color temperature and shading. "
-        "Generate no cabinet, enclosure, extra machinery, duplicate arm, text, annotations or new background behind the robot. The output is the edited full factory view, not a collage or depth map."
-    )
+from ..core.m2_prompt import build_prompt
 
 
 def run(ctx, prepare_only=False):
     out = ctx.stage("m2")
     if not (out / "conditions.json").exists():
         prepare_conditions(ctx)
+    else:
+        saved=read_json(out/'conditions.json')
+        if saved.get('spatial_method')!=VERSION or saved.get('condition_signature')!=signature(ctx.cfg):
+            raise ValueError('M2 description or spatial method changed; prepare a new experiment version instead of overwriting existing conditions')
     images = [out / "anchor.png", out / "position_hint.png", out / "depth_background.png"]
     prompt = build_prompt(ctx)
     write_json(out / "generation_plan.json", {"model": ctx.cfg["m2"]["model"], "images": list(map(str, images)), "prompt": prompt, "max_requests": 1, "candidates": 1})
     (out / 'generation_prompt.txt').write_text(prompt, encoding='utf-8')
+    write_json(out/'generation_inputs.json',{'model':ctx.cfg['m2']['model'],
+        'image_order':['anchor.png','position_hint.png','depth_background.png'],
+        'inspection_only':['depth.png','edit_mask.png','depth.npz','generation_region.json','mask_report.json'],
+        'prompt_file':'generation_prompt.txt','camera_file':'anchor_camera.json',
+        'm1_case_id':ctx.cfg['m2'].get('confirmed_m1_case_id'),
+        'replacement_text':ctx.cfg['m2']['replacement_text'],
+        'stage':'prepared_inputs_only' if prepare_only else 'generation_requested',
+        'background_depth_zero_means':'unknown only inside visibility-constrained edit_mask.png'})
     if prepare_only:
         ctx.receipt("m2", "conditions_prepared_api_not_called", images=list(map(str, images)))
         print("M2 conditions ready; Qwen has not been called", flush=True)

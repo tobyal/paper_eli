@@ -77,12 +77,16 @@ def convert_asset(ctx, job):
         local=transform_vertices(canonical_vertices(path),1/scale,rot.T,-rot.T@shift/scale)
         save_vertices(out/'object_local.ply',local)
     else: raise ValueError('Unsupported model asset')
-    fit(local,read_json(ctx.stage('m1')/'manifest.json')['world_transform'],
+    from ..core.m2_space import generation_frame
+    fit(local,generation_frame(ctx),
         read_json(ctx.stage('m2')/'anchor_camera.json'),ctx.stage('m2')/'object_mask.png',ctx.cfg['m3'],out)
 
 
 def execute(ctx, job):
     stage,action=job['stage'],job['action']
+    if stage in ('m3','m4'):
+        from ..core.workflow import validate_workflow
+        validate_workflow(ctx.cfg,stage=stage)
     if action!='qwen': os.environ['SWAP_DISABLE_QWEN']='1'
     if action=='convert_asset':
         convert_asset(ctx,job); return
@@ -117,6 +121,15 @@ def execute(ctx, job):
             run(ctx,prepare_only=True)
             if action=='reuse': image_import(ctx,job)
     elif stage=='m3':
+        if ctx.cfg['m3'].get('method')=='pbr_multiview_gaussian':
+            from ..core.pbr_pipeline import run
+            if job.get('asset'):
+                asset=job['asset']
+                if asset['kind']!='mesh' or Path(asset['path']).suffix.lower()!='.glb':
+                    raise ValueError('PBR 多视角训练需要带材质的 GLB；请从素材库选择原始 GLB')
+                ctx.cfg['m3']['pbr']['source_glb']=asset['path']
+            run(ctx)
+            return
         if action=='trellis' and not job.get('asset'):
             from ..modules.m3_trellis_generation import run
             run(ctx)

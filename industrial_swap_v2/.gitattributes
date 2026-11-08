@@ -1,2 +1,2 @@
-*.sh text eol=lf
-*.py text eol=lf
+# Preserve archived source bytes and their provenance SHA256 values.
+legacy/pre_four_module_cleanup/** -text -whitespace

@@ -1,4 +1,4 @@
-"""M3 analysis and real-photo supervision masks. Never alters/deletes splats."""
+"""M4 dual-mask supervision and occlusion attribution. Never alters/deletes splats."""
 import hashlib
 import json
 from pathlib import Path
@@ -10,13 +10,15 @@ from scipy.spatial.transform import Rotation
 from .context import gsle, read_json, write_json, sha256
 from .scene import read_vertices
 from .visibility_loss import object_contribution
+from .workflow import supervision_settings
+from .scene_integration import object_path
 
 
 DEFAULTS={'enabled':True,'resolution':640,'source_views':40,'holdout_every':4,
-          'local_expansion':.25,'edge_dilation_fraction':.008,'min_observed_views':2,
+          'local_expansion':.25,'min_observed_views':2,
           'min_observed_pixels':.5,'candidate_contribution_fraction':1e-5,
           'depth_margin_fraction':.015,'depth_uncertainty_fraction':.08,
-          'scheme':'legacy_bbox','old_alpha_threshold':.02,'new_alpha_threshold':.25,
+          'scheme':'old_new_union_v2','old_alpha_threshold':.02,'new_alpha_threshold':.25,
           'union_edge_fraction':.003,'occlusion_expansion':.08,
           'min_occlusion_views':3,'min_occlusion_angle_degrees':5.,
           'min_gain_to_environment':.03,'max_legal_fraction':.02}
@@ -67,20 +69,6 @@ def ray_box_depth(camera,low,high):
     return hit,near,far
 
 
-def supervision_masks(camera,box,source_depth,source_std,source_alpha,old_alpha,obj_depth,obj_alpha,
-                      edit_projection,size,cfg):
-    hit,near,far=ray_box_depth(camera,box[0],box[1]); margin=size*cfg['depth_margin_fraction']
-    confident=(source_alpha>.95)&(source_std<size*cfg['depth_uncertainty_fraction'])
-    front=confident&hit&(source_depth+2*source_std<near-margin)
-    behind=confident&hit&(source_depth-2*source_std>far+margin)&(old_alpha<.01)
-    uncertain=(hit&~(front|behind))|(old_alpha>.02)
-    radius=max(1,round(min(camera.width,camera.height)*cfg['edge_dilation_fraction']))
-    excluded=cv2.dilate(uncertain.astype(np.uint8),np.ones((2*radius+1,2*radius+1),np.uint8)).astype(bool)
-    reliable=~excluded
-    reliable[:2]=False; reliable[-2:]=False; reliable[:,:2]=False; reliable[:,-2:]=False
-    legal_foreground=reliable&confident&(source_depth+2*source_std<obj_depth-margin)&(obj_alpha>.05)
-    visibility=(obj_alpha>.25)&(edit_projection>0)&~legal_foreground&(source_alpha>.5)
-    return reliable,visibility,excluded,legal_foreground,hit
 
 
 def local_support(vertices,manifest,expansion):
@@ -110,15 +98,13 @@ def choose_views(cameras,manifest,count):
 
 
 def prepare_multiview(ctx,output_dir=None):
-    cfg={**DEFAULTS,**ctx.cfg['m3'].get('visibility_initialization',{})}
-    union=cfg['scheme']==UNION_SCHEME
-    if cfg['scheme'] not in ('legacy_bbox',UNION_SCHEME): raise ValueError('Unknown supervision scheme')
+    cfg=mask_config(supervision_settings(ctx.cfg))
     if cfg['source_views']<8 or cfg['holdout_every']<2 or cfg['min_observed_views']<2:
         raise ValueError('Multiview optimization needs independent train/validation views and at least two observation votes')
-    if not 0<=cfg['local_expansion']<=1 or not 0<cfg['edge_dilation_fraction']<.1:
+    if not 0<=cfg['local_expansion']<=1 or not 0<=cfg['union_edge_fraction']<.1:
         raise ValueError('Invalid relative spatial/mask margin')
-    out=Path(output_dir or ctx.stage('m3')/'multiview_visibility')
-    sources={'background':ctx.stage('m1')/'background_gaussians.ply','object':ctx.stage('m3')/'object_world.ply',
+    out=Path(output_dir or ctx.stage('m4')/'multiview_supervision')
+    sources={'background':ctx.stage('m1')/'background_gaussians.ply','object':object_path(ctx),
         'manifest':ctx.stage('m1')/'manifest.json','mask':ctx.stage('m2')/'object_mask.png',
         'camera':ctx.stage('m2')/'anchor_camera.json','original_scene':ctx.source(ctx.cfg['project']['source_ply']),
         'target_indices':ctx.stage('m1')/'target_indices.npy'}
@@ -126,7 +112,9 @@ def prepare_multiview(ctx,output_dir=None):
     if sha256(sources['original_scene'])!=ctx.cfg['project']['source_sha256']:
         raise ValueError('Source reconstruction differs from the M1 project fingerprint')
     if (out/'manifest.json').exists():
-        saved=read_json(out/'manifest.json'); assert saved['signature']==signature,'M3 visibility input/config mismatch'
+        saved=read_json(out/'manifest.json')
+        if not cache_matches(saved,cfg,{k:sha256(v) for k,v in sources.items()}):
+            raise ValueError('M4 supervision input/config mismatch; use a new output directory')
         return out
     out.mkdir(parents=True,exist_ok=True)
     for name in ('cache','object_masks','object_alpha','object_depth','renders','supervision_masks'): (out/name).mkdir(exist_ok=True)
@@ -143,7 +131,6 @@ def prepare_multiview(ctx,output_dir=None):
     counts=np.zeros(len(vertices),np.int16); observed_mass=np.zeros(len(vertices),np.float32)
     votes=np.zeros(len(vertices),np.int16); score=np.zeros(len(vertices),np.float32); records=[]
     old_corners=np.asarray(manifest['target_bbox']); box=(old_corners.min(0),old_corners.max(0))
-    edit_corners=np.asarray(manifest['generation_bbox'])
     local_flags=torch.zeros((len(vertices),3),device='cuda'); local_flags[torch.tensor(local_ids,device='cuda')]=1
     for index,camera in enumerate(cameras):
         name=f'{index:03d}_{Path(camera.name).stem}'; split='anchor' if index==0 else 'validation' if (index-1)%cfg['holdout_every']==0 else 'train'
@@ -165,19 +152,12 @@ def prepare_multiview(ctx,output_dir=None):
             joint_depth=jp[1]/jp[0].clamp_min(1e-6); visible=jp[2]
             local_alpha=c.raster(camera,bg,local_flags)[0].cpu().numpy()
         cpu=lambda tensor:tensor.detach().cpu().numpy()
-        edit_projection=c.bbox_mask(camera,edit_corners)
-        if union:
-            mold,mnew,menv,reliable,legal,wvis=union_supervision_masks(camera,box,cpu(sd),cpu(ss),cpu(sa),cpu(old),cpu(od),cpu(oa),size,cfg)
-            unknown=mold|mnew; old_projection=mold
-        else:
-            reliable,wvis,unknown,legal,old_projection=supervision_masks(camera,box,cpu(sd),cpu(ss),cpu(sa),cpu(old),cpu(od),cpu(oa),edit_projection,size,cfg)
+        mold,mnew,menv,reliable,legal,wvis=union_supervision_masks(camera,box,cpu(sd),cpu(ss),cpu(sa),cpu(old),cpu(od),cpu(oa),size,cfg)
+        unknown=mold|mnew; old_projection=mold
         reference_iou=None
         if split=='anchor':
             with Image.open(sources['mask']) as image: reference=np.asarray(image.convert('L').resize((camera.width,camera.height),Image.Resampling.NEAREST))>127
             modelmask=cpu(oa)>.25; reference_iou=float((reference&modelmask).sum()/max((reference|modelmask).sum(),1))
-            if not union:
-                wvis&=cv2.dilate(reference.astype(np.uint8),np.ones((3,3),np.uint8)).astype(bool)
-                if reference_iou<.35: wvis[:]=False
             c.save_image(out/'object_masks'/f'{name}_m2_reference.png',reference.astype(float))
             original=np.zeros((camera.height,camera.width,3),np.uint8); reliable[:]=False
         else:
@@ -185,23 +165,18 @@ def prepare_multiview(ctx,output_dir=None):
             with Image.open(image_path) as image: original=np.asarray(image.convert('RGB').resize((camera.width,camera.height),Image.Resampling.LANCZOS))
         train_mask=reliable&(local_alpha>.01)
         # RGB observation permission and occlusion permission are independent.
-        if split=='train' or (union and split=='anchor'):
+        if split in ('train','anchor'):
             colors=torch.zeros((len(bg.xyz),3),device='cuda',requires_grad=True)
             rendered=c.raster(camera,bg,colors)
-            if union:
-                (rendered*torch.tensor(np.stack((menv,legal,wvis)),device='cuda')).sum().backward()
-                masses=colors.grad.detach().cpu().numpy()
-                mass=masses[:,0]
-            else:
-                (rendered[0]*torch.tensor(train_mask,device='cuda')).sum().backward()
-                mass=colors.grad[:,0].detach().cpu().numpy()
+            (rendered*torch.tensor(np.stack((menv,legal,wvis)),device='cuda')).sum().backward()
+            masses=colors.grad.detach().cpu().numpy()
+            mass=masses[:,0]
             threshold=cfg['min_observed_pixels']*camera.width*camera.height/(640*360)
             if split=='train':
                 # The local 3D set limits membership; zero weights stay excluded.
-                if union:
-                    colors.grad.zero_(); rendered=c.raster(camera,bg,colors)
-                    (rendered[0]*torch.tensor(train_mask,device='cuda')).sum().backward()
-                    mass=colors.grad[:,0].detach().cpu().numpy().copy()
+                colors.grad.zero_(); rendered=c.raster(camera,bg,colors)
+                (rendered[0]*torch.tensor(train_mask,device='cuda')).sum().backward()
+                mass=colors.grad[:,0].detach().cpu().numpy().copy()
                 counts+=(mass>threshold); observed_mass+=mass
             del colors,rendered
         if split in ('train','anchor'):
@@ -209,20 +184,22 @@ def prepare_multiview(ctx,output_dir=None):
             contribution=object_contribution(c,camera,bg,obj)[0]
             (contribution*torch.tensor(wvis,device='cuda')).sum().backward()
             alpha=bg.opacity_logit.detach().sigmoid()[:,0].cpu().numpy()
-            gain=np.maximum(-bg.opacity_logit.grad[:,0].detach().cpu().numpy(),0)/np.maximum(1-alpha,1e-6 if union else .01)
+            gain=np.maximum(-bg.opacity_logit.grad[:,0].detach().cpu().numpy(),0)/np.maximum(1-alpha,1e-6)
             relative=gain/max(float((cpu(oa)*wvis).sum()),1)
             votes+=(relative>cfg['candidate_contribution_fraction']); score+=relative
-            if union:
-                outside=masses[spatial_ids,0]; inside=masses[spatial_ids,2]; protected=masses[spatial_ids,1]
-                # Actual visibility derivative proves front-to-back occlusion;
-                # 3-sigma support and spatial locality are checked by spatial_ids.
-                evidence=(relative[spatial_ids]>cfg['candidate_contribution_fraction'])&(gain[spatial_ids]/np.maximum(outside,1e-6)>=cfg['min_gain_to_environment'])
-                legal_veto|=(protected/np.maximum(inside+protected,1e-6)>cfg['max_legal_fraction'])&(protected>threshold)
-                vote_matrix.append(evidence)
-                direction=camera.center-np.asarray(manifest['world_transform']['center'])
-                vote_directions.append(direction/np.linalg.norm(direction))
+            outside=masses[spatial_ids,0]; inside=masses[spatial_ids,2]; protected=masses[spatial_ids,1]
+            # Actual visibility derivative proves front-to-back occlusion;
+            # 3-sigma support and spatial locality are checked by spatial_ids.
+            evidence=(relative[spatial_ids]>cfg['candidate_contribution_fraction'])&(gain[spatial_ids]/np.maximum(outside,1e-6)>=cfg['min_gain_to_environment'])
+            legal_veto|=(protected/np.maximum(inside+protected,1e-6)>cfg['max_legal_fraction'])&(protected>threshold)
+            vote_matrix.append(evidence)
+            direction=camera.center-np.asarray(manifest['world_transform']['center'])
+            vote_directions.append(direction/np.linalg.norm(direction))
             bg.opacity_logit=bg.opacity_logit.detach(); del contribution
-        extra={'old_mask':mold,'new_mask':mnew,'environment_mask':menv} if union else {}
+        regions={'overlap':mold&mnew,'old_only':mold&~mnew,'new_only':mnew&~mold,
+                 'new_visible':cpu(visible)>cfg['new_alpha_threshold'],
+                 'new_occluded':mnew&(cpu(visible)<cpu(oa)*.9)}
+        extra={'old_mask':mold,'new_mask':mnew,'environment_mask':menv,**regions}
         np.savez_compressed(out/'cache'/f'{name}.npz',**extra,original_rgb=original,background_initial=cpu(background_rgb),
             object_alpha=cpu(oa),object_depth=cpu(od),joint_depth=cpu(joint_depth),visible_initial=cpu(visible),
             reliable_background=reliable,background_train_mask=train_mask,visibility_weight=wvis,
@@ -233,36 +210,74 @@ def prepare_multiview(ctx,output_dir=None):
             c.save_image(out/'renders'/f'{name}_{label}.png',tensor)
         for label,mask in [('reliable',reliable),('unknown',unknown),('visibility',wvis),('legal_foreground',legal)]:
             c.save_image(out/'supervision_masks'/f'{name}_{label}.png',mask.astype(float))
-        if union:
-            for label,mask in [('old',mold),('new',mnew),('environment',menv),('environment_loss',train_mask)]:
-                c.save_image(out/'supervision_masks'/f'{name}_{label}.png',mask.astype(float))
+        for label,mask in [('old',mold),('new',mnew),('environment',menv),('environment_loss',train_mask)]:
+            c.save_image(out/'supervision_masks'/f'{name}_{label}.png',mask.astype(float))
+        for label,mask in regions.items():
+            c.save_image(out/'supervision_masks'/f'{name}_{label}.png',mask.astype(float))
         records.append({'name':name,'camera':camera.record(),'split':split,'original_image':None if split=='anchor' else str(image_path),
             'reference_iou':reference_iou,'reliable_pixels':int(reliable.sum()),'local_reliable_pixels':int(train_mask.sum()),
-            'unknown_pixels':int(unknown.sum()),'visibility_pixels':int(wvis.sum()),'legal_foreground_pixels':int(legal.sum())})
+            'unknown_pixels':int(unknown.sum()),'visibility_pixels':int(wvis.sum()),'legal_foreground_pixels':int(legal.sum()),
+            'region_pixel_counts':{k:int(mask.sum()) for k,mask in regions.items()}})
         del moments,op,jp,joint,z,zj,zo,sa,sd,ss,old,oa,od,object_rgb,background_rgb,joint_rgb,visible,local_alpha
         torch.cuda.empty_cache()
     supported=counts[local_ids]>=cfg['min_observed_views']; optimizable=local_ids[supported]
-    unsupported=local_ids[~supported]; candidates=local_ids[votes[local_ids]>=2]
-    if union:
-        rgb_indices=optimizable.copy()
-        candidates,span=occlusion_permissions(spatial_ids,vote_matrix,vote_directions,legal_veto,cfg)
-        optimizable=np.union1d(rgb_indices,candidates); unsupported=np.setdiff1d(local_ids,optimizable)
-        np.save(out/'rgb_indices.npy',rgb_indices); np.save(out/'occlusion_indices.npy',candidates)
-        np.savez_compressed(out/'occlusion_evidence.npz',spatial_indices=spatial_ids,votes=np.asarray(vote_matrix),
-            angular_span_degrees=span,legal_foreground_veto=legal_veto)
+    rgb_indices=optimizable.copy()
+    candidates,span=occlusion_permissions(spatial_ids,vote_matrix,vote_directions,legal_veto,cfg)
+    optimizable=np.union1d(rgb_indices,candidates); unsupported=np.setdiff1d(local_ids,optimizable)
+    np.save(out/'rgb_indices.npy',rgb_indices); np.save(out/'occlusion_indices.npy',candidates)
+    np.savez_compressed(out/'occlusion_evidence.npz',spatial_indices=spatial_ids,votes=np.asarray(vote_matrix),
+        angular_span_degrees=span,legal_foreground_veto=legal_veto)
     np.save(out/'local_indices.npy',optimizable); np.save(out/'unsupported_local_indices.npy',unsupported)
     np.save(out/'occlusion_candidate_indices.npy',candidates)
     np.savez_compressed(out/'observational_support.npz',counts=counts,mass=observed_mass,occlusion_votes=votes,occlusion_score=score)
     write_json(out/'occlusion_candidates.json',{'analysis_only':True,'deleted_gaussians':0,'candidate_count':len(candidates),
-        'supported_candidate_count':int(np.isin(candidates,rgb_indices if union else optimizable).sum()),'local_supported_count':len(optimizable),
+        'supported_candidate_count':int(np.isin(candidates,rgb_indices).sum()),'local_supported_count':len(optimizable),
         'local_unsupported_frozen_count':len(unsupported),'top_candidates':[{'background_index':int(i),'score':float(score[i]),'views':int(votes[i]),'observed_views':int(counts[i])} for i in candidates[np.argsort(-score[candidates])[:50]]]})
     write_json(out/'manifest.json',{'signature':signature,'config':cfg,'sources':{k:str(v) for k,v in sources.items()},
         'source_hashes':{k:sha256(v) for k,v in sources.items()},'views':records,'region_scale':size,
         'permission_scheme':cfg['scheme'],
-        'rgb_count':len(rgb_indices) if union else len(optimizable),
+        'rgb_count':len(rgb_indices),
         'occlusion_count':len(candidates),
-        'occlusion_without_rgb_count':int((~np.isin(candidates,rgb_indices)).sum()) if union else 0,
+        'occlusion_without_rgb_count':int((~np.isin(candidates,rgb_indices)).sum()),
         'local_supported_count':len(optimizable),'local_unsupported_count':len(unsupported),
-        'semantics':('M_env = complement of visible old semantic mask union independently rendered new mask. RGB and occlusion permissions are separate; depth is used only for foreground protection.' if union else 'Old LangSplat-selected Gaussian contribution plus per-camera 3D exclusion/depth confidence. Generated object masks are visibility constraints, not real geometry labels.'),
-        'unknown_policy':('RGB excludes the union of old visible semantic mask and new isolated alpha mask; occlusion-only splats may change opacity without RGB support, subject to spatial/multiview/foreground guards; no completion.' if union else 'No direct RGB loss in excluded/unknown pixels; no optimization of splats without multi-view real-photo support; no completion.')})
+        'semantics':('M_env = complement of visible old semantic mask union independently rendered new mask. RGB and occlusion permissions are separate; depth is used only for foreground protection.'),
+        'unknown_policy':('RGB excludes the union of old visible semantic mask and new isolated alpha mask; occlusion-only splats may change opacity without RGB support, subject to spatial/multiview/foreground guards; no completion.')})
     return out
+
+
+def mask_config(values=None):
+    # Compatibility for the earlier union cache: this bbox margin was unused.
+    values=dict(values or {}); values.pop('edge_dilation_fraction',None)
+    cfg={**DEFAULTS,**values}
+    if cfg['scheme']!=UNION_SCHEME or not cfg['enabled']:
+        raise ValueError('Official M4 requires old_new_union_v2 masks')
+    if set(cfg)-set(DEFAULTS): raise ValueError('Unknown multiview configuration keys')
+    return cfg
+
+
+def cache_matches(saved,cfg,source_hashes):
+    try:
+        return (saved.get('permission_scheme')==UNION_SCHEME and
+                mask_config(saved['config'])==cfg and saved['source_hashes']==source_hashes)
+    except (ValueError,KeyError):
+        return False
+
+
+def ensure_m4_supervision(ctx):
+    """Build new supervision only in M4; reuse matching historical caches read-only."""
+    cfg=mask_config(supervision_settings(ctx.cfg))
+    sources={'background':ctx.stage('m1')/'background_gaussians.ply',
+        'object':object_path(ctx),'manifest':ctx.stage('m1')/'manifest.json',
+        'mask':ctx.stage('m2')/'object_mask.png','camera':ctx.stage('m2')/'anchor_camera.json',
+        'original_scene':ctx.source(ctx.cfg['project']['source_ply']),
+        'target_indices':ctx.stage('m1')/'target_indices.npy'}
+    hashes={k:sha256(v) for k,v in sources.items()}
+    destination=ctx.stage('m4')/'multiview_supervision'
+    candidates=(destination,ctx.stage('m4')/'background_optimization/visibility_prepare',
+                ctx.stage('m3')/'multiview_visibility')
+    for folder in candidates:
+        if not (folder/'manifest.json').exists(): continue
+        if cache_matches(read_json(folder/'manifest.json'),cfg,hashes): return folder
+        if folder==destination:
+            raise ValueError('M4 supervision input/config mismatch; use a new output directory')
+    return prepare_multiview(ctx,destination)

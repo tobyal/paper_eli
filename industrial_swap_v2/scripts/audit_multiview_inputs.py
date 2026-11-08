@@ -7,7 +7,12 @@ from ..core.context import Context, read_json, write_json, sha256
 
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument('--config',required=True); args=parser.parse_args()
-    ctx=Context(args.config); manifest=read_json(ctx.stage('m3')/'multiview_visibility/manifest.json')
+    ctx=Context(args.config)
+    folders=[ctx.stage('m4')/'multiview_supervision',ctx.stage('m4')/'background_optimization/visibility_prepare',
+             ctx.stage('m3')/'multiview_visibility']
+    folder=next((p for p in folders if (p/'manifest.json').exists()),None)
+    if folder is None: raise FileNotFoundError('No completed M4 supervision cache')
+    manifest=read_json(folder/'manifest.json')
     photos={v['original_image'] for v in manifest['views'] if v['original_image']}
     sources=[Path(v) for v in photos]
     sources.extend(ctx.source('data/industrial/sparse/0')/n for n in ('cameras.bin','images.bin','points3D.bin'))

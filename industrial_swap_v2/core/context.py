@@ -35,8 +35,10 @@ class Context:
         self.cfg = yaml.safe_load(self.config_path.read_text(encoding="utf-8"))
         if self.cfg['m3']['model'] != 'microsoft/TRELLIS.2-4B':
             raise ValueError('V2 fixes the official microsoft/TRELLIS.2-4B model')
-        if self.cfg['m4']['method'] != 'di_sds':
-            raise ValueError('V2 refinement implements DI-SDS')
+        # Historical configs remain readable for asset reuse; execution is
+        # checked by the official entry points, without legacy dispatch.
+        if self.cfg['m4']['method'] not in ('dual_mask_local_background','di_sds'):
+            raise ValueError('Unknown M4 method')
         if not self.cfg['m1']['reuse_existing_localization']:
             raise NotImplementedError('M1 adapter reuses existing LangSplat results; run the original localization first for a new target')
         for key in ('use_avp','use_scene_depth','use_background_depth','use_sam'):

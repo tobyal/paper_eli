@@ -86,13 +86,17 @@ def run(ctx):
         video=render_utils.make_pbr_vis_frames(render_utils.render_video(mesh,envmap=envmap,num_frames=72))
         imageio.imwrite(out/'trellis_asset_preview.png',video[0])
         imageio.mimsave(out/'trellis_asset.mp4',video,fps=12)
+    if cfg.get('method')=='pbr_multiview_gaussian':
+        print('PBR GLB ready; Gaussian training belongs to M3 and placement to M4',flush=True)
+        return
     from .mesh_to_gaussian import convert
     from .alignment import fit
     if not (out/'object_local.ply').exists():
         convert(glb_path,out/'object_local.ply',cfg,ctx.cfg['project']['seed'])
     if not (out/'object_world.ply').exists():
         from .scene import read_vertices
-        fit(read_vertices(out/'object_local.ply'),read_json(ctx.stage('m1')/'manifest.json')['world_transform'],
+        from .m2_space import generation_frame
+        fit(read_vertices(out/'object_local.ply'),generation_frame(ctx),
             read_json(ctx.stage('m2')/'anchor_camera.json'),ctx.stage('m2')/'object_mask.png',cfg,out)
     print('TRELLIS mesh and Gaussian adapter finished',flush=True)
 

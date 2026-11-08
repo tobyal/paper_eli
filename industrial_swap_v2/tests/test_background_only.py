@@ -7,7 +7,7 @@ import numpy as np
 import torch
 from industrial_swap_v2.core.multiview_masks import union_supervision_masks,occlusion_permissions,DEFAULTS
 from industrial_swap_v2.core.local_background_optimizer import PermissionedBackground
-from industrial_swap_v2.tests.test_multiview_refinement import Common
+from industrial_swap_v2.tests.gaussian_fixture import Common
 
 
 class UnionMaskTests(unittest.TestCase):
@@ -43,9 +43,9 @@ class UnionMaskTests(unittest.TestCase):
 class PermissionTests(unittest.TestCase):
     def test_m4_background_only_returns_without_diffusion_import(self):
         from industrial_swap_v2.modules.m4_refinement import run
-        ctx=SimpleNamespace(cfg={'m4':{'background_only':True},'m3':{'visibility_initialization':{'scheme':'old_new_union_v2'}}},stage=lambda _:Path('/unused'))
+        ctx=SimpleNamespace(cfg={'m4':{'method':'dual_mask_local_background','local_background':{'enabled':True,'iterations':250},'multiview_supervision':{'enabled':True,'scheme':'old_new_union_v2'}},'m3':{}},stage=lambda _:Path('/unused'))
         with patch('industrial_swap_v2.core.local_background_optimizer.optimize_background') as optimize, \
-             patch('industrial_swap_v2.scripts.run_background_only.validate_background_only') as validate:
+             patch('industrial_swap_v2.core.m4_outputs.export_m4') as validate:
             run(ctx)
             optimize.assert_called_once_with(ctx); validate.assert_called_once_with(ctx)
 

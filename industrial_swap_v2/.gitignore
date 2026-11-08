@@ -13,3 +13,8 @@ secrets/
 *.obj
 *.mtl
 *.exr
+
+# Downloaded tools and generated review/preview artifacts stay on disk.
+/tools/
+/previews/
+/webapp/static/batches/

@@ -2,6 +2,8 @@
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
 import numpy as np
 from PIL import Image
 from scipy.spatial.transform import Rotation
@@ -11,6 +13,25 @@ from industrial_swap_v2.core.alignment import transform_vertices, xyz_of
 from industrial_swap_v2.core.scene import compose, read_vertices, save_vertices
 
 class GeometryTests(unittest.TestCase):
+    def test_existing_world_asset_reuse_skips_trellis_and_alignment(self):
+        from industrial_swap_v2.webapp.adapter import convert_asset
+        from industrial_swap_v2.core.mesh_to_gaussian import fields
+        from industrial_swap_v2.core.context import read_json
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); out=root/'m3'; out.mkdir()
+            original=np.zeros(4,dtype=[(key,'f4') for key in fields()]); original['x']=np.arange(4)
+            original['rot_0']=1; save_vertices(root/'asset.ply',original)
+            transform={'rotation':np.eye(3).tolist(),'scale':1.,'translation':[0,0,0]}
+            ctx=SimpleNamespace(cfg={'project':{'source_sha256':'same'}},stage=lambda name:root/name)
+            job={'asset':{'path':str(root/'asset.ply'),'kind':'gaussian_world',
+                'metadata':{'scene_sha':'same','transform':transform}},'parameters':{'realign':False}}
+            with patch('industrial_swap_v2.core.alignment.fit',side_effect=AssertionError('No alignment')), \
+                 patch('industrial_swap_v2.core.mesh_to_gaussian.convert',side_effect=AssertionError('No conversion')), \
+                 patch('industrial_swap_v2.webapp.adapter.subprocess.run',side_effect=AssertionError('No model process')):
+                convert_asset(ctx,job)
+            self.assertEqual(read_vertices(out/'object_world.ply').tobytes(),original.tobytes())
+            self.assertEqual(read_json(out/'transform.json'),transform)
+
     def test_textured_mesh_color_covariance_and_lossless_composition(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)

@@ -10,7 +10,7 @@ const keys=new Set(),objects=new Map(),pointClouds=new Map();
 const worldUp=new THREE.Vector3(),homeDirection=new THREE.Vector3();
 const forward=new THREE.Vector3(),right=new THREE.Vector3(),movement=new THREE.Vector3();
 const yaw=new THREE.Quaternion(),pitch=new THREE.Quaternion(),proposed=new THREE.Quaternion();
-const names={object_m3:'原始 M3',object_m4:'M4 精细化',background_m1:'原始背景',background_a:'优化背景'};
+const names={object_m3:'原始 M3',object_m4:'M4 保存的设备',background_m1:'原始背景',background_m4:'优化背景'};
 const resourceControls=['object-version','show-background','background-version','display-mode'];
 
 function loading(title,detail=''){

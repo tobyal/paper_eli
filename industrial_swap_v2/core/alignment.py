@@ -23,6 +23,10 @@ def transform_vertices(vertices, scale, rotation, translation):
     for i,k in enumerate(('nx','ny','nz')): output[k]=normal[:,i]
     for i in range(3): output[f'scale_{i}']+=np.log(scale)
     for i in range(4): output[f'rot_{i}']=quat[:,i]
+    # Nonzero directional colors must follow the object coordinate frame too.
+    # Historical SH0 assets take the exact no-op path.
+    from .pbr_math import rotate_vertex_sh
+    output=rotate_vertex_sh(output,rotation)
     return output
 
 
@@ -88,7 +92,7 @@ def fit(vertices, frame, camera, mask_path, config, destination):
         'world_to_object':np.linalg.inv(matrix).tolist(), 'fit_parameters':best[1],
         'silhouette_objective':best[0], 'floor_local_y':float(low[1]),
         'method':'uniform-scale Y-up yaw and floor-anchored translation, automatic anchor silhouette fit',
-        'reference_mask':str(mask_path),'camera':camera})
+        'reference_mask':str(mask_path),'camera':camera,'generation_frame':frame})
     preview=np.zeros((192,192,3),np.uint8)
     preview[truth,1]=255; preview[silhouette(best[1]),0]=255
     Image.fromarray(preview).save(destination/'alignment_overlay.png')

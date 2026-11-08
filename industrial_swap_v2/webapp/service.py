@@ -6,12 +6,15 @@ import shutil
 import zipfile
 import yaml
 from . import store as s
+from ..core.workflow import current_config,METHOD
 
 IMAGE_KINDS=('edited_scene','object_rgba')
 MODEL_KINDS=('mesh','gaussian_local','gaussian_world')
 ACTIONS={'m1':('reuse','run'),'m2':('prepare','reuse','qwen'),'m3':('reuse','trellis'),'m4':('refine',)}
 MATERIALS=('anchor.png','position_hint.png','edit_mask.png','depth.png','depth_background.png',
            'generation_prompt.txt','anchor_camera.json','conditions.json','generation_plan.json')
+SPATIAL_MATERIALS=('generation_region.json','mask_report.json','generation_bbox_mask.png',
+    'old_visible_mask.png','old_clean_mask.png','protected_foreground_mask.png','extension_proposal.png')
 
 
 def experiment(identifier):
@@ -43,6 +46,10 @@ def create(name, replacement=None, copy_from=None):
     cfg=copy.deepcopy(s.config()); heads={}
     if copy_from:
         parent=experiment(copy_from); cfg=s.unpack(parent['config']); heads=s.unpack(parent['heads'])
+    original=cfg
+    cfg=current_config(cfg)
+    if original['m4'].get('method')!=METHOD:
+        heads={k:v for k,v in heads.items() if k not in ('m3','m4')}
     if replacement:
         if len(replacement)>3000: raise ValueError('设备描述过长')
         if replacement!=cfg['m2']['replacement_text']:
@@ -123,12 +130,9 @@ def submit(identifier, stage, action, request_id, parameters=None, confirm_qwen=
     if action not in ACTIONS.get(stage,()): raise ValueError('阶段操作无效')
     if not request_id or len(request_id)>100: raise ValueError('缺少有效幂等请求编号')
     parameters=parameters or {}
-    allowed={'m1':set(),'m2':set(),'m3':{'realign','force_model','object_occlusion_filter'},'m4':{'iterations'}}
+    allowed={'m1':set(),'m2':set(),'m3':{'realign','force_model'},'m4':{'iterations'}}
     if set(parameters)-allowed[stage]: raise ValueError('包含此阶段不支持的运行参数')
     if any(type(parameters[k]) is not bool for k in ('realign','force_model') if k in parameters): raise ValueError('开关参数必须为布尔值')
-    if 'object_occlusion_filter' in parameters:
-        from ..core.object_occlusion_filter import filter_config
-        filter_config(parameters['object_occlusion_filter'])
     if action=='qwen' and not confirm_qwen: raise ValueError('必须明确点击并确认一次 Qwen API 调用')
     with s.transaction() as conn:
         old=s.sql(conn,'SELECT * FROM stage_runs WHERE request_id=:r',r=request_id).mappings().first()
@@ -140,29 +144,23 @@ def submit(identifier, stage, action, request_id, parameters=None, confirm_qwen=
         active(conn,identifier)
         exp=dict(s.sql(conn,'SELECT * FROM experiments WHERE id=:id',id=identifier).mappings().one())
         inputs=prerequisites(exp,stage,action)
-        cfg=s.unpack(exp['config'])
-        if 'object_occlusion_filter' in parameters:
-            from dataclasses import asdict
-            settings=dict(cfg['m3'].get('object_occlusion_filter',{}))
-            settings.update(parameters['object_occlusion_filter'])
-            cfg['m3']['object_occlusion_filter']=asdict(filter_config(settings))
-        if cfg['m3'].get('visibility_initialization',{}).get('enabled',False) and cfg['m3'].get('object_occlusion_filter',{}).get('enabled',False):
-            raise ValueError('新多视角流程只分析遮挡，不可同时启用归档的直接删除过滤')
+        cfg=current_config(s.unpack(exp['config']))
+        if stage=='m1' and cfg['m2'].get('confirmed_m1_case_id'):
+            raise ValueError('此实验已绑定人工确认的 M1 案例；请从 M1 案例页选择其他定位，不能换回历史固定设备')
+        if action=='qwen' and cfg['m2'].get('preparation_only'):
+            raise ValueError('此案例仅准备 Qwen 输入；请下载材料自行生成后上传图像，不提交 API 请求')
         if 'iterations' in parameters:
             steps=parameters['iterations']
-            if type(steps) is not int or not 1<=steps<=20000: raise ValueError('M4 迭代步数必须为 1–20000 的整数')
-            cfg['m4']['iterations']=steps
+            if type(steps) is not int or not 200<=steps<=2000: raise ValueError('M4 局部优化步数必须为 200–2000 的整数')
+            cfg['m4']['local_background']['iterations']=steps
         identifier_run=s.uid(); folder=s.DATA/'experiments'/identifier/'runs'/identifier_run
         cfg['project'].update(output_dir=str((folder/'outputs').relative_to(s.BASE)),
             records_dir=str((folder/'records').relative_to(s.BASE)), logs_dir=str((folder/'logs').relative_to(s.BASE)))
         cfg['m3']['input_image']=str((folder/'outputs/m2/object_rgba.png').relative_to(s.BASE))
-        cfg['m4']['initialize_from']=str((folder/'outputs/m3/object_world.ply').relative_to(s.BASE))
-        key={'version':'web-v3-oagof' if stage in ('m3','m4') else 'web-v2','stage':stage,'action':action,'scene':exp['scene_sha'],'seed':cfg['project']['seed'],
+        key={'version':{'m2':'web-v7-adaptive-visible','m3':'web-v8-pbr-local-gaussian','m4':'web-v8-pbr-scene-integration'}.get(stage,'web-v2'),'stage':stage,'action':action,'scene':exp['scene_sha'],'seed':cfg['project']['seed'],
              'replacement':exp['replacement_text'], 'config':cfg[stage], 'render':cfg['render'],
              'parameters':parameters,'inputs':{k:input_fingerprint(k,v) for k,v in inputs.items()}}
         key['config']=dict(key['config'])
-        if stage in ('m3','m4') and (cfg['m3'].get('visibility_initialization',{}).get('enabled',False) or cfg['m4'].get('local_background',{}).get('enabled',False)):
-            key['version']='web-v4-multiview'
         for name in ('api_key_file','input_image','initialize_from'): key['config'].pop(name,None)
         signature=s.digest(key)
         folder.mkdir(parents=True)
@@ -183,6 +181,12 @@ def submit(identifier, stage, action, request_id, parameters=None, confirm_qwen=
 def resume(identifier):
     value=run(identifier)
     if value['status']!='failed': raise ValueError('仅失败或中断任务可以恢复')
+    cfg=yaml.safe_load(Path(value['config_path']).read_text())
+    if value['stage'] in ('m3','m4'):
+        from ..core.workflow import validate_workflow
+        validate_workflow(cfg,stage=value['stage'])
+    if value['stage']=='m4' and (Path(value['folder'])/'outputs/m4/background_optimization/training.jsonl').exists() and not (Path(value['folder'])/'outputs/m4/background_optimization/summary.json').exists():
+        raise ValueError('局部优化中断记录已保留；请提交新的 M4 运行，不在原目录重新训练')
     with s.transaction() as conn:
         active(conn,value['experiment_id'])
         s.sql(conn,"UPDATE stage_runs SET status='pending',error=NULL,attempt=attempt+1 WHERE id=:id",id=identifier)
@@ -213,20 +217,30 @@ def register_outputs(value, directory):
         'edited_scene.png':'edited_scene','object_rgba.png':'object_rgba','object_mask.png':'mask','object_white.png':'preview',
         'depth.png':'depth','depth_background.png':'depth','anchor.png':'preview','position_hint.png':'preview',
         'trellis_asset.glb':'mesh','object_local.ply':'gaussian_local','object_world.ply':'gaussian_world',
+        'object_refined_local.ply':'gaussian_local','renders/validation_comparison.jpg':'preview',
         'trellis_native.pt':'checkpoint','trellis_asset_preview.png':'preview',
-        'object_refined.ply':'gaussian_world','renders/anchor_after.png':'preview',
+        'object_fixed.ply':'gaussian_world','object_refined.ply':'gaussian_world',
+        'renders/anchor_after.png':'preview',
     }
     if (directory/'transform.json').exists(): meta['transform']=json.loads((directory/'transform.json').read_text())
     if stage=='m4' and 'm3' in inputs:
         transform=stage_dir(inputs['m3'])/'transform.json'
         if transform.exists(): meta['transform']=json.loads(transform.read_text())
+        source_assets=s.unpack(run(inputs['m3'])['outputs']).get('assets',{})
+        if 'object_refined_local.ply' in source_assets:
+            meta['local_asset']=source_assets['object_refined_local.ply']
+            if 'trellis_asset.glb' in source_assets: meta['mesh_asset']=source_assets['trellis_asset.glb']
     if m2 and (m2/'object_rgba.png').exists():
         meta['input_image_sha']=s.sha(m2/'object_rgba.png')
         reference=s.one("SELECT id FROM assets WHERE sha256=:h AND kind='object_rgba'",h=meta['input_image_sha'])
         if reference: meta['input_asset']=reference['id']
     model=cfg['m2']['model'] if value['action']=='qwen' or (value['action']=='historical' and stage=='m2') else cfg['m3']['model'] if value['action']=='trellis' or (value['action']=='historical' and stage=='m3') else 'reused / imported'
     if source_asset: model=source_asset['model'] or 'external'
-    if stage=='m4': model='DI-SDS (frozen geometry)'
+    if stage=='m4': model=('M4 dual-mask background optimization (fixed object)'
+        if cfg['m4'].get('method')==METHOD or cfg['m4'].get('background_only')
+        else 'Historical DI-SDS (frozen geometry)')
+    if stage=='m3' and cfg['m3'].get('method')=='pbr_multiview_gaussian':
+        model='PBR multiview RGB+Depth optimized Gaussian / TRELLIS.2 GLB'
     for name,kind in definitions.items():
         file=directory/name
         if file.is_file():
@@ -247,6 +261,8 @@ def register_outputs(value, directory):
                 s.sql(conn,'UPDATE assets SET prompt=:p,model=:m WHERE id=:id',p=prompt,m=model,id=aid)
             for key,source in (('local_asset','object_local.ply'),('preview_asset','trellis_asset_preview.png'),('input_asset','object_rgba.png')):
                 if source in assets: extra[key]=assets[source]
+            if 'object_refined_local.ply' in assets: extra['local_asset']=assets['object_refined_local.ply']
+            if 'renders/validation_comparison.jpg' in assets: extra['preview_asset']=assets['renders/validation_comparison.jpg']
             if record['kind'] in MODEL_KINDS:
                 for key,source in (('mesh_asset','trellis_asset.glb'),('world_asset','object_world.ply'),('checkpoint_asset','trellis_native.pt')):
                     if source in assets: extra[key]=assets[source]
@@ -301,6 +317,8 @@ def bundle(run_id):
     if not target.is_file():
         with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED) as z:
             for name in MATERIALS: z.write(directory/name,name)
+            for name in ('depth.npz','generation_inputs.json',*SPATIAL_MATERIALS):
+                if (directory/name).is_file():z.write(directory/name,name)
     return target
 
 
@@ -310,6 +328,11 @@ def bootstrap():
     if s.one('SELECT id FROM experiments LIMIT 1'): return
     eid=create('原始基线 · 黄色机械臂')
     heads={}; cfg=s.config(); baseline=s.BASE/'outputs'
+    if (baseline/'m4/object_refined.ply').exists() and not (baseline/'m4/object_fixed.ply').exists():
+        # Keep an imported historical result distinct from the current method.
+        cfg['m4']={'method':'di_sds','iterations':2000}
+        with s.transaction() as conn:
+            s.sql(conn,'UPDATE experiments SET config=:cfg WHERE id=:id',cfg=s.dump(cfg),id=eid)
     for stage in ('m1','m2','m3','m4'):
         directory=baseline/stage; receipt=s.BASE/'records'/f'{stage}_status.json'
         if not receipt.is_file() or not directory.is_dir(): continue
@@ -333,7 +356,7 @@ def bootstrap():
         if stage=='m2':
             # The historical prompt is reused verbatim; this file is an independent material export.
             materials=folder/'materials'; materials.mkdir()
-            for name in MATERIALS:
+            for name in (*MATERIALS,*SPATIAL_MATERIALS):
                 if (directory/name).exists(): shutil.copy2(directory/name,materials/name)
             plan=json.loads((directory/'generation_plan.json').read_text())
             (materials/'generation_prompt.txt').write_text(plan['prompt'],encoding='utf-8')

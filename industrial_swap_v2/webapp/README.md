@@ -33,7 +33,7 @@ industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.webapp.manage st
 industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.webapp.manage restart
 ```
 
-重启只操作本程序 PID 文件且命令行匹配的服务进程。正在执行的 GPU 子进程独立运行，新 worker 检查 PID 和完成标记，不会重复提交同一任务。GPU 子进程本身失败后，页面提供“恢复此运行”，沿用原目录和检查点。不要直接修改正在运行的输入配置。
+重启只操作本程序 PID 文件且命令行匹配的服务进程。正在执行的 GPU 子进程独立运行，新 worker 检查 PID 和完成标记，不会重复提交同一任务。生成阶段失败可恢复已有中间资产。M4 短程优化中断后保留现场，需提交新运行；已完成优化但导出中断可复用完成的背景。不要直接修改正在运行的输入配置。
 
 ## 操作步骤
 
@@ -41,8 +41,8 @@ industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.webapp.manage re
 2. **M1。** 复用已有 LangSplat 结果，或调用原有 M1 代码重新整理目标/背景分区。页面显示点数、Bounding Box、生成区域与参考相机。这里没有新增 LangSplat 训练算法；更换待移除对象前，需按原项目流程提供对应定位。
 3. **M2 准备材料。** 复用原 `prepare-only` 与同一 `build_prompt()`，下载 Anchor、位置提示、Mask、完整/背景深度、Prompt、相机和条件 JSON，支持单文件与 ZIP。
 4. **M2 选图。** 上传外部 `edited_scene` 会运行现有自动 SAM；上传 `object_rgba` 则保留 Alpha 并生成 Mask/白底图，跳过 SAM。也可直接选择图库中已有图像。只有明确点击并确认“调用 Qwen API”才提交一次请求；导航、上传、材料准备及后续阶段均禁止调用 Qwen。
-5. **M3。** 可运行官方 TRELLIS.2，或选择/上传已有三维资产。GLB/Mesh 只做高斯化、对齐和合成；局部 PLY 跳过高斯化；世界 PLY 校验场景与变换后合成，也可先反变换到局部空间重新对齐。默认重新对齐。
-6. **M4。** 配套 M1 背景、M2 前景/Mask/相机和 M3 设备齐全后，启动原有 DI-SDS。默认 2,000 步，背景和几何冻结，可查看日志、恢复失败运行、下载最终 PLY 和视频。
+5. **M3。** 可运行官方 TRELLIS.2，或选择/上传已有三维资产。GLB/Mesh 只做高斯化、对齐和合成；局部 PLY 跳过高斯化；世界 PLY 校验场景与变换后合成，也可先反变换到局部空间重新对齐。世界坐标 PLY 默认保留原变换。M3 完成场景合成后结束，不构建双 Mask 监督。
+6. **M4。** 配套原始 M1 背景、M2 相机及 M3 固定设备齐全后，先逐视角构建旧/新设备 Mask 与遮挡候选，再进行局部背景优化，默认 250 步（200–2000）。环境监督排除旧/新设备 Mask 并集；RGB 与遮挡优化权限独立，设备全部参数固定。最终场景和末步候选分别提供，不再执行扩散精细化。
 
 图片必须保留对应 Anchor 的完整画布、视角与设备位置；不同分辨率允许等比例变化。已居中裁切的产品图片不能直接冒充场景相机参考。界面要求用户确认画布，并验证比例、场景与相机元数据。这里只能验证声明与元数据，不能自动证明任意外部生成图的透视正确。
 
@@ -86,7 +86,7 @@ webapp/data/
 
 Qwen 每次明确操作具有幂等请求编号、单独授权记录和独占磁盘锁。超时、401 或失败也保留锁；恢复只可利用已有响应继续下载/分割，不能自动重发。测试与素材复用模式设置 `SWAP_DISABLE_QWEN=1`，直接在原客户端入口拒绝提交。Web 前端不读取或持有 API Key。
 
-Worker 串行调度本应用任务，按空闲显存选择 GPU，保持原训练的显存预算。TRELLIS 推理要求 18GiB 空闲、M4 要求 24GiB；仅复用三维资产时只为渲染预留 4GiB，M1 与 RGBA 导入不等待训练级显存。资源不足保持排队；不会停止其他用户进程。日志轮询与文件下载独立于 GPU 子进程。
+Worker 串行调度本应用任务，按空闲显存选择 GPU，保持原训练的显存预算。TRELLIS 推理要求 18GiB 空闲、M4 要求 24GiB；M3 复用三维资产只为合成渲染预留 4GiB，M1 与 RGBA 导入不等待训练级显存。资源不足保持排队；不会停止其他用户进程。日志轮询与文件下载独立于 GPU 子进程。
 
 ## 验证命令
 
@@ -95,19 +95,18 @@ Worker 串行调度本应用任务，按空闲显存选择 GPU，保持原训练
 industrial_swap_v2/envs/webapp/bin/python -m unittest discover -s industrial_swap_v2/webapp/tests -v
 industrial_swap_v2/envs/trellis2_reused/bin/python -m unittest discover -s industrial_swap_v2/tests -v
 
-# 真实验证：会实际运行一次 TRELLIS.2 和 2,000 步 M4，不调用 Qwen
-industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.webapp.validate_live
-# 排错后恢复原任务：追加 --resume-failed
-
-# 真实 GLB 上传 / 局部 PLY / 世界 PLY 路径验证
-industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.webapp.validate_asset_routes
-
-# 汇总实际运行、文件哈希、耗时、测试结果与代码版本
-industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.webapp.record_validation
+# 只读核对已有双 Mask 结果：不执行优化或渲染
+CUDA_VISIBLE_DEVICES= envs/gsle/bin/python -m industrial_swap_v2.scripts.audit_existing_m4 \
+  --config EXISTING_UNION_CONFIG.yaml
 ```
 
-真实验证使用已有的 Qwen 场景图作为上传测试文件，不宣称重新从其他平台生成了图像。所有新结果留在 Web 数据目录；验证脚本在结束时重新计算历史产物 SHA256，确认原实验未被覆盖。
-
-`webapp/records/validation.json` 汇总实际任务状态与产物校验，包含阶段缓存、TRELLIS 自动模型缓存和两种 PLY 复用路径。`tests_web.log` / `tests_cli.log` 为测试输出，`webapp.pip.freeze.txt` 固定 Web 环境依赖。网页上传 RGBA、复制实验、日志及结果预览另经过真实浏览器操作检查。验证记录只有在全部实际运行和哈希检查通过后才标为 `complete`。
+此前会启动 TRELLIS 和完整 M4 的 live 验证脚本已归档。旧的 Web 实验验证记录仍留在 `webapp/records/`，本次整理未重新执行这些实验。CPU 测试数据库与真实实验隔离。
 
 API 交互文档：`/api/docs`。主要接口为 `/api/experiments`、`/api/assets/upload`、`/api/experiments/{id}/selection`、`/api/experiments/{id}/runs`、`/api/runs/{id}/resume`、`/api/runs/{id}/bundle` 与日志/产物下载接口。写操作需要同源 `X-Swap-Action: 1` 请求头。本版本面向经 SSH 使用的单用户科研工作台，不提供公网多用户账户系统。
+
+复制历史实验时只继承 M1/M2 结果及素材选择，重新建立 M3/M4 阶段记录。新的 M3/M4 缓存分别为 web-v6-m3-composition 和 web-v6-m4-dual-mask；Mask 参数只影响 M4 缓存；旧图像、Mesh 和 Gaussian 素材仍可按内容哈希复用。旧实验配置与产物不被改写。
+# M1 人工辅助案例准备
+
+新增入口：`http://127.0.0.1:18086/m1-cases`，或点击工作台侧栏 **M1 人工案例准备**。
+支持原始 COLMAP 照片浏览、缓存 SAM 区域选择/合并、实际 CLIP Top 5 英文语义推荐、LangSplat 定位、三视角检查及人工确认独立案例。
+仅执行 M1；测试与正式案例隔离。实现、数据目录和使用说明见 [M1_CASE_PREPARATION.md](M1_CASE_PREPARATION.md)。

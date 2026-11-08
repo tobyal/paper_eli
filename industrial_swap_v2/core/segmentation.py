@@ -14,7 +14,6 @@ def run(ctx):
     sys.path.insert(0, str(ctx.root / "gsle"))
     import preprocess as official
     from segment_anything import SamPredictor
-    from sam_prompts import yellow_object_prompts
     image = np.asarray(Image.open(out / "edited_scene.png").convert("RGB"))
     edit = np.asarray(Image.open(out / "edit_mask.png").resize((image.shape[1], image.shape[0]), Image.Resampling.NEAREST)) > 127
     y, x = np.where(edit)
@@ -23,9 +22,18 @@ def run(ctx):
     predictor = SamPredictor(sam)
     predictor.set_image(image)
     masks, scores, _ = predictor.predict(box=box, multimask_output=True)
-    points, labels, prompt_record = yellow_object_prompts(image, masks[int(scores.argmax())])
-    refined, refined_scores, _ = predictor.predict(box=box, point_coords=points, point_labels=labels, multimask_output=True)
-    masks, scores = np.concatenate((masks, refined)), np.concatenate((scores, refined_scores))
+    mode=ctx.cfg['m2'].get('segmentation_prompt_mode','yellow_robot')
+    if mode=='box_clip':
+        points=np.empty((0,2),np.float32);labels=np.empty(0,np.int32)
+        prompt_record={'method':'automatic_edit_volume_box_and_replacement_text','box':box.tolist(),
+            'color_rule':None,'text':ctx.cfg['m2']['replacement_text']}
+    elif mode=='yellow_robot':
+        from sam_prompts import yellow_object_prompts
+        points, labels, prompt_record = yellow_object_prompts(image, masks[int(scores.argmax())])
+        refined, refined_scores, _ = predictor.predict(box=box, point_coords=points, point_labels=labels, multimask_output=True)
+        masks, scores = np.concatenate((masks, refined)), np.concatenate((scores, refined_scores))
+    else:
+        raise ValueError('Unknown foreground segmentation prompt mode: '+mode)
     pins = read_json(ctx.root / "records/gsle/models.json")
     network = official.OpenCLIPNetwork(official.OpenCLIPNetworkConfig(clip_model_pretrained=str(Path(pins["openclip"]["path"]) / "open_clip_pytorch_model.bin"), positives=(ctx.cfg["m2"]["replacement_text"],)))
     candidates = []
@@ -41,7 +49,7 @@ def run(ctx):
             embedding /= embedding.norm(dim=-1, keepdim=True)
             relevance = float(network.get_relevancy(embedding, 0)[0, 0])
         covered = mask[points[:, 1].astype(int), points[:, 0].astype(int)]
-        pos = float(covered[labels == 1].mean())
+        pos = float(covered[labels == 1].mean()) if (labels == 1).any() else 1.
         neg = float(covered[labels == 0].mean()) if (labels == 0).any() else 0
         containment = float((mask & edit).sum() / mask.sum())
         clipped = bool(mask[0].any() or mask[-1].any() or mask[:, 0].any() or mask[:, -1].any())

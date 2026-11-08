@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "colors": ["white", "gray", "black", "blue", "green", "yellow", "red"],
+  "categories": [
+    "industrial control cabinet", "industrial electrical cabinet", "metal machine enclosure",
+    "industrial machine", "metal equipment housing", "portable industrial air cooler",
+    "portable air conditioner", "industrial floor fan", "industrial robot arm",
+    "automotive assembly workstation", "industrial workbench", "industrial inspection station",
+    "metal storage rack", "industrial parts rack", "metal storage trolley", "industrial tool cabinet",
+    "roller conveyor", "industrial belt conveyor", "industrial assembly press", "CNC machine",
+    "industrial machine tool", "industrial air compressor", "industrial vacuum cleaner",
+    "wheeled assembly stand", "industrial lifting table", "metal storage cabinet",
+    "industrial safety enclosure", "plastic storage container", "electrical control panel"
+  ],
+  "descriptions": [
+    "a portable industrial air cooler with a gray vented front",
+    "a white evaporative air cooler with a lower water tank",
+    "an entire portable evaporative air cooler including its lower water tank and base",
+    "an automotive dashboard assembly mounted on a white industrial workstation",
+    "a black automotive dashboard on a white metal assembly stand",
+    "an industrial machine with a black assembly on a white base",
+    "a white industrial workstation with a black assembly and metal support frame",
+    "a wheeled metal assembly fixture with a rectangular frame",
+    "an industrial parts rack with horizontal shelves",
+    "a tall gray storage rack with vertical slots",
+    "a tall metal automotive parts storage rack with vertical compartments",
+    "a metal rack containing blue plastic storage bins",
+    "a stack of gray plastic storage crates on a blue pallet",
+    "a stack of blue plastic storage containers on a pallet",
+    "a large blue plastic storage container",
+    "a wheeled metal trolley with shelves and storage bins",
+    "a metal storage rack covered with gray fabric",
+    "a gray industrial cabinet with a flat top",
+    "a white electrical cabinet with a control screen",
+    "a gray industrial machine enclosure with transparent doors",
+    "a metal roller conveyor with parallel cylindrical rollers",
+    "a green industrial workbench with a flat rectangular tabletop",
+    "an industrial fan with a circular black grille",
+    "a metal industrial platform with four support legs",
+    "a white machine base with wheels and vertical support posts",
+    "a rectangular industrial equipment housing with a ventilation grille"
+  ]
+}

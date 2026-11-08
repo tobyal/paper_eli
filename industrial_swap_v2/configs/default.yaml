@@ -1,6 +1,6 @@
 project:
   root: /mnt/sda/ubuntu/lkx/papers/paper_eli
-  output_dir: outputs
+  output_dir: outputs/official
   seed: 42
   gpu: 2
   gsle_python: envs/gsle/bin/python
@@ -8,6 +8,8 @@ project:
   trellis_python: industrial_swap_v2/envs/trellis2_reused/bin/python
   source_ply: outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply
   source_sha256: 1d5cc6a5b58e7d99fbefd54ba6de7ab351ee23b884b2fcacba11720906b5bf7a
+  records_dir: records/official
+  logs_dir: logs/official
 m1:
   reuse_existing_localization: true
   localization_dir: outputs/gsle/localization
@@ -27,18 +29,33 @@ m2:
   reuse_anchor: true
   existing_anchor: outputs/gsle/avp/anchor.json
   anchor_resolution: 1024
+  spatial_conditions:
+    method: adaptive_visible_v1
+    geometry_quantile: 0.01
+    covariance_cap_fraction: 0.04
+    space_padding_fraction: 0.025
+    floor_snap_fraction: 0.12
+    max_height_ratio: 1.65
+    min_height_ratio: 0.75
+    old_alpha_threshold: 0.02
+    edge_fraction: 0.015
+    depth_margin_fraction: 0.02
+    depth_std_fraction: 0.12
+    depth_cdf_bins: 33
+    max_front_contribution: 0.15
+    protected_contribution: 0.5
   use_scene_depth: true
   use_background_depth: true
   use_sam: true
-  replacement_text: >-
-    A yellow six-axis industrial robotic arm mounted on a square steel base,
-    with articulated rotary joints, shoulder, elbow, wrist,
-    and a compact two-finger gripper.
+  replacement_text: A yellow six-axis industrial robotic arm mounted on a square steel
+    base, with articulated rotary joints, shoulder, elbow, wrist, and a compact two-finger
+    gripper.
 m3:
+  method: pbr_multiview_gaussian
+  input_image: outputs/official/m2/object_rgba.png
   model: microsoft/TRELLIS.2-4B
   repository: https://github.com/microsoft/TRELLIS.2
   revision: 75fbf0183001ed9876c8dbb35de6b68552ee08bd
-  input_image: outputs/m2/object_rgba.png
   pipeline_type: 1024_cascade
   low_vram: true
   minimum_free_gpu_gib: 18
@@ -50,21 +67,47 @@ m3:
   texture_size: 4096
   decimation_target: 1000000
   fit_fraction: 0.95
-  output_type: mesh_and_gaussian
-  use_original_scene_transform: true
-  object_occlusion_filter:
-    enabled: false
-    use_multi_view: true
-    preserve_object_geometry: true
-    floor_repair: false
-    min_confirm_views: 2
-    region_expansion: 0.08
-    support_sigma: 3.0
-    min_occlusion_fraction: 0.000015
-    max_delete_fraction: 0.002
-    max_outside_mae: 0.0015
-    max_outside_changed_fraction: 0.003
-  visibility_initialization:
+  pbr:
+    blender: industrial_swap_v2/tools/blender-4.5.4-linux-x64/blender
+    hdri: test01/autoshop_01_4k.hdr
+    source_glb: null
+    render:
+      resolution: 512
+      samples: 64
+      azimuths_degrees: [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+      elevations_degrees: [-10, 10, 30]
+      hdri_strength: 1.0
+      hdri_rotation_degrees: 0.0
+      exposure: 0.0
+      fov_degrees: 49.1
+      camera_margin: 1.12
+      compute_device: CUDA
+      denoise: true
+      max_bounces: 8
+    training:
+      iterations: 4000
+      evaluate_every: 250
+      save_every: 1000
+      rgb_weight: 1.0
+      depth_weight: 0.2
+      sh_degree: 3
+      sh_dc_lr: 0.0025
+      sh_rest_lr: 0.00125
+      opacity_lr: 0.01
+      scale_lr: 0.003
+      xyz_lr_fraction: 0.00001
+      max_xyz_offset_fraction: 0.002
+      min_scale_ratio: 0.5
+      max_scale_ratio: 2.0
+      minimum_free_gpu_gib: 10
+m4:
+  method: dual_mask_local_background
+  integration:
+    alignment: anchor_silhouette
+    existing_transform: null
+  minimum_free_gpu_gib: 24
+  save_every: 500
+  multiview_supervision:
     enabled: true
     scheme: old_new_union_v2
     resolution: 640
@@ -72,27 +115,7 @@ m3:
     holdout_every: 4
     local_expansion: 0.25
     min_observed_views: 2
-    edge_dilation_fraction: 0.008
-m4:
-  background_only: true
-  method: di_sds
-  initialize_from: outputs/m3/object_world.ply
-  freeze_background: true
-  preserve_geometry: true
-  iterations: 2000
-  batch: 4
-  microbatch: 2
-  resolution: 512
-  unconditional_conditioning: text_only
-  guidance_scale: 100.0
-  sds_weight: 0.1
-  rgb_weight: 1500.0
-  mask_weight: 1500.0
-  color_lr: 0.002
-  opacity_lr: 0.002
-  checkpoint_every: 100
-  minimum_free_gpu_gib: 24
-  memory_budget_gib: 20
+    union_edge_fraction: 0.003
   local_background:
     enabled: true
     iterations: 250
@@ -100,16 +123,12 @@ m4:
     opacity_lr: 0.06
     rgb_weight: 1.0
     visibility_weight: 1.0
-    outside_preserve_weight: 0.2
     opacity_preserve_weight: 0.05
     color_preserve_weight: 0.02
     max_rgb_change: 0.08
     max_opacity_change: 0.08
-    candidate_max_opacity_change: 0.6
     warmup_steps: 20
     evaluate_every: 50
-  diffusion_mask_source: object_alpha
-  object_mask_dilation_fraction: 0.015
 render:
   trajectory_width: 960
   orbit_resolution: 512
