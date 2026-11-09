@@ -28,3 +28,5 @@ __pycache__/
 !/records/gaussianeditor_snapshot.json
 !/records/gsle_snapshot.json
 !/records/gsle_batch_execution.json
+
+/gaussianeditor_native/
