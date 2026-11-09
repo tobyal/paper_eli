@@ -1,0 +1,190 @@
+{
+  "ae_graph.py": {
+    "source": "0db3777e6bf98be41fa09f8bcc103b62b8ce9271f8b9d890ba78bf8d15adfec1",
+    "run": "0db3777e6bf98be41fa09f8bcc103b62b8ce9271f8b9d890ba78bf8d15adfec1"
+  },
+  "avp.py": {
+    "source": "f1dced088b12ded77c55d7b2fdb1bb9037e7d3f04e43d1d6a3e8ac139f156406",
+    "run": "72d3e9bfe8f853fd0d4476cbe2996fe7adeca24716574d3e3585f200fc35b59b"
+  },
+  "bootstrap_sources.py": {
+    "source": "83a2bba8c400ba8f7a06f1dfee716eaa5257707b0b1ea07e44dc2c63e881b9d8",
+    "run": "83a2bba8c400ba8f7a06f1dfee716eaa5257707b0b1ea07e44dc2c63e881b9d8"
+  },
+  "camera_sampling.py": {
+    "source": "656f66d8c4c58ead7cda1792ebdb363661d842b9fced3086d9d834b50ed0a1a5",
+    "run": "656f66d8c4c58ead7cda1792ebdb363661d842b9fced3086d9d834b50ed0a1a5"
+  },
+  "common.py": {
+    "source": "830df96ceed44754c1cf3a20b9bb500c47689ceaf9e3baf04a19db86d07c1a70",
+    "run": "830df96ceed44754c1cf3a20b9bb500c47689ceaf9e3baf04a19db86d07c1a70"
+  },
+  "compare_cfg_runs.py": {
+    "source": "e06a8553f6766473d99f5d94b326cb11fd18a1144ccf88c63f515f76dfa051dd",
+    "run": "e06a8553f6766473d99f5d94b326cb11fd18a1144ccf88c63f515f76dfa051dd"
+  },
+  "compose.py": {
+    "source": "a132447aa6f04564ad4605daef634200d8cf9542673c28b6dc3533d6f7740707",
+    "run": "a132447aa6f04564ad4605daef634200d8cf9542673c28b6dc3533d6f7740707"
+  },
+  "diffusion.py": {
+    "source": "ddc4136cb4ee564ae961145f60d7b5e0920f5cd56cda1fd99b70201ee05f86bc",
+    "run": "ddc4136cb4ee564ae961145f60d7b5e0920f5cd56cda1fd99b70201ee05f86bc"
+  },
+  "download_models.py": {
+    "source": "66284d98918e74cfc2eacda4e564dfe0f46381ae01231b3e9c48d3d277df9102",
+    "run": "66284d98918e74cfc2eacda4e564dfe0f46381ae01231b3e9c48d3d277df9102"
+  },
+  "inpaint.py": {
+    "source": "56c17638469e7b11e2049b2c4c56241def2ade3210b96aaab0746a62cc9f36ef",
+    "run": "56c17638469e7b11e2049b2c4c56241def2ade3210b96aaab0746a62cc9f36ef"
+  },
+  "inspect_floor.py": {
+    "source": "238b149750a758f3cd21966696efdd3e3054268c1a8beaa82f1627627b53a4e6",
+    "run": "238b149750a758f3cd21966696efdd3e3054268c1a8beaa82f1627627b53a4e6"
+  },
+  "lang_features.py": {
+    "source": "02cb3a8b7d49773ffd55b8a19e5158c51205654e0fca285cbb90e62cc125e57d",
+    "run": "02cb3a8b7d49773ffd55b8a19e5158c51205654e0fca285cbb90e62cc125e57d"
+  },
+  "lang_nms.py": {
+    "source": "71f08d339e5383039dda48f733c1ace2d8e1916f4a31c8d09a15fd79f68b4991",
+    "run": "71f08d339e5383039dda48f733c1ace2d8e1916f4a31c8d09a15fd79f68b4991"
+  },
+  "localize.py": {
+    "source": "60a2cf55a5b579461f28ce6a3562d0116af46b32039e61eba06762dbe967086d",
+    "run": "60f801467a5758b6da2964991e22d411f8c696bff4983ae920b5a5d93d199b7a"
+  },
+  "object_model.py": {
+    "source": "9296713b247757694b93eddaba401d023f34e3a972bbea6e66699f71ff05907c",
+    "run": "9296713b247757694b93eddaba401d023f34e3a972bbea6e66699f71ff05907c"
+  },
+  "package_results.py": {
+    "source": "aca05161355f18591714f44d293202dab99e3d062afa64e3531681c670cc9ba2",
+    "run": "aca05161355f18591714f44d293202dab99e3d062afa64e3531681c670cc9ba2"
+  },
+  "prepare_cfg_ablation.py": {
+    "source": "32278f23ef7aa8969a6c07e62857e93e35fb1da19ff3f2d55c0163793058b454",
+    "run": "32278f23ef7aa8969a6c07e62857e93e35fb1da19ff3f2d55c0163793058b454"
+  },
+  "prepare_dataset.py": {
+    "source": "1cf6af8e47c2bb9e49f2a500a87d2d943c02749fe3a30e1e310e54c38c910eb5",
+    "run": "1cf6af8e47c2bb9e49f2a500a87d2d943c02749fe3a30e1e310e54c38c910eb5"
+  },
+  "prepare_edit_region.py": {
+    "source": "779d4e48cb6faec1d5b25a9573160409f5558327a3e896b7c179d98c3e8dc270",
+    "run": "5cac98588e1b0873d47a0d3b006e6738d598442e7699cf8cf9ab6a9b082d725e"
+  },
+  "preview_checkpoint.py": {
+    "source": "47475a7274fa2175f9eff42ec4b8d34c219eda0f0a67409c4ca1623a9e3c0cff",
+    "run": "47475a7274fa2175f9eff42ec4b8d34c219eda0f0a67409c4ca1623a9e3c0cff"
+  },
+  "preview_localization.py": {
+    "source": "48d97b363372aa6ad2afccfa36161720c279fb112c04c28e759a55f69d3a2acc",
+    "run": "48d97b363372aa6ad2afccfa36161720c279fb112c04c28e759a55f69d3a2acc"
+  },
+  "provenance.py": {
+    "source": "8b3ff41ea2103e3974c7f6652ba111cc69c0bd460398aec8576674fa9df07512",
+    "run": "c32dd495549c0b75e9984e17e527a17fde74c76dd28ecde973959926dae4d256"
+  },
+  "query_language.py": {
+    "source": "be2b15afb93921608a7c0beaead9261a62424bc880d8e437d5328f327295fe92",
+    "run": "1955b712b206c47d3b7da364c6c0874362f7a8329c19534bb287a03045dd72e1"
+  },
+  "rank_inpainting.py": {
+    "source": "660fb1f9ecd36942ca25de8043e05bb3c3725d91681d437f10dd0c85e6cac290",
+    "run": "95c153005f9719f84aa6ab415dde1c1ae7789a8c0d9a6816a7dfbf75170b0b3e"
+  },
+  "record_assets.py": {
+    "source": "181074982c8c4334e9129ee0a4c2d7a2fd7e069c3696c2dd1784cd7026951981",
+    "run": "181074982c8c4334e9129ee0a4c2d7a2fd7e069c3696c2dd1784cd7026951981"
+  },
+  "reference_proposals.py": {
+    "source": "89aaff9a02f19613a5d5e8c2fee0815c0b9fafa7eba6c94f06c9b2eef3ed7d8e",
+    "run": "1730afda171cc3a5fc4847a9a598a0bbb1034c138307d3104c42a5e5d8b4b766"
+  },
+  "render_results.py": {
+    "source": "0622248c4d20cbc8f6dc60021e33c6fbd6679c77074eec1e91d572bdf09c2180",
+    "run": "0622248c4d20cbc8f6dc60021e33c6fbd6679c77074eec1e91d572bdf09c2180"
+  },
+  "resolve_models.py": {
+    "source": "c7730ccd0b47ebba8fc35ef71405aabcd9c39b26df525ea035d3db08cfbb9b8d",
+    "run": "c7730ccd0b47ebba8fc35ef71405aabcd9c39b26df525ea035d3db08cfbb9b8d"
+  },
+  "review_results.py": {
+    "source": "d2f50b92989d88299ceadd1e1b1c03ccf3d150103dfd4bdce7ba30d0ac8cb000",
+    "run": "d2f50b92989d88299ceadd1e1b1c03ccf3d150103dfd4bdce7ba30d0ac8cb000"
+  },
+  "sam_foreground.py": {
+    "source": "4ebc45aa9577f6b648bf7af987cb122919fe50c1a2f7cc9fd73c07f7a8897045",
+    "run": "c7ca37072a664e4d75c124874a3df98bb75af76d05bdbebbf1bd5fcc17028ac4"
+  },
+  "sam_prompts.py": {
+    "source": "887df6d4fdb69a62189ec2fd64ade196334a6213a7788936edfb9c06746dabe1",
+    "run": "887df6d4fdb69a62189ec2fd64ade196334a6213a7788936edfb9c06746dabe1"
+  },
+  "sam_regions.py": {
+    "source": "ed9e8419506e1c918121d63de2bfcf667aba6f2176309fb2266a01424fb44c96",
+    "run": "ed9e8419506e1c918121d63de2bfcf667aba6f2176309fb2266a01424fb44c96"
+  },
+  "select_delivery.py": {
+    "source": "79d60b98d2611c8850a76b2da2f3c7c0e6295aaf76c9fd6600de55d5a04ae819",
+    "run": "79d60b98d2611c8850a76b2da2f3c7c0e6295aaf76c9fd6600de55d5a04ae819"
+  },
+  "show_stages.py": {
+    "source": "0aa09541073cc11d2ca71014fdb3432271f4a1f4f913fe79bea3811278be80c6",
+    "run": "0aa09541073cc11d2ca71014fdb3432271f4a1f4f913fe79bea3811278be80c6"
+  },
+  "status.py": {
+    "source": "864959b9a7a566f5b52da2ab57fbe65e7d05060d8c6e3a97a47d3bb5f50dd435",
+    "run": "864959b9a7a566f5b52da2ab57fbe65e7d05060d8c6e3a97a47d3bb5f50dd435"
+  },
+  "train_autoencoder.py": {
+    "source": "0f2e398789cbb98b3193c78f47344688e1a54bccdf21febcefd5f9f1d82d70bc",
+    "run": "0f2e398789cbb98b3193c78f47344688e1a54bccdf21febcefd5f9f1d82d70bc"
+  },
+  "train_object.py": {
+    "source": "596319c92e932c9799bf24c34a91c8c87a70dec27d77b9020050b3c3bc098ad6",
+    "run": "596319c92e932c9799bf24c34a91c8c87a70dec27d77b9020050b3c3bc098ad6"
+  },
+  "validate_ae_graph.py": {
+    "source": "205b6a72f6b7a77b3e48db0f031540d971af4b8275565548f8eeb6c3034d2ddc",
+    "run": "205b6a72f6b7a77b3e48db0f031540d971af4b8275565548f8eeb6c3034d2ddc"
+  },
+  "validate_cameras.py": {
+    "source": "95aa2ff599100b5a66d9b5b576b84680220b5230180f96898fa60a3a899f15c3",
+    "run": "95aa2ff599100b5a66d9b5b576b84680220b5230180f96898fa60a3a899f15c3"
+  },
+  "validate_compactness.py": {
+    "source": "2e75ab34d0e41bfc550e5d2b214f50d002d6c38cf4f31815ad2aa7cfb8505246",
+    "run": "2e75ab34d0e41bfc550e5d2b214f50d002d6c38cf4f31815ad2aa7cfb8505246"
+  },
+  "validate_diffusion.py": {
+    "source": "21359f186a1957005fa680a0de207cd08d2882bc0b19119508bcb603595bcd46",
+    "run": "21359f186a1957005fa680a0de207cd08d2882bc0b19119508bcb603595bcd46"
+  },
+  "validate_feature_cache.py": {
+    "source": "3e3ff22fe64e40eff42ffdbb4c550819905fca1f21e175160f1a26539829f284",
+    "run": "3e3ff22fe64e40eff42ffdbb4c550819905fca1f21e175160f1a26539829f284"
+  },
+  "validate_language_renderer.py": {
+    "source": "2f60f7390aee894ffe6c78459ccf97cb31ca0ac1ab352776a30852646623f0d7",
+    "run": "2f60f7390aee894ffe6c78459ccf97cb31ca0ac1ab352776a30852646623f0d7"
+  },
+  "validate_renderer.py": {
+    "source": "5e4a90a689660dbb039a85ce6b07bc91c40db677ed7d8205fc9bb5182413f8c6",
+    "run": "5e4a90a689660dbb039a85ce6b07bc91c40db677ed7d8205fc9bb5182413f8c6"
+  },
+  "validate_trained_language.py": {
+    "source": "d09e906f50909655ad8967ebc768cd711ed3fce9e9736db1f0cc21d91ed24aa4",
+    "run": "d09e906f50909655ad8967ebc768cd711ed3fce9e9736db1f0cc21d91ed24aa4"
+  },
+  "verify_artifacts.py": {
+    "source": "a2f292f31ef2e1a94a5a4318e9b35f69da232ec66735c094cb5745ee3b3bf9ff",
+    "run": "a2f292f31ef2e1a94a5a4318e9b35f69da232ec66735c094cb5745ee3b3bf9ff"
+  },
+  "world_up.py": {
+    "source": "d09054ad730b05e7d5fcf9018e870e73fc3ed51de06c0faadfcb37d973407145",
+    "run": "d09054ad730b05e7d5fcf9018e870e73fc3ed51de06c0faadfcb37d973407145"
+  }
+}

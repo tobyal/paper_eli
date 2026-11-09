@@ -1,0 +1,68 @@
+--- /mnt/sda/ubuntu/lkx/papers/paper_eli/repos/DGE/threestudio/models/prompt_processors/stable_diffusion_prompt_processor.py before
++++ /mnt/sda/ubuntu/lkx/papers/paper_eli/repos/DGE/threestudio/models/prompt_processors/stable_diffusion_prompt_processor.py after
+@@ -50,12 +50,14 @@
+             prompt,
+             padding="max_length",
+             max_length=self.tokenizer.model_max_length,
++                truncation=True,
+             return_tensors="pt",
+         )
+         uncond_tokens = self.tokenizer(
+             negative_prompt,
+             padding="max_length",
+             max_length=self.tokenizer.model_max_length,
++                truncation=True,
+             return_tensors="pt",
+         )
+ 
+@@ -81,11 +83,16 @@
+             device_map="auto",
+         )
+ 
++        lengths = [len(tokenizer(text, truncation=False).input_ids) for text in prompts]
++        for text, length in zip(prompts, lengths):
++            if length > tokenizer.model_max_length:
++                print(f"NATIVE_CLIP_TOKEN_LIMIT input={length} used={tokenizer.model_max_length}: {text}", flush=True)
+         with torch.no_grad():
+             tokens = tokenizer(
+                 prompts,
+                 padding="max_length",
+                 max_length=tokenizer.model_max_length,
++                truncation=True,
+                 return_tensors="pt",
+             )
+             text_embeddings = text_encoder(tokens.input_ids.to(text_encoder.device))[0]
+--- /mnt/sda/ubuntu/lkx/papers/paper_eli/baseline_comparison/vendor/GaussianEditor/threestudio/models/prompt_processors/stable_diffusion_prompt_processor.py before
++++ /mnt/sda/ubuntu/lkx/papers/paper_eli/baseline_comparison/vendor/GaussianEditor/threestudio/models/prompt_processors/stable_diffusion_prompt_processor.py after
+@@ -50,12 +50,14 @@
+             prompt,
+             padding="max_length",
+             max_length=self.tokenizer.model_max_length,
++                truncation=True,
+             return_tensors="pt",
+         )
+         uncond_tokens = self.tokenizer(
+             negative_prompt,
+             padding="max_length",
+             max_length=self.tokenizer.model_max_length,
++                truncation=True,
+             return_tensors="pt",
+         )
+ 
+@@ -81,11 +83,16 @@
+             device_map="auto",
+         )
+ 
++        lengths = [len(tokenizer(text, truncation=False).input_ids) for text in prompts]
++        for text, length in zip(prompts, lengths):
++            if length > tokenizer.model_max_length:
++                print(f"NATIVE_CLIP_TOKEN_LIMIT input={length} used={tokenizer.model_max_length}: {text}", flush=True)
+         with torch.no_grad():
+             tokens = tokenizer(
+                 prompts,
+                 padding="max_length",
+                 max_length=tokenizer.model_max_length,
++                truncation=True,
+                 return_tensors="pt",
+             )
+             text_embeddings = text_encoder(tokens.input_ids.to(text_encoder.device))[0]

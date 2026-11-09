@@ -19,6 +19,47 @@
 
 ## M4 监督与权限
 
+M4 默认 `integration.alignment: rasterized_reference`。`core/alignment.py` 的
+`fit_reference` 调用 `core/gaussian_registration.py`：在保存的 M2 Anchor 内外参下
+渲染完整 Gaussian 的 RGB、Alpha 和相机 Z 深度，搜索 24 个 Yaw 与三种尺寸初值，
+对不同朝向候选进行可微配准。只优化统一尺度、Yaw 和两个水平位移，设备本身不训练。
+损失为软轮廓 IoU、轮廓距离、低权重归一化 RGB 结构/色度，以及三维占地中心和越界约束。
+RGB 不拟合曝光或重新着色。三维初值使用 M1 实测占地中心和 M2 的精确生成框；
+支撑高度固定为 M2 保存的底面，不从 Anchor 相机朝向重新定义设备坐标。
+
+导出时对位置、尺度、协方差旋转和 SH0–SH3 使用同一空间变换，并验证导出渲染与
+可微配准渲染的一致性。`alignment/` 保留候选、指标、RGB/Alpha/Depth、参考 Mask
+叠加和新旧同相机检查。轮廓或三维越界检查不合格时停止，不继续优化背景。
+`verified_transform` 与历史 `anchor_silhouette` 仅供显式选择的历史配置兼容。
+
+复用已完成案例重新配准（在服务器项目根目录运行）：
+
+```bash
+industrial_swap_v2/envs/webapp/bin/python -m industrial_swap_v2.scripts.prepare_reference_alignment \
+  --source-config industrial_swap_v2/outputs/pbr_10cases_m4_2000_20261108/case_02_B/config.yaml \
+  --destination outputs/case02_raster_alignment_v1 --gpu 3 --iterations 2000
+CUDA_VISIBLE_DEVICES=3 SWAP_GPU=3 envs/gsle/bin/python -m industrial_swap_v2.modules.m4_refinement \
+  --config industrial_swap_v2/outputs/case02_raster_alignment_v1/config.yaml
+CUDA_VISIBLE_DEVICES=3 SWAP_GPU=3 envs/gsle/bin/python -m industrial_swap_v2.scripts.inspect_reference_alignment \
+  --config industrial_swap_v2/outputs/case02_raster_alignment_v1/config.yaml
+```
+
+准备脚本拒绝覆盖已有目录。新的位姿必须重新构建 M4 Mask 缓存；旧案例的定位、
+Qwen 图像、独立 PBR Gaussian 和背景文件保持只读。对称设备的单视图姿态仍可能不唯一，
+候选分数及生成框越界量都随结果保存，不把视觉相似性解释为准确的物理测量。
+
+若参考图拟合的最优候选超过既有生成空间限制，使用相同损失进行一次约束内
+精配准：每步仅将尺度和水平平移投影回可行范围，不调整支撑高度、不修改设备，
+也不放宽原有 IoU/越界阈值。`alignment/constrained_refinement.json` 保存这一步的
+输入候选及结果。批量入口为 `scripts/run_registration_batch.py`，各案例独立输出；
+已验证的 case02 可直接复用，M1–M3 均不重新运行。
+
+经人工确认的高度适配可通过新实验的 `m4.integration.space_override` 指向
+`m4_height_adaptation.json`。此文件保存原 M1/M2 的 SHA256 和新旧生成框；
+入口强制校验底面、方向、水平占地不变，且新高度不超过原 M1 编辑空间顶面。
+它不修改 M2，也不会在配准失败后自动启用。本批次仅 case05 获准使用，
+相关文件和调整说明随该案例结果打包保存。
+
 每个相机分别渲染旧目标的可见贡献以及固定新设备的独立 Alpha。环境区域严格为 `M_env = ~(M_old | M_new)`；真实照片损失另保留既有的小幅边界保护、图像边缘和局部支持限制。大包围盒仅用于合法前景的保守深度判定，不再作为环境 RGB 的主要排除区域。
 
 M4 的 `multiview_supervision/` 保存 `cache/*.npz`、Mask/Alpha/Depth、相机清单、`rgb_indices.npy`、`occlusion_indices.npy` 和多视角遮挡证据。Anchor 的 M2 Mask 仅用于一致性审计，其他视角使用各自独立渲染。遮挡证据仍使用真实渲染贡献梯度、三维协方差支持、视角数量/角度和合法前景保护。

@@ -1,0 +1,8 @@
+{
+  "effective_coarse_batch": 6,
+  "effective_refine_batch": 4,
+  "coarse_physical_microbatch": 2,
+  "refine_case00_04_07_microbatch": 1,
+  "refine_case02_10_microbatch": 4,
+  "note": "Existing processes retain microbatch=1 accumulation. Pending case02/10 use native full refinement batch=4 with memory gate; losses, iterations, effective batch, models unchanged."
+}

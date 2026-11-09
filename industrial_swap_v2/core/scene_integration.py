@@ -12,7 +12,7 @@ def object_path(ctx):
 def integrate(ctx):
     if not enabled(ctx): return object_path(ctx)
     from .scene import read_vertices,save_vertices,compose
-    from .alignment import fit,transform_vertices
+    from .alignment import fit,fit_reference,transform_vertices
     from .m2_space import generation_frame
     src=ctx.stage('m3')/'object_refined_local.ply';out=ctx.stage('m4')
     summary=read_json(ctx.stage('m3')/'pbr_training_summary.json')
@@ -35,6 +35,8 @@ def integrate(ctx):
         write_json(out/'transform.json',transform)
     elif cfg['alignment']=='anchor_silhouette':
         fit(local,generation_frame(ctx),camera,ctx.stage('m2')/'object_mask.png',ctx.cfg['m3'],out)
+    elif cfg['alignment']=='rasterized_reference':
+        fit_reference(ctx)
     else: raise ValueError('Unknown M4 alignment method')
     compose(ctx.stage('m1')/'background_gaussians.ply',destination,out/'scene_initial.ply',out/'initial_composition.json')
     write_json(out/'integration.json',{'source':str(src),'source_sha256':sha256(src),'world_sha256':sha256(destination),

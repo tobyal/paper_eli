@@ -1,0 +1,11 @@
+--- before/avp.py
++++ after/avp.py
+@@ -65,6 +65,8 @@
+     sphere_radius = np.linalg.norm(corners - center, axis=1).max()
+     fov = 49.1
+     radius = float(sphere_radius / math.sin(math.radians(fov / 2)) * 1.15)
++    radius *= float(cfg["avp"].get("radius_multiplier", 1.0))
++    elevation = float(np.clip(elevation + cfg["avp"].get("elevation_offset_degrees", 0.0), 10, 65))
+     records = []
+     with torch.no_grad():
+         for i in range(cfg["avp"]["views"]):

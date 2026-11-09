@@ -1,0 +1,131 @@
+GSLE reproduction notes, 2026-11-05
+
+Paper: https://openaccess.thecvf.com/content/WACV2025/papers/Xiao_Localized_Gaussian_Splatting_Editing_with_Contextual_Awareness_WACV_2025_paper.pdf
+Supplement: https://openaccess.thecvf.com/content/WACV2025/supplemental/Xiao_Localized_Gaussian_Splatting_WACV_2025_supplemental.pdf
+Author project: https://corneliushsiao.github.io/GSLE.html
+
+Primary sources: WACV 2025 paper pp.5207-5217 and its 7-page supplement,
+downloaded to references/gsle. The author project page currently has no public
+source-code link. This is an independent paper-derived implementation using
+official component repositories, not an official GSLE code release.
+
+Task: replace the complete machine (black assembly and white base) at the
+previous input-video reference around75s with a yellow six-axis industrial
+robot arm mounted on a metal base. Re-localize using a trained LangSplat
+language field; the previous manually selected white-housing ROI is not input.
+
+Paper method:
+- Localization: LangSplat [39], paper p.5210. Train original SAM/OpenCLIP
+  multiscale features, scene-wise512->3 autoencoder, and 3D language fields.
+- AVP:100 azimuth views,3.6-degree spacing (p.5212). Target-masked HSV V,
+  min/max contrast normalization,8 in-plane rotations separated by45degrees.
+  Seek strongest directional brightness difference, not just brightest frame.
+- Anchor inpainting: projected3D bounding-box mask, depth ControlNet, SD
+  inpainting, generation text. SAM extracts generated foreground.
+- Coarse: solid-sphere initialization, radially Gaussian-shaped opacity,
+  low initial opacity/color, compactness-based densification/pruning from
+  GSGen [7]. Optimize RGB MSE, rendered-opacity mask MSE, and Stable Zero123
+  3D-SDS (paper equations3-4). Freeze pretrained models.
+- Composition: remove old target Gaussians, retain all other scene parameters;
+  place new object using an explicit invertible local-to-world similarity.
+- Refinement: render combined object/background. Volumetric depth is based
+  on camera-center distance (equation2), normalized then inverted as1-d.
+  Depth ControlNet receives noisy4-channel RGB latents, time, text and depth
+  (eq5). Its residuals enter9-channel inpainting UNet together with noisy
+  latents, projected bbox mask, and masked-image latents (eq6).
+  CFG in eq7 is conditioned + s*(conditioned - unconditioned).
+  Use view-conditioned prompts; remove Zero123 loss in refinement (eq8).
+  The unedited background stays frozen; gradients update the new object.
+
+Supplement settings:
+- Coarse random render64/128/256 and reference128/256/512 at steps0/200/300.
+- Refinement random/reference512. Effective batch coarse6, refinement4.
+- CFG coarse3.0; DI-SDS100. Models frozen. Memory microbatching may be used
+  with summed/averaged gradients and one optimizer update per full batch.
+- Coarse RGB/mask weights0->1500 over first1000 steps, then1000; 3D-SDS1.
+- Refinement RGB/mask1500, DI-SDS0.1.
+- Coarse xyz LR1e-3->1e-5 exponentially by1000; scale5e-3->5e-4.
+- Refinement xyz1e-4->1e-5 by10000; scale5e-4->5e-5.
+- Both stages rotation5e-3, color1e-2, opacity1e-2.
+
+Published ambiguities to expose in configuration/records:
+1. Supplement Algorithm1 writes B=abs(min(S-1)),argmin(B), but its stated
+   objective and main-paper Fig.3 select maximal directional contrast. With
+   complementary rotations, literal scoring can favor balanced illumination.
+   Save literal scores and text-consistent contrast scores, with both selected
+   views; explicitly record the scoring rule used for actual generation.
+2. Supplement mentions3500 coarse iterations in1.2 and6500 in1.3. Use6500
+   for the main run and save an intermediate3500 checkpoint; refinement2000.
+3. The coarse RGB/mask schedule explicitly rises to1500 then stays at1000.
+   Keep that piecewise schedule and record it rather than silently smoothing.
+4. Paper does not specify every initialization constant, timestep range,
+   candidate-camera radius/elevation, mask threshold, or densification period.
+   Derive spatial settings from the data, reuse documented official component
+   defaults where appropriate, and label each remaining choice as an assumption.
+5. Runway's original SD model repository has migrated; use verified maintained
+   snapshots of the same SD1.5 inpainting architecture. Stable Zero123 uses the
+   DreamGaussian-supported diffusers conversion, not Zero123-XL or Zero123++.
+6. SAM requires prompts. Automatic box/mask proposals must come from model
+   outputs or projected geometry, never manual tracing or hand-made foregrounds.
+7. Eq7 writes the unconditional prediction as epsilon_phi(x_t;t), omitting
+   text, mask, context and depth. The primary implementation therefore uses
+   empty text plus zero mask/context channels and zero ControlNet residuals.
+   Nine input channels are still required by the inpainting UNet. This padding
+   detail is not published; retain an explicit text-only-CFG ablation option.
+8. World up is estimated automatically from LangSplat floor semantics and a
+   robust plane, with calibrated-camera fallbacks. Semantic floor Gaussians
+   coplanar with that plane are retained during target removal. This is an
+   industrial-scene adaptation, not a claimed GSLE-published hyperparameter.
+   The observed noisy floor required a strong-horizontal-plane acceptance
+   case (>=1000 inliers, >20% support, normal/up alignment>0.95), followed by
+   refitting within three initial residual tolerances. Original rejected fit
+   and bbox-only removal diagnostics are retained. Unobserved background under
+   the old machine is not fabricated; the paper keeps background points fixed.
+9. Random-camera sampling follows the paper-era threestudio source pinned in
+   camera_source.json:50/50 uniform-angle and sphere sampling, stratified
+   azimuth, variable40-70degree FOV, and camera/center/up perturbations. The
+   normalized radius is mapped relative to the selected anchor in scene units.
+   Foreground background is white for Stable Zero123, as in DreamGaussian's
+   image-to-3D workflow; GSLE does not publish that compositing constant.
+10. Frozen diffusion networks use FP16, following the imported DreamGaussian
+    execution path; Gaussian parameters/rendering and SDS loss accumulation
+    use FP32. The paper does not specify numerical precision. SDS uses
+    w(t)=1-alpha_cumprod(t), matching DreamGaussian's released guidance;
+    GSLE leaves this weighting function unspecified. Report measured memory
+    and timings for this implementation, not the paper's hardware figures.
+11. Actual industrial-scene inpainting initially produced elongated mechanical
+    parts rather than a recognizable arm. These failed outputs are retained.
+    Require>=90% target visibility for AVP. Keep old-device localization/deletion
+    separate from a derived upright generation volume: preserve the original
+    floor-aligned horizontal extents and bottom, raise height to the largest
+    original oriented extent. No coordinates or foregrounds are hand supplied.
+    Inpainting ControlNet strength/prompt are adapted in config.json; use three
+    fixed seeds and automatic OpenCLIP ranking followed by visual QA. Negative
+    prompts apply only to2D generation; DI-SDS still uses empty unconditional
+    text and its full depth residuals. These are disclosed industrial adapters,
+    not hyperparameters reported by GSLE. AVP,3D-SDS and DI-SDS remain intact.
+12. Box-only SAM included a generated cabinet behind the arm. The final SAM
+    prompts use distance-transform peaks of yellow components and a large
+    low-saturation component inside the preliminary SAM mask. These are
+    automatic point prompts for this explicitly yellow target, not final mask
+    pixels. SAM predicts the full foreground and candidates must contain the
+    positive points and exclude the background point. Save all prompts/masks.
+    The local sphere has radius0.5 (diameter1); its similarity scale maps that
+    diameter to the largest generation-region side. A short earlier half-scale
+    diagnostic is retained separately and is not the production coarse model.
+13. Actual early refinement under drop_all_eq7 brightened/softened the object
+    and increased reference losses. Run a separately isolated full2000-step
+    text_only unconditional-conditioning ablation from the same coarse model.
+    Installed diffusers0.30.3 ControlNet inpainting duplicates both mask and
+    masked-image latents across CFG branches (pipeline_controlnet_inpaint.py,
+    lines932-934); with guess_mode=False its ControlNet receives both text
+    branches and the duplicated depth condition (lines1380-1406). This supports
+    testing context-preserving empty-text conditioning for the paper's omitted
+    unconditional inputs. Both experiments retain GSLE's cond+s*(cond-uncond)
+    coefficient, all models, losses, schedules, inputs and iteration counts.
+    This is a documented ambiguity comparison, not a claim of access to the
+    authors' undisclosed implementation. Judge final actual renders separately.
+
+Limitations acknowledged by the paper: no physically correct relighting or
+background-shadow editing; visibility/camera trajectories can need adjustment;
+single-view generation can miss lighting information. Record actual outcomes.

@@ -1,0 +1,31 @@
+This is a paper-derived GSLE implementation, not an official GSLE release.
+
+GSGen: https://github.com/gsgen3d/gsgen
+Compactness surface-distance and gap-filling formulas adapted in object_model.py.
+Copyright (c) 2023 gsgen3d. MIT license: LICENSE.GSGen.
+
+DreamGaussian: https://github.com/dreamgaussian/dreamgaussian
+Stable Zero123 pipeline/guidance imported from the pinned source checkout.
+Copyright (c) 2023 dreamgaussian. MIT license: LICENSE.DreamGaussian.
+
+LangSplat: https://github.com/minghanqin/LangSplat
+Official scene autoencoder, multiscale SAM/OpenCLIP extraction, feature rasterizer
+and 3D language-field training. lang_nms.py vectorizes its original NMS formulas;
+train_autoencoder.py preserves its architecture, optimizer, loss and schedule.
+See LICENSE.LangSplat and the upstream files' notices. Its 3DGS components retain
+the original Inria/MPII research/non-commercial license.
+
+Segment Anything: https://github.com/facebookresearch/segment-anything
+The LangSplat fork is pinned in upstream.json. sam_regions.py adapts the original
+region cleanup implementation to an ordered thread pool, with equivalence checks.
+Copyright (c) Meta Platforms, Inc. and affiliates. Apache2.0: LICENSE.SAM.
+
+Original 3DGS renderer and camera utilities are imported from the already pinned
+graphdeco-inria/gaussian-splatting checkout. Keep that repository's LICENSE.md.
+Pretrained models keep their upstream model licenses; they are downloaded to the
+ignored model cache, not redistributed in this source repository.
+
+threestudio: https://github.com/threestudio-project/threestudio
+Random camera distributions follow the paper-era source revision recorded in
+camera_source.json. camera_sampling.py independently implements these sampling
+equations in the existing COLMAP/object frame; threestudio is not a dependency.

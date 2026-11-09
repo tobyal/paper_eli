@@ -1,0 +1,42 @@
+--- before/gaussian_renderer/__init__.py
++++ after/gaussian_renderer/__init__.py
+@@ -59,7 +59,7 @@
+     # Create zero tensor. We will use it to make pytorch return gradients of the 2D (screen-space) means
+     screenspace_points = (
+         torch.zeros_like(
+-            pc.get_xyz, dtype=pc.get_xyz.dtype, requires_grad=True, device="cuda"
++            (pc._xyz if getattr(pc, "localize", False) else pc.get_xyz), dtype=pc.get_xyz.dtype, requires_grad=True, device="cuda"
+         )
+         + 0
+     )
+@@ -90,7 +90,7 @@
+     rasterizer = GaussianRasterizer(raster_settings=raster_settings)
+ 
+     means3D = pc.get_xyz
+-    means2D = screenspace_points
++    means2D = screenspace_points[pc.mask] if getattr(pc, "localize", False) else screenspace_points
+     opacity = pc.get_opacity
+ 
+     # If precomputed 3d covariance is provided, use it. If not, then it will be computed from
+@@ -124,7 +124,7 @@
+ 
+         shs = shs.float()
+     else:
+-        colors_precomp = override_color
++        colors_precomp = override_color[pc.mask] if getattr(pc, "localize", False) else override_color
+ 
+     # Rasterize visible Gaussians to image, obtain their radii (on screen).
+     # import pdb; pdb.set_trace()
+@@ -138,6 +138,12 @@
+         rotations=rotations.float(),
+         cov3D_precomp=cov3D_precomp,
+     )
++
++    # Local rendering uses a subset; densification statistics use global IDs.
++    if getattr(pc, "localize", False):
++        global_radii = radii.new_zeros(pc._xyz.shape[0])
++        global_radii[pc.mask] = radii
++        radii = global_radii
+ 
+     # Those Gaussians that were frustum culled or had a radius of 0 were not visible.
+     # They will be excluded from value updates used in the splitting criteria.

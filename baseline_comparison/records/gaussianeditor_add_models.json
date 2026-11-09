@@ -1,0 +1,33 @@
+{
+  "lambdalabs/sd-image-variations-diffusers": {
+    "revision": "81226edde9d4f972f363f98e28dfe353d2b1e944",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lambdalabs--sd-image-variations-diffusers/snapshots/81226edde9d4f972f363f98e28dfe353d2b1e944",
+    "allow_patterns": [
+      "image_encoder/*",
+      "feature_extractor/*",
+      "vae/*",
+      "scheduler/*",
+      "model_index.json"
+    ],
+    "usable": false,
+    "reason": "Empty moved-namespace snapshot; superseded by verified lambda/sd-image-variations-diffusers in gaussianeditor_recovered_models.json"
+  },
+  "lllyasviel/Annotators": {
+    "error": "DPT checkpoint absent in requested model repository"
+  },
+  "lllyasviel/control_v11p_sd15_inpaint": {
+    "revision": "c96e03a807e64135568ba8aecb66b3a306ec73bd",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lllyasviel--control_v11p_sd15_inpaint/snapshots/c96e03a807e64135568ba8aecb66b3a306ec73bd",
+    "allow_patterns": [
+      "config.json",
+      "diffusion_pytorch_model.bin"
+    ]
+  },
+  "camenduru/Wonder3D": {
+    "revision": "e20d94d639d6e1663abcbec791cddfbf51849f33",
+    "path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--camenduru--Wonder3D/snapshots/e20d94d639d6e1663abcbec791cddfbf51849f33",
+    "allow_patterns": [
+      "unet/*"
+    ]
+  }
+}

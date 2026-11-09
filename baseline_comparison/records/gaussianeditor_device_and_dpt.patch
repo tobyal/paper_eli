@@ -1,0 +1,22 @@
+--- before/threestudio/utils/wonder3D/instant-nsr-pl/launch.py
++++ after/threestudio/utils/wonder3D/instant-nsr-pl/launch.py
+@@ -53,7 +53,7 @@
+ 
+     # set CUDA_VISIBLE_DEVICES then import pytorch-lightning
+     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+-    os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
++    os.environ.setdefault("CUDA_VISIBLE_DEVICES", args.gpu)  # respect isolated parent GPU
+     n_gpus = len(args.gpu.split(","))
+ 
+     import datasets
+--- before/threestudio/utils/dpt.py
++++ after/threestudio/utils/dpt.py
+@@ -936,7 +936,7 @@
+         self.pretrained, self.scratch = _make_encoder(
+             backbone,
+             features,
+-            True,  # Set to true of you want to train from scratch, uses ImageNet weights
++            False,  # Complete Omnidata state dict is loaded strictly below; no overwritten ImageNet allocation
+             groups=1,
+             expand=False,
+             exportable=False,

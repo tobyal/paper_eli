@@ -1,0 +1,220 @@
+--- gsle/avp.py
++++ baseline_comparison/vendor/gsle/avp.py
+@@ -145,7 +145,7 @@
+         "camera": camera.record(),
+     }
+     save_json(dest / "anchor.json", metadata)
+-    save_json(ROOT / "records/gsle/avp.json", metadata)
++    save_json(RECORDS / "avp.json", metadata)
+     print(
+         "Selected AVP",
+         chosen["index"],
+--- gsle/localize.py
++++ baseline_comparison/vendor/gsle/localize.py
+@@ -33,7 +33,7 @@
+     / "data/gsle_langsplat/language_features"
+     / (Path(cfg["reference_image"]).stem + "_s.npy")
+ )
+-reference_mask = segments[proposal["level"]] == proposal["feature_index"]
++reference_mask = np.isin(segments[proposal["level"]], proposal.get("feature_indices", [proposal["feature_index"]]))
+ xy, z = camera.project(xyz)
+ pixels = np.round(xy).astype(np.int64)
+ inside = (
+@@ -112,7 +112,7 @@
+     "semantic_boundary": 0.5,
+ }
+ save_json(dest / "target.json", target)
+-save_json(ROOT / "records/gsle/localization.json", target)
++save_json(RECORDS / "localization.json", target)
+ selected = source.subset(indices)
+ retained = source.subset(keep)
+ selected.save(dest / "target.ply")
+--- gsle/prepare_edit_region.py
++++ baseline_comparison/vendor/gsle/prepare_edit_region.py
+@@ -45,7 +45,7 @@
+     "paper_status": "explicit industrial replacement adaptation; GSLE does not prescribe new-object box sizing",
+ }
+ save_json(OUT / "localization/edit_region.json", region)
+-save_json(ROOT / "records/gsle/edit_region.json", region)
++save_json(RECORDS / "edit_region.json", region)
+ print(
+     json.dumps(
+         {
+--- gsle/provenance.py
++++ baseline_comparison/vendor/gsle/provenance.py
+@@ -7,7 +7,7 @@
+ def capture(stage, destination=None):
+     root = Path(os.environ["ROOT"])
+     files = {}
+-    for path in sorted((root / "gsle").rglob("*")):
++    for path in sorted(Path(__file__).parent.rglob("*")):
+         if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc":
+             files[str(path.relative_to(root))] = hashlib.sha256(
+                 path.read_bytes()
+--- gsle/query_language.py
++++ baseline_comparison/vendor/gsle/query_language.py
+@@ -11,7 +11,7 @@
+ sys.path.insert(0, str(root / "repos/LangSplat/autoencoder"))
+ from model import Autoencoder
+ 
+-out = root / "outputs/gsle"
++out = Path(os.environ["GSLE_OUTPUT"])
+ dest = out / "localization"
+ dest.mkdir(exist_ok=True)
+ proposals = json.loads(
+@@ -37,7 +37,7 @@
+ source, _ = torch.load(
+     root / "outputs/reconstruction/chkpnt30000.pth", map_location="cpu"
+ )
+-cfg = json.loads((root / "gsle/config.json").read_text())
++cfg = json.loads(Path(os.environ["GSLE_CONFIG"]).read_text())
+ prefix = (
+     root / "data/gsle_langsplat/language_features" / Path(cfg["reference_image"]).stem
+ )
+@@ -49,7 +49,7 @@
+ start = time.time()
+ for level in (1, 2, 3):
+     model, iteration = torch.load(
+-        out / f"langsplat_{level}/chkpnt30000.pth", map_location="cpu"
++        root / f"outputs/gsle/langsplat_{level}/chkpnt30000.pth", map_location="cpu"
+     )
+     assert iteration == 30000 and len(model) == 13
+     for index in range(1, 7):
+--- gsle/rank_inpainting.py
++++ baseline_comparison/vendor/gsle/rank_inpainting.py
+@@ -6,24 +6,14 @@
+ from PIL import Image, ImageDraw
+ 
+ root = Path(os.environ["ROOT"])
+-out = root / "outputs/gsle"
++out = Path(os.environ["GSLE_OUTPUT"])
+ sys.path.insert(0, str(root / "repos/LangSplat"))
+ import preprocess as official
+ 
+-cfg = json.loads((root / "gsle/config.json").read_text())
++cfg = json.loads(Path(os.environ["GSLE_CONFIG"]).read_text())
+ pins = json.loads((root / "records/gsle/models.json").read_text())
+-positives = (
+-    cfg["replacement_text"],
+-    "a yellow articulated industrial robot arm on a pedestal",
+-    "a single six-axis robotic manipulator with an elbow and gripper",
+-)
+-negatives = (
+-    "a yellow roller machine",
+-    "a long horizontal frame with wheels",
+-    "two separate industrial robot arms",
+-    "a disconnected mechanical assembly",
+-    "texture",
+-)
++positives = (cfg["replacement_text"],)
++negatives = ("a disconnected mechanical assembly", "multiple separate machines", "texture", "background", "floor")
+ clip = official.OpenCLIPNetwork(
+     official.OpenCLIPNetworkConfig(
+         clip_model_pretrained=str(
+@@ -67,7 +57,7 @@
+     selection_pending=False,
+     selected=selected,
+     candidates=rows,
+-    selection_rule="mean pretrained OpenCLIP relevance over three robot-arm descriptions against explicit competing machine descriptions; visual QA remains necessary",
++    selection_rule="pretrained OpenCLIP relevance of the exact replacement text against generic failure/background descriptions; visual QA remains necessary",
+     ranking_positive_texts=positives,
+     ranking_negative_texts=negatives,
+ )
+--- gsle/reference_proposals.py
++++ baseline_comparison/vendor/gsle/reference_proposals.py
+@@ -13,13 +13,9 @@
+ sys.path.insert(0, str(root / "repos/LangSplat"))
+ import preprocess as official
+ 
+-cfg = json.loads((root / "gsle/config.json").read_text())
++cfg = json.loads(Path(os.environ["GSLE_CONFIG"]).read_text())
+ models = json.loads((root / "records/gsle/models.json").read_text())
+-texts = [
+-    cfg["target_text"],
+-    "a black automotive assembly on a white metal support base",
+-    "an industrial machine on a white cart",
+-]
++texts = [cfg["target_text"]]
+ network = official.OpenCLIPNetwork(
+     official.OpenCLIPNetworkConfig(
+         clip_model_pretrained=str(
+@@ -76,7 +72,19 @@
+             }
+         )
+ records.sort(key=lambda x: x["rank"], reverse=True)
+-dest = root / "outputs/gsle/localization_proposals"
++# The user-confirmed original-photo SAM region selects the physical instance;
++# its 3D extent is still freshly determined by the LangSplat query and depth.
++selected_mask=np.load(cfg["reference_sam_mask"]).astype(bool)
++yy,xx=np.where(selected_mask)
++chosen={"level":cfg["reference_sam_level"],"feature_index":cfg["reference_sam_ids"][0],
++    "feature_indices":cfg["reference_sam_ids"],"area_fraction":float(selected_mask.mean()),
++    "centroid":[float(xx.mean()/width),float(yy.mean()/height)],
++    "bbox":[int(xx.min()),int(yy.min()),int(xx.max()),int(yy.max())],
++    "text_scores":scores[cfg["reference_sam_ids"]].mean(0).tolist(),
++    "semantic_score":float(scores[cfg["reference_sam_ids"]].mean()),
++    "rank":float(scores[cfg["reference_sam_ids"]].mean()),"association":"confirmed original-photo SAM instance"}
++records.insert(0,chosen)
++dest = Path(os.environ["GSLE_OUTPUT"]) / "localization_proposals"
+ dest.mkdir(exist_ok=True)
+ canvas = Image.new("RGB", (468 * 3, 290 * 4), "white")
+ for rank, item in enumerate(records[:12]):
+--- gsle/sam_foreground.py
++++ baseline_comparison/vendor/gsle/sam_foreground.py
+@@ -11,13 +11,13 @@
+ from PIL import Image
+ 
+ root = Path(os.environ["ROOT"])
+-out = root / "outputs/gsle"
++out = Path(os.environ["GSLE_OUTPUT"])
+ sys.path.insert(0, str(root / "repos/LangSplat"))
+ import preprocess as official
+ from segment_anything import SamPredictor
+-from sam_prompts import yellow_object_prompts
+ 
+-cfg = json.loads((root / "gsle/config.json").read_text())
++
++cfg = json.loads(Path(os.environ["GSLE_CONFIG"]).read_text())
+ pins = json.loads((root / "records/gsle/models.json").read_text())
+ image = np.asarray(Image.open(out / "inpainting/edited_anchor.png").convert("RGB"))
+ edit_mask = np.asarray(Image.open(out / "avp/bbox_mask.png")) > 127
+@@ -29,14 +29,8 @@
+ predictor = SamPredictor(sam)
+ predictor.set_image(image)
+ masks, scores, logits = predictor.predict(box=box, multimask_output=True)
+-points, labels, prompt_record = yellow_object_prompts(
+-    image, masks[int(scores.argmax())]
+-)
+-refined, refined_scores, _ = predictor.predict(
+-    box=box, point_coords=points, point_labels=labels, multimask_output=True
+-)
+-masks = np.concatenate((masks, refined))
+-scores = np.concatenate((scores, refined_scores))
++points=np.empty((0,2),np.float32);labels=np.empty((0,),np.int32)
++prompt_record={"method":"projected editing-region box and exact replacement CLIP text", "box":box.tolist(),"color_rules":None}
+ network = official.OpenCLIPNetwork(
+     official.OpenCLIPNetworkConfig(
+         clip_model_pretrained=str(
+@@ -65,11 +59,11 @@
+     containment = float((mask & edit_mask).sum() / mask.sum())
+     rank = relevance * float(sam_score) * containment
+     sampled = mask[points[:, 1].astype(int), points[:, 0].astype(int)]
+-    positive_coverage = float(sampled[labels == 1].mean())
++    positive_coverage = float(sampled[labels == 1].mean()) if (labels == 1).any() else 1.0
+     negative_coverage = (
+         float(sampled[labels == 0].mean()) if (labels == 0).any() else 0.0
+     )
+-    valid = positive_coverage >= 0.9 and negative_coverage == 0.0
++    valid = containment > 0.7 and not (mask[0].any() or mask[-1].any() or mask[:,0].any() or mask[:,-1].any())
+     Image.fromarray(mask.astype(np.uint8) * 255).save(dest / f"candidate_{i}.png")
+     records.append(
+         {
+@@ -101,7 +95,7 @@
+ (dest / "segmentation.json").write_text(
+     json.dumps(
+         {
+-            "prompt_source": "projected3D box plus image-derived yellow foreground and large low-saturation background points",
++            "prompt_source": "projected3D editing box plus SAM multimask and exact replacement-text OpenCLIP ranking; no color-specific rules",
+             "automatic_points": prompt_record,
+             "box": box.tolist(),
+             "candidates": records,

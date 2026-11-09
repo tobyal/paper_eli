@@ -1,0 +1,142 @@
+diff --git a/gaussiansplatting/gaussian_renderer/__init__.py b/gaussiansplatting/gaussian_renderer/__init__.py
+index 60b7c50..5f176ae 100644
+--- a/gaussiansplatting/gaussian_renderer/__init__.py
++++ b/gaussiansplatting/gaussian_renderer/__init__.py
+@@ -59,7 +59,7 @@ def render(
+     # Create zero tensor. We will use it to make pytorch return gradients of the 2D (screen-space) means
+     screenspace_points = (
+         torch.zeros_like(
+-            pc.get_xyz, dtype=pc.get_xyz.dtype, requires_grad=True, device="cuda"
++            (pc._xyz if getattr(pc, "localize", False) else pc.get_xyz), dtype=pc.get_xyz.dtype, requires_grad=True, device="cuda"
+         )
+         + 0
+     )
+@@ -90,7 +90,7 @@ def render(
+     rasterizer = GaussianRasterizer(raster_settings=raster_settings)
+ 
+     means3D = pc.get_xyz
+-    means2D = screenspace_points
++    means2D = screenspace_points[pc.mask] if getattr(pc, "localize", False) else screenspace_points
+     opacity = pc.get_opacity
+ 
+     # If precomputed 3d covariance is provided, use it. If not, then it will be computed from
+@@ -124,7 +124,7 @@ def render(
+ 
+         shs = shs.float()
+     else:
+-        colors_precomp = override_color
++        colors_precomp = override_color[pc.mask] if getattr(pc, "localize", False) else override_color
+ 
+     # Rasterize visible Gaussians to image, obtain their radii (on screen).
+     # import pdb; pdb.set_trace()
+@@ -139,6 +139,12 @@ def render(
+         cov3D_precomp=cov3D_precomp,
+     )
+ 
++    # Local rendering uses a subset; densification statistics use global IDs.
++    if getattr(pc, "localize", False):
++        global_radii = radii.new_zeros(pc._xyz.shape[0])
++        global_radii[pc.mask] = radii
++        radii = global_radii
++
+     # Those Gaussians that were frustum culled or had a radius of 0 were not visible.
+     # They will be excluded from value updates used in the splitting criteria.
+     return {
+diff --git a/threestudio/models/prompt_processors/stable_diffusion_prompt_processor.py b/threestudio/models/prompt_processors/stable_diffusion_prompt_processor.py
+index 91b9eeb..6da893d 100644
+--- a/threestudio/models/prompt_processors/stable_diffusion_prompt_processor.py
++++ b/threestudio/models/prompt_processors/stable_diffusion_prompt_processor.py
+@@ -50,12 +50,14 @@ class StableDiffusionPromptProcessor(PromptProcessor):
+             prompt,
+             padding="max_length",
+             max_length=self.tokenizer.model_max_length,
++                truncation=True,
+             return_tensors="pt",
+         )
+         uncond_tokens = self.tokenizer(
+             negative_prompt,
+             padding="max_length",
+             max_length=self.tokenizer.model_max_length,
++                truncation=True,
+             return_tensors="pt",
+         )
+ 
+@@ -81,11 +83,16 @@ class StableDiffusionPromptProcessor(PromptProcessor):
+             device_map="auto",
+         )
+ 
++        lengths = [len(tokenizer(text, truncation=False).input_ids) for text in prompts]
++        for text, length in zip(prompts, lengths):
++            if length > tokenizer.model_max_length:
++                print(f"NATIVE_CLIP_TOKEN_LIMIT input={length} used={tokenizer.model_max_length}: {text}", flush=True)
+         with torch.no_grad():
+             tokens = tokenizer(
+                 prompts,
+                 padding="max_length",
+                 max_length=tokenizer.model_max_length,
++                truncation=True,
+                 return_tensors="pt",
+             )
+             text_embeddings = text_encoder(tokens.input_ids.to(text_encoder.device))[0]
+diff --git a/threestudio/systems/DGE.py b/threestudio/systems/DGE.py
+index 9f0ad76..2c48d1b 100644
+--- a/threestudio/systems/DGE.py
++++ b/threestudio/systems/DGE.py
+@@ -72,7 +72,7 @@ class DGE(BaseLift3DSystem):
+ 
+         # guidance 
+         camera_update_per_step: int = 500
+-        added_noise_schedule: List[int] = field(default_factory=[999, 200, 200, 21])    
++        added_noise_schedule: List[int] = field(default_factory=lambda: [999, 200, 200, 21])    
+         
+ 
+     cfg: Config
+@@ -120,7 +120,7 @@ class DGE(BaseLift3DSystem):
+ 
+                 cur_cam = self.trainer.datamodule.train_dataset.scene.cameras[id]
+ 
+-                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt)[
++                mask = self.text_segmentor(self.origin_frames[id], self.cfg.seg_prompt, camera=cur_cam)[
+                     0
+                 ].to(get_device())
+ 
+@@ -593,7 +593,7 @@ class DGE(BaseLift3DSystem):
+         distances = [np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), 0, 1)) for cam in cams]
+         sorted_cams = [cam for _, cam in sorted(zip(distances, cams), key=lambda pair: pair[0])]
+         reference_axis = np.cross(most_left_vecotr, sorted_cams[1].R[:, 2])
+-        distances_with_sign = [np.arccos(np.dot(most_left_vecotr, cam.R[:, 2])) if np.dot(reference_axis,  np.cross(most_left_vecotr, cam.R[:, 2])) >= 0 else 2 * np.pi - np.arccos(np.dot(most_left_vecotr, cam.R[:, 2])) for cam in cams]
++        distances_with_sign = [np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), -1.0, 1.0)) if np.dot(reference_axis,  np.cross(most_left_vecotr, cam.R[:, 2])) >= 0 else 2 * np.pi - np.arccos(np.clip(np.dot(most_left_vecotr, cam.R[:, 2]), -1.0, 1.0)) for cam in cams]
+         
+         sorted_cam_idx = [idx for _, idx in sorted(zip(distances_with_sign, range(len(cams))), key=lambda pair: pair[0])]
+ 
+diff --git a/threestudio/utils/sam.py b/threestudio/utils/sam.py
+index 55e68c0..edf204d 100644
+--- a/threestudio/utils/sam.py
++++ b/threestudio/utils/sam.py
+@@ -7,6 +7,7 @@ from einops import rearrange
+ from torchvision.transforms import ToPILImage, ToTensor
+ 
+ from lang_sam import LangSAM
++from instance_selection import select_instance
+ 
+ # from threestudio.utils.typing import *
+ 
+@@ -19,7 +20,7 @@ class LangSAMTextSegmentor(torch.nn.Module):
+         self.to_pil_image = ToPILImage(mode="RGB")
+         self.to_tensor = ToTensor()
+ 
+-    def forward(self, images, prompt: str):
++    def forward(self, images, prompt: str, camera=None):
+         images = rearrange(images, "b h w c -> b c h w")
+         masks = []
+         for image in images:
+@@ -27,6 +28,9 @@ class LangSAMTextSegmentor(torch.nn.Module):
+             image = self.to_pil_image(image.clamp(0.0, 1.0))
+             mask, _, _, _ = self.model.predict(image, prompt)
+             # breakpoint()
++            if camera is not None:
++                masks.append(select_instance(mask, camera))
++                continue
+             if mask.ndim == 3:
+                 masks.append(mask[0:1].to(torch.float32))
+             else:

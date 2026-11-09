@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "root": "/mnt/sda/ubuntu/lkx/papers/paper_eli",
+  "coordinate_contract": {
+    "world": "Original COLMAP world coordinates and arbitrary reconstruction units.",
+    "camera": "World-to-camera R,t; camera x right, y down, z forward; calibrated fx,fy,cx,cy and image dimensions.",
+    "gaussians": "Graphdeco PLY: xyz, log scales, wxyz quaternion, opacity logit, SH coefficients in channel-major order.",
+    "mask": "PNG grayscale 0 background / 255 editable foreground; tensors use 0/1.",
+    "depth": "Volumetric sum of alpha-composited Euclidean camera distances. Control image is 1 - minmax(depth) over valid alpha, repeated over RGB channels.",
+    "new_object_local": "x right, y floor-up, z toward the anchor; world xyz = local xyz @ axes.T * scale + center. Checkpoint records the exact similarity transform."
+  },
+  "modules": [
+    {
+      "name": "3D localization",
+      "entry": "gsle/05_localize.sh",
+      "requires": ["data/industrial", "outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply", "outputs/gsle/langsplat_1/chkpnt30000.pth", "outputs/gsle/langsplat_2/chkpnt30000.pth", "outputs/gsle/langsplat_3/chkpnt30000.pth", "gsle/config.json:target_text"],
+      "produces": ["outputs/gsle/localization/target.json", "outputs/gsle/localization/target_indices.npy", "outputs/gsle/localization/keep_indices.npy", "outputs/gsle/localization/target.ply", "outputs/gsle/localization/scene_without_target.ply"],
+      "invariant": "Index arrays partition the original PLY rows; retained background tensors are unchanged."
+    },
+    {
+      "name": "Generation-region adapter",
+      "entry": "gsle/prepare_edit_region.py",
+      "requires": ["outputs/gsle/localization/target.json"],
+      "produces": ["outputs/gsle/localization/edit_region.json"],
+      "invariant": "The upright generated-object region is separate from old-object deletion indices."
+    },
+    {
+      "name": "AVP",
+      "entry": "gsle/avp.py",
+      "requires": ["outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply", "outputs/gsle/localization/target_indices.npy", "outputs/gsle/localization/edit_region.json"],
+      "produces": ["outputs/gsle/avp/anchor.json", "outputs/gsle/avp/anchor.png", "outputs/gsle/avp/bbox_mask.png", "outputs/gsle/avp/depth_control.png", "outputs/gsle/avp/candidates.json"],
+      "invariant": "All selected-image modalities share the stored 512x512 calibrated anchor camera."
+    },
+    {
+      "name": "Depth-conditioned inpainting",
+      "entry": "gsle/inpaint.py, then gsle/rank_inpainting.py",
+      "requires": ["outputs/gsle/avp", "records/gsle/models.json", "gsle/config.json:replacement_text"],
+      "produces": ["outputs/gsle/inpainting/edited_anchor.png"],
+      "invariant": "Save every fixed-seed candidate and automatic ranking. Selected image retains anchor pixel coordinates."
+    },
+    {
+      "name": "SAM extraction",
+      "entry": "gsle/sam_foreground.py",
+      "requires": ["outputs/gsle/inpainting/edited_anchor.png", "outputs/gsle/avp/bbox_mask.png"],
+      "produces": ["outputs/gsle/foreground/object_rgba.png", "outputs/gsle/foreground/reference_white.png", "outputs/gsle/foreground/mask.png", "outputs/gsle/foreground/automatic_prompts.json", "outputs/gsle/foreground/segmentation.json"],
+      "invariant": "SAM predicts the mask from automatically derived prompts; no hand-traced mask or supplied replacement asset."
+    },
+    {
+      "name": "Coarse 3D-SDS",
+      "entry": "gsle/train_object.py coarse",
+      "requires": ["outputs/gsle/foreground", "outputs/gsle/avp/anchor.json", "outputs/gsle/localization/edit_region.json", "records/gsle/models.json"],
+      "produces": ["outputs/gsle/coarse/final.pth", "outputs/gsle/coarse/final_object_local.ply", "outputs/gsle/coarse/final_object_world.ply", "outputs/gsle/coarse/training.jsonl"],
+      "invariant": "Stable Zero123 remains frozen; 6500 optimizer updates change only new-object Gaussians."
+    },
+    {
+      "name": "Scene composition",
+      "entry": "gsle/compose.py coarse",
+      "requires": ["outputs/reconstruction/point_cloud/iteration_30000/point_cloud.ply", "outputs/gsle/localization/keep_indices.npy", "outputs/gsle/coarse/final_object_world.ply"],
+      "produces": ["outputs/gsle/composition/scene.ply", "outputs/gsle/composition/object_world.ply", "outputs/gsle/composition/composition.json"],
+      "invariant": "Assert bitwise identity of retained source PLY rows before accepting composition."
+    },
+    {
+      "name": "DI-SDS refinement",
+      "entry": "gsle/08_refine.sh",
+      "requires": ["outputs/gsle/coarse/final.pth", "outputs/gsle/composition/scene.ply", "outputs/gsle/foreground", "outputs/gsle/avp/anchor.json", "outputs/gsle/localization", "records/gsle/models.json"],
+      "produces": ["outputs/gsle/refine/final.pth", "outputs/gsle/refine/final_object_local.ply", "outputs/gsle/final/object_world.ply", "outputs/gsle/final/scene.ply", "outputs/gsle/final/renders", "outputs/gsle/final/review/summary.json"],
+      "invariant": "2000 updates with 4 sampled views, frozen inpainting/ControlNet models and retained background; RGB/mask plus DI-SDS, with Zero123 disabled."
+    }
+  ],
+  "status_note": "This document specifies interfaces. Completion and measured quality must be read from actual checkpoints, logs and reviewed renders."
+}

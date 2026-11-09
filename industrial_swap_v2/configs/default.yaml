@@ -103,8 +103,19 @@ m3:
 m4:
   method: dual_mask_local_background
   integration:
-    alignment: anchor_silhouette
+    alignment: rasterized_reference
     existing_transform: null
+    registration:
+      search_resolution: 320
+      refine_resolution: 640
+      yaw_step_degrees: 15
+      refine_candidates: 6
+      coarse_steps: 120
+      fine_steps: 180
+      rgb_weight: 0.18
+      center_weight: 0.35
+      volume_weight: 8.0
+      max_horizontal_fraction: 0.3
   minimum_free_gpu_gib: 24
   save_every: 500
   multiview_supervision:

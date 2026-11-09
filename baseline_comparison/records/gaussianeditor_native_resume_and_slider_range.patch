@@ -1,0 +1,120 @@
+--- before/webui.py
++++ after/webui.py
+@@ -1234,7 +1234,13 @@
+ 
+         frustum = None
+         frame = None
+-        while True:
++        cache_dir = Path(os.environ["GE_ADD_CACHE"]).absolute().as_posix()
++        reuse = os.environ.get("GE_REUSE_ADD_ASSETS") == "1"
++        if reuse:
++            out = Image.open(Path(cache_dir) / "inpainted.png").convert("RGB")
++            frame, frustum = ui_utils.new_frustum_from_cam(None, self.server, np.asarray(out))
++            print("Reusing this attempt's native Add image and completed 3D stages", flush=True)
++        while not reuse:
+             if self.inpaint_again:
+                 if frustum is not None:
+                     frustum.remove()
+@@ -1303,7 +1309,7 @@
+         self.inpaint_end.visible = False
+         self.edit_text.visible = False
+ 
+-        removed_bg = rembg.remove(out)
++        removed_bg = Image.open(Path(cache_dir) / "removed_bg.png").convert("RGBA") if reuse else rembg.remove(out)
+         inpainted_image = to_tensor(out).to("cuda")
+         frustum.remove()
+         frame.remove()
+@@ -1321,18 +1327,20 @@
+         removed_bg_path = os.path.join(cache_dir, "removed_bg.png")
+         mesh_path = os.path.join(cache_dir, "inpaint_mesh.obj")
+         gs_path = os.path.join(cache_dir, "inpaint_gs.obj")
+-        out.save(inpaint_path)
+-        removed_bg.save(removed_bg_path)
+-
+-        p1 = subprocess.Popen(
+-            f"{sys.executable} -m accelerate.commands.launch --config_file 1gpu.yaml test_mvdiffusion_seq.py "
+-            f"--save_dir {mv_image_dir} --config configs/mvdiffusion-joint-ortho-6views.yaml"
+-            f" validation_dataset.root_dir={cache_dir} validation_dataset.filepaths=[removed_bg.png]".split(
+-                " "
+-            ),
+-            cwd="threestudio/utils/wonder3D",
+-        )
+-        if p1.wait() != 0: raise RuntimeError("Native Add subprocess 1 failed")
++        if not reuse:
++            out.save(inpaint_path)
++            removed_bg.save(removed_bg_path)
++
++        if not (reuse and Path(mesh_path).is_file()):
++            p1 = subprocess.Popen(
++                f"{sys.executable} -m accelerate.commands.launch --config_file 1gpu.yaml test_mvdiffusion_seq.py "
++                f"--save_dir {mv_image_dir} --config configs/mvdiffusion-joint-ortho-6views.yaml"
++                f" validation_dataset.root_dir={cache_dir} validation_dataset.filepaths=[removed_bg.png]".split(
++                    " "
++                ),
++                cwd="threestudio/utils/wonder3D",
++            )
++            if p1.wait() != 0: raise RuntimeError("Native Add subprocess 1 failed")
+ 
+         print(
+             f"{sys.prefix}/bin/python launch.py --config configs/neuralangelo-ortho-wmask.yaml --save_dir {cache_dir} --gpu 0 --train --exp_dir {cache_dir}/neus_exp --runs_dir {cache_dir}/neus_runs dataset.root_dir={os.path.dirname(mv_image_dir)} dataset.scene={os.path.basename(mv_image_dir)}"
+@@ -1340,25 +1348,27 @@
+         cmd = f"{sys.prefix}/bin/python launch.py --config configs/neuralangelo-ortho-wmask.yaml --save_dir {cache_dir} --gpu 0 --train --exp_dir {cache_dir}/neus_exp --runs_dir {cache_dir}/neus_runs dataset.root_dir={os.path.dirname(mv_image_dir)} dataset.scene={os.path.basename(mv_image_dir)}".split(
+             " "
+         )
+-        p2 = subprocess.Popen(
+-            cmd,
+-            cwd="threestudio/utils/wonder3D/instant-nsr-pl",
+-        )
+-        if p2.wait() != 0: raise RuntimeError("Native Add subprocess 2 failed")
+-
+-        p3 = subprocess.Popen(
+-            [
+-                f"{sys.prefix}/bin/python",
+-                "train_from_mesh.py",
+-                "--mesh",
+-                mesh_path,
+-                "--save_path",
+-                gs_path,
+-                "--prompt",
+-                self.refine_text.value,
+-            ]
+-        )
+-        if p3.wait() != 0: raise RuntimeError("Native Add subprocess 3 failed")
++        if not (reuse and Path(mesh_path).is_file()):
++            p2 = subprocess.Popen(
++                cmd,
++                cwd="threestudio/utils/wonder3D/instant-nsr-pl",
++            )
++            if p2.wait() != 0: raise RuntimeError("Native Add subprocess 2 failed")
++
++        if not (reuse and Path(gs_path).is_file()):
++            p3 = subprocess.Popen(
++                [
++                    f"{sys.prefix}/bin/python",
++                    "train_from_mesh.py",
++                    "--mesh",
++                    mesh_path,
++                    "--save_path",
++                    gs_path,
++                    "--prompt",
++                    self.refine_text.value,
++                ]
++            )
++            if p3.wait() != 0: raise RuntimeError("Native Add subprocess 3 failed")
+ 
+         frustum.remove()
+         frame.remove()
+@@ -1415,11 +1425,11 @@
+         if os.environ.get("GE_TARGET_CAMERA_DEPTH"):
+             native_depth = float(z_in_cam)
+             requested_scale = float(os.environ["GE_TARGET_CAMERA_DEPTH"]) / native_depth
+-            if not (0 < requested_scale <= 5):
++            if not (math.isfinite(requested_scale) and requested_scale > 0):
+                 raise RuntimeError(f"Native depth slider cannot reach target: z={native_depth}, scale={requested_scale}")
+             self.depth_scaler.value = requested_scale
+             import json
+-            Path(cache_dir, "placement.json").write_text(json.dumps({"native_z":native_depth,"depth_slider":requested_scale,"target_camera_depth":float(os.environ["GE_TARGET_CAMERA_DEPTH"]),"camera_R":cam.R.tolist(),"camera_T":cam.T.tolist()},indent=2))
++            Path(cache_dir, "placement.json").write_text(json.dumps({"native_z":native_depth,"depth_slider":requested_scale,"native_ui_range":[0,5],"ui_range_extended_for_scene_units":requested_scale>5,"target_camera_depth":float(os.environ["GE_TARGET_CAMERA_DEPTH"]),"camera_R":cam.R.tolist(),"camera_T":cam.T.tolist()},indent=2))
+         self.depth_scaler.visible = True
+         self.depth_end.visible = True
+         self.refine_text.visible = True

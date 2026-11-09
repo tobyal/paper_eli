@@ -31,6 +31,7 @@ def transform_vertices(vertices, scale, rotation, translation):
 
 
 def fit(vertices, frame, camera, mask_path, config, destination):
+    """Historical mesh-conversion fitter; PBR M4 uses fit_reference below."""
     points = xyz_of(vertices)
     # Deterministic surface subset is sufficient for ordinary pose fitting.
     probe = points[::max(1,len(points)//40000)]
@@ -97,3 +98,9 @@ def fit(vertices, frame, camera, mask_path, config, destination):
     preview[truth,1]=255; preview[silhouette(best[1]),0]=255
     Image.fromarray(preview).save(destination/'alignment_overlay.png')
     return world
+
+
+def fit_reference(ctx):
+    """Official PBR registration: true Gaussian rasterization and 3D priors."""
+    from .gaussian_registration import fit_rasterized
+    return fit_rasterized(ctx)

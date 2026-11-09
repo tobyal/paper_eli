@@ -1,0 +1,15 @@
+--- before/webui.py
++++ after/webui.py
+@@ -1335,9 +1335,9 @@
+         if p1.wait() != 0: raise RuntimeError("Native Add subprocess 1 failed")
+ 
+         print(
+-            f"{sys.prefix}/bin/python launch.py --config configs/neuralangelo-ortho-wmask.yaml --save_dir {cache_dir} --gpu 0 --train dataset.root_dir={os.path.dirname(mv_image_dir)} dataset.scene={os.path.basename(mv_image_dir)}"
+-        )
+-        cmd = f"{sys.prefix}/bin/python launch.py --config configs/neuralangelo-ortho-wmask.yaml --save_dir {cache_dir} --gpu 0 --train dataset.root_dir={os.path.dirname(mv_image_dir)} dataset.scene={os.path.basename(mv_image_dir)}".split(
++            f"{sys.prefix}/bin/python launch.py --config configs/neuralangelo-ortho-wmask.yaml --save_dir {cache_dir} --gpu 0 --train --exp_dir {cache_dir}/neus_exp --runs_dir {cache_dir}/neus_runs dataset.root_dir={os.path.dirname(mv_image_dir)} dataset.scene={os.path.basename(mv_image_dir)}"
++        )
++        cmd = f"{sys.prefix}/bin/python launch.py --config configs/neuralangelo-ortho-wmask.yaml --save_dir {cache_dir} --gpu 0 --train --exp_dir {cache_dir}/neus_exp --runs_dir {cache_dir}/neus_runs dataset.root_dir={os.path.dirname(mv_image_dir)} dataset.scene={os.path.basename(mv_image_dir)}".split(
+             " "
+         )
+         p2 = subprocess.Popen(

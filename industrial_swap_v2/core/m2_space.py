@@ -167,3 +167,62 @@ def generation_frame(ctx):
             raise ValueError('M2 generation space missing or changed; prepare a new M2 version')
         return read_json(path)['world_transform']
     return read_json(ctx.stage('m1')/'manifest.json')['world_transform']
+
+
+def registration_space(ctx):
+    """Validate the saved M2 world frame; never derive it from the Anchor axes.
+
+    The bottom is the already estimated M1/M2 support plane. Its height is not
+    a free pose parameter. M1's measured footprint supplies the center prior.
+    """
+    frame = generation_frame(ctx)
+    axes = np.asarray(frame['axes'], float)
+    low, high = (np.asarray(frame[k], float) for k in ('local_bbox_low','local_bbox_high'))
+    center = np.asarray(frame['center'], float)
+    if not np.allclose(axes.T @ axes, np.eye(3), atol=1e-6) or np.linalg.det(axes)<.999:
+        raise ValueError('Generation frame must be a right-handed orthonormal world frame')
+    if not np.isfinite(np.r_[low, high, center]).all() or np.any(high<=low):
+        raise ValueError('Invalid generation volume')
+    region_path = ctx.stage('m2')/'generation_region.json'
+    region = read_json(region_path) if region_path.exists() else {}
+    if region:
+        expected = corners(low, high) @ axes.T + center
+        if not np.allclose(expected, region['generation_bbox'], atol=1e-5):
+            raise ValueError('Saved generation bbox and world frame disagree')
+    adaptation=None
+    override=ctx.cfg.get('m4',{}).get('integration',{}).get('space_override')
+    if override:
+        path=ctx.source(override);adaptation=read_json(path)
+        manifest_path=ctx.stage('m1')/'manifest.json'
+        if (not region_path.exists() or adaptation['source_generation_region_sha256']!=sha256(region_path)
+                or adaptation['source_m1_manifest_sha256']!=sha256(manifest_path)):
+            raise ValueError('Height adaptation source files changed')
+        updated=adaptation['world_transform'];new_axes=np.asarray(updated['axes'],float)
+        new_low=np.asarray(updated['local_bbox_low'],float);new_high=np.asarray(updated['local_bbox_high'],float)
+        new_center=np.asarray(updated['center'],float)
+        original_bottom=center+axes@np.array([0,low[1],0])
+        new_bottom=new_center+new_axes@np.array([0,new_low[1],0])
+        if not (np.allclose(new_axes,axes,atol=1e-8) and np.allclose(original_bottom,new_bottom,atol=1e-8)
+                and np.allclose(new_low[[0,2]],low[[0,2]]) and np.allclose(new_high[[0,2]],high[[0,2]])):
+            raise ValueError('Height adaptation must preserve axes, support plane and footprint')
+        m1=read_json(manifest_path)['world_transform'];m1_axes=np.asarray(m1['axes'])
+        ceiling=(m1['local_bbox_high'][1]-((original_bottom-np.asarray(m1['center']))@m1_axes)[1])/(axes[:,1]@m1_axes[:,1])
+        height=new_high[1]-new_low[1]
+        if not high[1]-low[1]<=height<=ceiling+1e-7:
+            raise ValueError('Height adaptation exceeds the existing M1 editing ceiling')
+        frame=updated;axes=new_axes;low=new_low;high=new_high;center=new_center
+    old = read_json(ctx.stage('m1')/'edit_region.json')
+    up = np.asarray(old['up']);up=up/np.linalg.norm(up)
+    if axes[:,1] @ up < .999: raise ValueError('M1 up and M2 support axes disagree')
+    geometry=region.get('geometry',{})
+    if geometry:
+        old_center=np.asarray(geometry['origin'])+np.asarray(geometry['axes']) @ (
+            (np.asarray(geometry['old_local_low'])+geometry['old_local_high'])/2)
+    else: old_center=np.asarray(old['center'])
+    footprint=(old_center-center) @ axes
+    footprint[1]=low[1]
+    return {'frame':frame,'support_center_local':footprint.tolist(),
+        'bottom_local_y':float(low[1]),'m1_up_alignment':float(axes[:,1]@up),
+        'contact':region.get('contact',{}),'space_override':adaptation,
+        'source':'saved M2 volume + measured M1 footprint'+(' + approved M4 height adaptation' if adaptation else ''),
+        'placement_rule':'uniform scale and yaw; bounded horizontal motion; fixed support height'}

@@ -1,0 +1,151 @@
+{
+  "seed": 42,
+  "target_text": "a portable industrial air cooler with a gray vented front",
+  "reference_image": "frame_000252.jpg",
+  "replacement_text": "A compact industrial process chiller with a light-gray and white rectangular enclosure, a circular dark-gray ventilation grille, a small blue upper control panel, and four caster wheels under its integrated gray base. Use predominantly neutral light-gray and white painted metal with restrained blue accents. Keep the unit compact, with no external pipes or protruding parts.",
+  "negative_text": "",
+  "replacement_region": {
+    "mode": "upright_from_original_footprint",
+    "height_rule": "max_original_extent"
+  },
+  "avp": {
+    "views": 100,
+    "in_plane_rotations": 8,
+    "scoring": "text_contrast",
+    "resolution": 512,
+    "min_visibility": 0.9,
+    "min_scene_coverage": 0.75
+  },
+  "inpainting": {
+    "steps": 50,
+    "guidance_scale": 9.0,
+    "controlnet_scale": 0.35,
+    "seed": 42,
+    "candidate_seeds": [
+      42,
+      43,
+      44
+    ],
+    "negative_text": "multiple separate replacement objects, disassembled machinery, floating object, disconnected parts"
+  },
+  "initialization": {
+    "points": 4096,
+    "sphere_radius": 0.5,
+    "scale": 0.02,
+    "opacity_peak": 0.1,
+    "opacity_radial_std": 0.25,
+    "color_min": 0.05,
+    "color_max": 0.15
+  },
+  "coarse": {
+    "iterations": 6500,
+    "batch": 6,
+    "random_resolutions": [
+      64,
+      128,
+      256
+    ],
+    "reference_resolutions": [
+      128,
+      256,
+      512
+    ],
+    "resolution_milestones": [
+      0,
+      200,
+      300
+    ],
+    "guidance_scale": 3.0,
+    "sds_weight": 1.0,
+    "xyz_lr": [
+      0.001,
+      1e-05,
+      1000
+    ],
+    "scale_lr": [
+      0.005,
+      0.0005,
+      1000
+    ]
+  },
+  "refine": {
+    "iterations": 2000,
+    "batch": 4,
+    "resolution": 512,
+    "guidance_scale": 100.0,
+    "unconditional_conditioning": "drop_all_eq7",
+    "sds_weight": 0.1,
+    "rgb_weight": 1500.0,
+    "mask_weight": 1500.0,
+    "xyz_lr": [
+      0.0001,
+      1e-05,
+      10000
+    ],
+    "scale_lr": [
+      0.0005,
+      5e-05,
+      10000
+    ]
+  },
+  "optimizer": {
+    "rotation_lr": 0.005,
+    "color_lr": 0.01,
+    "opacity_lr": 0.01,
+    "eps": 1e-15
+  },
+  "densification": {
+    "algorithm": "GSGen_compactness",
+    "neighbors": 3,
+    "start": 2000,
+    "end": 6000,
+    "period": 1000,
+    "prune_period": 500,
+    "prune_opacity": 0.01,
+    "max_points_fail": 1000000
+  },
+  "camera_sampling": {
+    "strategy": "threestudio_2c202276",
+    "azimuth": [
+      -180,
+      180
+    ],
+    "elevation": [
+      -10,
+      90
+    ],
+    "radius_multiplier": [
+      1.0,
+      1.5
+    ],
+    "fovy": [
+      40,
+      70
+    ],
+    "camera_perturb": 0.1,
+    "center_perturb": 0.2,
+    "up_perturb": 0.02,
+    "progressive_until": 0,
+    "eval_elevation": 15,
+    "stratified_azimuth": true
+  },
+  "diffusion_timesteps": [
+    0.02,
+    0.98
+  ],
+  "assumptions": [
+    "GSLE has no public source release on the author project page at implementation time.",
+    "Initialization point count/scale use GSGen defaults; low color/radial opacity constants are implementation choices because GSLE does not publish them.",
+    "Densification periods, opacity pruning threshold, camera elevation/radius range, inpainting settings and SDS timestep limits are exposed implementation choices, not reported GSLE constants.",
+    "AVP paper prose and supplement pseudocode disagree; both scores and selections are saved, text-consistent directional contrast drives this run.",
+    "Coarse iterations use the supplement hardware section's 6500; an intermediate 3500 checkpoint is also saved.",
+    "CFG for DI-SDS follows paper Eq7: conditioned+s*(conditioned-unconditioned). Its unconditional expression omits all conditions; implement empty text and zero mask/context/depth residuals, padding to the required nine UNet channels. The paper does not specify this channel-padding detail.",
+    "Use the published physical batches when memory permits; --microbatch may accumulate the same effective batch on the shared GPU. Frozen-background shading and depth conditions are outside autograd without changing joint visibility."
+  ],
+  "reference_sam_level": 3,
+  "reference_sam_ids": [
+    947
+  ],
+  "reference_sam_mask": "/mnt/sda/ubuntu/lkx/papers/paper_eli/baseline_comparison/inputs/case04/reference_sam_mask.npy",
+  "foreground_prompt_mode": "generic_box_clip"
+}

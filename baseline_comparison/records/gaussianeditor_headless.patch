@@ -1,0 +1,222 @@
+--- before/webui.py
++++ after/webui.py
+@@ -1047,7 +1047,7 @@
+                 "lllyasviel/control_v11p_sd15_inpaint", torch_dtype=torch.float16
+             )
+             pipe = StableDiffusionControlNetInpaintPipeline.from_pretrained(
+-                "runwayml/stable-diffusion-v1-5",
++                "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+                 controlnet=controlnet,
+                 torch_dtype=torch.float16,
+             )
+@@ -1213,7 +1213,7 @@
+                 "lllyasviel/control_v11p_sd15_inpaint", torch_dtype=torch.float16
+             )
+             pipe = StableDiffusionControlNetInpaintPipeline.from_pretrained(
+-                "runwayml/stable-diffusion-v1-5",
++                "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+                 controlnet=controlnet,
+                 torch_dtype=torch.float16,
+             )
+--- before/GUI/DelGuidance.py
++++ after/GUI/DelGuidance.py
+@@ -34,7 +34,7 @@
+ 
+         self.prompt_utils = StableDiffusionPromptProcessor(
+             {
+-                "pretrained_model_name_or_path": "runwayml/stable-diffusion-v1-5",
++                "pretrained_model_name_or_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+                 "prompt": text_prompt,
+             }
+         )
+--- before/train_from_mesh.py
++++ after/train_from_mesh.py
+@@ -84,7 +84,7 @@
+ 
+     prompt_processor = StableDiffusionPromptProcessor(
+         {
+-            "pretrained_model_name_or_path": "runwayml/stable-diffusion-v1-5",
++            "pretrained_model_name_or_path": "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+             "prompt": prompt,
+         }
+     )
+--- before/webui.py
++++ after/webui.py
+@@ -1044,7 +1044,7 @@
+             )
+ 
+             controlnet = ControlNetModel.from_pretrained(
+-                "lllyasviel/control_v11p_sd15_inpaint", torch_dtype=torch.float16
++                "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lllyasviel--control_v11p_sd15_inpaint/snapshots/c96e03a807e64135568ba8aecb66b3a306ec73bd", torch_dtype=torch.float16
+             )
+             pipe = StableDiffusionControlNetInpaintPipeline.from_pretrained(
+                 "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+@@ -1210,7 +1210,7 @@
+             )
+ 
+             controlnet = ControlNetModel.from_pretrained(
+-                "lllyasviel/control_v11p_sd15_inpaint", torch_dtype=torch.float16
++                "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lllyasviel--control_v11p_sd15_inpaint/snapshots/c96e03a807e64135568ba8aecb66b3a306ec73bd", torch_dtype=torch.float16
+             )
+             pipe = StableDiffusionControlNetInpaintPipeline.from_pretrained(
+                 "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14",
+--- before/webui.py
++++ after/webui.py
+@@ -767,7 +767,7 @@
+             # breakpoint()
+             # this_frame [c h w]
+             this_frame = this_frame.moveaxis(0, -1)[None, ...]
+-            mask = self.text_segmentor(this_frame, text_prompt)[0].to(get_device())
++            mask = self.text_segmentor(this_frame, text_prompt, camera=cur_cam)[0].to(get_device())
+             if self.use_sam:
+                 print("Using SAM")
+                 self.sam_features[idx] = self.sam_predictor.features
+--- before/webui.py
++++ after/webui.py
+@@ -1313,7 +1313,7 @@
+             np.asarray(removed_bg),
+         )
+ 
+-        cache_dir = Path("tmp_add").absolute().as_posix()
++        cache_dir = Path(os.environ["GE_ADD_CACHE"]).absolute().as_posix()
+         os.makedirs(cache_dir, exist_ok=True)
+         mv_image_dir = os.path.join(cache_dir, "multiview_pred_images")
+         os.makedirs(mv_image_dir, exist_ok=True)
+--- before/webui.py
++++ after/webui.py
+@@ -1325,7 +1325,7 @@
+         removed_bg.save(removed_bg_path)
+ 
+         p1 = subprocess.Popen(
+-            f"{sys.prefix}/bin/accelerate launch --config_file 1gpu.yaml test_mvdiffusion_seq.py "
++            f"{sys.executable} -m accelerate.commands.launch --config_file 1gpu.yaml test_mvdiffusion_seq.py "
+             f"--save_dir {mv_image_dir} --config configs/mvdiffusion-joint-ortho-6views.yaml"
+             f" validation_dataset.root_dir={cache_dir} validation_dataset.filepaths=[removed_bg.png]".split(
+                 " "
+--- before/webui.py
++++ after/webui.py
+@@ -1332,7 +1332,7 @@
+             ),
+             cwd="threestudio/utils/wonder3D",
+         )
+-        p1.wait()
++        if p1.wait() != 0: raise RuntimeError("Native Add subprocess 1 failed")
+ 
+         print(
+             f"{sys.prefix}/bin/python launch.py --config configs/neuralangelo-ortho-wmask.yaml --save_dir {cache_dir} --gpu 0 --train dataset.root_dir={os.path.dirname(mv_image_dir)} dataset.scene={os.path.basename(mv_image_dir)}"
+--- before/webui.py
++++ after/webui.py
+@@ -1344,7 +1344,7 @@
+             cmd,
+             cwd="threestudio/utils/wonder3D/instant-nsr-pl",
+         )
+-        p2.wait()
++        if p2.wait() != 0: raise RuntimeError("Native Add subprocess 2 failed")
+ 
+         p3 = subprocess.Popen(
+             [
+--- before/webui.py
++++ after/webui.py
+@@ -1358,7 +1358,7 @@
+                 self.refine_text.value,
+             ]
+         )
+-        p3.wait()
++        if p3.wait() != 0: raise RuntimeError("Native Add subprocess 3 failed")
+ 
+         frustum.remove()
+         frame.remove()
+--- before/webui.py
++++ after/webui.py
+@@ -1412,6 +1412,14 @@
+ 
+         z_in_cam = object_depth.min() * a + b
+ 
++        if os.environ.get("GE_TARGET_CAMERA_DEPTH"):
++            native_depth = float(z_in_cam)
++            requested_scale = float(os.environ["GE_TARGET_CAMERA_DEPTH"]) / native_depth
++            if not (0 < requested_scale <= 5):
++                raise RuntimeError(f"Native depth slider cannot reach target: z={native_depth}, scale={requested_scale}")
++            self.depth_scaler.value = requested_scale
++            import json
++            Path(cache_dir, "placement.json").write_text(json.dumps({"native_z":native_depth,"depth_slider":requested_scale,"target_camera_depth":float(os.environ["GE_TARGET_CAMERA_DEPTH"]),"camera_R":cam.R.tolist(),"camera_T":cam.T.tolist()},indent=2))
+         self.depth_scaler.visible = True
+         self.depth_end.visible = True
+         self.refine_text.visible = True
+--- before/webui.py
++++ after/webui.py
+@@ -1469,6 +1469,7 @@
+                 rotate_gaussians(new_object_gaussian, R)
+                 translate_gaussians(new_object_gaussian, T)
+ 
++                new_object_gaussian.save_ply(os.path.join(cache_dir, "object_world.ply"))
+                 self.gaussian.concat_gaussians(new_object_gaussian)
+                 self.scale_depth = False
+             else:
+--- before/train_from_mesh.py
++++ after/train_from_mesh.py
+@@ -89,13 +89,7 @@
+         }
+     )
+     prompt_utils = prompt_processor()
+-    prompt_processor_1024 = StableDiffusionPromptProcessor(
+-        {
+-            "pretrained_model_name_or_path": "stabilityai/stable-diffusion-2-1-base",
+-            "prompt": prompt,
+-        }
+-    )
+-    prompt_utils_1024 = prompt_processor_1024()
++    # Unused SD2.1 prompt allocation removed; no loss consumes it.
+ 
+     if "n2n" in args.guide:
+         from threestudio.models.guidance.instructpix2pix_guidance import InstructPix2PixGuidance
+--- before/threestudio/models/guidance/instructpix2pix_guidance.py
++++ after/threestudio/models/guidance/instructpix2pix_guidance.py
+@@ -21,7 +21,7 @@
+     class Config(BaseObject.Config):
+         cache_dir: Optional[str] = None
+         ddim_scheduler_name_or_path: str = "CompVis/stable-diffusion-v1-4"
+-        ip2p_name_or_path: str = "timbrooks/instruct-pix2pix"
++        ip2p_name_or_path: str = "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d"
+ 
+         enable_memory_efficient_attention: bool = False
+         enable_sequential_cpu_offload: bool = False
+--- before/threestudio/models/guidance/instructpix2pix_guidance.py
++++ after/threestudio/models/guidance/instructpix2pix_guidance.py
+@@ -20,7 +20,7 @@
+     @dataclass
+     class Config(BaseObject.Config):
+         cache_dir: Optional[str] = None
+-        ddim_scheduler_name_or_path: str = "CompVis/stable-diffusion-v1-4"
++        ddim_scheduler_name_or_path: str = "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--CompVis--stable-diffusion-v1-4/snapshots/133a221b8aa7292a167afc5127cb63fb5005638b"
+         ip2p_name_or_path: str = "/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--timbrooks--instruct-pix2pix/snapshots/31519b5cb02a7fd89b906d88731cd4d6a7bbf88d"
+ 
+         enable_memory_efficient_attention: bool = False
+--- before/threestudio/utils/wonder3D/configs/mvdiffusion-joint-ortho-6views.yaml
++++ after/threestudio/utils/wonder3D/configs/mvdiffusion-joint-ortho-6views.yaml
+@@ -1,4 +1,4 @@
+-pretrained_model_name_or_path: 'lambdalabs/sd-image-variations-diffusers'
++pretrained_model_name_or_path: '/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lambda--sd-image-variations-diffusers/snapshots/42bc0ee1726b141d49f519a6ea02ccfbf073db2e'
+ pretrained_unet_path: './ckpts/'
+ revision: null
+ validation_dataset:
+--- before/threestudio/utils/wonder3D/configs/mvdiffusion-joint-ortho-6views.yaml
++++ after/threestudio/utils/wonder3D/configs/mvdiffusion-joint-ortho-6views.yaml
+@@ -1,5 +1,5 @@
+ pretrained_model_name_or_path: '/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--lambda--sd-image-variations-diffusers/snapshots/42bc0ee1726b141d49f519a6ea02ccfbf073db2e'
+-pretrained_unet_path: './ckpts/'
++pretrained_unet_path: '/mnt/sda/ubuntu/lkx/papers/paper_eli/models/huggingface/hub/models--camenduru--Wonder3D/snapshots/e20d94d639d6e1663abcbec791cddfbf51849f33'
+ revision: null
+ validation_dataset:
+   root_dir: "./example_images" # the folder path stores testing images
+--- before/threestudio/utils/wonder3D/configs/mvdiffusion-joint-ortho-6views.yaml
++++ after/threestudio/utils/wonder3D/configs/mvdiffusion-joint-ortho-6views.yaml
+@@ -15,7 +15,7 @@
+ pred_type: 'joint'
+ seed: 42
+ validation_batch_size: 1
+-dataloader_num_workers: 64
++dataloader_num_workers: 8
+ 
+ local_rank: -1
+ 

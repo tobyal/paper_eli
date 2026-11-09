@@ -21,10 +21,10 @@ def register(item,published):
         cfg=yaml.safe_load((root/'config.yaml').read_text());heads={k:value for k,value in source['source_heads'].items() if k in ('m1','m2','materials')}
         if item.get('reuse_m3_run'):heads['m3']=item['reuse_m3_run']
         with s.transaction() as conn:
-            s.sql(conn,'UPDATE experiments SET config=:c,heads=:h WHERE id=:id',c=s.dump(cfg),h=s.dump(heads),id=eid)
-        published[key]={'experiment':eid,'runs':{'m3':item['reuse_m3_run']} if item.get('reuse_m3_run') else {}}
+            s.sql(conn,'UPDATE experiments SET config=:c,heads=:h,replacement_text=:txt WHERE id=:id',c=s.dump(cfg),h=s.dump(heads),txt=cfg['m2']['replacement_text'],id=eid)
+        published[key]={'experiment':eid,'runs':{stage:item['reuse_'+stage+'_run'] for stage in ('m2','m3') if item.get('reuse_'+stage+'_run')}}
     record=published[key]
-    for stage in ('m3','m4'):
+    for stage in (('m2','m3','m4') if item.get('register_new_m2') else ('m3','m4')):
         if stage in record['runs']:continue
         receipt=read_json(root/'records'/f'{stage}_status.json');assert receipt['status']=='complete'
         request=root.parent.name+':'+key+':'+stage
@@ -38,14 +38,21 @@ def register(item,published):
                     config_path,folder,log_path,created_at,request_id)
                     VALUES(:id,:e,:stage,'historical','importing',:sig,:inputs,:params,:cfg,:folder,:log,:t,:req)''',
                     id=rid,e=record['experiment'],stage=stage,sig=s.digest(receipt),inputs=s.dump(inputs),
-                    params=s.dump({'iterations':4000 if stage=='m3' else 2000}),cfg=str(root/'config.yaml'),
+                    params=s.dump({'input':'manual_scene_reference'} if stage=='m2' else {'iterations':4000 if stage=='m3' else 2000}),cfg=str(root/'config.yaml'),
                     folder=str(root),log=str(root/'logs'/f'{stage}.log'),t=s.now(),req=request)
                 s.sql(conn,'''INSERT INTO generation_records(id,experiment_id,run_id,model,prompt,input_assets,external_api,status,created_at)
                     VALUES(:id,:e,:r,:model,:prompt,:inputs,0,'importing',:t)''',id=s.uid(),e=record['experiment'],r=rid,
-                    model='PBR RGB+Depth Gaussian' if stage=='m3' else 'Dual-mask background 2000 steps',
+                    model='User image + SAM reference' if stage=='m2' else 'PBR RGB+Depth Gaussian' if stage=='m3' else 'Dual-mask background 2000 steps',
                     prompt=exp['replacement_text'],inputs=s.dump(inputs),t=s.now())
         v.finish(rid,root/stage,seconds=item['stages'].get(stage,{}).get('seconds',0))
         record['runs'][stage]=rid
+    if item.get('register_new_m2') and not record.get('new_assets_selected'):
+        image=s.unpack(v.run(record['runs']['m2'])['outputs'])['assets']['edited_scene.png']
+        mesh=s.unpack(v.run(record['runs']['m3'])['outputs'])['assets']['trellis_asset.glb']
+        with s.transaction() as conn:
+            s.attach(conn,record['experiment'],image,'m2',True)
+            s.attach(conn,record['experiment'],mesh,'m3',True)
+        record['new_assets_selected']=True
     if 'preview_assets' not in record:
         record['preview_assets']={}
         for path in (root/'previews').iterdir():
@@ -60,6 +67,7 @@ def main():
     args=parser.parse_args();batch=args.batch.resolve();state=read_json(batch/'batch.json')
     pubfile=batch/'published.json';published=read_json(pubfile) if pubfile.exists() else {}
     completed=sum(x['status']=='completed' for x in state['items']);failed=sum(x['status']=='failed' for x in state['items'])
+    fresh=state.get('new_trellis_inputs',False);total=len(state['items'])
     cards=[];rows=[];size=(1440,520*((len(state['items'])+2)//3))
     actual=Image.new('RGB',size,'white');guarded=Image.new('RGB',size,'white')
     adraw=ImageDraw.Draw(actual);gdraw=ImageDraw.Draw(guarded)
@@ -91,6 +99,12 @@ def main():
             'anchor_visibility_after':b['candidate']['anchor']['visibility'],
             'outside_union_mae':b['candidate']['anchor']['outside_union_mae'],
             'experiment':r['experiment'],'folder':str(root)}
+        if fresh:
+            row['alignment_iou']=read_json(root/'m4/alignment/report.json')['selected']['mask_iou']
+            generated=read_json(root/'m3/trellis_generation.json')
+            assert generated['input_sha256']==sha256(item['trellis_input'])
+            row['direct_trellis_input_verified']=True
+            row['trellis_input']=item['trellis_input']
         rows.append(row);rid3=r['runs']['m3'];rid4=r['runs']['m4']
         asset=lambda name:'/api/assets/'+r['preview_assets'][name]+'/file'
         for board,draw,name,label in ((actual,adraw,'anchor_candidate_step2000.png','actual 2000 | guard '+('PASS' if b['candidate_guard_passed'] else 'FAIL')),
@@ -100,6 +114,9 @@ def main():
         content+=f'，最佳 {a["best_step"]} 步；验证前景 PSNR {row["foreground_psnr_before"]:.2f} → {row["foreground_psnr_after"]:.2f} dB。</p>'
         content+=f'<p>M4 已完成 2,000 步；末步检查：{"通过" if b["candidate_guard_passed"] else "未通过"}，默认最终场景选择第 {b["selected_step"]} 步。下图四列：固定设备 / 插入后未优化 / 实际 2,000 步 / 保护规则场景。</p>'
         content+=f'<img loading="lazy" src="{asset("anchor_stages.jpg")}"><nav><a href="/#experiment/{r["experiment"]}">实验与日志</a>'
+        if fresh:
+            rid2=r['runs']['m2']
+            content+=f'<a href="{url(rid2,"edited_scene.png")}">本次 Qwen 场景参考</a><a href="{url(rid4,"alignment/anchor_overlay.png")}">参考 Mask / Gaussian Alpha 叠加（IoU {row["alignment_iou"]:.3f}）</a><a href="{url(rid4,"alignment/anchor_rgb.png")}">配准后的独立设备</a>'
         for name,label in [('scene_candidate_step2000.ply','实际 2000 步场景 PLY'),('scene_final.ply','保护规则场景 PLY'),('object_world.ply','设备世界 PLY')]:
             content+=f'<a href="{url(rid4,name)}&download=true">{label}</a>'
         content+=f'<a href="{url(rid3,"object_refined_local.ply")}&download=true">设备局部 PLY</a><a href="{url(rid3,"renders/validation_comparison.jpg")}">PBR / 初始 / 优化高斯对比</a><a href="{url(rid4,"summary.json")}">M4 指标</a><a href="/viewer?experiment={r["experiment"]}">保护规则场景漫游</a></nav>'
@@ -107,7 +124,7 @@ def main():
             content+=f'<video controls preload="none" src="{asset(name)}"></video>'
         cards.append(content+'</section>')
     report={'batch':batch.name,'completed':completed,'failed':failed,'total':len(state['items']),
-        'm3_steps':4000,'m4_steps':2000,'qwen_calls':0,'trellis_calls':0,'items':rows,
+        'm3_steps':4000,'m4_steps':2000,'qwen_calls':0,'trellis_calls':sum((Path(i['folder'])/'m3/trellis_generation.json').exists() for i in state['items']) if fresh else 0,'items':rows,
         'candidate_guard_passed':sum(r['guard_passed'] for r in rows)}
     write_json(batch/'results_summary.json',report)
     if rows:
@@ -116,13 +133,17 @@ def main():
     actual.save(batch/'actual_2000_overview.jpg');guarded.save(batch/'guarded_overview.jpg')
     page='''<!doctype html><html lang="zh"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 案例 PBR / M4 2000</title><style>body{font:16px/1.65 system-ui;background:#f3f5f7;color:#182533;max-width:1700px;margin:32px auto;padding:20px}section{background:white;padding:22px;margin:20px 0;border-radius:12px}img{width:100%}video{width:49%;margin-top:16px}a{display:inline-block;color:#1259b0;margin:7px 14px 5px 0}@media(max-width:700px){video{width:100%}}</style>'''
     if completed+failed<len(state['items']):page+='<meta http-equiv="refresh" content="30">'
-    page+=f'<h1>10 个已有案例 · PBR Gaussian + 2,000 步局部背景优化</h1><p>完成 {completed}/10；失败 {failed}。GLB、参考图像和已有空间位置均复用。case00 的 PBR M3 已完成，直接复用；其余沿用相同 36 视角、4,000 步 M3 配置。</p><p>默认最终场景经过环境保护检查；实际 2,000 步候选单独提供。第 0 步表示保留输入背景。旧实验不覆盖，不调用 Qwen 或 TRELLIS.2。</p>'
+    if fresh:
+        page=page.replace('<title>10 案例 PBR / M4 2000</title>',f'<title>{total} 个新视角案例 / M4 2000</title>')
+        page+=f'<h1>{total} 个新视角案例 · TRELLIS → PBR Gaussian → M4 2000</h1><p>完成 {completed}/{total}；失败 {failed}。直接使用用户设备图生成新的 TRELLIS 资产；完整 Qwen 场景图与各自新 Anchor 用于空间配准。M3 沿用 36 视角、4,000 步；M4 固定设备优化背景 2,000 步，每 500 步保存。</p><p>未调用 Qwen，旧实验保留。case10 使用用户提供的 case10_pre.png。实际 2,000 步与保护规则场景分别提供。</p>'
+    else:
+        page+=f'<h1>10 个已有案例 · PBR Gaussian + 2,000 步局部背景优化</h1><p>完成 {completed}/10；失败 {failed}。GLB、参考图像和已有空间位置均复用。case00 的 PBR M3 已完成，直接复用；其余沿用相同 36 视角、4,000 步 M3 配置。</p><p>默认最终场景经过环境保护检查；实际 2,000 步候选单独提供。第 0 步表示保留输入背景。旧实验不覆盖，不调用 Qwen 或 TRELLIS.2。</p>'
     page+=''.join(cards)+'</html>'
     dest=s.BASE/'webapp/static/batches'/batch.name;dest.mkdir(parents=True,exist_ok=True)
     (dest/'index.html').write_text(page,encoding='utf-8');(batch/'results_index.html').write_text(page,encoding='utf-8')
     if args.bundle:
         assert completed==len(state['items']) and not failed
-        path=batch/'pbr_10cases_m4_2000_previews.zip'
+        path=batch/('new_views_m3_m4_2000_results.zip' if fresh else 'pbr_10cases_m4_2000_previews.zip')
         with zipfile.ZipFile(path,'w',zipfile.ZIP_DEFLATED,compresslevel=3) as z:
             for name in ('batch.json','published.json','results_summary.json','results_summary.csv','actual_2000_overview.jpg','guarded_overview.jpg'):
                 z.write(batch/name,name)
@@ -134,8 +155,15 @@ def main():
                     'm3/renders/validation_comparison.jpg','m4/summary.json','m4/transform.json',
                     'm4/validation/supervision_union_masks.png','logs/m3.log','logs/m4.log'):
                     z.write(root/name,key+'/'+name)
+                if fresh:
+                    for name in ('m2/edited_scene.png','m2/object_rgba.png','m2/anchor_camera.json','m2/generation_region.json',
+                        'm3/trellis_generation.json','m4/alignment/report.json','m4/alignment/anchor_overlay.png','m4/alignment/anchor_rgb.png'):
+                        z.write(root/name,key+'/'+name)
+                    if (root/'pose_correction.json').is_file():
+                        z.write(root/'pose_correction.json',key+'/pose_correction.json')
             for name in ('run_pbr_case_batch.py','publish_pbr_case_batch.py','render_pbr_scene_results.py'):
                 z.write(s.BASE/'scripts'/name,'scripts/'+name)
+            if fresh:z.write(s.BASE/'scripts/run_manual_reselected_batch.py','scripts/run_manual_reselected_batch.py')
         write_json(batch/'delivery.json',{'zip':str(path),'bytes':path.stat().st_size,'sha256':sha256(path),
             'page':'/static/batches/'+batch.name+'/index.html','completed':completed})
     print({'completed':completed,'failed':failed,'page':'/static/batches/'+batch.name+'/index.html'},flush=True)
