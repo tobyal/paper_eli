@@ -36,3 +36,15 @@ __pycache__/
 /gsle_native/
 
 /native_dge_gsle_review/
+
+/gsle_weak_disds/
+
+/matched_views/
+/matched_views_localization_red/
+/target_centered_views/
+
+# Generated qualitative-comparison packages and renderer logs.
+/comparison_updated_v*/
+/viewpoint_aligned_v2/
+/matched_rendering/*.log
+/weak_disds/*.log
