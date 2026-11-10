@@ -30,3 +30,9 @@ __pycache__/
 !/records/gsle_batch_execution.json
 
 /gaussianeditor_native/
+
+/dge_native/
+
+/gsle_native/
+
+/native_dge_gsle_review/
