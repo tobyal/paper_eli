@@ -1,0 +1,29 @@
+{
+  "default": "case00_m4_2000",
+  "scenes": {
+    "case00_f09": {
+      "name": "case00 · F09 黄色机械臂",
+      "description": "F09 当前展示结果：原始 M1 背景与固定机械臂合成，未进行背景优化。",
+      "manifest": "industrial_swap_v2/outputs/registration_all_cases_v1/case00/m1/manifest.json",
+      "camera": "industrial_swap_v2/outputs/paper_figures_v4/F09_text_control/variants/A_robot/camera_params.json",
+      "camera_key": "main",
+      "resources": {
+        "object_m3": "industrial_swap_v2/outputs/registration_all_cases_v1/case00/m4/object_world.ply",
+        "background_m1": "industrial_swap_v2/outputs/registration_all_cases_v1/case00/m1/background_gaussians.ply"
+      },
+      "labels": {"object_m3": "固定机械臂", "background_m1": "F09 原始 M1 背景"}
+    },
+    "case00_m4_2000": {
+      "name": "case00 · M4 2000 步候选",
+      "description": "原有 M4 第 2000 步候选结果。未通过背景保持检查；用于检查优化效果。",
+      "manifest": "industrial_swap_v2/outputs/registration_all_cases_v1/case00/m1/manifest.json",
+      "camera": "industrial_swap_v2/outputs/paper_figures_v4/F09_text_control/variants/A_robot/camera_params.json",
+      "camera_key": "main",
+      "resources": {
+        "object_m3": "industrial_swap_v2/outputs/registration_all_cases_v1/case00/m4/object_world.ply",
+        "background_m4": "industrial_swap_v2/outputs/registration_all_cases_v1/case00/m4/background_optimization/background_candidate_step2000.ply"
+      },
+      "labels": {"object_m3": "固定机械臂", "background_m4": "2000 步候选背景"}
+    }
+  }
+}

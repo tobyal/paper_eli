@@ -11,7 +11,7 @@ const worldUp=new THREE.Vector3(),homeDirection=new THREE.Vector3();
 const forward=new THREE.Vector3(),right=new THREE.Vector3(),movement=new THREE.Vector3();
 const yaw=new THREE.Quaternion(),pitch=new THREE.Quaternion(),proposed=new THREE.Quaternion();
 const names={object_m3:'原始 M3',object_m4:'M4 保存的设备',background_m1:'原始背景',background_m4:'优化背景'};
-const resourceControls=['object-version','show-background','background-version','display-mode'];
+const resourceControls=['object-version','show-background','background-version','display-mode','scene-select'];
 
 function loading(title,detail=''){
   $('loading').hidden=false; $('loading-title').textContent=title; $('loading-detail').textContent=detail;
@@ -93,7 +93,7 @@ function focusBase(){
   placeCamera(new THREE.Vector3().fromArray(catalog.geometry.base_center),forward,catalog.geometry.base_radius);
 }
 function anchorView(){
-  if(!catalog)return; camera.up.copy(worldUp); camera.position.fromArray(catalog.anchor.position);
+  if(!catalog)return; camera.up.fromArray(catalog.anchor.up||catalog.up); camera.position.fromArray(catalog.anchor.position);
   orbit.target.fromArray(catalog.anchor.target); camera.fov=catalog.anchor.fov;
   camera.lookAt(orbit.target); camera.updateProjectionMatrix(); orbit.update();
 }
@@ -129,13 +129,26 @@ function animate(ms){
   if(ms-fpsTime>=1000){$('fps').textContent=`${Math.round(frames*1000/(ms-fpsTime))} FPS`;frames=0;fpsTime=ms;}
 }
 async function start(){
-  const experiment=new URLSearchParams(location.search).get('experiment');
-  const response=await fetch('/api/viewer/catalog'+(experiment?'?experiment_id='+encodeURIComponent(experiment):''));
+  const params=new URLSearchParams(location.search),query=new URLSearchParams();
+  if(params.get('experiment'))query.set('experiment_id',params.get('experiment'));
+  if(params.get('scene'))query.set('scene_id',params.get('scene'));
+  const response=await fetch('/api/viewer/catalog?'+query);
   if(!response.ok)throw Error((await response.json()).detail||'无法读取实验');
   catalog=await response.json(); worldUp.fromArray(catalog.up);
+  Object.assign(names,catalog.resource_labels||{});
+  document.title=catalog.experiment.name+' · 高斯漫游';
+  if(catalog.scenes?.length){
+    $('scene-field').hidden=false;
+    if(!catalog.scene_id)$('scene-select').add(new Option(catalog.experiment.name,''));
+    for(const item of catalog.scenes)$('scene-select').add(new Option(item.name,item.id));
+    $('scene-select').value=catalog.scene_id||'';
+    $('scene-select').onchange=()=>{if($('scene-select').value)location.href='/viewer?scene='+encodeURIComponent($('scene-select').value);};
+  }
+  if(catalog.description){$('scene-description').textContent=catalog.description;$('scene-description').hidden=false;}
   homeDirection.fromArray(catalog.anchor.position).sub(new THREE.Vector3().fromArray(catalog.geometry.center)).normalize();
   for(const id of ['object-version','background-version']){
     for(const option of [...$(id).options])if(!catalog.resources[option.value])option.remove();
+    for(const option of [...$(id).options])option.textContent=names[option.value];
   }
   renderer=new THREE.WebGLRenderer({antialias:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setClearColor($('canvas-color').value,1);
@@ -167,6 +180,8 @@ async function start(){
   $('canvas-color').oninput=()=>renderer.setClearColor($('canvas-color').value,1);
   $('fullscreen').onclick=()=>{const action=document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();action.catch(failure);};
   await changeObject();
+  if(catalog.defaults?.camera==='anchor')anchorView();
+  if(catalog.defaults?.show_background){$('show-background').checked=true;await changeBackground();}
 }
 $('retry').onclick=()=>location.reload();
 window.addEventListener('error',event=>{if(event.message)failure(new Error(event.message));});

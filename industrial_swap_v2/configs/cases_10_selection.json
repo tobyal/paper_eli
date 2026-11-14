@@ -1,0 +1,76 @@
+[
+  {
+    "case_id": "case_01",
+    "candidate": "candidates/air_cooler_09",
+    "name_zh": "主通道冷风机",
+    "replacement": "one compact white and blue industrial air filtration unit on caster wheels, with a rectangular housing, a front ventilation grille and an integrated control panel",
+    "review_note": "独立设备，正面及侧面轮廓清楚。"
+  },
+  {
+    "case_id": "case_02",
+    "candidate": "candidates/air_cooler_05",
+    "name_zh": "料架旁冷风机",
+    "avp_min_visibility": 0.85,
+    "replacement": "one compact orange autonomous mobile robot with a gray cargo platform, visible wheels, a front sensor panel and a rigid chassis",
+    "review_note": "独立实例，参考分割 IoU 0.86。邻近料架造成遮挡，100 个轨道视角的最大贡献可见率为 88.3%，本例 AVP 门槛显式设为 85%；需人工重点确认。"
+  },
+  {
+    "case_id": "case_03",
+    "candidate": "candidates2/assembly_workstation_00",
+    "name_zh": "侧排框架式工位",
+    "replacement": "one compact green industrial tool cabinet on caster wheels, with steel drawers, a flat worktop and a rigid rectangular chassis",
+    "review_note": "替换底座漏分明显的绿板旁冷风机候选。当前框架式工位使用独立的 automotive assembly workstation 语义定位，底架整体可见，需检查顶部斜板和侧面薄杆。 本例 AVP 门槛显式设为 85%，原 90% 阈值没有合格轨道视角。",
+    "avp_min_visibility": 0.85
+  },
+  {
+    "case_id": "case_04",
+    "candidate": "candidates/dashboard_station_02",
+    "name_zh": "中央仪表板装配工位",
+    "replacement": "one blue SCARA industrial robot with two horizontal rotary links, a vertical linear spindle and a square steel pedestal",
+    "review_note": "原机械臂实验位置的对照案例，本次重新执行语义查询和三维分割，没有复制历史定位集合。"
+  },
+  {
+    "case_id": "case_05",
+    "candidate": "candidates/dashboard_station_09",
+    "name_zh": "IP-005L旁装配工位",
+    "avp_min_visibility": 0.85,
+    "replacement": "one compact red and silver servo assembly press with a vertical actuator, a rectangular worktable, two rigid support columns and a stable floor-mounted base",
+    "review_note": "包含仪表板组件及白色工作底座；邻近工位边缘需复核。轨道最佳可见率 88.8%，本例 AVP 门槛显式设为 85%，选用后侧视角。"
+  },
+  {
+    "case_id": "case_06",
+    "candidate": "candidates2/assembly_workstation_04",
+    "name_zh": "后排立式装配工位",
+    "replacement": "one compact blue and white enclosed industrial machine vision inspection station with a transparent front safety window, a small control screen and a rigid steel base",
+    "review_note": "立式工位含白色面板和下方支架，背面邻近风扇需复核。"
+  },
+  {
+    "case_id": "case_07",
+    "candidate": "candidates2/metal_storage_rack_01",
+    "name_zh": "中央宽幅金属料架",
+    "replacement": "one compact industrial belt conveyor with a blue continuous belt, silver side rails, a visible drive motor and four steel support legs",
+    "review_note": "薄杆和箱体混合结构，重点检查邻近装配工位是否混入。"
+  },
+  {
+    "case_id": "case_08",
+    "candidate": "candidates3/horizontal_parts_rack_02",
+    "name_zh": "后排层板式零件料架",
+    "replacement": "one freestanding gray automated parts dispensing cabinet with blue access drawers, an operator control panel and a stable rectangular floor base",
+    "review_note": "采用重新查询的水平层板料架语义，避免原先竖向分格描述不准确。重点复核左侧相邻小货架；本例 AVP 门槛显式设为 85%。",
+    "avp_min_visibility": 0.85
+  },
+  {
+    "case_id": "case_09",
+    "candidate": "candidates3/gray_crates_pallet_04",
+    "name_zh": "蓝托盘上的灰色周转箱组",
+    "replacement": "one low-profile orange autonomous mobile robot carrying a gray cargo platform, with visible wheels, a front sensor panel and a rigid chassis",
+    "review_note": "物流设备案例，包含整组灰色周转箱及托盘；检查与后方金属料架的边界。"
+  },
+  {
+    "case_id": "case_10",
+    "candidate": "candidates3/vertical_slot_rack_09",
+    "name_zh": "通道端部竖槽料架",
+    "replacement": "one freestanding blue and gray enclosed industrial parts storage cabinet with front access doors, an operator display and a stable steel base",
+    "review_note": "竖槽料架案例，重点复核顶盖、侧面和底部是否完整纳入三维定位。"
+  }
+]

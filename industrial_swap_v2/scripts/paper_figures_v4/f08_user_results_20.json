@@ -1,0 +1,31 @@
+{
+  "source": "User-supplied result table in the current conversation",
+  "scope": "Redraw F08(c) only; no new localization, mask evaluation or model inference",
+  "case_labels": "01-20 are labels supplied in this table; rows 11-20 have no supplied canonical M1 UUID mapping. Do not interpret row 11 as the archived historical duplicate case.",
+  "columns": ["M1 case", "Text-only IoU", "Photo-assisted IoU"],
+  "rows": [
+    ["01", "0.6432", "0.7721"],
+    ["02", "0.3048", "0.6904"],
+    ["03", "0.0000", "0.8731"],
+    ["04", "0.8556", "0.8765"],
+    ["05", "0.0061", "0.7262"],
+    ["06", "0.3409", "0.6768"],
+    ["07", "0.4617", "0.7375"],
+    ["08", "0.5896", "0.6942"],
+    ["09", "0.7542", "0.8036"],
+    ["10", "0.0214", "0.7625"],
+    ["11", "0.6235", "0.7819"],
+    ["12", "0.4026", "0.6927"],
+    ["13", "0.6954", "0.7332"],
+    ["14", "0.1937", "0.6654"],
+    ["15", "0.7358", "0.7043"],
+    ["16", "0.5021", "0.7186"],
+    ["17", "0.8224", "0.8417"],
+    ["18", "0.2583", "0.6485"],
+    ["19", "0.6289", "0.8012"],
+    ["20", "0.4794", "0.7238"]
+  ],
+  "supplied_mean": ["0.4660", "0.7462"],
+  "adjusted_case": "06: use the user-supplied Photo-assisted IoU 0.6768",
+  "verification": "Only arithmetic and faithful plotting are verified in this task; no claim of independently re-evaluating the supplied scores from masks."
+}

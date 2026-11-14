@@ -1,0 +1,12 @@
+[
+  {"id":"floor_fan","text":"an industrial floor fan","replacement":"one compact blue industrial air circulator with a round protective grille, a visible motor and a sturdy floor stand"},
+  {"id":"metal_storage_rack","text":"a metal storage rack","replacement":"one enclosed blue and gray automated parts storage cabinet with front access drawers and a stable floor-mounted base"},
+  {"id":"assembly_workstation","text":"an automotive assembly workstation","replacement":"one compact orange six-axis industrial robot arm on a rectangular steel base with articulated joints and a parallel gripper"},
+  {"id":"tool_cabinet","text":"a tool cabinet","replacement":"one blue industrial tool cabinet with multiple steel drawers, a worktop and four caster wheels"},
+  {"id":"computer_monitor","text":"a computer monitor","replacement":"one compact industrial touchscreen terminal with a black display, gray housing and a rigid mounting stand"},
+  {"id":"shelved_cart","text":"a metal cart with shelves","replacement":"one stainless steel mobile tool cabinet with solid side panels, two front doors, a flat top and four caster wheels"},
+  {"id":"single_blue_container","text":"a blue plastic storage container","replacement":"one compact gray industrial parts dispenser with a blue front panel, a rigid housing and a flat support base"},
+  {"id":"vertical_storage_trolley","text":"a storage trolley with vertical compartments","replacement":"one freestanding automatic parts handling station with blue vertical supports, a compact horizontal lift and a stable rectangular base"},
+  {"id":"covered_storage_rack","text":"a large gray covered storage rack","replacement":"one compact blue and white enclosed industrial inspection cabinet with a front safety window and a stable steel base"},
+  {"id":"portable_air_conditioner","text":"a portable air conditioner","replacement":"one compact white and blue industrial dehumidifier on caster wheels with a rectangular grille and an integrated control panel"}
+]

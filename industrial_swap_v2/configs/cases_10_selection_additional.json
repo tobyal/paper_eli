@@ -1,0 +1,4 @@
+[
+  {"case_id":"case_09","candidate":"candidates3/gray_crates_pallet_04","name_zh":"蓝托盘上的灰色周转箱组","replacement":"one low-profile orange autonomous mobile robot carrying a gray cargo platform, with visible wheels, a front sensor panel and a rigid chassis","review_note":"物流设备案例，包含整组灰色周转箱及托盘；检查与后方金属料架的边界。"},
+  {"case_id":"case_10","candidate":"candidates3/vertical_slot_rack_09","name_zh":"通道端部竖槽料架","replacement":"one freestanding blue and gray enclosed industrial parts storage cabinet with front access doors, an operator display and a stable steel base","review_note":"竖槽料架案例，重点复核顶盖、侧面和底部是否完整纳入三维定位。"}
+]

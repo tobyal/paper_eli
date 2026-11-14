@@ -11,6 +11,17 @@ from . import store as s, service as v
 router=APIRouter()
 
 
+def scene_presets():
+    path=Path(__file__).with_name('viewer_scenes.json')
+    return json.loads(path.read_text(encoding='utf-8')) if path.exists() else {'scenes':{}}
+
+
+def preset_sources(identifier):
+    preset=scene_presets()['scenes'].get(identifier)
+    if preset is None: raise HTTPException(404,'未知的漫游场景')
+    return preset,{key:contained(s.ROOT/path) for key,path in preset['resources'].items()}
+
+
 def selected_experiment(identifier=None):
     if identifier: return v.experiment(identifier)
     record=s.BASE/'records/multiview_scene_refinement_20261106.json'
@@ -65,7 +76,29 @@ def count_vertices(path):
 
 
 @router.get('/api/viewer/catalog')
-def catalog(experiment_id: str=None):
+def catalog(experiment_id: str=None, scene_id: str=None):
+    presets=scene_presets()
+    if scene_id or (not experiment_id and presets.get('default')):
+        identifier=scene_id or presets['default']
+        preset,paths=preset_sources(identifier)
+        manifest=json.loads((s.ROOT/preset['manifest']).read_text())
+        saved_camera=json.loads((s.ROOT/preset['camera']).read_text())
+        anchor=saved_camera[preset['camera_key']] if preset.get('camera_key') else saved_camera
+        up=np.asarray(manifest['world_up'],dtype=float); up/=np.linalg.norm(up)
+        obj=paths['object_m3']; stat=obj.stat()
+        bounds=geometry(str(obj),stat.st_size,stat.st_mtime_ns,tuple(up))
+        R=np.asarray(anchor['R']); position=-R.T@np.asarray(anchor['t'])
+        distance=np.linalg.norm(position-np.asarray(bounds['center']))
+        return {'experiment':{'id':identifier,'name':preset['name']},'geometry':bounds,'up':up.tolist(),
+            'scene_id':identifier,'scenes':[{'id':key,'name':value['name']} for key,value in presets['scenes'].items()],
+            'description':preset.get('description',''),'resource_labels':preset.get('labels',{}),
+            'defaults':{'show_background':True,'camera':'anchor'},
+            'anchor':{'position':position.tolist(),'target':(position+R[2]*distance).tolist(),
+                      'fov':float(np.degrees(2*np.arctan(anchor['height']/(2*anchor['fy'])))),
+                      'up':(-R[1]).tolist()},
+            'resources':{key:{'url':f'/api/viewer/scene/{identifier}/{key}.ply?v={path.stat().st_mtime_ns}',
+                'bytes':path.stat().st_size,'count':count_vertices(path)} for key,path in paths.items()},
+            'source_unchanged':True,'renderer':'Spark 2.4.0 / Three.js 0.180.0'}
     experiment=selected_experiment(experiment_id); paths,directories=sources(experiment)
     manifest=json.loads((directories['m1']/'manifest.json').read_text())
     anchor=json.loads((directories['m2']/'anchor_camera.json').read_text())
@@ -76,11 +109,20 @@ def catalog(experiment_id: str=None):
     R=np.asarray(anchor['R']); t=np.asarray(anchor['t']); position=-R.T@t
     distance=np.linalg.norm(position-np.asarray(bounds['center']))
     return {'experiment':{'id':experiment['id'],'name':experiment['name']},'geometry':bounds,'up':up.tolist(),
+        'scenes':[{'id':key,'name':value['name']} for key,value in presets['scenes'].items()],
         'anchor':{'position':position.tolist(),'target':(position+R[2]*distance).tolist(),
                   'fov':float(np.degrees(2*np.arctan(anchor['height']/(2*anchor['fy']))))},
         'resources':{key:{'url':f"/api/viewer/file/{experiment['id']}/{key}.ply?v={path.stat().st_mtime_ns}",
             'bytes':path.stat().st_size,'count':count_vertices(path)} for key,path in paths.items()},
         'source_unchanged':True,'renderer':'Spark 2.4.0 / Three.js 0.180.0'}
+
+
+@router.get('/api/viewer/scene/{scene_id}/{resource_id}.ply')
+def scene_file(scene_id: str,resource_id: str):
+    _,paths=preset_sources(scene_id)
+    if resource_id not in paths: raise HTTPException(404,'未知的高斯素材')
+    return FileResponse(paths[resource_id],media_type='application/octet-stream',
+                        headers={'Cache-Control':'private, max-age=3600'})
 
 
 @router.get('/api/viewer/file/{experiment_id}/{resource_id}.ply')

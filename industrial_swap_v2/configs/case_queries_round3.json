@@ -1,0 +1,7 @@
+[
+  {"id":"gray_crates_pallet","text":"a stack of gray plastic storage crates on a blue pallet","replacement":"one low-profile orange autonomous mobile robot carrying a single gray cargo platform, with visible wheels and a front sensor panel"},
+  {"id":"gray_cabinet","text":"a gray industrial cabinet with a flat top","replacement":"one compact blue industrial tool cabinet with steel drawers, a flat worktop and a rigid rectangular support base"},
+  {"id":"horizontal_parts_rack","text":"an industrial parts rack with horizontal shelves","replacement":"one compact blue industrial belt conveyor with a continuous rubber belt, silver side rails and four steel support legs"},
+  {"id":"vertical_slot_rack","text":"a tall gray storage rack with vertical slots","replacement":"one enclosed gray and blue industrial parts storage cabinet with front access doors and a stable base"},
+  {"id":"black_dashboard","text":"a black automotive dashboard on a white metal assembly stand","replacement":"one compact orange six-axis industrial robot arm mounted on a metal pedestal with a small gripper"}
+]

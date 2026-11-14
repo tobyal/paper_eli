@@ -3,7 +3,12 @@
 入口：http://127.0.0.1:18086/viewer
 指定实验：/viewer?experiment=<experiment_id>
 
-默认打开 records/multiview_scene_refinement_20261106.json 中记录的实验，
+默认打开 case00 的双 Mask M4 2000 步场景，自动加载候选优化背景并使用论文展示相机。
+入口：/viewer?scene=case00_m4_2000（2000 步优化候选，未通过背景保持检查）。
+场景下拉框可切换 /viewer?scene=case00_f09（F09 原始 M1 背景版本）。
+这些只读场景由 viewer_scenes.json 登记，复用现有文件，不重新训练或改动高斯。
+指定 experiment 参数仍读取对应历史实验；没有预设时，默认读取
+records/multiview_scene_refinement_20261106.json 中记录的实验，
 直接读取原始 M3 object_world.ply。可切换 M4 object_fixed.ply（历史记录兼容 object_refined.ply），
 叠加原始 M1 背景或M4 优化背景。全程只读，无模型变换、抽样或地面补丁。
 
